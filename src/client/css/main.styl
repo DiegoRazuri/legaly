@@ -1,0 +1,1518 @@
+@import "style.styl"
+@import "fonts.styl"
+
+
+/*! normalize.css v4.1.1 | MIT License | github.com/necolas/normalize.css */
+
+/**
+ * 1. Change the default font family in all browsers (opinionated).
+ * 2. Prevent adjustments of font size after orientation changes in IE and iOS.
+ */
+
+html {
+  font-family: sans-serif; /* 1 */
+  -ms-text-size-adjust: 100%; /* 2 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/**
+ * Remove the margin in all browsers (opinionated).
+ */
+
+body {
+  margin: 0;
+}
+
+/* HTML5 display definitions
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 9-.
+ * 1. Add the correct display in Edge, IE, and Firefox.
+ * 2. Add the correct display in IE.
+ */
+
+article,
+aside,
+details, /* 1 */
+figcaption,
+figure,
+footer,
+header,
+main, /* 2 */
+menu,
+nav,
+section,
+summary { /* 1 */
+  display: block;
+}
+
+/**
+ * Add the correct display in IE 9-.
+ */
+
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+}
+
+/**
+ * Add the correct display in iOS 4-7.
+ */
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+
+progress {
+  vertical-align: baseline;
+}
+
+/**
+ * Add the correct display in IE 10-.
+ * 1. Add the correct display in IE.
+ */
+
+template, /* 1 */
+[hidden] {
+  display: none;
+}
+
+/* Links
+   ========================================================================== */
+
+/**
+ * 1. Remove the gray background on active links in IE 10.
+ * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
+ */
+
+a {
+  background-color: transparent; /* 1 */
+  -webkit-text-decoration-skip: objects; /* 2 */
+}
+
+/**
+ * Remove the outline on focused links when they are also active or hovered
+ * in all browsers (opinionated).
+ */
+
+a:active,
+a:hover {
+  outline-width: 0;
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * 1. Remove the bottom border in Firefox 39-.
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+
+abbr[title] {
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
+}
+
+/**
+ * Prevent the duplicate application of `bolder` by the next rule in Safari 6.
+ */
+
+b,
+strong {
+  font-weight: inherit;
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/**
+ * Add the correct font style in Android 4.3-.
+ */
+
+dfn {
+  font-style: italic;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/**
+ * Add the correct background and color in IE 9-.
+ */
+
+mark {
+  background-color: #ff0;
+  color: #000;
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Remove the border on images inside links in IE 10-.
+ */
+
+img {
+  border-style: none;
+}
+
+/**
+ * Hide the overflow in IE.
+ */
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/**
+ * Add the correct margin in IE 8.
+ */
+
+figure {
+  margin: 1em 40px;
+}
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+
+hr {
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * 1. Change font properties to `inherit` in all browsers (opinionated).
+ * 2. Remove the margin in Firefox and Safari.
+ */
+
+button,
+input,
+select,
+textarea {
+  font: inherit; /* 1 */
+  margin: 0; /* 2 */
+}
+
+/**
+ * Restore the font weight unset by the previous rule.
+ */
+
+optgroup {
+  font-weight: bold;
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+
+button,
+input { /* 1 */
+  overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+
+button,
+select { /* 1 */
+  text-transform: none;
+}
+
+/**
+ * 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`
+ *    controls in Android 4.
+ * 2. Correct the inability to style clickable types in iOS and Safari.
+ */
+
+button,
+html [type="button"], /* 1 */
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button; /* 2 */
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Change the border, margin, and padding in all browsers (opinionated).
+ */
+
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+
+legend {
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+
+/**
+ * Remove the default vertical scrollbar in IE.
+ */
+
+textarea {
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10-.
+ * 2. Remove the padding in IE 10-.
+ */
+
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+
+[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+ * Remove the inner padding and cancel buttons in Chrome and Safari on OS X.
+ */
+
+[type="search"]::-webkit-search-cancel-button,
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * Correct the text style of placeholders in Chrome, Edge, and Safari.
+ */
+
+::-webkit-input-placeholder {
+  color: inherit;
+  opacity: 0.54;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/*
+Landing
+*/
+
+body
+	display block
+	border none
+	background-color white
+	width 100%
+	margin 0px
+	padding 0px
+	
+	.container
+		.appContainer
+			.movilMenu
+				display none
+				flex-direction column
+				justify-content flex-start
+				align-items flex-start
+				width 100%
+				height 100vh
+				margin 0px
+				padding 0px
+				position fixed
+				z-index 1
+				background-color #007EFF
+				
+				.wrapperHeaderMovilMenu
+					display flex
+					justify-content space-between
+					align-items flex-start
+					height 40px
+					width 100%
+					margin-bottom 12%
+					
+					span
+						width 40px
+						margin 10px 0px 0px 10px
+						font-size 1.2em
+						color white
+					.movilMenuMainLogo
+						width 100px
+						
+				.wrapperMovilMenuBtn
+					width 65%
+					margin 0px auto
+						
+					.wrapperBtnRegistration, .rowMenuMovil
+						display flex
+						justify-content flex-start
+						align-items center
+						
+						a
+							text-decoration none
+							color white
+							
+					.wrapperBtnRegistration
+						margin-bottom 20px
+						span
+							color white
+							
+						a
+							margin-left 10px
+							font-weight bold
+							text-decoration none
+							
+					ul
+						list-style none
+						margin 0px
+						padding 0px 0px 0px 0px
+						
+						li
+							
+							margin 12% 0px
+							a
+								text-align left
+								text-decoration none
+								color white
+								
+							p
+								color white
+								margin-left 10px
+								width 120px
+								text-align left
+								
+							span
+								width 20x
+								font-size 1.3em
+								
+						.wrapperMovilMenuSocialNetwork
+							a
+								margin 0px 10px 0px 0px
+								padding 0px
+								width 30px
+								height 30px
+								line-height 30px
+								border solid 1px black
+								border-radius 50%
+								color black
+								text-align center
+								span
+									
+									width 30px
+									height 30px
+									line-height 30px
+									font-size 1.2em
+									text-align center
+					
+					.underlineWhite
+						background-color white
+						height 1px 
+						width 100%
+						opacity 0.5
+						margin 0px 0px
+
+			header
+				background-color white
+				display block
+				height 50px
+				width 100%
+				margin 0px
+				padding 0px
+				position fixed
+				top 0px
+				z-index 99
+				box-shadow 0px 1px 20px rgba(0,0,0,0.2)
+				
+				
+				.wrapperGeneralInfo
+					display none
+					
+				nav
+					display flex
+					align-items center
+					justify-content space-between
+					height 100%
+					
+					.btnMovilMenu
+						width 70px
+						
+					.btnMovilMenu
+						font-size 25px
+						margin-left 10px
+
+					.mainLogo
+						border solid 1px red
+						height 40px
+						width 130px
+					
+					.gridNav
+						display none
+						
+					.btnRegistration
+						margin 0px 10px 0px 0px
+						padding 0px 3px
+						height 23px
+						background-color #007FFF
+						border-radius 2	px
+						cursor pointer
+						width 90px
+						
+						a
+							width 100%
+							height 100%
+							text-decoration none
+							display flex
+							justify-content center
+							align-items center
+
+							p, span
+								color white
+								font-family "Open Sans"
+								font-size 0.6em
+								font-weight lighter
+								
+							span
+								margin 0px 3px 0px 0px
+
+			
+			.wrapperViews
+				margin 50px 0px 0px 0px
+				
+				.wrapperLanding
+					
+					.wrapperBanner
+						height 450px
+						display flex
+						flex-wrap nowrap
+						flex-direction column
+						justify-content center
+						align-items center
+						background-image url("img/Home-banner1.png")
+						background-repeat no-repeat
+						background-size cover
+						background-position 34% 0px
+						
+						.bannerScene
+							width 100%
+							height 300px
+							display flex
+							justify-content center
+							align-items center
+							
+							.gridConstitucionEmpresas, .gridRegistraMarca
+								background-color white
+								width 94%
+								margin auto
+								padding 25px 0px
+								display flex
+								flex-direction column
+								flex-wrap wrap
+								align-items center
+								position absolute
+								box-shadow 0px 2px 16px rgba(0,0,0,0.6)
+								
+
+								figure
+									width 65px
+									display block
+									margin 0px auto 16px auto
+									
+									img
+										width 100%
+									
+								h1
+									font-family "Source Serif Pro"
+									font-size 1.3em
+									font-weight 500
+									text-align center
+									color #000000
+									margin 0px
+									padding 0px
+									display block
+									width 290px
+									
+								p
+									font-family "Open Sans"
+									font-size 0.9em
+									font-weight 400
+									text-align center
+									color #007FFF
+									margin 3px 0px 10px 0px
+									padding 0px
+									display block
+									width 280px
+									
+								a
+									text-decoration none
+									font-family "Open Sans"
+									font-size 0.7em
+									font-weight regular
+									text-align center
+									color #000000
+									margin 0px
+									padding 0px
+									display block
+									width auto
+									
+								div
+									background-color #007FFF
+									margin 10px 0px
+									padding 0px 23px
+									display block
+									width auto
+									height 28px
+									line-height 28px
+									border-radius 2px
+									cursor pointer
+									
+									a
+										font-family "Open Sans"
+										font-size 0.8em
+										font-weight regular
+										text-align center
+										color white
+										text-decoration none
+									
+								
+								
+							.gridRegistraMarca
+								display none
+								h1
+									width 310px
+						
+						.gridPagination
+							width 100px
+							margin 10px auto 
+							display flex
+							justify-content center
+							span
+								color #000000
+								margin 0px 2px
+								font-size 3.1em
+								color #95989A
+							
+							.gridActive
+								color #007FFF
+					
+					.wrapperBenefits, .wrapperTestimonials, .wrapperCounters
+						
+							
+					.wrapperBenefits
+						display flex
+						justify-content center
+						flex-direction column
+						padding-bottom 50px
+						
+						h4	
+							width 100%
+							
+						.wrapperInfoBenefits
+							width 95%
+							margin 0px auto 0px auto
+							display flex
+							justify-content space-around
+							flex-wrap wrap
+
+							.gridBenefit
+								margin 40px auto 0px auto
+								width 48%
+								display flex
+								flex-direction column
+								justify-content center
+								align-items center
+								
+								figure
+									width 60px
+									
+									img 
+										width 100%
+								
+								h2
+									font-family "Source Serif Pro"
+									font-size 1.4em
+									font-weight 600
+									text-align center
+									color #000000
+									margin 0px auto 0px auto
+									padding 0px
+									display block
+									text-align center
+									
+								h3
+									font-family "Open Sans"
+									font-size 0.75em
+									font-weight 600
+									text-align center
+									color #272727
+									margin 10px auto 0px auto
+									padding 0px
+									display block
+									text-align center
+									width 120px
+						
+					.wrapperTestimonials
+						padding-top 20px
+						background-color #F8f8f8
+						
+						h4
+							width 80%
+						
+						.wrapperWidgetTestimonials
+							display flex
+							justify-content center
+							height 300px
+							margin-top 30px
+							
+							.btnWidgetTestimonials
+								margin 50px 0px 0px 0px
+								padding 0px
+								font-size 2.5em
+								color #ccc
+							
+							.wrapperInfoTestimonials
+								width 250px
+								height 300px
+								position relative
+								
+								.gridTestimonial
+									position absolute
+									display flex
+									flex-direction column
+									align-items center
+
+									figure
+										width 100px
+										border-radius 50%
+										overflow hidden
+										height 100px
+										margin 16px auto 8px auto
+										
+										img
+											width 100%
+											
+									.gridScore
+										margin 0px auto
+										span
+											color #007fff
+											
+									.testimonial
+										font-family "Open Sans"
+										font-weight lighter
+										font-size 0.8em
+										text-align center
+										color #95989A
+										margin 20px auto 20px auto
+										padding 0px
+										display block
+										text-align center
+										width 250px
+										
+									.clientName
+										font-family "Source Serif Pro"
+										font-weight normal
+										font-size 0.9em
+										text-align center
+										color #000000
+										margin 0px auto 2px auto
+										padding 0px
+										display block
+										text-align center
+										width auto
+										
+									.clientEnterpriseName
+										font-family "Source Serif Pro"
+										font-weight bold
+										font-size 0.9em
+										text-transform uppercase
+										text-align center
+										color #000000
+										margin 0px auto 0px auto
+										padding 0px
+										display block
+										text-align center
+										width auto
+
+					.wrapperCounters
+						padding-top 20px
+						h4
+							width 310px
+							
+						.wrapperInfoCounters
+							margin 40px auto
+							display flex
+							flex-direction column
+							align-items center
+							
+							.gridCounter
+								width 170px
+								display flex
+								flex-direction column
+								align-items center
+								margin 0px auto 50px auto
+								
+								span
+									display block
+									background-color #007FFF
+									width 90px
+									height 90px
+									line-height 90px
+									border-radius 50%
+									color white
+									font-size 2.3em
+									font-weight normal
+									text-align center
+									
+								.number
+									font-family "Source Serif Pro"
+									font-size 2.5em
+									font-weight 500
+									text-align center
+									color #000000
+									margin 10px auto 0px auto
+									padding 0px
+									display block
+									text-align center
+							
+
+								.counterName
+									font-family "Open Sans"
+									font-weight lighter
+									color #454545
+									font-size 1em
+									margin 0px auto
+
+			footer
+				display block
+				margin 0px
+				padding 20px 0px
+				background-color #007FFF
+				
+				.wrapperFooterInfo
+					display flex
+					justify-content center
+					flex-wrap wrap
+					
+					.gridFooterInfo
+						margin-bottom 7px
+						
+						h5
+							font-family "Open Sans"
+							font-size 0.6em
+							font-weight bold
+							color white
+							margin 0px auto 0px auto
+							padding 0px
+							display block
+							
+						.underlineWhite
+							 height 3px
+							 width 25px
+							 background-color white
+							 margin 7px 0px
+							 padding 0px
+							 
+						ul
+							list-style none
+							margin 10px 0px
+							padding 0px
+							
+							li
+								margin 4px 0px
+								a
+									text-decoration none
+									font-family "Open Sans"
+									font-size 0.4em
+									font-weight lighter
+									color white
+									margin 0px auto 0px auto
+									padding 0px
+									display block
+									
+					#footerGrid1
+						ul li
+							font-family "Open Sans"
+							font-size 0.4em
+							font-weight lighter
+							color white
+							margin 4px auto
+							padding 0px
+							display block
+							
+					#footerGrid6
+						.gridForm
+							display flex
+							width 140px
+							input
+								border none
+								height 30px
+								width 110px
+								font-size 0.7em
+
+							span
+								display block
+								background-color black
+								color white
+								font-size 1em
+								height 32px
+								width 32px
+								line-height 32px
+								text-align center
+						.gridFooterInfoSocialNetwork
+							margin 10px 0px
+							display flex
+							justify-content flex-end
+							
+							.socialNetworkIco
+								margin 0px 0px 0px 5px
+								text-decoration none
+								span
+									color white
+									border solid 1px white
+									border-radius 50%
+									font-size 0.7em
+									display block
+									text-align center
+									height 18px
+									width 18px
+									line-height 18px
+							
+
+						
+					.gridFooterA
+						width 22%
+						
+					.gridFooterB
+						width 44%
+						
+					#footerGrid1
+						order 5
+						
+					#footerGrid2
+						order 1
+					
+					#footerGrid3
+						order 2
+					
+					#footerGrid4
+						order 3
+					
+					#footerGrid5
+						order 4
+						
+					#footerGrid6
+						order 6
+						
+
+			.login
+				background-color white
+				width 100%
+				position fixed
+				top 0px
+				height 100vh
+				z-index 9999
+				display flex
+				align-items center
+				
+				.wrapperLogin
+					display flex
+					flex-direction column
+					align-items center
+					justify-content center
+					
+					.wrapperBtnClose
+						color black
+						width 100%
+						display flex
+						justify-content flex-end
+						
+						a
+							text-decoration none
+							
+							span
+								font-size 1em
+								text-align right
+								margin 0px 0px 30px 0px 
+					
+					figure
+						margin 0px auto 10px auto
+						border solid 1px red	
+						width 100px
+						
+						img
+							width 100%
+							
+					h5
+						margin 0px auto 10px auto
+						font-family "Source Serif Pro"
+						font-size 1em
+						font-weight 500
+						color #000000
+						padding 0px
+						display block
+						text-align center
+						
+						
+					.formLogin
+						display flex
+						flex-wrap wrap
+						justify-content center
+						margin-top 10px
+						
+						.gridFormShort
+								margin 5px 1%
+								width 44%
+								
+							label
+								margin 15px 0px 10px 0px
+								text-align left
+							
+							.inputSingleValue
+									border solid 1px #DEDEDE
+									border-radius 3px
+									display flex
+									height 40px
+							
+								input
+									width 100%
+									height 38px
+									margin auto 0px
+									border none
+									
+								span
+									padding 0px
+									width 43px
+									color #007EFF
+									text-align center
+									height 40px
+									line-height 40px
+									font-size 1.3em
+									margin 0px 1px
+									
+					.emailLogin
+						border-radius 3px
+						background-color #007EFF
+						
+					.fbLogin
+						background-color #4464A2
+					.linkedinLogin
+						background-color #0282BD
+						
+					.underlineGrey
+						margin 10px auto
+									
+					.btnLoginForm
+						cursor pointer
+						height 40px
+						width 90%
+						margin 10px 0px
+						
+						a
+							width 100%
+							height 100%
+							text-decoration none
+							display flex
+							justify-content center
+							align-items center
+						
+							span
+								width 30px
+								color white
+								font-size 1.2em
+								text-align center
+								margin 0px auto
+								padding 0px
+								
+							p
+								font-family "Open Sans"
+								font-weight lighter
+								font-size 0.9em
+								color white
+								text-align center
+								width auto
+								margin 0px
+								padding 0px		
+
+	.userPhoto
+		display block
+		height 30px
+		width 30px
+		line-height 30px
+		margin 0px 25px 0px 0px
+		padding 0px
+		border-radius 50%
+		overflow hidden
+		
+		a
+			text-decoration none
+			width 100%
+			height 100%
+			margin 0px
+			padding 0px
+			
+			img
+				width 100%
+			
+	.sectionBrandRegistration
+		display none
+		
+		
+@media screen and (min-width: 767px)
+	body .container .appContainer .wrapperViews .wrapperLanding 
+		.wrapperBenefits
+			padding-bottom 80px
+			
+		.wrapperBanner .bannerScene .gridConstitucionEmpresas, .wrapperBanner .bannerScene .gridRegistraMarca
+			width 380px
+	
+		.wrapperBenefits .wrapperInfoBenefits .gridBenefit
+			width 25%
+			
+		#faq2
+			figure
+				order 2
+			.gridFaq
+				order 1
+			
+		.wrapperFaq
+			margin 0px
+			padding 0px
+			display flex
+			align-items center
+			
+			figure, .gridFaq
+				width 50%
+				
+			figure
+				margin 0px
+				padding 0px
+				
+				img
+					width 100%
+			.gridFaq
+				display flex
+				flex-direction column
+				align-items center
+				background-color white
+				
+				h1
+					font-family "Source Serif Pro"
+					font-size 1.4em
+					font-weight 600
+					color #007EFF
+					margin 0px auto 20px auto
+					padding 0px
+					display block
+					text-align center
+					width 300px
+					
+				h2	
+					font-family "Open Sans"
+					font-size 0.9em
+					font-weight lighter
+					color #95989A
+					margin 10px auto 15px auto
+					padding 0px
+					display block
+					text-align center
+					width 300px
+					
+				.btnFaq
+					background-color #F34A51
+					height 26px
+					line-height 26px
+					width 120px
+					margin 20px auto 0px auto
+					padding 0px
+					font-family "Open Sans"
+					font-size 0.7em
+					font-weight lighter
+					color white
+					text-align center
+					
+
+				
+
+		.wrapperCounters
+			padding 40px 0px 0px 0px 
+			h4	
+				width 100%
+			.wrapperInfoCounters
+				flex-direction row
+				margin 40px auto 20px 0px
+				
+
+	body .container .appContainer .login .wrapperLogin
+		width 60%
+		margin 0px auto
+				
+@media screen and (min-width: 1180px)
+	
+	body .container .appContainer header
+		height 85px
+		.wrapperGeneralInfo
+			display flex
+			justify-content space-between
+			height 35px
+			border-bottom solid 1px #ADADAD
+			
+			.gridSocialNetworks
+				display flex
+				margin-left 25px
+				a
+					text-decoration none
+					cursor pointer
+					margin auto 3px
+					
+					span
+						display block
+						text-align center
+						font-size 0.6em
+						color #505050
+						border solid 1px #505050
+						border-radius 50%
+						height 16px
+						width 16px
+						line-height 16px
+						
+			.gridGeneralContactInfo
+				width 410px
+				display flex
+				justify-content space-between
+				margin-right 25px
+				
+				.subGrid
+					display flex
+					justify-content center
+					align-items center
+					margin auto 0px
+					span
+						color #505050
+						font-size 0.9em
+						margin-right 8px
+						
+					p
+						color #505050
+						font-size 0.6em
+						font-family "Open Sans"
+						font-weight lighter
+
+		nav
+			height 50px
+			
+			.btnMovilMenu
+				display none
+				
+			.mainLogo
+				margin auto 25px
+				
+			.gridNav
+				display flex
+				width 70%
+				justify-content flex-end
+				
+				a
+					text-decoration none
+					font-family "Open Sans"
+					font-size 0.67em
+					font-weight lighter
+					color #505050
+					padding 0px
+					margin auto 16px
+					cursor pointer			
+				
+			.btnRegistration
+				margin-right 25px
+				height 26px
+				padding 0px 15px
+				span
+					margin 0px 6px 0px 0px
+				
+				p
+					font-size 0.65em
+			
+
+	body .container .appContainer .wrapperViews .wrapperLanding
+		.wrapperBanner
+			height 600px
+			background-position 34% -43px
+			
+		.wrapperBanner .bannerScene .gridConstitucionEmpresas, .wrapperBanner .bannerScene .gridRegistraMarca
+			width 470px
+			padding 40px 0px
+			
+			figure
+				width 80px
+			h1 
+				font-size 1.6em
+				width 355px
+				
+			p
+				font-size 1em
+				margin 7px 0px 20px 0px
+
+	
+		.wrapperBanner .gridPagination
+			margin 40px auto 0px auto
+			
+			span
+				font-size 4em
+				
+
+		.wrapperBenefits
+			padding-bottom 120px
+			
+			.wrapperInfoBenefits
+				margin 20px auto 0px auto
+				width 1100px
+				
+				.gridBenefit
+					figure
+						width 75px
+						
+					h2
+						font-size 1.7em
+					
+					h3
+						font-size 0.9em
+						width 128px
+						
+		.wrapperFaq
+			.gridFaq
+				h1
+					font-size 2.4em
+					width 420px
+					margin 0px auto 25px auto
+					
+					
+				h2
+					font-size 1.1em
+					width 400px
+					margin 18px auto 15px auto
+					
+				.btnFaq
+					font-size 0.8em
+					height 33px
+					line-height 33px
+					width 135px
+					margin 40px auto 0px auto
+					cursor pointer
+		
+		.wrapperTestimonials
+			padding-top 45px
+			
+			.wrapperWidgetTestimonials 
+				height 400px
+				.wrapperInfoTestimonials 
+					width 280px
+	
+					.gridTestimonial
+						figure
+							margin 16px auto 16px auto
+						.testimonial
+							font-size 1em
+							width 280px
+							margin 37px auto
+							
+						.clientName
+							font-size 1em
+							
+						.clientEnterpriseName
+							font-size 1.1em
+
+		.wrapperCounters
+			padding 60px 0px 0px 0px
+			
+			.wrapperInfoCounters
+				margin 60px auto 20px auto
+				width 590px
+				.gridCounter
+					span
+						font-size 1.6em
+						width 60px
+						height 60px
+						line-height 60px
+					.number
+						font-size 1.5em
+					.counterName
+						font-size 0.9em
+						
+
+
+	body .container .appContainer
+		footer
+			padding 80px 0px
+			
+			.wrapperFooterInfo
+				.gridFooterInfo
+					width 11%
+					
+					h5
+						font-size 0.65em
+					ul 
+						li 
+							a
+								font-size 0.6em
+								
+
+				#footerGrid1
+					order 1
+					padding-right 3.7%
+					ul
+						li
+							font-size 0.6em
+							
+				#footerGrid2
+					order 2
+				#footerGrid3
+					order 3
+				#footerGrid4
+					order 4
+				#footerGrid5
+					order 5
+							
+				#footerGrid6 
+					order 6
+					
+					.gridFooterInfoSocialNetwork
+						justify-content center
+		
+		.login
+			background-color #F2F2F2
+			.wrapperLogin
+				background-color white
+				box-shadow 0px 1px 20px rgba(0,0,0,0.2)
+				width 30%
+				padding 45px 50px					
+
+
+@import "userprofile.styl"
+@import "enterpriseIncorporation.styl"
+						
+
+

@@ -1,0 +1,989 @@
+.sectionEnterpriseIncorporation
+	display flex
+	flex-direction column
+	margin 50px 0px 0px 0px
+	
+	.wrapperIncorporationForm
+		.enterpriseInformationForm, .personalInformationForm, .partnersAddingForm, .dateForm, .paymentMethodForm
+			background-color white
+			display flex
+			flex-direction column
+			
+			.gridForm
+				width 100%
+				
+				h3
+					margin 30px auto 10px auto
+				
+				form
+					width 100%
+					margin 20px auto 0px auto
+					display flex
+					justify-content center
+					flex-wrap wrap
+					align-content flex-start
+
+					label
+						margin 15px 0px 10px 0px
+						text-align left
+						
+					.inputMultipleValues, .inputSelect, .inputSingleValue, .inputDate
+						border solid 1px #DEDEDE
+						border-radius 3px
+						display flex
+						height 40px
+						
+						span
+							padding 0px
+							width 43px
+							color #007EFF
+							text-align center
+							height 40px
+							line-height 40px
+							font-size 1.3em
+							margin 0px 1px
+						
+					.inputMultipleValues
+						justify-content space-between
+						.wrapperInputValues
+							width 100%
+							height 100%
+							border none
+							display flex
+							flex-direction row-reverse
+							align-items center
+							
+							input
+								width 100%
+								height 38px
+								margin auto 0px
+								border none
+								
+							.option-name
+								display flex
+								align-items center
+								color black
+								font-family "Open Sans"
+								font-weight lighter
+								font-size 0.9em
+								border-radius 2px
+								white-space nowrap
+								background-color #D8D8D8
+								margin 2px 2px
+								height 30px
+								line-height 30px
+								padding 0px 5px
+								
+								span
+									width 12px
+									height 12px
+									line-height 12px
+									margin auto 0px auto 3px
+									font-size 0.8em
+									cursor pointer
+									
+								
+								
+								
+					.inputSelect
+						select
+							height 40px
+							width 100%
+							
+							
+					.inputSingleValue
+						input
+							width 100%
+							height 38px
+							margin auto 0px
+							border none
+							
+						
+					.inputDate
+						input[type=date]
+							width 70%
+							padding-left 10px
+							border none
+							background-image none
+							appearance none
+							-webkit-appearance none
+							-moz-appearance none
+							font-size 0.8em
+						.icoInputDate
+							display none
+							
+					.inputCheckbox
+						display flex
+						margin-bottom 40px
+						.wrapperCheckbox
+							width 50%
+							display flex
+							align-items center
+							justify-content flex-start
+							
+							input
+								border solid 1px #DEDEDE
+								background-color none
+								
+							input[type="checkbox"]
+								appearance none
+								-moz-appearance none
+								-webkit-appearance
+								background-color none
+								margin 0px 10px 0px 0px
+								
+							input[type="checkbox"]#checkboxGoods:checked
+								background-color #007EFF
+								
+								
+							.icon-box
+								padding 0px
+								color #007EFF
+								text-align center
+								font-size 1.3em
+								margin 0px 10px 0px 0px
+								
+							.icon-dollar
+								display block
+								border solid 2px #007EFF
+								border-radius 2px
+								width 17px
+								height 17px
+								line-height 17px
+								font-size 1em
+								color #007EFF
+								text-align center
+								margin 0px 10px 0px 0px
+							
+							label
+								margin 0px 
+								
+					.gridFormShort
+						margin 5px 1%
+						width 44%
+						
+						a
+							text-decoration none
+						
+					.gridFormLarge
+						width 89%
+						margin 5px auto
+						
+						a
+							text-decoration none
+							
+					.gridMovilDivision
+						width 100%
+						height 55px
+						background-color #F8F8F8
+						color black
+						text-align center
+						line-height 55px
+						margin 30px auto
+						font-family "Open Sans"
+						font-size 1.2em
+						font-weight lighter
+						
+						
+				.instructions
+					margin 20px auto
+					text-align center
+					color #007EFF
+					width 270px
+
+				.wrapperBtnForm
+					width 87%
+					margin 0px auto
+
+
+		.partnersAddingForm
+			.gridForm
+				form
+					.partnerRow
+						width 95%
+						display flex
+						margin 0px auto
+						justify-content center
+						
+						.gridFormShort
+							width 45%
+		.personalInformationForm
+			.gridForm
+				.wrapperPartnersList
+					margin 30px auto 0px auto
+					padding 0px 
+					width 84%
+					display flex
+					flex-wrap wrap
+					align-items center
+				
+					.btnNewPartner
+						border solid 1px #007EFF
+						
+						span
+							display block
+							height 55px
+							width 55px
+							color #007EFF
+							font-size 3.2em
+							text-align center
+							font-weight lighter
+							margin 0px auto
+							padding 0px
+					
+					.btnPartnerProfile
+						width 55px
+						height 55px
+						line-height 55px
+						margin 0px 10px 0px 0px
+						border-radius 50%
+						overflow hidden
+						
+						figure
+							width 100%
+							margin 0px
+							padding 0px	
+							
+
+							img
+								width 100%
+						
+				form
+					.goodRow
+						width 95%
+						display flex
+						margin 0px auto
+						justify-content center
+						
+						.gridFormShort
+							width 45%
+						
+		.paymentMethodForm
+			.gridForm
+				.wrapperBtnPayments
+					display flex
+					justify-content center
+					margin 10px auto
+
+					.btnPaymentMethod
+						border solid 1px red
+						width 40%
+						margin 20px 5px
+						
+						figure
+							width 100%
+							margin 0px
+							padding 0px
+							
+							img
+								width 100%
+								
+						p
+							display block
+							margin 0px auto
+							
+				.btnServiceTicket
+					display flex
+					flex-direction column
+					justify-content center
+					background-color #F0F0F0
+					height 50px
+					width 100%
+					margin 0px
+					padding 10px 0px 0px 0px
+					color black
+					font-family "Open Sans"
+					font-size 1.1em
+					font-weight lighter
+					
+					span
+						text-align center
+						
+		.serviceTicket
+			margin 20px auto
+			
+			.underlineBlue
+				margin-bottom 20px
+			
+			.detailName
+				color black
+				font-weight bold
+				margin 15px auto
+				
+			.detail
+				color #A8A8A8
+				magin 0px auto 10px auto
+
+			.price
+				color #007EFF
+				
+			.btnPrint
+				background-color #007EFF
+				height 50px
+				line-height 50px
+				width 200px
+				margin 30px auto
+				color white
+				font-family "Open Sans"
+				font-size 1em
+				font-weight lighter
+				border-radius 2px
+				cursor pointer
+				
+			.deliveryLocation, .deliveryDate
+				color #007EFF
+				width 220px
+		.gridUserHelp
+			display none
+	.wrapperComercialFAQ
+		background-color #f8f8f8
+		padding 20px 0px
+		display flex
+		flex-direction column
+		justify-content center
+		align-items center
+		
+		.gridComercialFAQ
+			width 290px
+			height 500px
+			background-color white
+			border-top solid 4px #007EFF
+			display flex
+			flex-direction column
+			align-items center
+			margin 20px auto
+			padding 0px
+			box-shadow 0px 1px 20px rgba(0,0,0,0.2)
+			
+			figure
+				margin 40px auto 10px auto
+				padding 0px
+				width 80px
+				
+				img
+					width 100%
+			
+			h2, h3
+				color black
+					
+			h2
+				font-weight bold
+				
+			h3
+				font-family "Open Sans"
+				font-size 1em
+				font-weight lighter
+				color #000000
+				margin 20px auto 0px auto
+				padding 0px
+				display block
+				text-align center
+				width 239px
+				
+				ul
+					list-style none
+					margin 0px
+					padding 0px
+					
+					li
+						margin 8px auto
+
+.wrapperBtnNext, .wrapperBtnTransparent
+	a
+		text-decoration none
+			
+					
+
+		
+
+.gridStepProgress
+	background-color #007EFF
+	display flex
+	flex-direction column
+	justify-content center
+	padding-bottom 20px
+			
+	.icon-cross
+		color white
+		text-align right
+		margin 7px 7px 0px 0px
+		font-size 1.2em
+
+	.stepProgress
+		display block
+		width 200px
+		margin 25px auto 20px auto
+		display flex
+		justify-content center
+		list-style none
+		align-items center
+		padding 0px
+		
+		li
+			margin 0px 10px
+			color black
+			font-size 1.1em
+			font-family "Open Sans"
+			
+		.stepActive
+			border solid 2px white
+			border-radius 50%
+			width 20px
+			height 20px
+			color white
+			line-height 20px
+			text-align center
+		
+	
+	figure
+		width 100px
+		margin 15px auto 0px auto
+		padding 0px
+		
+		img
+			width 100%
+		
+		
+	h4
+		font-weight bold
+		color black
+		margin 20px auto 5px auto
+	p
+		color white
+	
+	.instructions
+		width 250px
+		margin 14px auto 15px auto
+		
+	.icon-angle-down
+		color white
+		font-size 1em
+		text-align center
+		margin 0px auto
+		display none
+		
+	.helpTitle
+		margin 20px auto 20px auto
+	
+	.gridUserSupport
+		display flex
+		justify-content center
+		align-items center
+		margin 0px 0px 8px 0px
+		
+		p
+			margin 0px 0px 0px 7px 
+		span
+			color black
+			font-size 0.9em
+					
+
+.btnNext
+	background-color #007EFF
+	border-radius 3px
+	height 40px
+	text-align center
+	line-height 40px
+	width 100%
+	color white
+	font-family "Open Sans"
+	font-size 1.1em
+	margin 30px auto 0px auto
+	
+.btnTransparentBackground
+	background-color white
+	height 40px
+	line-height 40px
+	text-align center
+	color #000000
+	font-family "Open Sans"
+	font-size 1.1em
+	margin 5px auto
+						
+.btnRed
+	background-color #F3575D
+	width 200px
+	height 50px
+	line-height 40px
+	border-radius 6px
+	text-align center
+	color white
+	font-family "Open Sans"
+	font-size 1.1em
+	margin 20px auto 20px auto
+	display flex
+	justify-content center
+	align-items center
+	cursor pointer
+	
+	span
+		color white
+		margin auto 0px auto 7px
+				
+		
+.wrapperFaq
+	margin 30px auto
+	padding 0px
+	display flex
+	flex-wrap wrap
+	align-items center
+	
+	figure, .gridFaq
+		width 100%
+		
+	figure
+		margin 0px
+		padding 0px
+		
+		img
+			width 100%
+	.gridFaq
+		display flex
+		flex-direction column
+		align-items center
+		background-color white
+		padding 20px 0px
+		
+		h1
+			font-family "Source Serif Pro"
+			font-size 1.4em
+			font-weight 600
+			color #007EFF
+			margin 0px auto 20px auto
+			padding 0px
+			display block
+			text-align center
+			width 300px
+			
+		h2	
+			font-family "Open Sans"
+			font-size 0.9em
+			font-weight lighter
+			color #95989A
+			margin 10px auto 15px auto
+			padding 0px
+			display block
+			text-align center
+			width 300px
+			
+		.btnFaq
+			background-color #F34A51
+			height 26px
+			line-height 26px
+			width 120px
+			margin 20px auto 0px auto
+			padding 0px
+			font-family "Open Sans"
+			font-size 0.7em
+			font-weight lighter
+			color white
+			text-align center
+			
+select
+	background-color transparent
+	border none
+	background url("img/Flechas.svg")
+	background-repeat no-repeat
+	background-position center left
+	appearance none
+	-webkit-appearance none
+	-moz-appearance none
+	background-size 0.8em
+	background-position-x 15px
+	padding-left: 40px;
+    
+			
+@media screen and (min-width: 767px)
+
+	.sectionEnterpriseIncorporation .wrapperComercialFAQ
+		flex-direction row
+		flex-wrap wrap
+
+	.wrapperFaq figure, .wrapperFaq .gridFaq
+		width 50%	
+		
+	.sectionEnterpriseIncorporation .wrapperIncorporationForm .dateForm .gridForm 
+		.instructions
+			width 500px
+		form 
+			.inputDate 
+				input[type=date]
+					width 95%
+				.icoInputDate
+					display flex
+					margin-left 10px
+		
+@media screen and (min-width: 1180px)
+	
+	body .container .appContainer .wrapperViews .sectionEnterpriseIncorporation
+		.wrapperIncorporationForm
+			.enterpriseInformationForm, .personalInformationForm, .partnersAddingForm, .dateForm
+				margin 80px auto
+				width 820px
+				display flex
+				flex-direction row-reverse
+				box-shadow 1px 1px 20px rgba(0,0,0,0.2)
+				
+				
+				.gridStepProgress
+					width 32%
+					
+					.icon-cross
+						display none
+						
+					.stepProgress
+						margin 30px auto 20px auto
+						
+						li
+							font-size 0.9em
+							
+					figure
+						width 60px
+						
+					.instructions
+						width 150px
+						margin 5px auto 
+					
+					.helpTitle
+						margin 100px auto 20px auto
+					
+				.gridForm
+					width 68%
+					padding-bottom 50px
+					
+					h3
+						width 81%
+						margin 42px auto 10px auto
+						
+					.underlineBlue
+						margin 0px 0px 0px 10%
+					
+					form
+						
+						.gridFormLarge
+							width 81%
+							
+						.gridFormMutable
+							margin 5px 2%
+							width 38%
+							
+							.inputCheckbox
+								margin-top 20px
+								
+						.gridFormShort
+							width 38%
+							margin 5px 2%
+							
+						.wrapperBtnNext, .wrapperBtnTransparent
+							margin-top 30px
+							
+						.wrapperBtnNext
+							order 2
+							
+						.wrapperBtnTransparent
+							order 1
+								
+						.btnNext, .btnTransparentBackground
+							margin 0px auto
+							cursor pointer
+							font-size 0.9em
+							width 70%
+							
+						.btnTransparentBackground
+							width 29%
+							margin auto auto
+							
+						.btnTransparentBackground:hover
+							color red
+							
+
+						.btnStepWrapperNext
+							order 2
+								
+							
+						.btnStepWrapperBack
+							order 1
+				
+			.personalInformationForm
+				width 1150px
+				.gridStepProgress
+					width 23%
+					justify-content flex-start
+					
+					.stepProgress
+						margin-top 50px
+					
+					figure
+						margin-top 120px
+						
+					.helpTitle
+						margin-top 100px
+				.gridForm
+					width 77%
+					display flex
+					flex-wrap wrap
+						
+					h3
+						width 87%
+					
+					.wrapperUnderline
+						width 87%
+						margin 0px auto
+						
+						.underlineBlue
+							margin 0px
+							
+					.wrapperPartnersList
+						width 87%
+						margin 20px auto 0px auto
+						
+						.btnPartnerProfile
+							width 40px
+							height 40px
+							line-height 40px	
+							
+							span
+								width 40px
+								height 40px
+								line-height 40px	
+								font-size 2em	
+						
+					form
+						width 47%
+						
+						.gridMovilDivision
+							display none
+							
+						.gridFormShort
+							margin 5px 2%
+							width 38%
+							
+						.lblOptional
+							width 80%
+							margin 15px auto 0px auto
+							
+						.addGood
+							order 8
+							margin-right 10%
+							margin-top 45px
+							width 38%
+							font-size 0.9em 
+							
+					.gridDesktopDivision
+						width 1px
+						height 200px
+						background-color #D0D0D0
+						margin auto auto
+					
+						
+					.wrapperBtnForm
+						display flex
+						justify-content space-around
+						align-items center
+						align-content center
+						width 88%
+						margin 30px auto 0px auto
+						
+						.btnNext
+							padding 0px 20px
+							margin 0px
+							font-size 0.9em
+							cursor pointer
+							
+							
+						.btnTransparentBackground
+							font-weight 0.9em
+							cursor pointer
+							
+							
+						.btnTransparentBackground:hover
+							color red
+
+						.wrapperBtnNext
+							order 2
+							
+						.wrapperBtnTransparent
+							order 1
+						
+			.partnersAddingForm
+				.gridForm
+					display flex
+					flex-wrap wrap
+					.wrapperFormTitle
+						width 50%		
+					.btnAddPartner
+						font-size 0.7em
+						width 120px
+						height 35px
+						margin-top 40px
+						margin-right 10%
+							
+			.dateForm
+				width 580px
+				.gridForm
+					width 100%
+				
+					.instructions			
+						text-align left
+						width 81%
+
+			.wrapperPaymentMethodForm
+				display flex
+				flex-direction row
+				justify-content center
+				
+				.gridUserHelp
+					order 3
+					background-color #007EFF
+					width 230px
+					display flex
+					flex-direction column
+					justify-content center
+					height 160px
+					
+					h4
+						font-weight bold
+						color black
+						margin 0px auto 5px auto
+					p
+						color white
+					
+					
+						
+					.icon-angle-down
+						color white
+						font-size 1em
+						text-align center
+						margin 0px auto
+						display none
+						
+					.helpTitle
+						margin 0px auto 10px auto
+						
+					.underlineWhite
+						background-color white
+						height 1px
+						width 70px
+						margin 0px auto 30px auto
+						
+					
+					.gridUserSupport
+						display flex
+						justify-content center
+						align-items center
+						margin 0px 0px 4px 0px
+						
+						p
+							margin 0px 0px 0px 7px 
+						span
+							color black
+							font-size 0.9em
+						
+
+				.serviceTicket
+					order 1
+					width 250px
+					padding-bottom 40px
+					.btnPrint
+						font-size 0.8em
+						width 130px
+						height 35px
+						line-height 35px
+						
+					.underlineGrey
+						width 100%
+						margin
+						
+					.detailName
+						margin 5px auto
+					.deliveryLocation
+						margin-top 15px
+						
+					.deliveryLocation, .deliveryDate
+						width 130px
+						
+					.subtitle
+						margin-top 25px
+					
+				.paymentMethodForm
+					order 2
+					width 550px
+					
+					.gridForm
+						
+						.bigTitlesSS
+							margin-top 70px
+							
+						.wrapperBtnPayments
+							margin-top 60px
+							
+							.btnPaymentMethod
+								width 200px
+								margin 20px 20px
+								
+							.btnPaymentMethod:hover
+								border solid 2px #007EFF
+								cursor pointer
+							
+							
+						.btnServiceTicket
+							display none
+						
+
+				.serviceTicket, .paymentMethodForm, .gridUserHelp
+					margin 80px 7px
+					box-shadow 1px 1px 20px rgba(0,0,0,0.2)
+					
+					h3
+						width 81%
+						margin 42px auto 10px auto
+						text-align center
+						
+					.underlineBlue
+						margin 0px auto
+
+				
+		.wrapperFaq
+			margin 0px
+			figure
+				display block
+				margin 0px
+				padding 0px
+				
+			.gridFaq
+				h1
+					width 500px
+					font-size 2.4em
+					margin 0px auto 20px auto
+					
+				h2
+					font-size 1.1em
+					width 400px
+					margin-top 20px
+					
+				.btnFaq
+					font-size 0.8em
+					width 140px
+					height 33px
+					line-height 33px
+					cursor pointer
+					
+		.wrapperComercialFAQ
+			justify-content center
+			background-image url("img/Home-banner1.png")
+			background-repeat no-repeat
+			background-size cover
+			background-position 34% 0px
+			
+			.gridComercialFAQ
+				width 360px
+				margin 90px 20px
+				padding-bottom 50px
+				h3
+					font-size 0.95em
+
+
+		
+	
+		
+		

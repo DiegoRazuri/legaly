@@ -1,0 +1,325 @@
+.sectionUserprofile
+	padding-top 20px
+	background-color #F8f8f8
+	
+	.wrapperPersonalInformation, .wrapperServicesState, .wrapperPartnersNetwork
+		display block
+		padding 7px 0px
+		margin 0px
+		background-color #F8f8f8
+		
+		.blockPersonalInformation, .blockServiceState
+			background-color white
+			width 90%
+			margin 35px auto 15px auto
+			padding 35px 5px
+			box-shadow 0px 1px 20px rgba(0,0,0,0.2)
+			display flex
+			flex-direction column
+			justify-content center
+			align-items center
+			
+			.userProfilePhoto
+				margin 0px auto
+				border-radius 50%
+				overflow hidden
+				height 140px
+				width 140px
+				
+				img
+					width 100%
+					
+			h5
+				margin 15px auto
+				font-weight bold
+				
+			.gridUserInfo
+				width auto
+				display flex
+				justify-content center
+				align-items center
+				margin 0px auto 3px auto
+				
+				p
+					text-transform Capitalize
+					color #5D5D5D
+					display block
+					margin 0px
+
+				span
+					color #007EFF
+					margin 0px 10px 0px 0px
+					
+			.underlineGrey
+				margin 20px auto
+			
+			.gridPersonalInformationB
+				ul
+					display block
+					margin 0px auto
+					padding 0px
+					width 100%
+					
+					li
+						list-style none
+						margin 0px auto 7px auto
+						
+						p
+							text-transform Capitalize
+							
+						.dataName
+							color #007EFF
+							font-weight bold
+						.userData
+							color #5D5D5D
+							
+						.userDataEmail
+							text-transform lowercase
+				
+	.wrapperServicesState .blockServiceState
+		.serviceImage
+			display block
+			margin 0px auto
+			width 65px
+			
+			img
+				width 100%
+		
+		.serviceEnterpriseName
+			font-weight bold
+			text-transform Capitalize
+			
+		.wrapperPie
+			position relative
+			.pie
+				background-color: #7fdbff;
+				border-radius: 50%;
+				overflow: hidden;
+				height: 200px;
+				width: 200px;
+				background-image: linear-gradient(90deg, #E6E6E6 50%, #0074d9 0);
+				
+				.dataBackground
+					height 150px
+					width 150px
+					margin auto
+					background-color white
+					position absolute
+					top 25px
+					left 25px
+					border-radius 50%
+					
+				.pieData
+					position absolute
+					top 50px
+					left 50px
+					font-family "Source Serif Pro"
+					font-size 3.5em
+					font-weight 500
+					color #6E6E6E
+					height 100px
+					width 100px
+					line-height 100px
+
+			.pie:before
+				background-color: #E6E6E6;
+				content: '';
+				display: block;
+				margin-left: 50%;
+				height: 200px;
+				width: 100px;
+				border-radius: 0 100% 100% 0 / 50%;
+				transform-origin: left;
+				transform: rotate(30deg);
+			
+	.wrapperPartnersNetwork
+		.wrapperPartners
+			margin 20px auto
+			.row
+				height 100px
+				width 90%
+				display flex
+				justify-content space-around
+				align-items center
+				margin 0px auto
+				
+				figure
+					margin 0px 0px 0px 10px
+					width 70px
+					height 70px
+					border-radius 50%
+					overflow hidden
+					img
+						width 100%
+						
+				.partnerInfo
+					margin 0px 10px 0px 10px
+					display flex
+					flex-direction column
+					justify-content flex-start
+					
+					p
+						margin 2px 0px
+						display flex
+						justify-content flex-start
+						align-items center
+						text-transform Capitalize
+						
+						span
+							display block
+							margin 0px 5px 0px 0px
+							padding 0px
+							
+					.enterpriseName
+						color #007EFF
+
+@media screen and (min-width: 767px)
+	.sectionUserprofile
+		display flex
+		flex-wrap wrap
+		justify-content center
+		
+		.wrapperPersonalInformation
+			width 90%
+		.wrapperServicesState
+			width 42%
+		.wrapperPartnersNetwork
+			width 42%	
+
+@media screen and (min-width: 1180px)
+	.sectionUserprofile
+		padding-bottom 20px
+		.wrapperPersonalInformation
+			width 1100px
+			
+			h4
+				margin 40px 0px 5px 0px
+				text-align left
+				
+			.underlineBlue
+				margin 0px
+			
+			.blockPersonalInformation
+				width 100%
+				flex-direction row
+				padding 35px 0px
+				margin 25px auto 15px auto
+				
+				.gridPersonalInformationA
+					width 50%
+					display flex
+					justify-content space-around
+					align-items center
+					
+					.wrapperPersonalInformationText
+						width 350px
+						display flex
+						flex-direction column
+						justify-content flex-start
+						align-content center
+						
+						h5
+							margin 7px 0px	
+							text-align left
+						.gridUserInfo
+							margin 0px 0px 3px 0px
+							justify-content flex-start
+						
+
+
+				.underlineGrey
+					width 1px
+					height 120px
+					margin auto 0px
+					background-color #D0D0D0
+					
+				.gridPersonalInformationB
+					width 50%
+					display flex
+					justify-content flex-end
+					align-items center
+					ul
+						width 460px
+						margin 0px 20px 0px 0px
+						li
+							display flex
+							margin 7px 0px 
+							p
+								margin 0px
+								text-align left
+							
+							.dataName
+								width 150px
+								margin 0px 40px 0px 0px
+								
+		.wrapperServicesState
+			width 800px
+			display flex
+			flex-wrap wrap
+			justify-content space-between
+			align-content flex-start
+			
+			h4
+				text-align left
+				width 100%
+				margin 10px 0px 5px 0px		
+			.wrapperUnderline
+				width 100%
+				margin 0px 0px 30px 0px
+				padding 0px
+				.underlineBlue
+					margin 0px
+			.blockServiceState
+				width 237px
+				margin 0px
+				padding 20px 5px 23px 5px
+				
+				.serviceImage
+					width 45px
+					
+				.serviceEnterpriseName
+					margin 6px auto 14px auto
+				
+				.wrapperPie
+					.pie
+						width 125px
+						height 125px 
+						
+						.dataBackground
+							width 100px
+							height 100px
+							top 13px
+							left 13px
+						.pieData
+							width 75px
+							height 75px
+							line-height 75px
+							font-size 2.5em
+							top 25px
+							left 25px
+							
+					.pie:before
+						height 125px
+						width 63px
+							
+		.wrapperPartnersNetwork
+			width 270px
+			margin-left 30px
+		 	h4
+		 		width 100%
+				margin 10px 0px 5px 0px	
+				text-align left
+				
+			.underlineBlue
+				margin 0px
+				
+	.sectionUserprofile .wrapperPartnersNetwork .wrapperPartners .row
+		margin 0px 0px
+		width 240px
+		height 80px
+		
+		figure
+			margin 0px
+			height 60px
+			width 60px
+							
