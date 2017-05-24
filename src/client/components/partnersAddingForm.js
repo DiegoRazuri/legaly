@@ -14,73 +14,85 @@ export default class PartnersAddingForm extends Component{
 	constructor (props){
 		super(props);
 		this.state={
-			numberOfPartners : 4
+			positionSelected : "",
+			AccountManagerPositionSelected : "",
+			enterpriseSaved : 0
+
+
 		}
 
+		this.selectPositionHandler = this.selectPositionHandler.bind(this);
 		this.addPartner = this.addPartner.bind(this);
 		this.handlePartnerAddingFormSubmit = this.handlePartnerAddingFormSubmit.bind(this);
 		
-
 	}
 
 	addPartner(){
-	
-		let wrapper = document.getElementById("partnerForm");
-
-		let numWrapperPartnerRow = document.getElementsByClassName("partnerRow").length;
-
-		let num = numWrapperPartnerRow +1;
-
-
+		let email = ReactDom.findDOMNode(this.refs.inputPartnerEmail).value.trim()
 		
-		let comp = `<div class="partnerRow">
-					<div class="gridFormShort">
-						<label class="smallContent">${num}. Socio</label>
-						<div class="inputSingleValue">
-							<input class="inputPartnerEmail" type="text" placeholder="e-mail"/>
-							<span class="icon-head"></span>
-						</div>
-					</div>
-					<div class="gridFormShort">
-						<label class="smallContent">Cargo</label>
-						<div class="inputSingleValue">
-							<input class="inputPartnerPosition" type="text"/>
-							<span></span>
-						</div>
-					</div>
 
-				</div>`;
+		let json ={
+			partnerEmail :  email,
+			position : this.state.positionSelected
 
+		}
 
-		wrapper.insertAdjacentHTML('beforeend', comp)
+		this.props.rowPartnerInputHandler.call(null, json)
+
+		ReactDom.findDOMNode(this.refs.inputPartnerEmail).value = '';
+		ReactDom.findDOMNode(this.refs.positionSelect).value = '';
+		
 	}
 
 	handlePartnerAddingFormSubmit(){
 
-		let inputs = document.getElementsByClassName("partnerRow");
+		if(this.props.partnersInvitationSaved == 0){
+			let json = { position : this.state.AccountManagerPositionSelected }
 
-		console.log(inputs[0]);
+			this.props.rowAccountManagerInputHandler.call(null, json)
+			this.props.sendPartnerInvitation.call(null)
+			
+		}else{
 
-		let arry=[];
+			let json = { position : this.state.AccountManagerPositionSelected }
 
-		for(let i = 0; i< inputs.length; i++){
+			this.props.rowAccountManagerInputHandler.call(null, json)
 
-			if(inputs[i].children[0].children[1].children[0].value != ""){
-				
-				arry.push({
-					partnerEmail: inputs[i].children[0].children[1].children[0].value,
-					position: inputs[i].children[1].children[1].children[0].value
-
-				})
-
-			}
-
+			this.props.updatePartnerInvitation.call(null)
 		}
 
-		//INFO LISTA PARA ENVIAR AL SERVER
-		console.log(arry)
+		
+
+		
+
+
 			
 
+	}
+
+	selectPositionHandler(ev){
+
+
+		let target = ev.target;
+
+
+		this.setState({ [target.name] : target.value});
+	}
+
+	componentDidMount(){
+		window.scrollTo(0, 0)
+
+
+		if(this.props.partnersInvitationSaved == 1){
+			let inputAccountManagerPosition = ReactDom.findDOMNode(this.refs.AccountManagerPositionSelected)
+
+			inputAccountManagerPosition.value = this.props.enterpriseInProcessData.partners[0].position;
+
+			
+			this.setState({
+				AccountManagerPositionSelected : this.props.enterpriseInProcessData.partners[0].position
+			})			
+		}
 	}
 
 
@@ -89,70 +101,187 @@ export default class PartnersAddingForm extends Component{
 	
 	render(){
 
-		console.log("partnersAddingForm")
-		console.log(this.props.enterpriseInProcess)
-		console.log(this.props.user)
+	
 
-		let rows=[];
+		let partnerRow=[];
 
-		for(let i=0; i< this.state.numberOfPartners; i++){
+		if(this.props.enterpriseInProcessData.partners){
 
-			let key_id = uid();
+		
 
-			rows.push(<PartnerRowInput
-					number = {i+1}
-					key = {key_id}
-				/>)
+			for(let i=0; i< this.props.enterpriseInProcessData.partners.length; i++){
+
+				if(this.props.enterpriseInProcessData.partners[i].user._id != this.props.user._id){
+
+					let key_id = uid();
+
+					partnerRow.push(<PartnerRowInput
+							deletingPartnerRow = {this.props.deletingPartnerRow}
+							partner_id = {this.props.enterpriseInProcessData.partners[i]._id}
+							name = {this.props.enterpriseInProcessData.partners[i].user.name}
+							position = {this.props.enterpriseInProcessData.partners[i].position}
+							partnerListPos = {i}
+							enterprise_id = {this.props.enterpriseInProcessData._id}
+							user_id = {this.props.enterpriseInProcessData.partners[i].user._id}
+							number = {i+1}
+							key = {key_id}
+						/>)
+				}
+				
+			}
+
 		}
 
+	
 
-		return <div className="partnersAddingForm">
-					<div className="gridStepProgress">
-						<span className="icon-cross"></span>
-						<ul className="stepProgress">
-							<li className="stepActive">1</li>
-							<li>2</li>
-							<li>3</li>
-						</ul>
-						<figure>
-							<img src="css/img/InfoEmpresa1.svg"/>
-						</figure>
-						<h4 className="bigTitlesOS">Constitución de empresa</h4>
-						<p className="mediumContent instructions">Ingresa la información que necesitas para emitir la minuta</p>
-						<h4 className="bigTitlesOS helpTitle">¿Necesitas ayuda?</h4>
-						<span className="icon-angle-down"></span>
-						<div className="gridUserSupport">
-							<span className="icon-whatsapp"></span>
-							<p className="smallContent">942 914 542</p>
+
+		return <div className="sectionEnterpriseIncorporation">
+					<div className="wrapperIncorporationForm">
+
+						<div className="partnersAddingForm">
+							<div className="gridStepProgress">
+								<span className="icon-cross"></span>
+								<ul className="stepProgress">
+									<li>1</li>
+									<li className="stepActive">2</li>
+									<li>3</li>
+								</ul>
+								<figure>
+									<img src="css/img/Infosocios2.svg"/>
+								</figure>
+								<h4 className="bigTitlesOS">Agrega a tus socios</h4>
+								<p className="mediumContent instructions">Incorpora a todos las personas que conformarán la sociedad.</p>
+								<h4 className="bigTitlesOS helpTitle">¿Necesitas ayuda?</h4>
+								<span className="icon-angle-down"></span>
+								<a href="http://www.facebook.com/legaly.pe" target="_blank" className="gridUserSupport">
+									<span className="icon-facebook"></span>
+									<p className="smallContent">www.facebook.com/legaly.pe</p>
+								</a>
+								<div className="gridUserSupport">
+									<span className="icon-mail_outline"></span>
+									<p className="smallContent">ayuda@legaly.pe</p>
+								</div>
+							</div>
+							<div className="gridForm">
+								<div className="wrapperFormTitle">
+									<h3 className="bigTitlesSS">Invita a los fundadores</h3>
+									<div className="underlineBlue"></div>	
+								</div>
+							
+								<form id="partnerForm">
+
+									<div className="partnerRow partnerRowInfo" data-partnerlistpos={0}>
+										<div className="gridFormShort gridEmail">
+											<label className="smallContent">1. Socio</label>
+											<p className="smallContent">{this.props.enterpriseInProcessData.partners ? this.props.enterpriseInProcessData.partners[0].user.name: ""}</p>
+											
+										</div>
+										<div className="gridFormShort">
+											<label className="smallContent">Cargo</label>
+											<div className="inputSelect">
+												<select onChange={this.selectPositionHandler.bind()} ref="AccountManagerPositionSelected" value={this.state.AccountManagerPositionSelected} name="AccountManagerPositionSelected">
+													<option disabled></option>
+													<option>Ninguno</option>
+													<option>Gerente General</option>
+													<option>Gerente de Producción</option>
+													<option>Gerente de Finanzas</option>
+												</select>
+												<span></span>
+											</div>
+										</div>
+										<span className=""></span>
+									</div>
+
+									{ partnerRow }
+									
+									<div className="partnerRow">
+										<div className="gridFormShort">
+											<label className="smallContent">Socio</label>
+											<div className="inputSingleValue">
+												<input ref="inputPartnerEmail" className="inputPartnerEmail" type="text" placeholder="Nombre Completo"/>
+												<span className="icon-head"></span>
+											</div>
+										</div>
+										<div className="gridFormShort">
+											<label className="smallContent">Cargo</label>
+											<div className="inputSelect">
+												<select onChange={this.selectPositionHandler.bind()} ref="positionSelect" value={this.state.positionSelected} name="positionSelected">
+													<option disabled></option>
+													<option>Ninguno</option>
+													<option>Gerente General</option>
+													<option>Sub Gerente</option>
+													<option>Gerente de Finanzas</option>
+												</select>
+												<span></span>
+											</div>
+										</div>
+
+									</div>
+									<div className="gridFormLarge">
+										<div className="btnRed btnAddPartner" onClick={this.addPartner.bind(this)}>
+											<p>Agregar socio</p>
+											<span className="icon-head"></span>
+										</div>
+									</div>
+									<div className="gridFormLarge gridFormMutable wrapperBtnNext">
+										<Link to="/informacion-personal"><div className="btnNext" onClick={this.handlePartnerAddingFormSubmit.bind(this)}>Siguiente</div></Link>
+									</div>
+									<div className="gridFormLarge gridFormMutable wrapperBtnTransparent">
+										<Link to="/informacion-empresa"><div className="btnTransparentBackground">Anterior</div></Link>
+									</div>
+								</form>
+							</div>
 						</div>
-						<div className="gridUserSupport">
-							<span className="icon-mail_outline"></span>
-							<p className="smallContent">ayuda@legitify.com</p>
+
+					</div>
+					
+
+					<div id="faq1" className="wrapperFaq">
+						<figure>
+							<img src="./css/img/constitucion-photo.jpg"/>
+						</figure>
+						<div className="gridFaq">
+							<h1>¿Por qué es importante constituir mi empresa?</h1>
+							<div className="underlineBlue"></div>
+							<h2>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h2>
+							<div className="btnFaq">Quiero saber más</div>
 						</div>
 					</div>
-					<div className="gridForm">
-						<div className="wrapperFormTitle">
-							<h3 className="bigTitlesSS">Invita a los fundadores</h3>
-							<div className="underlineBlue"></div>	
+
+
+
+					<div className="wrapperComercialFAQ">
+						<div className="gridComercialFAQ">
+							<figure>
+								<img src="css/img/accesible.svg"/>
+							</figure>
+							<h2 className="landingTitles">¿Cúal es el precio?</h2>
+							<h3>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h3>
 						</div>
-						
-						<div className="btnRed btnAddPartner" onClick={this.addPartner.bind(this)}>
-							<p>Agregar socio</p>
-							<span className="icon-head"></span>
+						<div className="gridComercialFAQ">
+							<figure>
+								<img src="css/img/rapidez.svg"/>
+							</figure>
+							<h2 className="landingTitles">¿Cúanto debo esperar?</h2>
+							<h3>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h3>
 						</div>
-						<form id="partnerForm">
-							
-							{
-								rows
-							}
-							
-							<div className="gridFormLarge gridFormMutable wrapperBtnNext">
-								<Link to="/informacion-personal"><div className="btnNext" onClick={this.handlePartnerAddingFormSubmit.bind(this)}>Invitar a socios</div></Link>
-							</div>
-							<div className="gridFormLarge gridFormMutable wrapperBtnTransparent">
-								<Link to="/informacion-empresa"><div className="btnTransparentBackground">Anterior</div></Link>
-							</div>
-						</form>
+						<div className="gridComercialFAQ">
+							<figure>
+								<img src="css/img/delivery.svg"/>
+							</figure>
+							<h2 className="landingTitles">Brindamos lo siguiente</h2>
+							<h3>
+								<ul>
+									<li>Búsqueda y reserva de nombre</li>
+									<li>Estatutos de la empresa</li>
+									<li>Escritura pública ante notario</li>
+									<li>Inscripción registral en Sunarp</li>
+									<li>Ficha RUC</li>
+									<li>Copia literal</li>
+									<li>Compra de dominio web</li>
+								</ul>
+							</h3>
+						</div>
 					</div>
 				</div>
 	}

@@ -24,9 +24,6 @@ export default class Incorporate extends Component{
 		return <div className="sectionEnterpriseIncorporation">
 					<div className="wrapperIncorporationForm">
 						
-						<Route path="/informacion-empresa" render={(props) => ( <EnterpriseInformationForm user={this.props.user} enterpriseInProcess={this.props.enterpriseInProcess} enterpriseIdInProcess={this.props.enterpriseIdInProcess} sendEnterpriseInformation={this.props.sendEnterpriseInformation}/>   )}/>
-						
-						<Route path="/invitar-socios" render={(props) => ( <PartnersAddingForm user={this.props.user} enterpriseInProcess={this.props.enterpriseInProcess} enterpriseIdInProcess={this.props.enterpriseIdInProcess}/>   )}/>
 						<Route path="/informacion-personal" render={(props) => ( <PersonalInformationForm/>   )}/>
 						<Route path="/fecha-firma" render={(props) => ( <DateForm/>   )}/>
 						<Route path="/metodo-pago" render={(props) => ( <PaymentMethodForm/>   )}/>

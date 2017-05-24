@@ -19,12 +19,45 @@ export default class LoginForm extends Component{
 						</Link>
 					</div>
 					<figure>
-						<img src="#"/>
+						<img src="css/img/LogotipoLegaly.svg"/>
 					</figure>
-					<h5>Una frase vendedora de lo que hacemos</h5>
+					<h5>Crea tu empresa, sin moverte a ningún lugar.</h5>
 					<div className="underlineBlue"></div>
 
-					<div className="formLogin">
+					
+
+					<div className="btnLoginForm fbLogin">
+						<a href="/auth/facebook">
+							<span className="icon-facebook"></span>
+							<p>Registrarme con facebook</p>
+							<span></span>
+						</a>	
+					
+					</div>
+					<div className="btnLoginForm linkedinLogin">
+						<a href="/auth/linkedin">
+							<span className="icon-linkedin"></span>
+							<p>Registrarme con linkedin</p>
+							<span></span>
+						</a>
+					</div>
+					<div className="btnLoginForm googleLogin">
+						<a href="/auth/google">
+							<span className="icon-google"></span>
+							<p>Registrarme con google</p>
+							<span></span>
+						</a>
+					</div>
+
+
+				</div>
+			</div>
+
+	}
+}
+
+/*
+<div className="formLogin">
 						<div className="gridFormShort">
 							<label className="smallContent">Nombre completo</label>
 							<div className="inputSingleValue">
@@ -64,24 +97,4 @@ export default class LoginForm extends Component{
 					</div>
 
 					<div className="underlineGrey"></div>
-
-					<div className="btnLoginForm fbLogin">
-						<a href="/auth/facebook">
-							<span className="icon-facebook"></span>
-							<p>Registrarme con facebook</p>
-							<span></span>
-						</a>	
-					
-					</div>
-					<div className="btnLoginForm linkedinLogin">
-						<a href="/auth/linkedin">
-							<span className="icon-linkedin"></span>
-							<p>Registrarme con linkedin</p>
-							<span></span>
-						</a>
-					</div>
-				</div>
-			</div>
-
-	}
-}
+					*/

@@ -24120,10 +24120,6 @@ var _loginForm = require('./loginForm');
 
 var _loginForm2 = _interopRequireDefault(_loginForm);
 
-var _userprofile = require('./userprofile');
-
-var _userprofile2 = _interopRequireDefault(_userprofile);
-
 var _landing = require('./landing');
 
 var _landing2 = _interopRequireDefault(_landing);
@@ -24131,6 +24127,34 @@ var _landing2 = _interopRequireDefault(_landing);
 var _incorporate = require('./incorporate');
 
 var _incorporate2 = _interopRequireDefault(_incorporate);
+
+var _enterpriseInformationForm = require('./enterpriseInformationForm');
+
+var _enterpriseInformationForm2 = _interopRequireDefault(_enterpriseInformationForm);
+
+var _partnersAddingForm = require('./partnersAddingForm');
+
+var _partnersAddingForm2 = _interopRequireDefault(_partnersAddingForm);
+
+var _personalInformationForm = require('./personalInformationForm');
+
+var _personalInformationForm2 = _interopRequireDefault(_personalInformationForm);
+
+var _dateForm = require('./dateForm');
+
+var _dateForm2 = _interopRequireDefault(_dateForm);
+
+var _paymentMethodForm = require('./paymentMethodForm');
+
+var _paymentMethodForm2 = _interopRequireDefault(_paymentMethodForm);
+
+var _userprofile = require('./userprofile');
+
+var _userprofile2 = _interopRequireDefault(_userprofile);
+
+var _userAvatar = require('./userAvatar');
+
+var _userAvatar2 = _interopRequireDefault(_userAvatar);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24156,43 +24180,337 @@ var App = function (_Component) {
 		_this.state = {
 			user: false,
 			months: [],
-			enterpriseInProcess: false,
-			enterpriseIdInProcess: ""
+			enterpriseInProcess: 0,
+			enterpriseSaved: 0,
+			partnersInvitationSaved: 0,
+			enterpriseInProcessData: {}
 
 		};
 
-		_this.sendEnterpriseInformation = _this.sendEnterpriseInformation.bind(_this);
+		_this.sendPartnerInvitation = _this.sendPartnerInvitation.bind(_this);
 		_this.switchEnterpriseInProcess = _this.switchEnterpriseInProcess.bind(_this);
+		_this.sendEnterpriseInformation = _this.sendEnterpriseInformation.bind(_this);
+		_this.inputTextHandler = _this.inputTextHandler.bind(_this);
+		_this.selectHandler = _this.selectHandler.bind(_this);
+		_this.rowInputsHandler = _this.rowInputsHandler.bind(_this);
+		_this.deleteRowInputHandle = _this.deleteRowInputHandle.bind(_this);
+		_this.sendPartnersInformation = _this.sendPartnersInformation.bind(_this);
+		_this.inputTextHandlerRootLevel = _this.inputTextHandlerRootLevel.bind(_this);
+		_this.sendSingingDateInformation = _this.sendSingingDateInformation.bind(_this);
+		_this.isItLogin = _this.isItLogin.bind(_this);
+		_this.deletingPartnerRow = _this.deletingPartnerRow.bind(_this);
+		_this.rowPartnerInputHandler = _this.rowPartnerInputHandler.bind(_this);
+		_this.logPageView = _this.logPageView.bind(_this);
+		_this.updateEnterpriseInformation = _this.updateEnterpriseInformation.bind(_this);
+		_this.rowAccountManagerInputHandler = _this.rowAccountManagerInputHandler.bind(_this);
+		_this.updatePartnerInvitation = _this.updatePartnerInvitation.bind(_this);
+		_this.switchBtnNavSelected = _this.switchBtnNavSelected.bind(_this);
 
 		return _this;
 	}
 
+	// no se esta utilizando pero sirve de ejemplo
+
 	_createClass(App, [{
-		key: 'switchEnterpriseInProcess',
-		value: function switchEnterpriseInProcess() {
-			if (this.state.enterpriseInProcess == true) {
-				this.setState({ enterpriseInProcess: false });
+		key: 'switchStepState',
+		value: function switchStepState(key) {
+			if (this.state[key] == 0) {
+				this.setState(_defineProperty({}, key, 1));
 			} else {
-				this.setState({ enterpriseInProcess: true });
+				this.setState(_defineProperty({}, key, 0));
 			}
 		}
+
+		// FORMSTAGE
+
+	}, {
+		key: 'inputTextHandler',
+		value: function inputTextHandler(ev) {
+			var target = ev.target;
+
+			var name = target.name;
+
+			var newData = this.state.enterpriseInProcessData;
+
+			if (name == "moneyInput" || name == "goodsInput") {
+
+				newData.partners[target.dataset.pos][name] = target.value;
+			} else {
+
+				newData.partners[target.dataset.pos].user[name] = target.value;
+			}
+
+			this.setState({ enterpriseInProcessData: newData });
+		}
+
+		// FORMSTAGE
+
+	}, {
+		key: 'inputTextHandlerRootLevel',
+		value: function inputTextHandlerRootLevel(ev) {
+			var target = ev.target;
+			var name = target.name;
+
+			var newData = this.state.enterpriseInProcessData;
+
+			newData[name] = target.value;
+
+			this.setState({ enterpriseInProcessData: newData });
+		}
+
+		// FORMSTAGE
+
+	}, {
+		key: 'selectHandler',
+		value: function selectHandler(ev) {
+
+			var target = ev.target;
+
+			var newData = this.state.enterpriseInProcessData;
+
+			newData.partners[target.dataset.pos].user[target.name] = target.value;
+
+			this.setState({ enterpriseInProcessData: newData });
+		}
+
+		// FORMSTAGE
+
+	}, {
+		key: 'rowInputsHandler',
+		value: function rowInputsHandler(json) {
+
+			var newData = this.state.enterpriseInProcessData;
+
+			newData.partners[json.partnerSelected].goodsInput.push({
+				goodName: json.goodName,
+				goodValue: json.goodValue
+			});
+
+			this.setState({ enterpriseInProcessData: newData });
+		}
+
+		// FORMSTAGE
+
+	}, {
+		key: 'rowPartnerInputHandler',
+		value: function rowPartnerInputHandler(json) {
+
+			var newData = this.state.enterpriseInProcessData;
+
+			var partner = {
+				user: { name: json.partnerEmail },
+				position: json.position
+			};
+
+			newData.partners.push(partner);
+
+			this.setState({ enterpriseInProcessData: newData });
+		}
+	}, {
+		key: 'rowAccountManagerInputHandler',
+		value: function rowAccountManagerInputHandler(json) {
+
+			var newData = this.state.enterpriseInProcessData;
+
+			newData.partners[0].position = json.position;
+
+			this.setState({ enterpriseInProcessData: newData });
+		}
+
+		// FORMSTAGE
+
+	}, {
+		key: 'deleteRowInputHandle',
+		value: function deleteRowInputHandle(json) {
+
+			var newData = this.state.enterpriseInProcessData;
+
+			newData.partners[json.partnerSelected].goodsInput.splice(json.inputPos, 1);
+
+			this.setState({ enterpriseInProcessData: newData });
+		}
+
+		// FORMSTAGE
+
+	}, {
+		key: 'deletingPartnerRow',
+		value: function deletingPartnerRow(json) {
+			var _this2 = this;
+
+			if (this.state.partnersInvitationSaved == 1) {
+
+				$.post('/api/delete_partner_invitation', json, function (res) {
+					if (res.state == 1) {
+
+						var newData = _this2.state.enterpriseInProcessData;
+
+						newData.partners.splice(json.partnerSelected, 1);
+
+						_this2.setState({ enterpriseInProcessData: newData });
+					}
+				});
+			} else {
+
+				var newData = this.state.enterpriseInProcessData;
+
+				newData.partners.splice(json.partnerSelected, 1);
+
+				this.setState({ enterpriseInProcessData: newData });
+			}
+		}
+
+		//REACTSTAGE
+
+	}, {
+		key: 'switchEnterpriseInProcess',
+		value: function switchEnterpriseInProcess() {
+			if (this.state.enterpriseInProcess == 1) {
+				this.setState({ enterpriseInProcess: 0 });
+			} else {
+				this.setState({ enterpriseInProcess: 1 });
+			}
+		}
+
+		// REACTSTAGE STEP 1
+
 	}, {
 		key: 'sendEnterpriseInformation',
 		value: function sendEnterpriseInformation(json) {
-			var _this2 = this;
+			var _this3 = this;
 
 			$.post('/api/enterprise_information', json, function (res) {
 				if (res) {
 					console.log(res);
 
-					_this2.state.user.enterprise.push(res.enterprise);
+					var newEnterpriseProgressData = res.enterprise;
 
-					var newData = _this2.state.user;
+					_this3.setState({
+						enterpriseInProcessData: newEnterpriseProgressData,
+						enterpriseSaved: 1
+					});
+				}
+			});
+		}
 
-					_this2.setState({
-						user: newData,
-						enterpriseInProcess: true,
-						enterpriseIdInProcess: res.enterprise._id
+		//DBSTAGE STEP 4
+
+	}, {
+		key: 'sendSingingDateInformation',
+		value: function sendSingingDateInformation() {
+			var _this4 = this;
+
+			var json = this.state.enterpriseInProcessData;
+
+			$.post('/api/signing_date_information', json, function (res) {
+				if (res) {
+					console.log("info de res");
+					console.log(res);
+
+					var newData = _this4.state.enterpriseInProcessData;
+
+					newData.price = res.price;
+
+					_this4.setState({ enterpriseInProcessData: newData });
+				}
+			});
+		}
+
+		//DBSTAGE STEP 3
+
+	}, {
+		key: 'sendPartnersInformation',
+		value: function sendPartnersInformation() {
+
+			var json = this.state.enterpriseInProcessData;
+
+			$.post('/api/partners_information', json, function (res) {
+				if (res) {
+					console.log("info de res");
+					console.log(res);
+
+					//let newData = this.state.enterpriseInProcessData.user
+
+					//this.setState({user: newData});
+
+					/*
+     this.state.user.enterprise.push(res.enterprise)
+     	let newData = this.state.user
+     	let newEnterpriseProgressData = res.enterprise
+     	this.setState({
+     	user : newData,
+     	enterpriseInProcessData : newEnterpriseProgressData
+     	})
+     */
+
+					//console.log(this.state.enterpriseInProcessData)
+				}
+			});
+		}
+
+		//DBSTAGE STEP 2
+
+	}, {
+		key: 'sendPartnerInvitation',
+		value: function sendPartnerInvitation() {
+			var _this5 = this;
+
+			//capturo la data para enviarla
+
+			var json = this.state.enterpriseInProcessData;
+
+			$.post('/api/partners_invitation', json, function (res) {
+				if (res) {
+
+					var newEnterpriseProgressData = res.enterprise;
+
+					_this5.setState({
+						enterpriseInProcessData: newEnterpriseProgressData,
+						partnersInvitationSaved: 1
+
+					});
+				}
+			});
+		}
+	}, {
+		key: 'updatePartnerInvitation',
+		value: function updatePartnerInvitation() {
+			var _this6 = this;
+
+			var json = this.state.enterpriseInProcessData;
+
+			$.post('/api/partners_invitation_update', json, function (res) {
+				if (res) {
+
+					console.log(res);
+
+					var newEnterpriseProgressData = res.enterprise;
+
+					_this6.setState({
+						enterpriseInProcessData: newEnterpriseProgressData
+
+					});
+				}
+			});
+		}
+
+		//DBSTAGE STEP 2
+
+	}, {
+		key: 'updateEnterpriseInformation',
+		value: function updateEnterpriseInformation(json) {
+			var _this7 = this;
+
+			json._id = this.state.enterpriseInProcessData._id;
+
+			$.post('/api/enterprise_information_update', json, function (res) {
+				if (res) {
+
+					console.log(res);
+
+					var newEnterpriseProgressData = res;
+
+					_this7.setState({
+						enterpriseInProcessData: newEnterpriseProgressData
 
 					});
 				}
@@ -24201,7 +24519,7 @@ var App = function (_Component) {
 	}, {
 		key: 'isItLogin',
 		value: function isItLogin() {
-			var _this3 = this;
+			var _this8 = this;
 
 			$.ajax({
 				type: 'GET',
@@ -24212,14 +24530,13 @@ var App = function (_Component) {
 				success: function success(res) {
 					if (res.user != false) {
 
-						_this3.setState({
+						_this8.setState({
 							user: res
 						});
 					}
 				},
 				error: function error(data) {
 					console.log("error");
-					console.log(data);
 				}
 			});
 		}
@@ -24229,22 +24546,75 @@ var App = function (_Component) {
 			this.isItLogin();
 		}
 	}, {
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			$("#btnMovilMenu").click(function () {
+
+				$("#movilMenu").slideDown();
+			});
+
+			$("#btnCloseMovilMenu").click(function () {
+
+				$("#movilMenu").fadeOut();
+			});
+		}
+	}, {
+		key: 'logPageView',
+		value: function logPageView() {
+			//    ReactGA.set({page : window.location.pathname });
+			//    ReactGA.pageview(window.location.pathname);
+
+			// instruccion para que suba el scroll hasta el tope cuando carga la ruta
+			var action = this.state.location.action;
+
+
+			if (action === 'PUSH') {
+				window.scrollTo(0, 0);
+			}
+		}
+	}, {
+		key: 'switchBtnNavSelected',
+		value: function switchBtnNavSelected(pos) {
+			if (pos == 0) {
+				this.setState({
+					btnNavCons: 'btnNavSelected',
+					btnNavUs: '',
+					btnNavInfo: ''
+				});
+			} else if (pos == 1) {
+				this.setState({
+					btnNavCons: '',
+					btnNavUs: 'btnNavSelected',
+					btnNavInfo: ''
+				});
+			} else if (pos == 2) {
+				this.setState({
+					btnNavCons: '',
+					btnNavUs: '',
+					btnNavInfo: 'btnNavSelected'
+
+				});
+			} else {
+				this.setState({
+					btnNavCons: '',
+					btnNavUs: '',
+					btnNavInfo: ''
+
+				});
+			}
+		}
+	}, {
 		key: 'render',
 		value: function render() {
-			var _this4 = this;
+			var _React$createElement,
+			    _React$createElement2,
+			    _React$createElement3,
+			    _this9 = this;
 
 			var userLogin = void 0;
 
 			if (this.state.user != false) {
-				userLogin = _react2.default.createElement(
-					'figure',
-					{ className: 'userPhoto' },
-					_react2.default.createElement(
-						_reactRouterDom.Link,
-						{ to: '/perfil' },
-						_react2.default.createElement('img', { src: this.state.user.photo })
-					)
-				);
+				userLogin = _react2.default.createElement(_userAvatar2.default, { user: this.state.user, switchBtnNavSelected: this.switchBtnNavSelected });
 			} else {
 				userLogin = _react2.default.createElement(
 					'div',
@@ -24270,15 +24640,15 @@ var App = function (_Component) {
 					null,
 					_react2.default.createElement(
 						'div',
-						{ className: 'movilMenu' },
+						{ id: 'movilMenu', className: 'movilMenu' },
 						_react2.default.createElement(
 							'div',
 							{ className: 'wrapperHeaderMovilMenu' },
-							_react2.default.createElement('span', { className: 'icon-cross' }),
+							_react2.default.createElement('span', { id: 'btnCloseMovilMenu', className: 'icon-cross' }),
 							_react2.default.createElement(
 								'figure',
 								{ className: 'movilMenuMainLogo' },
-								_react2.default.createElement('img', { src: '#' })
+								_react2.default.createElement('img', { src: 'css/img/LogotipoLegaly.svg' })
 							),
 							_react2.default.createElement('span', null)
 						),
@@ -24306,15 +24676,6 @@ var App = function (_Component) {
 										_reactRouterDom.Link,
 										{ to: '/constitucion', className: 'mediumContent' },
 										'Constituye tu Empresa'
-									)
-								),
-								_react2.default.createElement(
-									'li',
-									null,
-									_react2.default.createElement(
-										'a',
-										{ href: '#', className: 'mediumContent' },
-										'Registra tu marca'
 									)
 								),
 								_react2.default.createElement(
@@ -24420,11 +24781,11 @@ var App = function (_Component) {
 							_react2.default.createElement(
 								'div',
 								{ className: 'subGrid' },
-								_react2.default.createElement('span', { className: 'icon-whatsapp' }),
+								_react2.default.createElement('span', { className: 'icon-office' }),
 								_react2.default.createElement(
 									'p',
 									null,
-									'942 914 542'
+									'01 468 1546'
 								)
 							),
 							_react2.default.createElement(
@@ -24434,7 +24795,7 @@ var App = function (_Component) {
 								_react2.default.createElement(
 									'p',
 									null,
-									'info@legitify.com'
+									'info@legaly.pe'
 								)
 							),
 							_react2.default.createElement(
@@ -24452,33 +24813,32 @@ var App = function (_Component) {
 					_react2.default.createElement(
 						'nav',
 						null,
-						_react2.default.createElement('span', { className: 'icon-align-justify btnMovilMenu' }),
+						_react2.default.createElement('span', { id: 'btnMovilMenu', className: 'icon-align-justify btnMovilMenu' }),
 						_react2.default.createElement(
 							'figure',
 							{ className: 'mainLogo' },
-							_react2.default.createElement('img', { src: '#' })
+							_react2.default.createElement(
+								_reactRouterDom.Link,
+								{ to: '/', onClick: this.switchBtnNavSelected.bind(this, 4) },
+								_react2.default.createElement('img', { src: 'css/img/LogotipoLegaly.svg' })
+							)
 						),
 						_react2.default.createElement(
 							'div',
 							{ className: 'gridNav' },
 							_react2.default.createElement(
-								'a',
-								{ href: '#' },
+								_reactRouterDom.Link,
+								(_React$createElement = { to: '/informacion-empresa', className: 'btnMainNav' }, _defineProperty(_React$createElement, 'className', this.state.btnNavCons), _defineProperty(_React$createElement, 'onClick', this.switchBtnNavSelected.bind(this, 0)), _React$createElement),
 								'Constituye tu Empresa'
 							),
 							_react2.default.createElement(
 								'a',
-								{ href: '#' },
-								'Registra tu marca'
-							),
-							_react2.default.createElement(
-								'a',
-								{ href: '#' },
+								(_React$createElement2 = { href: '#', className: 'btnMainNav' }, _defineProperty(_React$createElement2, 'className', this.state.btnNavUs), _defineProperty(_React$createElement2, 'onClick', this.switchBtnNavSelected.bind(this, 1)), _React$createElement2),
 								'Quienes somos'
 							),
 							_react2.default.createElement(
 								'a',
-								{ href: '#' },
+								(_React$createElement3 = { href: '#', className: 'btnMainNav' }, _defineProperty(_React$createElement3, 'className', this.state.btnNavInfo), _defineProperty(_React$createElement3, 'onClick', this.switchBtnNavSelected.bind(this, 2)), _React$createElement3),
 								'Informaci\xF3n'
 							)
 						),
@@ -24490,22 +24850,22 @@ var App = function (_Component) {
 					{ className: 'wrapperViews' },
 					_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _landing2.default }),
 					_react2.default.createElement(_reactRouterDom.Route, { path: '/informacion-empresa', render: function render(props) {
-							return _react2.default.createElement(_incorporate2.default, _defineProperty({ user: _this4.state.user, enterpriseInProcess: _this4.state.enterpriseInProcess, enterpriseIdInProcess: _this4.state.enterpriseIdInProcess, sendEnterpriseInformation: _this4.sendEnterpriseInformation }, 'enterpriseInProcess', _this4.enterpriseInProcess));
+							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_enterpriseInformationForm2.default, { user: _this9.state.user, sendEnterpriseInformation: _this9.sendEnterpriseInformation, enterpriseInProcessData: _this9.state.enterpriseInProcessData, enterpriseInProcess: _this9.state.enterpriseInProcess, enterpriseSaved: _this9.state.enterpriseSaved, updateEnterpriseInformation: _this9.updateEnterpriseInformation });
 						} }),
 					_react2.default.createElement(_reactRouterDom.Route, { path: '/invitar-socios', render: function render(props) {
-							return _react2.default.createElement(_incorporate2.default, { user: _this4.state.user, enterpriseInProcess: _this4.state.enterpriseInProcess, enterpriseIdInProcess: _this4.state.enterpriseIdInProcess });
+							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_partnersAddingForm2.default, { user: _this9.state.user, sendPartnerInvitation: _this9.sendPartnerInvitation, enterpriseInProcessData: _this9.state.enterpriseInProcessData, rowPartnerInputHandler: _this9.rowPartnerInputHandler, deletingPartnerRow: _this9.deletingPartnerRow, rowAccountManagerInputHandler: _this9.rowAccountManagerInputHandler, partnersInvitationSaved: _this9.state.partnersInvitationSaved, updatePartnerInvitation: _this9.updatePartnerInvitation });
 						} }),
 					_react2.default.createElement(_reactRouterDom.Route, { path: '/informacion-personal', render: function render(props) {
-							return _react2.default.createElement(_incorporate2.default, null);
+							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_personalInformationForm2.default, { user: _this9.state.user, enterpriseInProcessData: _this9.state.enterpriseInProcessData, inputTextHandler: _this9.inputTextHandler, selectHandler: _this9.selectHandler, rowInputsHandler: _this9.rowInputsHandler, deleteRowInputHandle: _this9.deleteRowInputHandle, sendPartnersInformation: _this9.sendPartnersInformation, enterpriseSaved: _this9.state.enterpriseSaved });
 						} }),
 					_react2.default.createElement(_reactRouterDom.Route, { path: '/fecha-firma', render: function render(props) {
-							return _react2.default.createElement(_incorporate2.default, null);
+							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_dateForm2.default, { inputTextHandlerRootLevel: _this9.inputTextHandlerRootLevel, enterpriseInProcessData: _this9.state.enterpriseInProcessData, sendSingingDateInformation: _this9.sendSingingDateInformation, enterpriseSaved: _this9.state.enterpriseSaved });
 						} }),
-					_react2.default.createElement(_reactRouterDom.Route, { path: '/metodo-pago', render: function render(props) {
-							return _react2.default.createElement(_incorporate2.default, null);
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/metodo-pago', onUpdate: this.logPageView, render: function render(props) {
+							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_paymentMethodForm2.default, { enterpriseInProcessData: _this9.state.enterpriseInProcessData, enterpriseSaved: _this9.state.enterpriseSaved });
 						} }),
-					_react2.default.createElement(_reactRouterDom.Route, { path: '/perfil', render: function render(props) {
-							return _this4.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_userprofile2.default, null);
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/perfil', onUpdate: this.logPageView, render: function render(props) {
+							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_userprofile2.default, { user: _this9.state.user, isItLogin: _this9.isItLogin });
 						} })
 				),
 				_react2.default.createElement(
@@ -24534,17 +24894,17 @@ var App = function (_Component) {
 								_react2.default.createElement(
 									'li',
 									null,
-									'Jr. Tom\xE1s Guido 150, Lince - CC. Risso'
+									'Jr. Tom\xE1s Guido 160, Lince - CC. Risso'
 								),
 								_react2.default.createElement(
 									'li',
 									null,
-									'info@legitify.com'
+									'info@legaly.pe'
 								),
 								_react2.default.createElement(
 									'li',
 									null,
-									'942 914 542'
+									'01 468 1546'
 								)
 							)
 						),
@@ -24554,7 +24914,7 @@ var App = function (_Component) {
 							_react2.default.createElement(
 								'h5',
 								null,
-								'LEGITIFY \xAE'
+								'LEGALY \xAE'
 							),
 							_react2.default.createElement('div', { className: 'underlineWhite' }),
 							_react2.default.createElement(
@@ -24762,7 +25122,211 @@ var App = function (_Component) {
 
 exports.default = App;
 
-},{"./incorporate":227,"./landing":228,"./loginForm":229,"./userprofile":234,"react":218,"react-dom":41,"react-router-dom":178}],224:[function(require,module,exports){
+},{"./dateForm":227,"./enterpriseInformationForm":228,"./incorporate":230,"./landing":231,"./loginForm":232,"./partnersAddingForm":234,"./paymentMethodForm":235,"./personalInformationForm":236,"./userAvatar":238,"./userprofile":239,"react":218,"react-dom":41,"react-router-dom":178}],224:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *	module dependencies
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
+
+var BtnUserprofileInfo = function (_Component) {
+	_inherits(BtnUserprofileInfo, _Component);
+
+	function BtnUserprofileInfo() {
+		_classCallCheck(this, BtnUserprofileInfo);
+
+		return _possibleConstructorReturn(this, (BtnUserprofileInfo.__proto__ || Object.getPrototypeOf(BtnUserprofileInfo)).apply(this, arguments));
+	}
+
+	_createClass(BtnUserprofileInfo, [{
+		key: 'render',
+		value: function render() {
+
+			return _react2.default.createElement(
+				'div',
+				{ className: this.props.classSelected, onClick: this.props.switchPartnerSelected.bind(this, this.props.pos) },
+				_react2.default.createElement(
+					'figure',
+					null,
+					_react2.default.createElement('img', { src: this.props.photoUrl })
+				)
+			);
+		}
+	}]);
+
+	return BtnUserprofileInfo;
+}(_react.Component);
+
+exports.default = BtnUserprofileInfo;
+
+},{"react":218,"react-dom":41}],225:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *	module dependencies
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
+
+var BtnUserprofileInfoText = function (_Component) {
+	_inherits(BtnUserprofileInfoText, _Component);
+
+	function BtnUserprofileInfoText() {
+		_classCallCheck(this, BtnUserprofileInfoText);
+
+		return _possibleConstructorReturn(this, (BtnUserprofileInfoText.__proto__ || Object.getPrototypeOf(BtnUserprofileInfoText)).apply(this, arguments));
+	}
+
+	_createClass(BtnUserprofileInfoText, [{
+		key: 'render',
+		value: function render() {
+
+			return _react2.default.createElement(
+				'div',
+				{ className: this.props.classSelected, onClick: this.props.switchPartnerSelected.bind(this, this.props.pos) },
+				_react2.default.createElement(
+					'p',
+					null,
+					this.props.btnText
+				)
+			);
+		}
+	}]);
+
+	return BtnUserprofileInfoText;
+}(_react.Component);
+
+exports.default = BtnUserprofileInfoText;
+
+},{"react":218,"react-dom":41}],226:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _reactRouterDom = require('react-router-dom');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *	module dependencies
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
+
+var ContactRow = function (_Component) {
+	_inherits(ContactRow, _Component);
+
+	function ContactRow() {
+		_classCallCheck(this, ContactRow);
+
+		return _possibleConstructorReturn(this, (ContactRow.__proto__ || Object.getPrototypeOf(ContactRow)).apply(this, arguments));
+	}
+
+	_createClass(ContactRow, [{
+		key: 'render',
+		value: function render() {
+
+			var displayPhoto = void 0;
+
+			if (this.props.user.photo != undefined) {
+
+				displayPhoto = _react2.default.createElement(
+					'figure',
+					null,
+					_react2.default.createElement('img', { src: this.props.user.photo })
+				);
+			} else {
+				displayPhoto = _react2.default.createElement(
+					'p',
+					{ className: 'displayPhotoName' },
+					this.props.user.name[0]
+				);
+			}
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'row' },
+				displayPhoto,
+				_react2.default.createElement(
+					'div',
+					{ className: 'partnerInfo' },
+					_react2.default.createElement(
+						'p',
+						{ className: 'mediumContent' },
+						this.props.user.name
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'enterpriseName mediumContent' },
+						_react2.default.createElement('span', { className: 'icon-office' }),
+						this.props.companyName
+					)
+				)
+			);
+		}
+	}]);
+
+	return ContactRow;
+}(_react.Component);
+
+exports.default = ContactRow;
+
+},{"react":218,"react-dom":41,"react-router-dom":178}],227:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24795,152 +25359,375 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var DateForm = function (_Component) {
 	_inherits(DateForm, _Component);
 
-	function DateForm(props) {
+	function DateForm() {
 		_classCallCheck(this, DateForm);
 
-		var _this = _possibleConstructorReturn(this, (DateForm.__proto__ || Object.getPrototypeOf(DateForm)).call(this, props));
-
-		_this.state = {
-			hour: "8:00"
-		};
-
-		_this.handleChange = _this.handleChange.bind(_this);
-
-		return _this;
+		return _possibleConstructorReturn(this, (DateForm.__proto__ || Object.getPrototypeOf(DateForm)).apply(this, arguments));
 	}
 
 	_createClass(DateForm, [{
 		key: 'handleDateFormSubmit',
 		value: function handleDateFormSubmit() {
 
-			var date = document.getElementById("inputDate").value;
-			var hour = this.state.hour;
-			var location = _reactDom2.default.findDOMNode(this.refs.location_i).value.trim();
-
-			var json = {
-				date: date,
-				hour: hour,
-				location: location
-			};
-
-			// DATA LISTA PARA ENVIAR A SERVER
-			console.log(json);
+			this.props.sendSingingDateInformation.call(null);
 		}
 	}, {
-		key: 'handleChange',
-		value: function handleChange(ev) {
-			this.setState({ hour: ev.target.value });
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			window.scrollTo(0, 0);
 		}
 	}, {
 		key: 'render',
 		value: function render() {
 
+			var dataReaderEnterprise = this.props.enterpriseInProcessData;
+
+			var inputDate = void 0,
+			    selectTime = void 0,
+			    inputLocation = void 0;
+
+			if (dataReaderEnterprise) {
+
+				inputDate = _react2.default.createElement('input', { type: 'date', id: 'inputDate', value: dataReaderEnterprise.signAppointmentDate != undefined ? dataReaderEnterprise.signAppointmentDate : "", onChange: this.props.inputTextHandlerRootLevel.bind(), name: 'signAppointmentDate' });
+
+				selectTime = _react2.default.createElement(
+					'select',
+					{ value: dataReaderEnterprise.signAppointmentTime != undefined ? dataReaderEnterprise.signAppointmentTime : "", onChange: this.props.inputTextHandlerRootLevel.bind(), name: 'signAppointmentTime' },
+					_react2.default.createElement('option', { disabled: true }),
+					_react2.default.createElement(
+						'option',
+						null,
+						'8:00 am'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'8:30 am'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'9:00 am'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'9:30 am'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'10:00 am'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'10:30 am'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'11:00 am'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'11:30 am'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'12:00 pm'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'12:30 pm'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'1:00 pm'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'1:30 pm'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'2:00 pm'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'2:30 pm'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'3:00 pm'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'3:30 pm'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'4:00 pm'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'4:30 pm'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'5:00 pm'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'5:30 pm'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'6:00 pm'
+					)
+				);
+
+				inputLocation = _react2.default.createElement('input', { type: 'text', value: dataReaderEnterprise.signAppointmentLocation != undefined ? dataReaderEnterprise.signAppointmentLocation : "", onChange: this.props.inputTextHandlerRootLevel.bind(), name: 'signAppointmentLocation' });
+			}
+
 			return _react2.default.createElement(
 				'div',
-				{ className: 'dateForm' },
+				{ className: 'sectionEnterpriseIncorporation' },
 				_react2.default.createElement(
 					'div',
-					{ className: 'gridForm' },
+					{ className: 'wrapperIncorporationForm' },
 					_react2.default.createElement(
-						'h3',
-						{ className: 'bigTitlesSS' },
-						'Delivery - Firma de Constituci\xF3n'
-					),
-					_react2.default.createElement('div', { className: 'underlineBlue' }),
-					_react2.default.createElement(
-						'p',
-						{ className: 'instructions smallContent' },
-						'Establece la hora, fecha y direcci\xF3n de tu preferencia para que uno de nuestros colaboradores vaya con los papeles necesarios para la firma y huella digital de todos los socios. Por lo tanto, todos los fundadores deben de estar para dicha reuni\xF3n. '
-					),
-					_react2.default.createElement(
-						'form',
-						null,
+						'div',
+						{ className: 'dateForm' },
 						_react2.default.createElement(
 							'div',
-							{ className: 'gridFormShort' },
+							{ className: 'gridForm' },
 							_react2.default.createElement(
-								'label',
-								{ className: 'smallContent' },
-								'Fecha'
+								'h3',
+								{ className: 'bigTitlesSS' },
+								'Delivery - Firma de Constituci\xF3n'
+							),
+							_react2.default.createElement('div', { className: 'underlineBlue' }),
+							_react2.default.createElement(
+								'p',
+								{ className: 'instructions smallContent' },
+								'Establece la hora, fecha y direcci\xF3n de tu preferencia para que uno de nuestros colaboradores vaya con los papeles necesarios para la firma y huella digital de todos los socios. Por lo tanto, todos los fundadores deben de estar para dicha reuni\xF3n. '
 							),
 							_react2.default.createElement(
-								'div',
-								{ className: 'inputDate' },
-								_react2.default.createElement('input', { type: 'date', id: 'inputDate' }),
-								_react2.default.createElement('span', { className: 'icon-layout icoInputDate' })
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridFormShort' },
-							_react2.default.createElement(
-								'label',
-								{ className: 'smallContent' },
-								'Hora'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'inputSelect' },
+								'form',
+								null,
 								_react2.default.createElement(
-									'select',
-									{ onClick: this.handleChange },
+									'div',
+									{ className: 'gridFormShort' },
 									_react2.default.createElement(
-										'option',
-										null,
-										'8:00 am'
+										'label',
+										{ className: 'smallContent' },
+										'Fecha'
 									),
 									_react2.default.createElement(
-										'option',
-										null,
-										'8:30 am'
-									),
-									_react2.default.createElement(
-										'option',
-										null,
-										'9:00 am'
+										'div',
+										{ className: 'inputDate' },
+										inputDate,
+										_react2.default.createElement('span', { className: 'icon-layout icoInputDate' })
 									)
 								),
-								_react2.default.createElement('span', { className: 'icon-clock icoInputSelect' })
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridFormLarge' },
-							_react2.default.createElement(
-								'label',
-								{ className: 'smallContent' },
-								'Direcci\xF3n'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'inputSingleValue' },
-								_react2.default.createElement('input', { type: 'text', ref: 'location_i' }),
-								_react2.default.createElement('span', { className: 'icon-room' })
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridFormLarge gridFormMutable wrapperBtnNext' },
-							_react2.default.createElement(
-								_reactRouterDom.Link,
-								{ to: '/metodo-pago' },
 								_react2.default.createElement(
 									'div',
-									{ className: 'btnNext', onClick: this.handleDateFormSubmit.bind(this) },
-									'Siguiente'
+									{ className: 'gridFormShort' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'smallContent' },
+										'Hora'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'inputSelect' },
+										selectTime,
+										_react2.default.createElement('span', { className: 'icon-clock icoInputSelect' })
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormLarge' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'smallContent' },
+										'Direcci\xF3n'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'inputSingleValue' },
+										inputLocation,
+										_react2.default.createElement('span', { className: 'icon-room' })
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormLarge gridFormMutable wrapperBtnNext' },
+									_react2.default.createElement(
+										_reactRouterDom.Link,
+										{ to: '/metodo-pago' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'btnNext', onClick: this.handleDateFormSubmit.bind(this) },
+											'Siguiente'
+										)
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormLarge gridFormMutable wrapperBtnTransparent' },
+									_react2.default.createElement(
+										_reactRouterDom.Link,
+										{ to: '/informacion-perosnal' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'btnTransparentBackground' },
+											'Anterior'
+										)
+									)
 								)
 							)
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ id: 'faq1', className: 'wrapperFaq' },
+					_react2.default.createElement(
+						'figure',
+						null,
+						_react2.default.createElement('img', { src: './css/img/constitucion-photo.jpg' })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridFaq' },
+						_react2.default.createElement(
+							'h1',
+							null,
+							'\xBFPor qu\xE9 es importante constituir mi empresa?'
+						),
+						_react2.default.createElement('div', { className: 'underlineBlue' }),
+						_react2.default.createElement(
+							'h2',
+							null,
+							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
 						),
 						_react2.default.createElement(
 							'div',
-							{ className: 'gridFormLarge gridFormMutable wrapperBtnTransparent' },
+							{ className: 'btnFaq' },
+							'Quiero saber m\xE1s'
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'wrapperComercialFAQ' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridComercialFAQ' },
+						_react2.default.createElement(
+							'figure',
+							null,
+							_react2.default.createElement('img', { src: 'css/img/accesible.svg' })
+						),
+						_react2.default.createElement(
+							'h2',
+							{ className: 'landingTitles' },
+							'\xBFC\xFAal es el precio?'
+						),
+						_react2.default.createElement(
+							'h3',
+							null,
+							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridComercialFAQ' },
+						_react2.default.createElement(
+							'figure',
+							null,
+							_react2.default.createElement('img', { src: 'css/img/rapidez.svg' })
+						),
+						_react2.default.createElement(
+							'h2',
+							{ className: 'landingTitles' },
+							'\xBFC\xFAanto debo esperar?'
+						),
+						_react2.default.createElement(
+							'h3',
+							null,
+							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridComercialFAQ' },
+						_react2.default.createElement(
+							'figure',
+							null,
+							_react2.default.createElement('img', { src: 'css/img/delivery.svg' })
+						),
+						_react2.default.createElement(
+							'h2',
+							{ className: 'landingTitles' },
+							'Brindamos lo siguiente'
+						),
+						_react2.default.createElement(
+							'h3',
+							null,
 							_react2.default.createElement(
-								_reactRouterDom.Link,
-								{ to: '/informacion-perosnal' },
+								'ul',
+								null,
 								_react2.default.createElement(
-									'div',
-									{ className: 'btnTransparentBackground' },
-									'Anterior'
+									'li',
+									null,
+									'B\xFAsqueda y reserva de nombre'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Estatutos de la empresa'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Escritura p\xFAblica ante notario'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Inscripci\xF3n registral en Sunarp'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Ficha RUC'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Copia literal'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Compra de dominio web'
 								)
 							)
 						)
@@ -24955,7 +25742,7 @@ var DateForm = function (_Component) {
 
 exports.default = DateForm;
 
-},{"react":218,"react-dom":41,"react-router-dom":178}],225:[function(require,module,exports){
+},{"react":218,"react-dom":41,"react-router-dom":178}],228:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24976,8 +25763,6 @@ var _reactRouterDom = require('react-router-dom');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -24996,14 +25781,14 @@ var EnterpriseInformationForm = function (_Component) {
 		var _this = _possibleConstructorReturn(this, (EnterpriseInformationForm.__proto__ || Object.getPrototypeOf(EnterpriseInformationForm)).call(this, props));
 
 		_this.state = {
-			enterpriseCategory: "",
-			goods_investment: false,
-			money_investment: false
+			industry: "",
+			societyType: ""
 
 		};
 
 		_this.handleChange = _this.handleChange.bind(_this);
-		_this.handelCheckboxChange = _this.handelCheckboxChange.bind(_this);
+		_this.handleChangeSocietyType = _this.handleChangeSocietyType.bind(_this);
+		//this.handelCheckboxChange = this.handelCheckboxChange.bind(this);
 
 		return _this;
 	}
@@ -25022,28 +25807,25 @@ var EnterpriseInformationForm = function (_Component) {
 
 			var capital = _reactDom2.default.findDOMNode(this.refs.investment_i).value.trim();
 
+			var good_investment = document.getElementById("checkboxGoods").checked;
+
+			var money_investment = document.getElementById("checkboxMoney").checked;
+
 			var json = {
-				names: names,
-				enterpriseIndustry: this.state.enterpriseCategory,
-				goods_investment: this.state.goods_investment,
-				money_investment: this.state.money_investment,
-				total_capital: capital
+				optionNames: names,
+				industry: this.state.industry,
+				societyType: this.state.societyType,
+				isItGoodsCapital: good_investment,
+				isItMoneyCapital: money_investment,
+				totalCapital: capital
+
 			};
 
-			//Datos listos para enviar.
-			console.log(json);
-
-			this.props.sendEnterpriseInformation.call(null, json);
-
-			/*
-   		//ELIMINAR TODOS LOS ELEMENTOS CON UN CLASS ESPECIFICO
-   
-   		let namesSelected = document.getElementsByClassName("option-name");
-   
-   		while(namesSelected[0]){
-   			namesSelected[0].parentNode.removeChild(namesSelected[0]);
-   		}
-   */
+			if (this.props.enterpriseSaved == 1) {
+				this.props.updateEnterpriseInformation.call(null, json);
+			} else {
+				this.props.sendEnterpriseInformation.call(null, json);
+			}
 
 			return;
 		}
@@ -25051,18 +25833,13 @@ var EnterpriseInformationForm = function (_Component) {
 		key: 'handleChange',
 		value: function handleChange(ev) {
 
-			console.log(ev.target.value);
-			this.setState({ enterpriseCategory: ev.target.value });
+			this.setState({ industry: ev.target.value });
 		}
 	}, {
-		key: 'handelCheckboxChange',
-		value: function handelCheckboxChange(ev) {
-			var target = ev.target;
+		key: 'handleChangeSocietyType',
+		value: function handleChangeSocietyType(ev) {
 
-			var value = target.type === 'checkbox' ? target.checked : target.value;
-			var name = target.name;
-
-			this.setState(_defineProperty({}, name, value));
+			this.setState({ societyType: ev.target.value });
 		}
 	}, {
 		key: 'deleteName',
@@ -25078,9 +25855,16 @@ var EnterpriseInformationForm = function (_Component) {
 		}
 	}, {
 		key: 'catchNames',
-		value: function catchNames() {
+		value: function catchNames(val) {
 
-			var companyNames_i = _reactDom2.default.findDOMNode(this.refs.companyNames_i).value.trim();
+			var companyNames_i;
+
+			if (val == 0) {
+				var companyNames_i = _reactDom2.default.findDOMNode(this.refs.companyNames_i).value.trim();
+			} else if (this.props.enterpriseInProcessData) {
+
+				var companyNames_i = this.props.enterpriseInProcessData.optionNames.toString();
+			}
 
 			var wrapper = document.getElementById("wrapperInputValues");
 
@@ -25088,7 +25872,6 @@ var EnterpriseInformationForm = function (_Component) {
 
 			for (var i = arry.length - 1; i >= 0; i--) {
 
-				console.log("nombre: " + arry[i]);
 				name = arry[i];
 
 				if (arry[i] != "") {
@@ -25121,241 +25904,1057 @@ var EnterpriseInformationForm = function (_Component) {
 	}, {
 		key: 'componentDidMount',
 		value: function componentDidMount() {
-			console.log("dentro componentDidMount");
 
-			console.log(this.props.enterpriseInProcess);
+			window.scrollTo(0, 0);
 
-			if (this.props.enterpriseInProcess == true) {
+			if (this.props.enterpriseSaved == 1) {
 
-				var position = this.props.user.enterprise.length - 1;
+				var inputInvestment = _reactDom2.default.findDOMNode(this.refs.investment_i);
+				var inputIndustry = _reactDom2.default.findDOMNode(this.refs.selectEnterpriseIndustry);
+				var inputSocietyType = _reactDom2.default.findDOMNode(this.refs.selectSocietyType);
 
-				console.log("esta es la position" + position);
+				inputInvestment.value = this.props.enterpriseInProcessData.totalCapital;
+				inputIndustry.value = this.props.enterpriseInProcessData.industry;
+				inputSocietyType.value = this.props.enterpriseInProcessData.societyType;
 
-				var input = _reactDom2.default.findDOMNode(this.refs.investment_i);
+				this.setState({
+					enterpriseCategory: this.props.enterpriseInProcessData.industry,
+					societyType: this.props.enterpriseInProcessData.societyType,
+					industry: this.props.enterpriseInProcessData.industry
+				});
 
-				input.value = this.props.user.enterprise[position].totalCapital;
+				this.catchNames(1);
 
-				console.log("este es el valor totalCapital" + this.props.user.enterprise[position].totalCapital);
+				if (this.props.enterpriseInProcessData.isItGoodsCapital == true) {
+					document.getElementById("checkboxGoods").checked = true;
+				} else {
+					document.getElementById("checkboxGoods").checked = false;
+				}
+
+				if (this.props.enterpriseInProcessData.isItMoneyCapital == true) {
+					document.getElementById("checkboxMoney").checked = true;
+				} else {
+					document.getElementById("checkboxMoney").checked = false;
+				}
 			}
 		}
 	}, {
 		key: 'render',
 		value: function render() {
-
-			console.log("enterpriseinfoform props");
-			console.log(this.props.enterpriseInProcess);
-			console.log(this.props.user);
+			/*
+   		let dataReader;
+   
+   		if(this.props.enterpriseInProcess != 0){
+   
+   			dataReader = this.props.enterpriseInProcessData;
+   
+   
+   
+   		}
+   		
+   */
 
 			return _react2.default.createElement(
 				'div',
-				{ className: 'enterpriseInformationForm' },
+				{ className: 'sectionEnterpriseIncorporation' },
 				_react2.default.createElement(
 					'div',
-					{ className: 'gridStepProgress' },
-					_react2.default.createElement('span', { className: 'icon-cross' }),
-					_react2.default.createElement(
-						'ul',
-						{ className: 'stepProgress' },
-						_react2.default.createElement(
-							'li',
-							{ className: 'stepActive' },
-							'1'
-						),
-						_react2.default.createElement(
-							'li',
-							null,
-							'2'
-						),
-						_react2.default.createElement(
-							'li',
-							null,
-							'3'
-						)
-					),
-					_react2.default.createElement(
-						'figure',
-						null,
-						_react2.default.createElement('img', { src: 'css/img/InfoEmpresa1.svg' })
-					),
-					_react2.default.createElement(
-						'h4',
-						{ className: 'bigTitlesOS' },
-						'Constituci\xF3n de empresa'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'mediumContent instructions' },
-						'Ingresa la informaci\xF3n que necesitas para emitir la minuta'
-					),
-					_react2.default.createElement(
-						'h4',
-						{ className: 'bigTitlesOS helpTitle' },
-						'\xBFNecesitas ayuda?'
-					),
-					_react2.default.createElement('span', { className: 'icon-angle-down' }),
+					{ className: 'wrapperIncorporationForm' },
 					_react2.default.createElement(
 						'div',
-						{ className: 'gridUserSupport' },
-						_react2.default.createElement('span', { className: 'icon-whatsapp' }),
+						{ className: 'enterpriseInformationForm' },
 						_react2.default.createElement(
-							'p',
-							{ className: 'smallContent' },
-							'942 914 542'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'gridUserSupport' },
-						_react2.default.createElement('span', { className: 'icon-mail_outline' }),
+							'div',
+							{ className: 'gridStepProgress' },
+							_react2.default.createElement('span', { className: 'icon-cross' }),
+							_react2.default.createElement(
+								'ul',
+								{ className: 'stepProgress' },
+								_react2.default.createElement(
+									'li',
+									{ className: 'stepActive' },
+									'1'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'2'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'3'
+								)
+							),
+							_react2.default.createElement(
+								'figure',
+								null,
+								_react2.default.createElement('img', { src: 'css/img/InfoEmpresa1.svg' })
+							),
+							_react2.default.createElement(
+								'h4',
+								{ className: 'bigTitlesOS' },
+								'Constituci\xF3n de empresa'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'mediumContent instructions' },
+								'Ingresa la informaci\xF3n que necesitas para emitir la minuta'
+							),
+							_react2.default.createElement(
+								'h4',
+								{ className: 'bigTitlesOS helpTitle' },
+								'\xBFNecesitas ayuda?'
+							),
+							_react2.default.createElement('span', { className: 'icon-angle-down' }),
+							_react2.default.createElement(
+								'a',
+								{ href: 'http://www.facebook.com/legaly.pe', target: '_blank', className: 'gridUserSupport' },
+								_react2.default.createElement('span', { className: 'icon-facebook' }),
+								_react2.default.createElement(
+									'p',
+									{ className: 'smallContent' },
+									'www.facebook.com/legaly.pe'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'gridUserSupport' },
+								_react2.default.createElement('span', { className: 'icon-mail_outline' }),
+								_react2.default.createElement(
+									'p',
+									{ className: 'smallContent' },
+									'ayuda@legaly.pe'
+								)
+							)
+						),
 						_react2.default.createElement(
-							'p',
-							{ className: 'smallContent' },
-							'ayuda@legitify.com'
+							'div',
+							{ className: 'gridForm' },
+							_react2.default.createElement(
+								'h3',
+								{ className: 'bigTitlesSS' },
+								'Constituci\xF3n de empresa'
+							),
+							_react2.default.createElement('div', { className: 'underlineBlue' }),
+							_react2.default.createElement(
+								'form',
+								null,
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormLarge' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'smallContent' },
+										'Ingresa de 3 a 5 posibles nombres en orden de prioridad'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'inputMultipleValues' },
+										_react2.default.createElement(
+											'div',
+											{ id: 'wrapperInputValues', className: 'wrapperInputValues' },
+											_react2.default.createElement('input', { autoFocus: true, type: 'text', id: 'inputMultipleValuesNames', ref: 'companyNames_i', onBlur: this.catchNames.bind(this, 0) })
+										),
+										_react2.default.createElement('span', { className: 'icon-flag2' })
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormLarge' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'smallContent' },
+										'Elige un tipo de sociedad'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'inputSelect' },
+										_react2.default.createElement(
+											'select',
+											{ id: 'selectEnterpriseIncorporationForm', value: this.state.societyType, ref: 'selectSocietyType', onChange: this.handleChangeSocietyType },
+											_react2.default.createElement('option', { disabled: true }),
+											_react2.default.createElement(
+												'option',
+												null,
+												'S.A.C.'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'S.A.'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'E.I.R.L.'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'S.R.L.'
+											)
+										),
+										_react2.default.createElement('span', { className: 'icon-flag2 icoInputSelect' })
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormLarge' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'smallContent' },
+										'\xBFA qu\xE9 se dedicar\xE1 tu empresa?'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'inputSelect' },
+										_react2.default.createElement(
+											'select',
+											{ id: 'selectEnterpriseIncorporationForm', value: this.state.industry, ref: 'selectEnterpriseIndustry', onChange: this.handleChange },
+											_react2.default.createElement('option', { disabled: true }),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ASESORIA EMPRESARIAL'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ASESORIA ENERGETICA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ASESORIA FINANCIERA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ASESORIA INFORMATICA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'BEBIDAS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'BIBLIOTECA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'BUFFET- CATERING'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ABARROTES'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ACCESORIOS MEDICOS/ INSTRUMENTOS MEDICOS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'AGENCIA DE ADUANAS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'AGENCIA DE VIAJES Y TURISMO'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'AGENTE DE CARGA INTERNACIONAL'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'AIRE ACONDICIONADO'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ALIMENTOS NATURALES'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ANALISIS DE ECOSISTEMAS/EVALUACION DE IMPACTO AMBIENTAL'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ARTEFACTOS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ARTESANIA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ARTICULOS DE BASAR'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ARTICULOS DE SEGURIDAD'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ARTICULOS ELECTRONICOS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ASESORIA CONTABLE'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'CORRETAJE INMOBILIARIOADUANAS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'CORTINAS Y PERSIANASTURISMO'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'COSMETOLOGIA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'CRIANZA DE ANIMALES'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'DEPORTE'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'DISE\xD1O DE INTERIORES'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'DISE\xD1O GRAFICO'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'EDITORIAL'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ESTIMULACION TEMPRANA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'FUEGOS ARTIFICIALES'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'IDIOMAS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'LAVANDERIA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'MANTENIMIENTO AERONAVES'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'PANADERIA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'PLASTICOS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'PSICOLOGOS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'RESIDUOS SOLIDOS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'SERVICIOS MEDICOS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'TOPOGRAFIA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'YOGA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ASESORIA EN GENERAL'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'JARDINERIA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ESCUELA DE MANEJO'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'MANUALIDADES'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'REDES Y MERCADEO'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ASESORIA PARA TESIS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'GIMNASIO'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'CONSULTORIA EN INGENIERIA ELECTRICA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'CONSULTORIA NAVAL'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'CONSULTORIA Y EVALUACION DE PROYECTOS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'EQUIPO DE CARNICERIA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ESTAMPADOS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ADMINISTRACION DE EDIFICIOS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ARTICULOS DE LIMPIESA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ASESORIA MINERA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ASESORIA PETROLERA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ASESOR\xCDA RADIOLOGICA Y MEDICINA NUCLEAR'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'CERTIFICACION DE CURSOS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'CONSULTORIA EN SALUD E HIGIENE OCUPACIONAl'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'CONSULTORIA EN SEGURIDAD INDUSTRIAL'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'CONTROL DE CALIDAD'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'SERVICIO DE COMUNICACI\xD3N'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'SERVICIOS DENTALES'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'SERVICIOS EDUCATIVOS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'SISTEMAS CONTRA INCENDIOS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'SPA- SALON DE BELLESA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'SUPERMERCADO'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'TALLER AUTOMOTRIS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'TECNOLOGIA NUCLEAR'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'TELE- COMUNICACIONES'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'TEXTILES'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'TRAGAMONEDAS Y CASINOS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'TRANSPORTE'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'VEHICULOS Y ACCESORIOS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'VETERINARIA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'VIDRIERIA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'CONSULTORIA METAL- MECANICA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'PERFUMERIA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'PESQUERIA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'PINTURA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'PORTUARIO LOGISTICA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'PRENDAS DE VESTIR'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'PRESTAMOS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'PRODUCTORA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'PUBLICIDAD'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'RECICLAJE'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'RESTAURANTE'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'SELECCI\xD3N DE PERSONAL'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'MARKETING'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'MENSAJERIA Y COURIER'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'METALMECANICA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'METALURGIA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'MINERIA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'MODELAJE'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'MUEBLES'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'OPTICA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'PANADERIA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'PERFORACION Y DEMOLICION'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'ESTUDIO DE SUELOS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'EVENTOS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'FARMACIA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'FERRETERIA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'FORESTAL'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'FOTOGRAFIA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'FRUTAS Y VERDURAS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'FUMIGACION Y EXTINTORES'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'FUNERARIAS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'GANADERIA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'GASOLINERA Y ESTACION DE SERVICIOS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'HOSPEDAJE'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'IMPRENTA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'INDUSTRIA PETROLERA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'INGENIERIA DE MINAS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'INSTALACIONES DE GAS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'INTERMEDIACION TURISTICA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'JOYERIA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'LACTEOS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'LIBRER\xCDA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'LICORERIA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'MADERERA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'MAQUINARIA AGROINDUSTRIAL'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'COMPUTACI\xD3N E INFORM\xC1TICA'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'CONSTRUCCION'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'CONSTRUCCION DE POZOS'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'CONSULTORIA AMBIENTAL'
+											),
+											_react2.default.createElement(
+												'option',
+												null,
+												'CONSULTORIA EN INGENIERIA ELECTRICA'
+											)
+										),
+										_react2.default.createElement('span', { className: 'icon-briefcase icoInputSelect' })
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormLarge gridFormMutable' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'smallContent' },
+										'\xBFCu\xE1l es el capital del negocio?'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'inputSingleValue' },
+										_react2.default.createElement('input', { type: 'number', min: '1', ref: 'investment_i' }),
+										_react2.default.createElement('span', { className: 'icon-dollar' })
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormLarge gridFormMutable' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'smallContent' },
+										'Capital constituido por:'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'inputCheckbox' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'wrapperCheckbox' },
+											_react2.default.createElement('input', { type: 'checkbox', name: 'goods_investment', id: 'checkboxGoods' }),
+											_react2.default.createElement('span', { className: 'icon-box' }),
+											_react2.default.createElement(
+												'label',
+												{ className: 'smallContent' },
+												'Bienes'
+											)
+										),
+										_react2.default.createElement(
+											'div',
+											{ className: 'wrapperCheckbox' },
+											_react2.default.createElement('input', { type: 'checkbox', name: 'money_investment', id: 'checkboxMoney' }),
+											_react2.default.createElement('span', { className: 'icon-dollar' }),
+											_react2.default.createElement(
+												'label',
+												{ className: 'smallContent' },
+												'Dinero'
+											)
+										)
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormLarge gridFormMutable btnStepWrapperNext' },
+									_react2.default.createElement(
+										_reactRouterDom.Link,
+										{ to: '/invitar-socios' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'btnNext', onClick: this.handleEnterpriseInformationSubmit.bind(this) },
+											'Siguiente'
+										)
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormShort btnStepWrapperBack' },
+									_react2.default.createElement(
+										_reactRouterDom.Link,
+										{ to: '/' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'btnTransparentBackground' },
+											'Cancelar'
+										)
+									)
+								)
+							)
 						)
 					)
 				),
 				_react2.default.createElement(
 					'div',
-					{ className: 'gridForm' },
+					{ id: 'faq1', className: 'wrapperFaq' },
 					_react2.default.createElement(
-						'h3',
-						{ className: 'bigTitlesSS' },
-						'Constituci\xF3n de empresa'
-					),
-					_react2.default.createElement('div', { className: 'underlineBlue' }),
-					_react2.default.createElement(
-						'form',
+						'figure',
 						null,
+						_react2.default.createElement('img', { src: './css/img/constitucion-photo.jpg' })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridFaq' },
 						_react2.default.createElement(
-							'div',
-							{ className: 'gridFormLarge' },
-							_react2.default.createElement(
-								'label',
-								{ className: 'smallContent' },
-								'Ingresa de 3 a 5 posibles nombres en orden de prioridad'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'inputMultipleValues' },
-								_react2.default.createElement(
-									'div',
-									{ id: 'wrapperInputValues', className: 'wrapperInputValues' },
-									_react2.default.createElement('input', { autoFocus: true, type: 'text', id: 'inputMultipleValuesNames', ref: 'companyNames_i', onBlur: this.catchNames.bind(this) })
-								),
-								_react2.default.createElement('span', { className: 'icon-flag2' })
-							)
+							'h1',
+							null,
+							'\xBFPor qu\xE9 es importante constituir mi empresa?'
+						),
+						_react2.default.createElement('div', { className: 'underlineBlue' }),
+						_react2.default.createElement(
+							'h2',
+							null,
+							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
 						),
 						_react2.default.createElement(
 							'div',
-							{ className: 'gridFormLarge' },
-							_react2.default.createElement(
-								'label',
-								{ className: 'smallContent' },
-								'\xBFA qu\xE9 se dedicar\xE1 tu empresa?'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'inputSelect' },
-								_react2.default.createElement(
-									'select',
-									{ id: 'selectEnterpriseIncorporationForm', ref: 'selectEnterpriseIndustry', onChange: this.handleChange },
-									_react2.default.createElement(
-										'option',
-										null,
-										'Elige una opci\xF3n'
-									),
-									_react2.default.createElement(
-										'option',
-										null,
-										'a'
-									),
-									_react2.default.createElement(
-										'option',
-										null,
-										'b'
-									),
-									_react2.default.createElement(
-										'option',
-										null,
-										'c'
-									)
-								),
-								_react2.default.createElement('span', { className: 'icon-briefcase icoInputSelect' })
-							)
+							{ className: 'btnFaq' },
+							'Quiero saber m\xE1s'
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'wrapperComercialFAQ' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridComercialFAQ' },
+						_react2.default.createElement(
+							'figure',
+							null,
+							_react2.default.createElement('img', { src: 'css/img/accesible.svg' })
 						),
 						_react2.default.createElement(
-							'div',
-							{ className: 'gridFormLarge gridFormMutable' },
-							_react2.default.createElement(
-								'label',
-								{ className: 'smallContent' },
-								'\xBFCu\xE1l es el capital del negocio?'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'inputSingleValue' },
-								_react2.default.createElement('input', { type: 'number', min: '1', ref: 'investment_i' }),
-								_react2.default.createElement('span', { className: 'icon-dollar' })
-							)
+							'h2',
+							{ className: 'landingTitles' },
+							'\xBFC\xFAal es el precio?'
 						),
 						_react2.default.createElement(
-							'div',
-							{ className: 'gridFormLarge gridFormMutable' },
+							'h3',
+							null,
+							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridComercialFAQ' },
+						_react2.default.createElement(
+							'figure',
+							null,
+							_react2.default.createElement('img', { src: 'css/img/rapidez.svg' })
+						),
+						_react2.default.createElement(
+							'h2',
+							{ className: 'landingTitles' },
+							'\xBFC\xFAanto debo esperar?'
+						),
+						_react2.default.createElement(
+							'h3',
+							null,
+							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridComercialFAQ' },
+						_react2.default.createElement(
+							'figure',
+							null,
+							_react2.default.createElement('img', { src: 'css/img/delivery.svg' })
+						),
+						_react2.default.createElement(
+							'h2',
+							{ className: 'landingTitles' },
+							'Brindamos lo siguiente'
+						),
+						_react2.default.createElement(
+							'h3',
+							null,
 							_react2.default.createElement(
-								'label',
-								{ className: 'smallContent' },
-								'Capital constituido por:'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'inputCheckbox' },
+								'ul',
+								null,
 								_react2.default.createElement(
-									'div',
-									{ className: 'wrapperCheckbox' },
-									_react2.default.createElement('input', { type: 'checkbox', name: 'goods_investment', id: 'checkboxGoods', onChange: this.handelCheckboxChange }),
-									_react2.default.createElement('span', { className: 'icon-box' }),
-									_react2.default.createElement(
-										'label',
-										{ className: 'smallContent' },
-										'Bienes'
-									)
+									'li',
+									null,
+									'B\xFAsqueda y reserva de nombre'
 								),
 								_react2.default.createElement(
-									'div',
-									{ className: 'wrapperCheckbox' },
-									_react2.default.createElement('input', { type: 'checkbox', name: 'money_investment', onChange: this.handelCheckboxChange }),
-									_react2.default.createElement('span', { className: 'icon-dollar' }),
-									_react2.default.createElement(
-										'label',
-										{ className: 'smallContent' },
-										'Dinero'
-									)
-								)
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridFormLarge gridFormMutable btnStepWrapperNext' },
-							_react2.default.createElement(
-								_reactRouterDom.Link,
-								{ to: '/invitar-socios' },
+									'li',
+									null,
+									'Estatutos de la empresa'
+								),
 								_react2.default.createElement(
-									'div',
-									{ className: 'btnNext', onClick: this.handleEnterpriseInformationSubmit.bind(this) },
-									'Siguiente'
-								)
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridFormShort btnStepWrapperBack' },
-							_react2.default.createElement(
-								_reactRouterDom.Link,
-								{ to: '/' },
+									'li',
+									null,
+									'Escritura p\xFAblica ante notario'
+								),
 								_react2.default.createElement(
-									'div',
-									{ className: 'btnTransparentBackground' },
-									'Cancelar'
+									'li',
+									null,
+									'Inscripci\xF3n registral en Sunarp'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Ficha RUC'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Copia literal'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Compra de dominio web'
 								)
 							)
 						)
@@ -25370,7 +26969,7 @@ var EnterpriseInformationForm = function (_Component) {
 
 exports.default = EnterpriseInformationForm;
 
-},{"react":218,"react-dom":41,"react-router-dom":178}],226:[function(require,module,exports){
+},{"react":218,"react-dom":41,"react-router-dom":178}],229:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25401,22 +27000,42 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var GoodRowInput = function (_Component) {
 	_inherits(GoodRowInput, _Component);
 
-	function GoodRowInput() {
+	function GoodRowInput(props) {
 		_classCallCheck(this, GoodRowInput);
 
-		return _possibleConstructorReturn(this, (GoodRowInput.__proto__ || Object.getPrototypeOf(GoodRowInput)).apply(this, arguments));
+		var _this = _possibleConstructorReturn(this, (GoodRowInput.__proto__ || Object.getPrototypeOf(GoodRowInput)).call(this, props));
+
+		_this.state = {
+
+			partnerSelected: 0,
+			numberOfGoods: 1
+		};
+
+		_this.deletingRow = _this.deletingRow.bind(_this);
+
+		return _this;
 	}
 
 	_createClass(GoodRowInput, [{
+		key: 'deletingRow',
+		value: function deletingRow() {
+			var json = {
+				partnerSelected: this.props.partnerSelected,
+				inputPos: this.props.goodListPos
+			};
+
+			this.props.deleteRowInputHandle.call(null, json);
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 
 			return _react2.default.createElement(
 				'div',
-				{ className: 'goodRow' },
+				{ className: 'goodRow goodRowInfo', 'data-goodlistpos': this.props.goodListPos },
 				_react2.default.createElement(
 					'div',
-					{ className: 'gridFormShort' },
+					{ className: 'gridFormShort gridName' },
 					_react2.default.createElement(
 						'label',
 						{ className: 'smallContent' },
@@ -25424,27 +27043,28 @@ var GoodRowInput = function (_Component) {
 						'. Bien'
 					),
 					_react2.default.createElement(
-						'div',
-						{ className: 'inputSingleValue' },
-						_react2.default.createElement('input', { type: 'text' }),
-						_react2.default.createElement('span', { className: 'icon-box' })
+						'p',
+						{ className: 'smallContent' },
+						this.props.goodInfo.goodName
 					)
 				),
 				_react2.default.createElement(
 					'div',
-					{ className: 'gridFormShort' },
+					{ className: 'gridFormShort gridValue' },
 					_react2.default.createElement(
 						'label',
 						{ className: 'smallContent' },
 						'Valor'
 					),
 					_react2.default.createElement(
-						'div',
-						{ className: 'inputSingleValue' },
-						_react2.default.createElement('input', { type: 'number' }),
-						_react2.default.createElement('span', { className: 'icon-usd' })
+						'p',
+						{ className: 'smallContent' },
+						'S/. ',
+						this.props.goodInfo.goodValue,
+						'.00'
 					)
-				)
+				),
+				_react2.default.createElement('span', { className: 'icon-cross smallContent', onClick: this.deletingRow.bind() })
 			);
 		}
 	}]);
@@ -25454,7 +27074,7 @@ var GoodRowInput = function (_Component) {
 
 exports.default = GoodRowInput;
 
-},{"react":218,"react-dom":41}],227:[function(require,module,exports){
+},{"react":218,"react-dom":41}],230:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25509,25 +27129,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Incorporate = function (_Component) {
 	_inherits(Incorporate, _Component);
 
-	function Incorporate(props) {
+	function Incorporate() {
 		_classCallCheck(this, Incorporate);
 
-		var _this = _possibleConstructorReturn(this, (Incorporate.__proto__ || Object.getPrototypeOf(Incorporate)).call(this, props));
-
-		_this.state = {
-			enterpriseInProcess: false,
-			enterpriseIdInProcess: ""
-
-		};
-
-		return _this;
+		return _possibleConstructorReturn(this, (Incorporate.__proto__ || Object.getPrototypeOf(Incorporate)).apply(this, arguments));
 	}
 
 	_createClass(Incorporate, [{
 		key: 'render',
 		value: function render() {
-			var _this2 = this;
-
 			console.log("Incorporate props");
 			console.log(this.props.enterpriseInProcess);
 			console.log(this.props.user);
@@ -25538,12 +27148,6 @@ var Incorporate = function (_Component) {
 				_react2.default.createElement(
 					'div',
 					{ className: 'wrapperIncorporationForm' },
-					_react2.default.createElement(_reactRouterDom.Route, { path: '/informacion-empresa', render: function render(props) {
-							return _react2.default.createElement(_enterpriseInformationForm2.default, { user: _this2.props.user, enterpriseInProcess: _this2.props.enterpriseInProcess, enterpriseIdInProcess: _this2.props.enterpriseIdInProcess, sendEnterpriseInformation: _this2.props.sendEnterpriseInformation });
-						} }),
-					_react2.default.createElement(_reactRouterDom.Route, { path: '/invitar-socios', render: function render(props) {
-							return _react2.default.createElement(_partnersAddingForm2.default, { user: _this2.props.user, enterpriseInProcess: _this2.props.enterpriseInProcess, enterpriseIdInProcess: _this2.props.enterpriseIdInProcess });
-						} }),
 					_react2.default.createElement(_reactRouterDom.Route, { path: '/informacion-personal', render: function render(props) {
 							return _react2.default.createElement(_personalInformationForm2.default, null);
 						} }),
@@ -25691,7 +27295,7 @@ var Incorporate = function (_Component) {
 
 exports.default = Incorporate;
 
-},{"./dateForm":224,"./enterpriseInformationForm":225,"./partnersAddingForm":231,"./paymentMethodForm":232,"./personalInformationForm":233,"react":218,"react-dom":41,"react-router":188,"react-router-dom":178}],228:[function(require,module,exports){
+},{"./dateForm":227,"./enterpriseInformationForm":228,"./partnersAddingForm":234,"./paymentMethodForm":235,"./personalInformationForm":236,"react":218,"react-dom":41,"react-router":188,"react-router-dom":178}],231:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25731,6 +27335,11 @@ var Landing = function (_Component) {
 	}
 
 	_createClass(Landing, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			window.scrollTo(0, 0);
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 
@@ -25754,7 +27363,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'h1',
 								null,
-								'Constituye tu empresa desde S/. 600.00 en solo 48 horas.'
+								'Constituye tu empresa desde S/. 650.00 en solo 48 horas.'
 							),
 							_react2.default.createElement(
 								'p',
@@ -26153,7 +27762,7 @@ var Landing = function (_Component) {
 
 exports.default = Landing;
 
-},{"react":218,"react-dom":41,"react-router-dom":178}],229:[function(require,module,exports){
+},{"react":218,"react-dom":41,"react-router-dom":178}],232:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26214,94 +27823,14 @@ var LoginForm = function (_Component) {
 					_react2.default.createElement(
 						'figure',
 						null,
-						_react2.default.createElement('img', { src: '#' })
+						_react2.default.createElement('img', { src: 'css/img/LogotipoLegaly.svg' })
 					),
 					_react2.default.createElement(
 						'h5',
 						null,
-						'Una frase vendedora de lo que hacemos'
+						'Crea tu empresa, sin moverte a ning\xFAn lugar.'
 					),
 					_react2.default.createElement('div', { className: 'underlineBlue' }),
-					_react2.default.createElement(
-						'div',
-						{ className: 'formLogin' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridFormShort' },
-							_react2.default.createElement(
-								'label',
-								{ className: 'smallContent' },
-								'Nombre completo'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'inputSingleValue' },
-								_react2.default.createElement('input', { type: 'text' }),
-								_react2.default.createElement('span', { className: 'icon-head' })
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridFormShort' },
-							_react2.default.createElement(
-								'label',
-								{ className: 'smallContent' },
-								'Apellidos'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'inputSingleValue' },
-								_react2.default.createElement('input', { type: 'text' }),
-								_react2.default.createElement('span', { className: 'icon-head' })
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridFormShort' },
-							_react2.default.createElement(
-								'label',
-								{ className: 'smallContent' },
-								'Correo'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'inputSingleValue' },
-								_react2.default.createElement('input', { type: 'text' }),
-								_react2.default.createElement('span', { className: 'icon-mail_outline' })
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridFormShort' },
-							_react2.default.createElement(
-								'label',
-								{ className: 'smallContent' },
-								'Contrase\xF1a'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'inputSingleValue' },
-								_react2.default.createElement('input', { type: 'text' }),
-								_react2.default.createElement('span', { className: 'icon-lock' })
-							)
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'btnLoginForm emailLogin' },
-						_react2.default.createElement(
-							'a',
-							{ href: '' },
-							_react2.default.createElement('span', { className: '' }),
-							_react2.default.createElement(
-								'p',
-								null,
-								'Registrarme'
-							),
-							_react2.default.createElement('span', null)
-						)
-					),
-					_react2.default.createElement('div', { className: 'underlineGrey' }),
 					_react2.default.createElement(
 						'div',
 						{ className: 'btnLoginForm fbLogin' },
@@ -26331,6 +27860,21 @@ var LoginForm = function (_Component) {
 							),
 							_react2.default.createElement('span', null)
 						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'btnLoginForm googleLogin' },
+						_react2.default.createElement(
+							'a',
+							{ href: '/auth/google' },
+							_react2.default.createElement('span', { className: 'icon-google' }),
+							_react2.default.createElement(
+								'p',
+								null,
+								'Registrarme con google'
+							),
+							_react2.default.createElement('span', null)
+						)
 					)
 				)
 			);
@@ -26340,9 +27884,53 @@ var LoginForm = function (_Component) {
 	return LoginForm;
 }(_react.Component);
 
+/*
+<div className="formLogin">
+						<div className="gridFormShort">
+							<label className="smallContent">Nombre completo</label>
+							<div className="inputSingleValue">
+								<input type="text"/>
+								<span className="icon-head"></span>
+							</div>
+						</div>
+						<div className="gridFormShort">
+							<label className="smallContent">Apellidos</label>
+							<div className="inputSingleValue">
+								<input type="text"/>
+								<span className="icon-head"></span>
+							</div>
+						</div>
+						<div className="gridFormShort">
+							<label className="smallContent">Correo</label>
+							<div className="inputSingleValue">
+								<input type="text"/>
+								<span className="icon-mail_outline"></span>
+							</div>
+						</div>
+						<div className="gridFormShort">
+							<label className="smallContent">Contraseña</label>
+							<div className="inputSingleValue">
+								<input type="text"/>
+								<span className="icon-lock"></span>
+							</div>
+						</div>
+					</div>
+					
+					<div className="btnLoginForm emailLogin">
+						<a href="">
+							<span className=""></span>
+							<p>Registrarme</p>
+							<span></span>
+						</a>
+					</div>
+
+					<div className="underlineGrey"></div>
+					*/
+
+
 exports.default = LoginForm;
 
-},{"react":218,"react-dom":41,"react-router-dom":178}],230:[function(require,module,exports){
+},{"react":218,"react-dom":41,"react-router-dom":178}],233:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26373,22 +27961,44 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var PartnerRowInput = function (_Component) {
 	_inherits(PartnerRowInput, _Component);
 
-	function PartnerRowInput() {
+	function PartnerRowInput(props) {
 		_classCallCheck(this, PartnerRowInput);
 
-		return _possibleConstructorReturn(this, (PartnerRowInput.__proto__ || Object.getPrototypeOf(PartnerRowInput)).apply(this, arguments));
+		var _this = _possibleConstructorReturn(this, (PartnerRowInput.__proto__ || Object.getPrototypeOf(PartnerRowInput)).call(this, props));
+
+		_this.state = {
+
+			partnerSelected: 0,
+			numberOfGoods: 1
+		};
+
+		_this.deletingRow = _this.deletingRow.bind(_this);
+
+		return _this;
 	}
 
 	_createClass(PartnerRowInput, [{
+		key: 'deletingRow',
+		value: function deletingRow() {
+			var json = {
+				partnerSelected: this.props.partnerListPos,
+				user_id: this.props.user_id,
+				enterprise_id: this.props.enterprise_id,
+				partner_id: this.props.partner_id
+			};
+
+			this.props.deletingPartnerRow.call(null, json);
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 
 			return _react2.default.createElement(
 				'div',
-				{ className: 'partnerRow' },
+				{ className: 'partnerRow partnerRowInfo', 'data-partnerlistpos': this.props.partnerListPos },
 				_react2.default.createElement(
 					'div',
-					{ className: 'gridFormShort' },
+					{ className: 'gridFormShort gridEmail' },
 					_react2.default.createElement(
 						'label',
 						{ className: 'smallContent' },
@@ -26396,27 +28006,26 @@ var PartnerRowInput = function (_Component) {
 						'. Socio'
 					),
 					_react2.default.createElement(
-						'div',
-						{ className: 'inputSingleValue' },
-						_react2.default.createElement('input', { className: 'inputPartnerEmail', type: 'text', placeholder: 'e-mail' }),
-						_react2.default.createElement('span', { className: 'icon-head' })
+						'p',
+						{ className: 'smallContent' },
+						this.props.name
 					)
 				),
 				_react2.default.createElement(
 					'div',
-					{ className: 'gridFormShort' },
+					{ className: 'gridFormShort gridPosition' },
 					_react2.default.createElement(
 						'label',
 						{ className: 'smallContent' },
 						'Cargo'
 					),
 					_react2.default.createElement(
-						'div',
-						{ className: 'inputSingleValue' },
-						_react2.default.createElement('input', { className: 'inputPartnerPosition', type: 'text' }),
-						_react2.default.createElement('span', null)
+						'p',
+						{ className: 'smallContent' },
+						this.props.position
 					)
-				)
+				),
+				_react2.default.createElement('span', { className: 'icon-cross smallContent', onClick: this.deletingRow.bind() })
 			);
 		}
 	}]);
@@ -26426,7 +28035,7 @@ var PartnerRowInput = function (_Component) {
 
 exports.default = PartnerRowInput;
 
-},{"react":218,"react-dom":41}],231:[function(require,module,exports){
+},{"react":218,"react-dom":41}],234:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26455,6 +28064,8 @@ var _partnerRowInput2 = _interopRequireDefault(_partnerRowInput);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -26473,9 +28084,13 @@ var PartnersAddingForm = function (_Component) {
 		var _this = _possibleConstructorReturn(this, (PartnersAddingForm.__proto__ || Object.getPrototypeOf(PartnersAddingForm)).call(this, props));
 
 		_this.state = {
-			numberOfPartners: 4
+			positionSelected: "",
+			AccountManagerPositionSelected: "",
+			enterpriseSaved: 0
+
 		};
 
+		_this.selectPositionHandler = _this.selectPositionHandler.bind(_this);
 		_this.addPartner = _this.addPartner.bind(_this);
 		_this.handlePartnerAddingFormSubmit = _this.handlePartnerAddingFormSubmit.bind(_this);
 
@@ -26485,180 +28100,464 @@ var PartnersAddingForm = function (_Component) {
 	_createClass(PartnersAddingForm, [{
 		key: 'addPartner',
 		value: function addPartner() {
+			var email = _reactDom2.default.findDOMNode(this.refs.inputPartnerEmail).value.trim();
 
-			var wrapper = document.getElementById("partnerForm");
+			var json = {
+				partnerEmail: email,
+				position: this.state.positionSelected
 
-			var numWrapperPartnerRow = document.getElementsByClassName("partnerRow").length;
+			};
 
-			var num = numWrapperPartnerRow + 1;
+			this.props.rowPartnerInputHandler.call(null, json);
 
-			var comp = '<div class="partnerRow">\n\t\t\t\t\t<div class="gridFormShort">\n\t\t\t\t\t\t<label class="smallContent">' + num + '. Socio</label>\n\t\t\t\t\t\t<div class="inputSingleValue">\n\t\t\t\t\t\t\t<input class="inputPartnerEmail" type="text" placeholder="e-mail"/>\n\t\t\t\t\t\t\t<span class="icon-head"></span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class="gridFormShort">\n\t\t\t\t\t\t<label class="smallContent">Cargo</label>\n\t\t\t\t\t\t<div class="inputSingleValue">\n\t\t\t\t\t\t\t<input class="inputPartnerPosition" type="text"/>\n\t\t\t\t\t\t\t<span></span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\n\t\t\t\t</div>';
-
-			wrapper.insertAdjacentHTML('beforeend', comp);
+			_reactDom2.default.findDOMNode(this.refs.inputPartnerEmail).value = '';
+			_reactDom2.default.findDOMNode(this.refs.positionSelect).value = '';
 		}
 	}, {
 		key: 'handlePartnerAddingFormSubmit',
 		value: function handlePartnerAddingFormSubmit() {
 
-			var inputs = document.getElementsByClassName("partnerRow");
+			if (this.props.partnersInvitationSaved == 0) {
+				var json = { position: this.state.AccountManagerPositionSelected };
 
-			console.log(inputs[0]);
+				this.props.rowAccountManagerInputHandler.call(null, json);
+				this.props.sendPartnerInvitation.call(null);
+			} else {
 
-			var arry = [];
+				var _json = { position: this.state.AccountManagerPositionSelected };
 
-			for (var i = 0; i < inputs.length; i++) {
+				this.props.rowAccountManagerInputHandler.call(null, _json);
 
-				if (inputs[i].children[0].children[1].children[0].value != "") {
-
-					arry.push({
-						partnerEmail: inputs[i].children[0].children[1].children[0].value,
-						position: inputs[i].children[1].children[1].children[0].value
-
-					});
-				}
+				this.props.updatePartnerInvitation.call(null);
 			}
+		}
+	}, {
+		key: 'selectPositionHandler',
+		value: function selectPositionHandler(ev) {
 
-			//INFO LISTA PARA ENVIAR AL SERVER
-			console.log(arry);
+			var target = ev.target;
+
+			this.setState(_defineProperty({}, target.name, target.value));
+		}
+	}, {
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			window.scrollTo(0, 0);
+
+			if (this.props.partnersInvitationSaved == 1) {
+				var inputAccountManagerPosition = _reactDom2.default.findDOMNode(this.refs.AccountManagerPositionSelected);
+
+				inputAccountManagerPosition.value = this.props.enterpriseInProcessData.partners[0].position;
+
+				this.setState({
+					AccountManagerPositionSelected: this.props.enterpriseInProcessData.partners[0].position
+				});
+			}
 		}
 	}, {
 		key: 'render',
 		value: function render() {
-			var _this2 = this;
 
-			console.log("partnersAddingForm");
-			console.log(this.props.enterpriseInProcess);
-			console.log(this.props.user);
+			var partnerRow = [];
 
-			var rows = [];
+			if (this.props.enterpriseInProcessData.partners) {
 
-			for (var i = 0; i < this.state.numberOfPartners; i++) {
+				for (var i = 0; i < this.props.enterpriseInProcessData.partners.length; i++) {
 
-				var key_id = (0, _uid2.default)();
+					if (this.props.enterpriseInProcessData.partners[i].user._id != this.props.user._id) {
 
-				rows.push(_react2.default.createElement(_partnerRowInput2.default, {
-					number: i + 1,
-					key: key_id
-				}));
+						var key_id = (0, _uid2.default)();
+
+						partnerRow.push(_react2.default.createElement(_partnerRowInput2.default, {
+							deletingPartnerRow: this.props.deletingPartnerRow,
+							partner_id: this.props.enterpriseInProcessData.partners[i]._id,
+							name: this.props.enterpriseInProcessData.partners[i].user.name,
+							position: this.props.enterpriseInProcessData.partners[i].position,
+							partnerListPos: i,
+							enterprise_id: this.props.enterpriseInProcessData._id,
+							user_id: this.props.enterpriseInProcessData.partners[i].user._id,
+							number: i + 1,
+							key: key_id
+						}));
+					}
+				}
 			}
 
 			return _react2.default.createElement(
 				'div',
-				{ className: 'partnersAddingForm' },
+				{ className: 'sectionEnterpriseIncorporation' },
 				_react2.default.createElement(
 					'div',
-					{ className: 'gridStepProgress' },
-					_react2.default.createElement('span', { className: 'icon-cross' }),
-					_react2.default.createElement(
-						'ul',
-						{ className: 'stepProgress' },
-						_react2.default.createElement(
-							'li',
-							{ className: 'stepActive' },
-							'1'
-						),
-						_react2.default.createElement(
-							'li',
-							null,
-							'2'
-						),
-						_react2.default.createElement(
-							'li',
-							null,
-							'3'
-						)
-					),
-					_react2.default.createElement(
-						'figure',
-						null,
-						_react2.default.createElement('img', { src: 'css/img/InfoEmpresa1.svg' })
-					),
-					_react2.default.createElement(
-						'h4',
-						{ className: 'bigTitlesOS' },
-						'Constituci\xF3n de empresa'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'mediumContent instructions' },
-						'Ingresa la informaci\xF3n que necesitas para emitir la minuta'
-					),
-					_react2.default.createElement(
-						'h4',
-						{ className: 'bigTitlesOS helpTitle' },
-						'\xBFNecesitas ayuda?'
-					),
-					_react2.default.createElement('span', { className: 'icon-angle-down' }),
+					{ className: 'wrapperIncorporationForm' },
 					_react2.default.createElement(
 						'div',
-						{ className: 'gridUserSupport' },
-						_react2.default.createElement('span', { className: 'icon-whatsapp' }),
-						_react2.default.createElement(
-							'p',
-							{ className: 'smallContent' },
-							'942 914 542'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'gridUserSupport' },
-						_react2.default.createElement('span', { className: 'icon-mail_outline' }),
-						_react2.default.createElement(
-							'p',
-							{ className: 'smallContent' },
-							'ayuda@legitify.com'
-						)
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'gridForm' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'wrapperFormTitle' },
-						_react2.default.createElement(
-							'h3',
-							{ className: 'bigTitlesSS' },
-							'Invita a los fundadores'
-						),
-						_react2.default.createElement('div', { className: 'underlineBlue' })
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'btnRed btnAddPartner', onClick: this.addPartner.bind(this) },
-						_react2.default.createElement(
-							'p',
-							null,
-							'Agregar socio'
-						),
-						_react2.default.createElement('span', { className: 'icon-head' })
-					),
-					_react2.default.createElement(
-						'form',
-						{ id: 'partnerForm' },
-						rows,
+						{ className: 'partnersAddingForm' },
 						_react2.default.createElement(
 							'div',
-							{ className: 'gridFormLarge gridFormMutable wrapperBtnNext' },
+							{ className: 'gridStepProgress' },
+							_react2.default.createElement('span', { className: 'icon-cross' }),
 							_react2.default.createElement(
-								_reactRouterDom.Link,
-								{ to: '/informacion-personal' },
+								'ul',
+								{ className: 'stepProgress' },
 								_react2.default.createElement(
-									'div',
-									{ className: 'btnNext', onClick: this.handlePartnerAddingFormSubmit.bind(this) },
-									'Invitar a socios'
+									'li',
+									null,
+									'1'
+								),
+								_react2.default.createElement(
+									'li',
+									{ className: 'stepActive' },
+									'2'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'3'
+								)
+							),
+							_react2.default.createElement(
+								'figure',
+								null,
+								_react2.default.createElement('img', { src: 'css/img/Infosocios2.svg' })
+							),
+							_react2.default.createElement(
+								'h4',
+								{ className: 'bigTitlesOS' },
+								'Agrega a tus socios'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'mediumContent instructions' },
+								'Incorpora a todos las personas que conformar\xE1n la sociedad.'
+							),
+							_react2.default.createElement(
+								'h4',
+								{ className: 'bigTitlesOS helpTitle' },
+								'\xBFNecesitas ayuda?'
+							),
+							_react2.default.createElement('span', { className: 'icon-angle-down' }),
+							_react2.default.createElement(
+								'a',
+								{ href: 'http://www.facebook.com/legaly.pe', target: '_blank', className: 'gridUserSupport' },
+								_react2.default.createElement('span', { className: 'icon-facebook' }),
+								_react2.default.createElement(
+									'p',
+									{ className: 'smallContent' },
+									'www.facebook.com/legaly.pe'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'gridUserSupport' },
+								_react2.default.createElement('span', { className: 'icon-mail_outline' }),
+								_react2.default.createElement(
+									'p',
+									{ className: 'smallContent' },
+									'ayuda@legaly.pe'
 								)
 							)
 						),
 						_react2.default.createElement(
 							'div',
-							{ className: 'gridFormLarge gridFormMutable wrapperBtnTransparent' },
+							{ className: 'gridForm' },
 							_react2.default.createElement(
 								'div',
-								{ className: 'btnTransparentBackground', onClick: function onClick() {
-										return _this2.history.push("/informacion-empresa");
-									} },
-								'Anterior'
+								{ className: 'wrapperFormTitle' },
+								_react2.default.createElement(
+									'h3',
+									{ className: 'bigTitlesSS' },
+									'Invita a los fundadores'
+								),
+								_react2.default.createElement('div', { className: 'underlineBlue' })
+							),
+							_react2.default.createElement(
+								'form',
+								{ id: 'partnerForm' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'partnerRow partnerRowInfo', 'data-partnerlistpos': 0 },
+									_react2.default.createElement(
+										'div',
+										{ className: 'gridFormShort gridEmail' },
+										_react2.default.createElement(
+											'label',
+											{ className: 'smallContent' },
+											'1. Socio'
+										),
+										_react2.default.createElement(
+											'p',
+											{ className: 'smallContent' },
+											this.props.enterpriseInProcessData.partners ? this.props.enterpriseInProcessData.partners[0].user.name : ""
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'gridFormShort' },
+										_react2.default.createElement(
+											'label',
+											{ className: 'smallContent' },
+											'Cargo'
+										),
+										_react2.default.createElement(
+											'div',
+											{ className: 'inputSelect' },
+											_react2.default.createElement(
+												'select',
+												{ onChange: this.selectPositionHandler.bind(), ref: 'AccountManagerPositionSelected', value: this.state.AccountManagerPositionSelected, name: 'AccountManagerPositionSelected' },
+												_react2.default.createElement('option', { disabled: true }),
+												_react2.default.createElement(
+													'option',
+													null,
+													'Ninguno'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'Gerente General'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'Gerente de Producci\xF3n'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'Gerente de Finanzas'
+												)
+											),
+											_react2.default.createElement('span', null)
+										)
+									),
+									_react2.default.createElement('span', { className: '' })
+								),
+								partnerRow,
+								_react2.default.createElement(
+									'div',
+									{ className: 'partnerRow' },
+									_react2.default.createElement(
+										'div',
+										{ className: 'gridFormShort' },
+										_react2.default.createElement(
+											'label',
+											{ className: 'smallContent' },
+											'Socio'
+										),
+										_react2.default.createElement(
+											'div',
+											{ className: 'inputSingleValue' },
+											_react2.default.createElement('input', { ref: 'inputPartnerEmail', className: 'inputPartnerEmail', type: 'text', placeholder: 'Nombre Completo' }),
+											_react2.default.createElement('span', { className: 'icon-head' })
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'gridFormShort' },
+										_react2.default.createElement(
+											'label',
+											{ className: 'smallContent' },
+											'Cargo'
+										),
+										_react2.default.createElement(
+											'div',
+											{ className: 'inputSelect' },
+											_react2.default.createElement(
+												'select',
+												{ onChange: this.selectPositionHandler.bind(), ref: 'positionSelect', value: this.state.positionSelected, name: 'positionSelected' },
+												_react2.default.createElement('option', { disabled: true }),
+												_react2.default.createElement(
+													'option',
+													null,
+													'Ninguno'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'Gerente General'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'Gerente de Producci\xF3n'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'Gerente de Finanzas'
+												)
+											),
+											_react2.default.createElement('span', null)
+										)
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormLarge' },
+									_react2.default.createElement(
+										'div',
+										{ className: 'btnRed btnAddPartner', onClick: this.addPartner.bind(this) },
+										_react2.default.createElement(
+											'p',
+											null,
+											'Agregar socio'
+										),
+										_react2.default.createElement('span', { className: 'icon-head' })
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormLarge gridFormMutable wrapperBtnNext' },
+									_react2.default.createElement(
+										_reactRouterDom.Link,
+										{ to: '/informacion-personal' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'btnNext', onClick: this.handlePartnerAddingFormSubmit.bind(this) },
+											'Siguiente'
+										)
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormLarge gridFormMutable wrapperBtnTransparent' },
+									_react2.default.createElement(
+										_reactRouterDom.Link,
+										{ to: '/informacion-empresa' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'btnTransparentBackground' },
+											'Anterior'
+										)
+									)
+								)
+							)
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ id: 'faq1', className: 'wrapperFaq' },
+					_react2.default.createElement(
+						'figure',
+						null,
+						_react2.default.createElement('img', { src: './css/img/constitucion-photo.jpg' })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridFaq' },
+						_react2.default.createElement(
+							'h1',
+							null,
+							'\xBFPor qu\xE9 es importante constituir mi empresa?'
+						),
+						_react2.default.createElement('div', { className: 'underlineBlue' }),
+						_react2.default.createElement(
+							'h2',
+							null,
+							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'btnFaq' },
+							'Quiero saber m\xE1s'
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'wrapperComercialFAQ' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridComercialFAQ' },
+						_react2.default.createElement(
+							'figure',
+							null,
+							_react2.default.createElement('img', { src: 'css/img/accesible.svg' })
+						),
+						_react2.default.createElement(
+							'h2',
+							{ className: 'landingTitles' },
+							'\xBFC\xFAal es el precio?'
+						),
+						_react2.default.createElement(
+							'h3',
+							null,
+							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridComercialFAQ' },
+						_react2.default.createElement(
+							'figure',
+							null,
+							_react2.default.createElement('img', { src: 'css/img/rapidez.svg' })
+						),
+						_react2.default.createElement(
+							'h2',
+							{ className: 'landingTitles' },
+							'\xBFC\xFAanto debo esperar?'
+						),
+						_react2.default.createElement(
+							'h3',
+							null,
+							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridComercialFAQ' },
+						_react2.default.createElement(
+							'figure',
+							null,
+							_react2.default.createElement('img', { src: 'css/img/delivery.svg' })
+						),
+						_react2.default.createElement(
+							'h2',
+							{ className: 'landingTitles' },
+							'Brindamos lo siguiente'
+						),
+						_react2.default.createElement(
+							'h3',
+							null,
+							_react2.default.createElement(
+								'ul',
+								null,
+								_react2.default.createElement(
+									'li',
+									null,
+									'B\xFAsqueda y reserva de nombre'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Estatutos de la empresa'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Escritura p\xFAblica ante notario'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Inscripci\xF3n registral en Sunarp'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Ficha RUC'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Copia literal'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Compra de dominio web'
+								)
 							)
 						)
 					)
@@ -26672,7 +28571,7 @@ var PartnersAddingForm = function (_Component) {
 
 exports.default = PartnersAddingForm;
 
-},{"./partnerRowInput":230,"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],232:[function(require,module,exports){
+},{"./partnerRowInput":233,"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],235:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26705,185 +28604,360 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var PaymentMethodForm = function (_Component) {
 	_inherits(PaymentMethodForm, _Component);
 
-	function PaymentMethodForm() {
+	function PaymentMethodForm(props) {
 		_classCallCheck(this, PaymentMethodForm);
 
-		return _possibleConstructorReturn(this, (PaymentMethodForm.__proto__ || Object.getPrototypeOf(PaymentMethodForm)).apply(this, arguments));
+		var _this = _possibleConstructorReturn(this, (PaymentMethodForm.__proto__ || Object.getPrototypeOf(PaymentMethodForm)).call(this, props));
+
+		_this.state = {
+
+			months: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"]
+		};
+
+		return _this;
 	}
 
 	_createClass(PaymentMethodForm, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			window.scrollTo(0, 0);
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 
+			var date = this.props.enterpriseInProcessData.signAppointmentDate;
+
+			var dateArry = date.split("-");
+
+			var day = dateArry[2];
+
+			var pos = dateArry[1];
+
+			var month = this.state.months[pos];
+
+			var year = dateArry[0];
+
 			return _react2.default.createElement(
 				'div',
-				{ className: 'wrapperPaymentMethodForm' },
+				{ className: 'sectionEnterpriseIncorporation' },
 				_react2.default.createElement(
 					'div',
-					{ className: 'paymentMethodForm' },
+					{ className: 'wrapperIncorporationForm' },
 					_react2.default.createElement(
 						'div',
-						{ className: 'gridForm' },
-						_react2.default.createElement(
-							'h3',
-							{ className: 'bigTitlesSS' },
-							'Selecciona un m\xE9todo de pago'
-						),
-						_react2.default.createElement('div', { className: 'underlineBlue' }),
+						{ className: 'wrapperPaymentMethodForm' },
 						_react2.default.createElement(
 							'div',
-							{ className: 'wrapperBtnPayments' },
+							{ className: 'paymentMethodForm' },
 							_react2.default.createElement(
 								'div',
-								{ className: 'btnPaymentMethod' },
+								{ className: 'gridForm' },
 								_react2.default.createElement(
-									'figure',
-									null,
-									_react2.default.createElement('img', { src: '#' })
-								),
-								_react2.default.createElement(
-									'p',
-									{ className: 'smallContent' },
-									'Tarjeta de cr\xE9dito o d\xE9bito'
-								)
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'btnPaymentMethod' },
-								_react2.default.createElement(
-									'figure',
-									null,
-									_react2.default.createElement('img', { src: '#' })
-								),
-								_react2.default.createElement(
-									'p',
-									{ className: 'smallContent' },
+									'h3',
+									{ className: 'bigTitlesSS' },
 									'Env\xEDo de voucher de pago'
+								),
+								_react2.default.createElement('div', { className: 'underlineBlue' }),
+								_react2.default.createElement(
+									'div',
+									{ className: 'wrapperBtnPayments' },
+									_react2.default.createElement(
+										'div',
+										{ className: 'btnPaymentMethod' },
+										_react2.default.createElement(
+											'figure',
+											null,
+											_react2.default.createElement('img', { src: 'css/img/VoucherPago.svg' })
+										)
+									),
+									_react2.default.createElement(
+										'p',
+										{ className: 'deliveryInstructions' },
+										'Establece la hora, fecha y direcci\xF3n de tu preferencia para que uno de nuestros colaboradores vaya con los papeles necesarios para la firma y huella digital de todos los socios. Por lo tanto, todos los fundadores deben de estar para dicha reuni\xF3n.'
+									),
+									_react2.default.createElement(
+										'p',
+										{ className: 'legalyContactInfo' },
+										'constituciones@haztuempresa.com'
+									),
+									_react2.default.createElement(
+										'p',
+										{ className: 'legalyContactInfo' },
+										'BCP cta xxx 192 - 111111111'
+									),
+									_react2.default.createElement(
+										_reactRouterDom.Link,
+										{ to: '/' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'btnPrint mediumContent' },
+											'Confirmar'
+										)
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'btnServiceTicket' },
+									_react2.default.createElement(
+										'p',
+										{ className: 'mediumContent' },
+										'Orden de servicio'
+									),
+									_react2.default.createElement('span', { className: 'icon-angle-down' })
 								)
 							)
 						),
 						_react2.default.createElement(
 							'div',
-							{ className: 'btnServiceTicket' },
+							{ className: 'serviceTicket' },
 							_react2.default.createElement(
-								'p',
-								{ className: 'mediumContent' },
+								'h3',
+								{ className: 'bigTitlesSS' },
 								'Orden de servicio'
 							),
-							_react2.default.createElement('span', { className: 'icon-angle-down' })
+							_react2.default.createElement('div', { className: 'underlineBlue' }),
+							_react2.default.createElement(
+								'p',
+								{ className: 'detailName mediumContent' },
+								'Servicio'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'mediumContent detail' },
+								'Constituci\xF3n'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'detailName mediumContent' },
+								'Detalles'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'mediumContent detail' },
+								this.props.enterpriseInProcessData.partners.length,
+								' Gerentes'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'mediumContent detail' },
+								this.props.enterpriseInProcessData.totalCapital,
+								' capital'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'mediumContent detail' },
+								'8 p\xE1ginas'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'detailName mediumContent' },
+								'Precio'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'price mediumContent' },
+								'S/. ',
+								this.props.enterpriseInProcessData.price,
+								'.00'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'detailName mediumContent' },
+								'Delivery'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'mediumContent detail' },
+								'72 horas'
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'btnPrint mediumContent' },
+								'Imprimir Recibo'
+							),
+							_react2.default.createElement('div', { className: 'underlineGrey' }),
+							_react2.default.createElement(
+								'h3',
+								{ className: 'bigTitlesSS subtitle' },
+								'Delivery'
+							),
+							_react2.default.createElement('div', { className: 'underlineBlue' }),
+							_react2.default.createElement(
+								'p',
+								{ className: 'deliveryLocation mediumContent' },
+								this.props.enterpriseInProcessData.signAppointmentLocation
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'deliveryDate mediumContent' },
+								day,
+								' de ',
+								month,
+								' del ',
+								year,
+								' a las ',
+								this.props.enterpriseInProcessData.signAppointmentTime
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'gridUserHelp' },
+							_react2.default.createElement(
+								'h4',
+								{ className: 'bigTitlesOS helpTitle' },
+								'\xBFNecesitas ayuda?'
+							),
+							_react2.default.createElement('div', { className: 'underlineWhite' }),
+							_react2.default.createElement('span', { className: 'icon-angle-down' }),
+							_react2.default.createElement(
+								'a',
+								{ href: 'http://www.facebook.com/legaly.pe', target: '_blank', className: 'gridUserSupport' },
+								_react2.default.createElement('span', { className: 'icon-whatsapp' }),
+								_react2.default.createElement(
+									'p',
+									{ className: 'smallContent' },
+									'www.facebook.com/legaly.pe'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'gridUserSupport' },
+								_react2.default.createElement('span', { className: 'icon-mail_outline' }),
+								_react2.default.createElement(
+									'p',
+									{ className: 'smallContent' },
+									'ayuda@legaly.pe'
+								)
+							)
 						)
 					)
 				),
 				_react2.default.createElement(
 					'div',
-					{ className: 'serviceTicket' },
+					{ id: 'faq1', className: 'wrapperFaq' },
 					_react2.default.createElement(
-						'h3',
-						{ className: 'bigTitlesSS' },
-						'Orden de servicio'
-					),
-					_react2.default.createElement('div', { className: 'underlineBlue' }),
-					_react2.default.createElement(
-						'p',
-						{ className: 'detailName mediumContent' },
-						'Producto'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'mediumContent detail' },
-						'Constituci\xF3n'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'detailName mediumContent' },
-						'Detalles'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'mediumContent detail' },
-						'3 Gerentes'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'mediumContent detail' },
-						'20k capital'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'mediumContent detail' },
-						'8 p\xE1ginas'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'detailName mediumContent' },
-						'Precio'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'price mediumContent' },
-						'S/. 750.00'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'detailName mediumContent' },
-						'Delivery'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'mediumContent detail' },
-						'72 horas'
+						'figure',
+						null,
+						_react2.default.createElement('img', { src: './css/img/constitucion-photo.jpg' })
 					),
 					_react2.default.createElement(
 						'div',
-						{ className: 'btnPrint mediumContent' },
-						'Imprimir Recibo'
-					),
-					_react2.default.createElement('div', { className: 'underlineGrey' }),
-					_react2.default.createElement(
-						'h3',
-						{ className: 'bigTitlesSS subtitle' },
-						'Delivery'
-					),
-					_react2.default.createElement('div', { className: 'underlineBlue' }),
-					_react2.default.createElement(
-						'p',
-						{ className: 'deliveryLocation mediumContent' },
-						'Jir\xF3n F\xE9lix Dib\xF3s #791 Magdalena del Mar'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'deliveryDate mediumContent' },
-						'Lunes 28 de Mayo 5:00 pm'
+						{ className: 'gridFaq' },
+						_react2.default.createElement(
+							'h1',
+							null,
+							'\xBFPor qu\xE9 es importante constituir mi empresa?'
+						),
+						_react2.default.createElement('div', { className: 'underlineBlue' }),
+						_react2.default.createElement(
+							'h2',
+							null,
+							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'btnFaq' },
+							'Quiero saber m\xE1s'
+						)
 					)
 				),
 				_react2.default.createElement(
 					'div',
-					{ className: 'gridUserHelp' },
-					_react2.default.createElement(
-						'h4',
-						{ className: 'bigTitlesOS helpTitle' },
-						'\xBFNecesitas ayuda?'
-					),
-					_react2.default.createElement('div', { className: 'underlineWhite' }),
-					_react2.default.createElement('span', { className: 'icon-angle-down' }),
+					{ className: 'wrapperComercialFAQ' },
 					_react2.default.createElement(
 						'div',
-						{ className: 'gridUserSupport' },
-						_react2.default.createElement('span', { className: 'icon-whatsapp' }),
+						{ className: 'gridComercialFAQ' },
 						_react2.default.createElement(
-							'p',
-							{ className: 'smallContent' },
-							'942 914 542'
+							'figure',
+							null,
+							_react2.default.createElement('img', { src: 'css/img/accesible.svg' })
+						),
+						_react2.default.createElement(
+							'h2',
+							{ className: 'landingTitles' },
+							'\xBFC\xFAal es el precio?'
+						),
+						_react2.default.createElement(
+							'h3',
+							null,
+							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
 						)
 					),
 					_react2.default.createElement(
 						'div',
-						{ className: 'gridUserSupport' },
-						_react2.default.createElement('span', { className: 'icon-mail_outline' }),
+						{ className: 'gridComercialFAQ' },
 						_react2.default.createElement(
-							'p',
-							{ className: 'smallContent' },
-							'ayuda@legitify.com'
+							'figure',
+							null,
+							_react2.default.createElement('img', { src: 'css/img/rapidez.svg' })
+						),
+						_react2.default.createElement(
+							'h2',
+							{ className: 'landingTitles' },
+							'\xBFC\xFAanto debo esperar?'
+						),
+						_react2.default.createElement(
+							'h3',
+							null,
+							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridComercialFAQ' },
+						_react2.default.createElement(
+							'figure',
+							null,
+							_react2.default.createElement('img', { src: 'css/img/delivery.svg' })
+						),
+						_react2.default.createElement(
+							'h2',
+							{ className: 'landingTitles' },
+							'Brindamos lo siguiente'
+						),
+						_react2.default.createElement(
+							'h3',
+							null,
+							_react2.default.createElement(
+								'ul',
+								null,
+								_react2.default.createElement(
+									'li',
+									null,
+									'B\xFAsqueda y reserva de nombre'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Estatutos de la empresa'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Escritura p\xFAblica ante notario'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Inscripci\xF3n registral en Sunarp'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Ficha RUC'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Copia literal'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Compra de dominio web'
+								)
+							)
 						)
 					)
 				)
@@ -26896,7 +28970,7 @@ var PaymentMethodForm = function (_Component) {
 
 exports.default = PaymentMethodForm;
 
-},{"react":218,"react-dom":41,"react-router-dom":178}],233:[function(require,module,exports){
+},{"react":218,"react-dom":41,"react-router-dom":178}],236:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26923,6 +28997,14 @@ var _goodRowInput = require('./goodRowInput');
 
 var _goodRowInput2 = _interopRequireDefault(_goodRowInput);
 
+var _btnUserprofileInfo = require('./btnUserprofileInfo');
+
+var _btnUserprofileInfo2 = _interopRequireDefault(_btnUserprofileInfo);
+
+var _btnUserprofileInfoText = require('./btnUserprofileInfoText');
+
+var _btnUserprofileInfoText2 = _interopRequireDefault(_btnUserprofileInfoText);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26943,16 +29025,13 @@ var PersonalInformationForm = function (_Component) {
 		var _this = _possibleConstructorReturn(this, (PersonalInformationForm.__proto__ || Object.getPrototypeOf(PersonalInformationForm)).call(this, props));
 
 		_this.state = {
-			numberOfGoods: 3,
-			userDocumentType: "DNI",
-			userCivilStatus: "Soltero",
-			spouseDocumentType: "DNI"
+
+			partnerSelected: 0,
+			numberOfGoods: 1
 		};
 
 		_this.addGood = _this.addGood.bind(_this);
-		_this.handleChangeUserDocumentType = _this.handleChangeUserDocumentType.bind(_this);
-		_this.handleChangeUserCivilStatus = _this.handleChangeUserCivilStatus.bind(_this);
-		_this.handleChangeSpouseDocumentType = _this.handleChangeSpouseDocumentType.bind(_this);
+		_this.switchPartnerSelected = _this.switchPartnerSelected.bind(_this);
 
 		return _this;
 	}
@@ -26960,457 +29039,651 @@ var PersonalInformationForm = function (_Component) {
 	_createClass(PersonalInformationForm, [{
 		key: 'addGood',
 		value: function addGood() {
-			/*
-   	let n = this.state.numberOfGoods;
-   		let new_value = n+1;
-   		this.setState({
-   		numberOfGoods : new_value
-   	});
-   */
 
-			var wrapper = document.getElementById("gridBForm");
+			var good_name = _reactDom2.default.findDOMNode(this.refs.good_name_i).value.trim();
+			var good_value = _reactDom2.default.findDOMNode(this.refs.good_value_i).value.trim();
 
-			var numWrapperGoodRow = document.getElementsByClassName("goodRow").length;
+			var json = {
+				partnerSelected: this.state.partnerSelected,
+				goodName: good_name,
+				goodValue: good_value
+			};
 
-			var num = numWrapperGoodRow + 1;
+			this.props.rowInputsHandler.call(null, json);
 
-			var comp = '<div class="goodRow"><div class="gridFormShort"><label class="smallContent">' + num + '. Bien</label><div class="inputSingleValue"><input type="text"/><span class="icon-box"></span></div></div><div class="gridFormShort"><label class="smallContent">Valor</label><div class="inputSingleValue"><input type="number"/><span class="icon-usd"></span></div></div></div>';
-
-			wrapper.insertAdjacentHTML('beforeend', comp);
+			_reactDom2.default.findDOMNode(this.refs.good_name_i).value = '';
+			_reactDom2.default.findDOMNode(this.refs.good_value_i).value = '';
 		}
 	}, {
-		key: 'handleChangeUserDocumentType',
-		value: function handleChangeUserDocumentType(ev) {
-			this.setState({ userDocumentType: ev.target.value });
-		}
-	}, {
-		key: 'handleChangeUserCivilStatus',
-		value: function handleChangeUserCivilStatus(ev) {
-			this.setState({ userCivilStatus: ev.target.value });
-		}
-	}, {
-		key: 'handleChangeSpouseDocumentType',
-		value: function handleChangeSpouseDocumentType(ev) {
-			this.setState({ spouseDocumentType: ev.target.value });
+		key: 'switchPartnerSelected',
+		value: function switchPartnerSelected(pos) {
+			this.setState({ partnerSelected: pos });
 		}
 	}, {
 		key: 'handlePersonalInformationFormSubmit',
 		value: function handlePersonalInformationFormSubmit() {
 
-			var user_name_i = _reactDom2.default.findDOMNode(this.refs.user_name_i).value.trim();
-			var user_document_type_i = this.state.userDocumentType;
-			var user_document_number_i = _reactDom2.default.findDOMNode(this.refs.user_document_number_i).value.trim();
-			var user_email_i = _reactDom2.default.findDOMNode(this.refs.user_email_i).value.trim();
-			var user_location_i = _reactDom2.default.findDOMNode(this.refs.user_location_i).value.trim();
-			var user_civil_status_i = this.state.userCivilStatus;
-
-			if (this.state.userCivilStatus != "Soltero") {
-				var _spouse_document_type_i = this.state.spouseDocumentType;
-				var _supouse_document_number_i = _reactDom2.default.findDOMNode(this.refs.supouse_document_number_i).value.trim();
-			}
-
-			var user_money_investment_i = _reactDom2.default.findDOMNode(this.refs.user_money_investment_i).value.trim();
-
-			var inputs = document.getElementsByClassName("goodRow");
-
-			console.log(inputs[0]);
-
-			var arry = [];
-
-			for (var i = 0; i < inputs.length; i++) {
-
-				if (inputs[i].children[0].children[1].children[0].value != "") {
-
-					arry.push({
-						good_name: inputs[i].children[0].children[1].children[0].value,
-						good_value: inputs[i].children[1].children[1].children[0].value
-
-					});
-				}
-			}
-
-			var json = {
-				name: user_name_i,
-				user_document_type: user_document_type_i,
-				user_document_number: user_document_number_i,
-				email: user_email_i,
-				location: user_location_i,
-				civil_status: user_civil_status_i,
-				money_investment: user_money_investment_i,
-				goods_investment: arry
-			};
-
-			if (this.state.userCivilStatus != "Soltero") {
-				json.spouse_document_type = spouse_document_type_i;
-				json.supouse_document_number = supouse_document_number_i;
-			}
-
-			//INFO LISTA PARA ENVIAR AL SERVER
-			console.log(json);
+			this.props.sendPartnersInformation.call(null);
 
 			return;
+		}
+	}, {
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			window.scrollTo(0, 0);
 		}
 	}, {
 		key: 'render',
 		value: function render() {
 
+			var dataReaderPartner = this.props.enterpriseInProcessData.partners[this.state.partnerSelected];
+
+			var rowInputNumber = void 0;
+			var goodlistpos = void 0;
+
 			var goodRowInputs = [];
 
-			for (var i = 0; i < this.state.numberOfGoods; i++) {
+			var btnAddingGoods = void 0,
+			    goodInputTextBox = void 0;
 
-				var key_id = (0, _uid2.default)();
+			//for para agregar listado de bienes
 
-				goodRowInputs.push(_react2.default.createElement(_goodRowInput2.default, {
-					number: i + 1,
-					key: key_id
-				}));
+			if (this.props.enterpriseInProcessData.isItGoodsCapital == true) {
+
+				if (dataReaderPartner.goodsInput) {
+
+					for (var i = 0; i < dataReaderPartner.goodsInput.length; i++) {
+
+						var key_id = (0, _uid2.default)();
+						var num = i + 1;
+
+						goodRowInputs.push(_react2.default.createElement(_goodRowInput2.default, {
+							number: num,
+							key: key_id,
+							partnerSelected: this.state.partnerSelected,
+							goodInfo: dataReaderPartner.goodsInput[i],
+							goodListPos: i,
+							deleteRowInputHandle: this.props.deleteRowInputHandle
+
+						}));
+					}
+
+					rowInputNumber = dataReaderPartner.goodsInput.length + 1;
+				} else {
+					rowInputNumber = 1;
+				}
+
+				//btn para agregar bienes
+
+				btnAddingGoods = _react2.default.createElement(
+					'div',
+					{ className: 'btnRed addGood', onClick: this.addGood.bind(this) },
+					_react2.default.createElement(
+						'p',
+						null,
+						'Agregar bien'
+					),
+					_react2.default.createElement('span', { className: 'icon-box' })
+				);
+
+				//input para agregar bienes
+
+				goodInputTextBox = _react2.default.createElement(
+					'div',
+					{ className: 'goodRow' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridFormShort' },
+						_react2.default.createElement(
+							'label',
+							{ className: 'smallContent' },
+							rowInputNumber,
+							'. Bien'
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'inputSingleValue' },
+							_react2.default.createElement('input', { type: 'text', ref: 'good_name_i', name: 'goodName', 'data-pos': this.state.partnerSelected }),
+							_react2.default.createElement('span', { className: 'icon-box' })
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridFormShort' },
+						_react2.default.createElement(
+							'label',
+							{ className: 'smallContent' },
+							'Valor'
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'inputSingleValue' },
+							_react2.default.createElement('input', { type: 'number', ref: 'good_value_i', name: 'goodValue', 'data-pos': this.state.partnerSelected }),
+							_react2.default.createElement('span', { className: 'icon-usd' })
+						)
+					)
+				);
+			}
+
+			//agregando los inputs
+
+
+			var inputName = void 0,
+			    inputDocTypePartner = void 0,
+			    inputDocPartnerNumber = void 0,
+			    inputMail = void 0,
+			    inputLocation = void 0,
+			    inputCivilStatus = void 0,
+			    inputDocTypeCouple = void 0,
+			    inputDocNumCouple = void 0,
+			    inputMoneyInvestment = void 0;
+
+			if (dataReaderPartner.user) {
+
+				inputName = _react2.default.createElement('input', { type: 'text', ref: 'user_name_i', value: dataReaderPartner.user.name, onChange: this.props.inputTextHandler.bind(), name: 'name', 'data-pos': this.state.partnerSelected });
+
+				inputDocTypePartner = _react2.default.createElement(
+					'select',
+					{ onChange: this.props.selectHandler.bind(), value: dataReaderPartner.user.documentType != undefined ? dataReaderPartner.user.documentType : "", name: 'documentType', 'data-pos': this.state.partnerSelected },
+					_react2.default.createElement('option', { disabled: true }),
+					_react2.default.createElement(
+						'option',
+						null,
+						'DNI'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'Pasaporte'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'Carn\xE9 de extranjer\xEDa'
+					)
+				);
+
+				inputDocPartnerNumber = _react2.default.createElement('input', { type: 'number', ref: 'user_document_number_i', value: dataReaderPartner.user.documentNumber != undefined ? dataReaderPartner.user.documentNumber : "", onChange: this.props.inputTextHandler.bind(), name: 'documentNumber', 'data-pos': this.state.partnerSelected });
+
+				inputMail = _react2.default.createElement('input', { type: 'email', ref: 'user_email_i', value: dataReaderPartner.user.email != undefined ? dataReaderPartner.user.email : "", onChange: this.props.inputTextHandler.bind(), name: 'email', 'data-pos': this.state.partnerSelected });
+
+				inputLocation = _react2.default.createElement('input', { type: 'text', ref: 'user_location_i', value: dataReaderPartner.user.location != undefined ? dataReaderPartner.user.location : "", onChange: this.props.inputTextHandler.bind(), name: 'location', 'data-pos': this.state.partnerSelected });
+
+				inputCivilStatus = _react2.default.createElement(
+					'select',
+					{ onChange: this.props.selectHandler.bind(), value: dataReaderPartner.user.civilStatus != undefined ? dataReaderPartner.user.civilStatus : "", name: 'civilStatus', 'data-pos': this.state.partnerSelected },
+					_react2.default.createElement('option', { disabled: true }),
+					_react2.default.createElement(
+						'option',
+						null,
+						'Soltero'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'Casado'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'Divorciado'
+					)
+				);
+
+				inputDocTypeCouple = _react2.default.createElement(
+					'select',
+					{ onChange: this.props.selectHandler.bind(), value: dataReaderPartner.user.coupleDocumentType != undefined ? dataReaderPartner.user.coupleDocumentType : "", name: 'coupleDocumentType', 'data-pos': this.state.partnerSelected },
+					_react2.default.createElement('option', { disabled: true }),
+					_react2.default.createElement(
+						'option',
+						null,
+						'DNI'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'Pasaporte'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'Carn\xE9 de extranjer\xEDa'
+					)
+				);
+
+				inputDocNumCouple = _react2.default.createElement('input', { type: 'number', ref: 'couple_document_number_i', value: dataReaderPartner.user.coupleDocumentNumber != undefined ? dataReaderPartner.user.coupleDocumentNumber : "", onChange: this.props.inputTextHandler.bind(), name: 'coupleDocumentNumber', 'data-pos': this.state.partnerSelected });
+
+				inputMoneyInvestment = _react2.default.createElement('input', { type: 'number', ref: 'user_money_investment_i', value: dataReaderPartner.moneyInput != undefined ? dataReaderPartner.moneyInput : "", onChange: this.props.inputTextHandler.bind(), name: 'moneyInput', 'data-pos': this.state.partnerSelected });
+			}
+
+			//agregando input de inversion en Dinero
+
+			var moneyCapitalInput = void 0;
+
+			if (this.props.enterpriseInProcessData.isItMoneyCapital == true) {
+
+				moneyCapitalInput = _react2.default.createElement(
+					'div',
+					{ className: 'gridFormLarge' },
+					_react2.default.createElement(
+						'label',
+						{ className: 'smallContent' },
+						'Dinero:'
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'inputSingleValue' },
+						inputMoneyInvestment,
+						_react2.default.createElement('span', { className: 'icon-usd' })
+					)
+				);
+			}
+
+			//agregando selectores de socios
+
+
+			var btnUserprofileInfo = [];
+
+			if (this.props.enterpriseInProcessData.partners[0].user) {
+				for (var _i = 0; _i < this.props.enterpriseInProcessData.partners.length; _i++) {
+
+					var _key_id = (0, _uid2.default)();
+
+					var btnText = this.props.enterpriseInProcessData.partners[_i].user.name;
+
+					if (this.state.partnerSelected == _i) {
+						var classSelected = "btnPartnerProfile btnPartnerProfileText btnPartnerProfileSelected";
+
+						btnUserprofileInfo.push(_react2.default.createElement(_btnUserprofileInfoText2.default, { btnText: btnText, key: _key_id, switchPartnerSelected: this.switchPartnerSelected, classSelected: classSelected, pos: _i }));
+					} else {
+
+						var _classSelected = "btnPartnerProfile btnPartnerProfileText";
+
+						btnUserprofileInfo.push(_react2.default.createElement(_btnUserprofileInfoText2.default, { btnText: btnText, key: _key_id, switchPartnerSelected: this.switchPartnerSelected, classSelected: _classSelected, pos: _i }));
+					}
+				}
 			}
 
 			return _react2.default.createElement(
 				'div',
-				{ className: 'personalInformationForm' },
+				{ className: 'sectionEnterpriseIncorporation' },
 				_react2.default.createElement(
 					'div',
-					{ className: 'gridStepProgress' },
-					_react2.default.createElement('span', { className: 'icon-cross' }),
-					_react2.default.createElement(
-						'ul',
-						{ className: 'stepProgress' },
-						_react2.default.createElement(
-							'li',
-							{ className: 'stepActive' },
-							'1'
-						),
-						_react2.default.createElement(
-							'li',
-							null,
-							'2'
-						),
-						_react2.default.createElement(
-							'li',
-							null,
-							'3'
-						)
-					),
-					_react2.default.createElement(
-						'figure',
-						null,
-						_react2.default.createElement('img', { src: 'css/img/InfoEmpresa1.svg' })
-					),
-					_react2.default.createElement(
-						'h4',
-						{ className: 'bigTitlesOS' },
-						'Constituci\xF3n de empresa'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'mediumContent instructions' },
-						'Ingresa la informaci\xF3n que necesitas para emitir la minuta'
-					),
-					_react2.default.createElement(
-						'h4',
-						{ className: 'bigTitlesOS helpTitle' },
-						'\xBFNecesitas ayuda?'
-					),
-					_react2.default.createElement('span', { className: 'icon-angle-down' }),
+					{ className: 'wrapperIncorporationForm' },
 					_react2.default.createElement(
 						'div',
-						{ className: 'gridUserSupport' },
-						_react2.default.createElement('span', { className: 'icon-whatsapp' }),
-						_react2.default.createElement(
-							'p',
-							{ className: 'smallContent' },
-							'942 914 542'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'gridUserSupport' },
-						_react2.default.createElement('span', { className: 'icon-mail_outline' }),
-						_react2.default.createElement(
-							'p',
-							{ className: 'smallContent' },
-							'ayuda@legitify.com'
-						)
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'gridForm' },
-					_react2.default.createElement(
-						'h3',
-						{ className: 'bigTitlesSS' },
-						'Informaci\xF3n personal'
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'wrapperUnderline' },
-						_react2.default.createElement('div', { className: 'underlineBlue' })
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'wrapperPartnersList' },
+						{ className: 'personalInformationForm' },
 						_react2.default.createElement(
 							'div',
-							{ className: 'btnPartnerProfile btnNewPartner' },
-							_react2.default.createElement('span', { className: 'icon-add' })
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'btnPartnerProfile' },
+							{ className: 'gridStepProgress' },
+							_react2.default.createElement('span', { className: 'icon-cross' }),
+							_react2.default.createElement(
+								'ul',
+								{ className: 'stepProgress' },
+								_react2.default.createElement(
+									'li',
+									null,
+									'1'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'2'
+								),
+								_react2.default.createElement(
+									'li',
+									{ className: 'stepActive' },
+									'3'
+								)
+							),
 							_react2.default.createElement(
 								'figure',
 								null,
-								_react2.default.createElement('img', { src: 'css/img/Fake-client.jpg' })
-							)
-						)
-					),
-					_react2.default.createElement(
-						'form',
-						null,
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridFormLarge' },
-							_react2.default.createElement(
-								'label',
-								{ className: 'smallContent' },
-								'Nombre completo:'
+								_react2.default.createElement('img', { src: 'css/img/InfoPersonal3.svg' })
 							),
 							_react2.default.createElement(
-								'div',
-								{ className: 'inputSingleValue' },
-								_react2.default.createElement('input', { type: 'text', ref: 'user_name_i' }),
-								_react2.default.createElement('span', { className: 'icon-head' })
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridFormShort' },
-							_react2.default.createElement(
-								'label',
-								{ className: 'smallContent' },
-								'Tipo de documento:'
+								'h4',
+								{ className: 'bigTitlesOS' },
+								'Informaci\xF3n personal'
 							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'inputSelect' },
-								_react2.default.createElement(
-									'select',
-									{ onChange: this.handleChangeUserDocumentType },
-									_react2.default.createElement(
-										'option',
-										null,
-										'DNI'
-									),
-									_react2.default.createElement(
-										'option',
-										null,
-										'Pasaporte'
-									),
-									_react2.default.createElement(
-										'option',
-										null,
-										'Carn\xE9 de extranjer\xEDa'
-									)
-								),
-								_react2.default.createElement('span', { className: 'icon-briefcase icoInputSelect' })
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridFormShort' },
-							_react2.default.createElement(
-								'label',
-								{ className: 'smallContent' },
-								'N\xFAmero de documento:'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'inputSingleValue' },
-								_react2.default.createElement('input', { type: 'number', ref: 'user_document_number_i' }),
-								_react2.default.createElement('span', { className: 'icon-credit-card' })
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridFormLarge' },
-							_react2.default.createElement(
-								'label',
-								{ className: 'smallContent' },
-								'Correo:'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'inputSingleValue' },
-								_react2.default.createElement('input', { type: 'email', ref: 'user_email_i' }),
-								_react2.default.createElement('span', null)
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridFormLarge' },
-							_react2.default.createElement(
-								'label',
-								{ className: 'smallContent' },
-								'Domicilio:'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'inputSingleValue' },
-								_react2.default.createElement('input', { type: 'text', ref: 'user_location_i' }),
-								_react2.default.createElement('span', { className: 'icon-room' })
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridFormShort' },
-							_react2.default.createElement(
-								'label',
-								{ className: 'smallContent' },
-								'Estado civil:'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'inputSelect' },
-								_react2.default.createElement(
-									'select',
-									{ onChange: this.handleChangeUserCivilStatus },
-									_react2.default.createElement(
-										'option',
-										null,
-										'Soltero'
-									),
-									_react2.default.createElement(
-										'option',
-										null,
-										'Casado'
-									),
-									_react2.default.createElement(
-										'option',
-										null,
-										'Divorciado'
-									)
-								),
-								_react2.default.createElement('span', { className: 'icoInputSelect' })
-							)
-						),
-						_react2.default.createElement('div', { className: 'gridFormShort' }),
-						_react2.default.createElement(
-							'label',
-							{ className: 'smallContent lblOptional' },
-							'Documento de identidad del c\xF3nyugue'
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridFormShort' },
-							_react2.default.createElement(
-								'label',
-								{ className: 'smallContent' },
-								'Tipo de documento:'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'inputSelect' },
-								_react2.default.createElement(
-									'select',
-									{ onChange: this.handleChangeSpouseDocumentType },
-									_react2.default.createElement(
-										'option',
-										null,
-										'DNI'
-									),
-									_react2.default.createElement(
-										'option',
-										null,
-										'Pasaporte'
-									),
-									_react2.default.createElement(
-										'option',
-										null,
-										'Carn\xE9 de extranjer\xEDa'
-									)
-								),
-								_react2.default.createElement('span', { className: 'icon-briefcase icoInputSelect' })
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridFormShort' },
-							_react2.default.createElement(
-								'label',
-								{ className: 'smallContent' },
-								'N\xFAmero de documento:'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'inputSingleValue' },
-								_react2.default.createElement('input', { type: 'number', ref: 'supouse_document_number_i' }),
-								_react2.default.createElement('span', { className: 'icon-credit-card' })
-							)
-						)
-					),
-					_react2.default.createElement('div', { className: 'gridDesktopDivision' }),
-					_react2.default.createElement(
-						'form',
-						{ id: 'gridBForm', className: 'gridBForm' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridMovilDivision' },
-							'Aporte de Capital'
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'btnRed addGood', onClick: this.addGood.bind(this) },
 							_react2.default.createElement(
 								'p',
-								null,
-								'Agregar bien'
+								{ className: 'mediumContent instructions' },
+								'Debes ingresar la informaci\xF3n de cada socio.'
 							),
-							_react2.default.createElement('span', { className: 'icon-box' })
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridFormLarge' },
 							_react2.default.createElement(
-								'label',
-								{ className: 'smallContent' },
-								'Dinero:'
+								'h4',
+								{ className: 'bigTitlesOS helpTitle' },
+								'\xBFNecesitas ayuda?'
+							),
+							_react2.default.createElement('span', { className: 'icon-angle-down' }),
+							_react2.default.createElement(
+								'a',
+								{ href: 'http://www.facebook.com/legaly.pe', target: '_blank', className: 'gridUserSupport' },
+								_react2.default.createElement('span', { className: 'icon-facebook' }),
+								_react2.default.createElement(
+									'p',
+									{ className: 'smallContent' },
+									'www.facebook.com/legaly.pe'
+								)
 							),
 							_react2.default.createElement(
 								'div',
-								{ className: 'inputSingleValue' },
-								_react2.default.createElement('input', { type: 'number', ref: 'user_money_investment_i' }),
-								_react2.default.createElement('span', { className: 'icon-usd' })
-							)
-						),
-						goodRowInputs
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'wrapperBtnForm' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridFormLarge wrapperBtnNext' },
-							_react2.default.createElement(
-								_reactRouterDom.Link,
-								{ to: '/fecha-firma' },
+								{ className: 'gridUserSupport' },
+								_react2.default.createElement('span', { className: 'icon-mail_outline' }),
 								_react2.default.createElement(
-									'div',
-									{ className: 'btnNext', onClick: this.handlePersonalInformationFormSubmit.bind(this) },
-									'Guardar informaci\xF3n'
+									'p',
+									{ className: 'smallContent' },
+									'ayuda@legaly.pe'
 								)
 							)
 						),
 						_react2.default.createElement(
 							'div',
-							{ className: 'gridFormLarge wrapperBtnTransparent' },
+							{ className: 'gridForm' },
 							_react2.default.createElement(
-								_reactRouterDom.Link,
-								{ to: '/invitar-socios' },
+								'h3',
+								{ className: 'bigTitlesSS' },
+								'Informaci\xF3n personal'
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'wrapperUnderline' },
+								_react2.default.createElement('div', { className: 'underlineBlue' })
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'wrapperPartnersList' },
+								btnUserprofileInfo
+							),
+							_react2.default.createElement(
+								'form',
+								null,
 								_react2.default.createElement(
 									'div',
-									{ className: 'btnTransparentBackground' },
-									'Anterior'
+									{ className: 'gridFormLarge' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'smallContent' },
+										'Nombre completo:'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'inputSingleValue' },
+										inputName,
+										_react2.default.createElement('span', { className: 'icon-head' })
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormShort' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'smallContent' },
+										'Tipo de documento:'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'inputSelect' },
+										inputDocTypePartner,
+										_react2.default.createElement('span', { className: 'icon-briefcase icoInputSelect' })
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormShort' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'smallContent' },
+										'N\xFAmero de documento:'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'inputSingleValue' },
+										inputDocPartnerNumber,
+										_react2.default.createElement('span', { className: 'icon-credit-card' })
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormLarge' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'smallContent' },
+										'Correo:'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'inputSingleValue' },
+										inputMail,
+										_react2.default.createElement('span', null)
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormLarge' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'smallContent' },
+										'Domicilio:'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'inputSingleValue' },
+										inputLocation,
+										_react2.default.createElement('span', { className: 'icon-room' })
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormShort' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'smallContent' },
+										'Estado civil:'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'inputSelect' },
+										inputCivilStatus,
+										_react2.default.createElement('span', { className: 'icoInputSelect' })
+									)
+								),
+								_react2.default.createElement('div', { className: 'gridFormShort' }),
+								_react2.default.createElement(
+									'label',
+									{ className: 'smallContent lblOptional' },
+									'Documento de identidad del c\xF3nyugue'
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormShort' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'smallContent' },
+										'Tipo de documento:'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'inputSelect' },
+										inputDocTypeCouple,
+										_react2.default.createElement('span', { className: 'icon-briefcase icoInputSelect' })
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormShort' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'smallContent' },
+										'N\xFAmero de documento:'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'inputSingleValue' },
+										inputDocNumCouple,
+										_react2.default.createElement('span', { className: 'icon-credit-card' })
+									)
+								)
+							),
+							_react2.default.createElement('div', { className: 'gridDesktopDivision' }),
+							_react2.default.createElement(
+								'form',
+								{ id: 'gridBForm', className: 'gridBForm' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridMovilDivision' },
+									'Aporte de Capital'
+								),
+								btnAddingGoods,
+								moneyCapitalInput,
+								goodRowInputs,
+								goodInputTextBox
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'wrapperBtnForm' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormLarge wrapperBtnNext' },
+									_react2.default.createElement(
+										_reactRouterDom.Link,
+										{ to: '/fecha-firma' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'btnNext', onClick: this.handlePersonalInformationFormSubmit.bind(this) },
+											'Siguiente'
+										)
+									)
+								),
+								_react2.default.createElement('div', { className: 'gridFormLarge wrapperBtnTransparent' })
+							)
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ id: 'faq1', className: 'wrapperFaq' },
+					_react2.default.createElement(
+						'figure',
+						null,
+						_react2.default.createElement('img', { src: './css/img/constitucion-photo.jpg' })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridFaq' },
+						_react2.default.createElement(
+							'h1',
+							null,
+							'\xBFPor qu\xE9 es importante constituir mi empresa?'
+						),
+						_react2.default.createElement('div', { className: 'underlineBlue' }),
+						_react2.default.createElement(
+							'h2',
+							null,
+							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'btnFaq' },
+							'Quiero saber m\xE1s'
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'wrapperComercialFAQ' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridComercialFAQ' },
+						_react2.default.createElement(
+							'figure',
+							null,
+							_react2.default.createElement('img', { src: 'css/img/accesible.svg' })
+						),
+						_react2.default.createElement(
+							'h2',
+							{ className: 'landingTitles' },
+							'\xBFC\xFAal es el precio?'
+						),
+						_react2.default.createElement(
+							'h3',
+							null,
+							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridComercialFAQ' },
+						_react2.default.createElement(
+							'figure',
+							null,
+							_react2.default.createElement('img', { src: 'css/img/rapidez.svg' })
+						),
+						_react2.default.createElement(
+							'h2',
+							{ className: 'landingTitles' },
+							'\xBFC\xFAanto debo esperar?'
+						),
+						_react2.default.createElement(
+							'h3',
+							null,
+							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridComercialFAQ' },
+						_react2.default.createElement(
+							'figure',
+							null,
+							_react2.default.createElement('img', { src: 'css/img/delivery.svg' })
+						),
+						_react2.default.createElement(
+							'h2',
+							{ className: 'landingTitles' },
+							'Brindamos lo siguiente'
+						),
+						_react2.default.createElement(
+							'h3',
+							null,
+							_react2.default.createElement(
+								'ul',
+								null,
+								_react2.default.createElement(
+									'li',
+									null,
+									'B\xFAsqueda y reserva de nombre'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Estatutos de la empresa'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Escritura p\xFAblica ante notario'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Inscripci\xF3n registral en Sunarp'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Ficha RUC'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Copia literal'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Compra de dominio web'
 								)
 							)
 						)
@@ -27422,10 +29695,74 @@ var PersonalInformationForm = function (_Component) {
 
 	return PersonalInformationForm;
 }(_react.Component);
+/*
+//agregando selectores de socios
+		
+
+		let btnUserprofileInfo =[];
+
+		if(this.props.enterpriseInProcessData.partners[0].user){
+			for(let i= 0; i< this.props.enterpriseInProcessData.partners.length; i++){
+
+				let key_id = uid()
+
+				
+
+				if(this.props.enterpriseInProcessData.partners[i].user.photo){
+
+					let photoUrl = this.props.enterpriseInProcessData.partners[i].user.photo;
+
+					if(this.state.partnerSelected == i){
+
+						let classSelected = "btnPartnerProfile btnPartnerProfileSelected"
+
+						btnUserprofileInfo.push(<BtnUserprofileInfo photoUrl={photoUrl} key={key_id} switchPartnerSelected={this.switchPartnerSelected} classSelected={classSelected} pos={i}/>)
+					}else{
+						let classSelected = "btnPartnerProfile"
+
+						btnUserprofileInfo.push(<BtnUserprofileInfo photoUrl={photoUrl} key={key_id} switchPartnerSelected={this.switchPartnerSelected} classSelected={classSelected} pos={i}/>)
+					}
+
+					
+
+				}else{
+					console.log("dentro de else")
+					console.log(this.props.enterpriseInProcessData.partners[i].user)
+					console.log(this.props.enterpriseInProcessData.partners[i].user.name[0])
+					let btnText = this.props.enterpriseInProcessData.partners[i].user.name[0];
+
+					if(this.state.partnerSelected == i){
+						let classSelected = "btnPartnerProfile btnPartnerProfileText btnPartnerProfileSelected"
+
+						btnUserprofileInfo.push(<BtnUserprofileInfoText btnText={btnText} key={key_id} switchPartnerSelected={this.switchPartnerSelected} classSelected={classSelected} pos={i}/>)
+
+					}else{
+
+						let classSelected = "btnPartnerProfile btnPartnerProfileText"
+
+						btnUserprofileInfo.push(<BtnUserprofileInfoText btnText={btnText} key={key_id} switchPartnerSelected={this.switchPartnerSelected} classSelected={classSelected} pos={i}/>)
+
+					}
+					
+					
+				}
+				
+			}
+		}
+*/
+
+/*
+<div className="btnPartnerProfile btnNewPartner">
+	<span className="icon-add"></span>
+</div>
+*/
+
+//value={dataReader.name != undefined ? this.props.enterpriseInProcessData.partners[this.state.partnerSelected].user.name : ""}
+
 
 exports.default = PersonalInformationForm;
 
-},{"./goodRowInput":226,"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],234:[function(require,module,exports){
+},{"./btnUserprofileInfo":224,"./btnUserprofileInfoText":225,"./goodRowInput":229,"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],237:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27455,6 +29792,167 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
 
+var ServiceState = function (_Component) {
+	_inherits(ServiceState, _Component);
+
+	function ServiceState() {
+		_classCallCheck(this, ServiceState);
+
+		return _possibleConstructorReturn(this, (ServiceState.__proto__ || Object.getPrototypeOf(ServiceState)).apply(this, arguments));
+	}
+
+	_createClass(ServiceState, [{
+		key: 'render',
+		value: function render() {
+
+			var progress = void 0;
+
+			progress = 100 / this.props.enterprise.serviceState;
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'blockServiceState' },
+				_react2.default.createElement(
+					'figure',
+					{ className: 'serviceImage' },
+					_react2.default.createElement('img', { src: 'css/img/Constitucion-icon.svg' })
+				),
+				_react2.default.createElement(
+					'h6',
+					{ className: 'bigTitlesOS serviceEnterpriseName' },
+					this.props.enterprise.name ? this.props.enterprise.name : this.props.enterprise.optionNames[0]
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'wrapperPie' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'pie' },
+						_react2.default.createElement('div', { className: 'dataBackground' }),
+						_react2.default.createElement(
+							'div',
+							{ className: 'pieData' },
+							progress,
+							'%'
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return ServiceState;
+}(_react.Component);
+
+exports.default = ServiceState;
+
+},{"react":218,"react-dom":41,"react-router-dom":178}],238:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _reactRouterDom = require('react-router-dom');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *	module dependencies
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
+
+var UserAvatar = function (_Component) {
+	_inherits(UserAvatar, _Component);
+
+	function UserAvatar() {
+		_classCallCheck(this, UserAvatar);
+
+		return _possibleConstructorReturn(this, (UserAvatar.__proto__ || Object.getPrototypeOf(UserAvatar)).apply(this, arguments));
+	}
+
+	_createClass(UserAvatar, [{
+		key: 'shouldComponentUpdate',
+		value: function shouldComponentUpdate() {
+			return false;
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+
+			return _react2.default.createElement(
+				'figure',
+				{ className: 'userPhoto', onClick: this.props.switchBtnNavSelected.bind(this, 5) },
+				_react2.default.createElement(
+					_reactRouterDom.Link,
+					{ to: '/perfil' },
+					_react2.default.createElement('img', { src: this.props.user.photo })
+				)
+			);
+		}
+	}]);
+
+	return UserAvatar;
+}(_react.Component);
+
+exports.default = UserAvatar;
+
+},{"react":218,"react-dom":41,"react-router-dom":178}],239:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _reactRouterDom = require('react-router-dom');
+
+var _uid = require('uid');
+
+var _uid2 = _interopRequireDefault(_uid);
+
+var _serviceState = require('./serviceState');
+
+var _serviceState2 = _interopRequireDefault(_serviceState);
+
+var _contactRow = require('./contactRow');
+
+var _contactRow2 = _interopRequireDefault(_contactRow);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *	module dependencies
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
+
 var Userprofile = function (_Component) {
 	_inherits(Userprofile, _Component);
 
@@ -27465,8 +29963,50 @@ var Userprofile = function (_Component) {
 	}
 
 	_createClass(Userprofile, [{
+		key: 'componentWillMount',
+		value: function componentWillMount() {
+			console.log("ejecutando componentWillMount");
+			console.log(this.props.user);
+			this.props.isItLogin();
+		}
+	}, {
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			window.scrollTo(0, 0);
+		}
+	}, {
 		key: 'render',
 		value: function render() {
+			var _this2 = this;
+
+			var serviceState = void 0;
+			var contactRow = [];
+			var nationality = void 0;
+
+			this.props.user.enterprise.map(function (enterprise) {
+				if (enterprise.inProcess == true) {
+
+					serviceState = _react2.default.createElement(_serviceState2.default, { enterpriseData: enterprise });
+				}
+
+				var companyName = enterprise.name ? enterprise.name : enterprise.optionNames[0];
+
+				enterprise.partners.map(function (partner) {
+					if (partner.user._id != _this2.props.user._id) {
+						var key_id = (0, _uid2.default)();
+
+						contactRow.push(_react2.default.createElement(_contactRow2.default, { key: key_id, user: partner.user, companyName: companyName }));
+					}
+				});
+			});
+
+			if (this.props.user.documentType) {
+				if (this.props.user.documentType == "DNI") {
+					nationality = "peruana";
+				} else {
+					nationality = "extranjero";
+				}
+			}
 
 			return _react2.default.createElement(
 				'div',
@@ -27481,6 +30021,11 @@ var Userprofile = function (_Component) {
 					),
 					_react2.default.createElement('div', { className: 'underlineBlue' }),
 					_react2.default.createElement(
+						'a',
+						{ href: '/logout', className: 'btnLogout' },
+						'Cerrar sesi\xF3n'
+					),
+					_react2.default.createElement(
 						'div',
 						{ className: 'blockPersonalInformation' },
 						_react2.default.createElement(
@@ -27489,7 +30034,7 @@ var Userprofile = function (_Component) {
 							_react2.default.createElement(
 								'figure',
 								{ className: 'userProfilePhoto' },
-								_react2.default.createElement('img', { src: 'css/img/Fake-client.jpg' })
+								_react2.default.createElement('img', { src: this.props.user.photo })
 							),
 							_react2.default.createElement(
 								'div',
@@ -27497,7 +30042,7 @@ var Userprofile = function (_Component) {
 								_react2.default.createElement(
 									'h5',
 									{ className: 'mediumContent' },
-									'Paul Alexander Braga Eguren'
+									this.props.user.name
 								),
 								_react2.default.createElement(
 									'div',
@@ -27506,7 +30051,9 @@ var Userprofile = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'smallContent' },
-										'DNI 46080606'
+										this.props.user.documentType,
+										' ',
+										this.props.user.documentNumber
 									)
 								),
 								_react2.default.createElement(
@@ -27516,7 +30063,7 @@ var Userprofile = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'smallContent' },
-										'empresario'
+										this.props.user.position ? this.props.user.position : "--"
 									)
 								)
 							)
@@ -27539,7 +30086,7 @@ var Userprofile = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'userData smallContent' },
-										'peruana'
+										nationality
 									)
 								),
 								_react2.default.createElement(
@@ -27553,7 +30100,7 @@ var Userprofile = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'userData smallContent' },
-										'iquitos'
+										'--'
 									)
 								),
 								_react2.default.createElement(
@@ -27567,7 +30114,7 @@ var Userprofile = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'userData smallContent' },
-										'21/08/1989'
+										'--'
 									)
 								),
 								_react2.default.createElement(
@@ -27581,7 +30128,7 @@ var Userprofile = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'userData smallContent' },
-										'comprometido'
+										this.props.user.civilStatus
 									)
 								),
 								_react2.default.createElement(
@@ -27595,7 +30142,7 @@ var Userprofile = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'userData smallContent' },
-										'jr. los c\xF3ndores 229 bellavista callao'
+										this.props.user.location
 									)
 								),
 								_react2.default.createElement(
@@ -27609,7 +30156,7 @@ var Userprofile = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'userData smallContent' },
-										'996005400'
+										'--'
 									)
 								),
 								_react2.default.createElement(
@@ -27623,7 +30170,7 @@ var Userprofile = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'userData smallContent userDataEmail' },
-										'plbraga@plaqart.com'
+										this.props.user.email
 									)
 								)
 							)
@@ -27643,90 +30190,7 @@ var Userprofile = function (_Component) {
 						{ className: 'wrapperUnderline' },
 						_react2.default.createElement('div', { className: 'underlineBlue' })
 					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'blockServiceState' },
-						_react2.default.createElement(
-							'figure',
-							{ className: 'serviceImage' },
-							_react2.default.createElement('img', { src: 'css/img/Constitucion-icon.svg' })
-						),
-						_react2.default.createElement(
-							'h6',
-							{ className: 'bigTitlesOS serviceEnterpriseName' },
-							'la empresa sa'
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'wrapperPie' },
-							_react2.default.createElement(
-								'div',
-								{ className: 'pie' },
-								_react2.default.createElement('div', { className: 'dataBackground' }),
-								_react2.default.createElement(
-									'div',
-									{ className: 'pieData' },
-									'50%'
-								)
-							)
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'blockServiceState' },
-						_react2.default.createElement(
-							'figure',
-							{ className: 'serviceImage' },
-							_react2.default.createElement('img', { src: 'css/img/Constitucion-icon.svg' })
-						),
-						_react2.default.createElement(
-							'h6',
-							{ className: 'bigTitlesOS serviceEnterpriseName' },
-							'la empresa sa'
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'wrapperPie' },
-							_react2.default.createElement(
-								'div',
-								{ className: 'pie' },
-								_react2.default.createElement('div', { className: 'dataBackground' }),
-								_react2.default.createElement(
-									'div',
-									{ className: 'pieData' },
-									'50%'
-								)
-							)
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'blockServiceState' },
-						_react2.default.createElement(
-							'figure',
-							{ className: 'serviceImage' },
-							_react2.default.createElement('img', { src: 'css/img/Constitucion-icon.svg' })
-						),
-						_react2.default.createElement(
-							'h6',
-							{ className: 'bigTitlesOS serviceEnterpriseName' },
-							'la empresa sa'
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'wrapperPie' },
-							_react2.default.createElement(
-								'div',
-								{ className: 'pie' },
-								_react2.default.createElement('div', { className: 'dataBackground' }),
-								_react2.default.createElement(
-									'div',
-									{ className: 'pieData' },
-									'50%'
-								)
-							)
-						)
-					)
+					serviceState
 				),
 				_react2.default.createElement(
 					'div',
@@ -27740,78 +30204,7 @@ var Userprofile = function (_Component) {
 					_react2.default.createElement(
 						'div',
 						{ className: 'wrapperPartners' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'row' },
-							_react2.default.createElement(
-								'figure',
-								null,
-								_react2.default.createElement('img', { src: 'css/img/Fake-client.jpg' })
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'partnerInfo' },
-								_react2.default.createElement(
-									'p',
-									{ className: 'mediumContent' },
-									'jaime prado hernandez'
-								),
-								_react2.default.createElement(
-									'p',
-									{ className: 'enterpriseName mediumContent' },
-									_react2.default.createElement('span', { className: 'icon-office' }),
-									' La empresa sac'
-								)
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'row' },
-							_react2.default.createElement(
-								'figure',
-								null,
-								_react2.default.createElement('img', { src: 'css/img/Fake-client.jpg' })
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'partnerInfo' },
-								_react2.default.createElement(
-									'p',
-									{ className: 'mediumContent' },
-									'jaime prado hernandez'
-								),
-								_react2.default.createElement(
-									'p',
-									{ className: 'enterpriseName mediumContent' },
-									_react2.default.createElement('span', { className: 'icon-office' }),
-									' La empresa sac'
-								)
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'row' },
-							_react2.default.createElement(
-								'figure',
-								null,
-								_react2.default.createElement('img', { src: 'css/img/Fake-client.jpg' })
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'partnerInfo' },
-								_react2.default.createElement(
-									'p',
-									{ className: 'mediumContent' },
-									'jaime prado hernandez'
-								),
-								_react2.default.createElement(
-									'p',
-									{ className: 'enterpriseName mediumContent' },
-									_react2.default.createElement('span', { className: 'icon-office' }),
-									' La empresa sac'
-								)
-							)
-						)
+						contactRow
 					)
 				)
 			);
@@ -27823,7 +30216,7 @@ var Userprofile = function (_Component) {
 
 exports.default = Userprofile;
 
-},{"react":218,"react-dom":41,"react-router-dom":178}],235:[function(require,module,exports){
+},{"./contactRow":226,"./serviceState":237,"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],240:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -27850,4 +30243,4 @@ var routes = _react2.default.createElement(
 
 _reactDom2.default.render(routes, document.getElementById('container'));
 
-},{"./components/app":223,"react":218,"react-dom":41,"react-router-dom":178}]},{},[235]);
+},{"./components/app":223,"react":218,"react-dom":41,"react-router-dom":178}]},{},[240]);

@@ -3,12 +3,23 @@
 */
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
-import { Route, Link, Redirect, match } from 'react-router-dom'
+import { Link, Redirect, match, Route} from 'react-router-dom'
+
 
 import LoginForm from './loginForm';
-import Userprofile from './userprofile';
 import Landing from './landing';
 import Incorporate from './incorporate';
+
+import EnterpriseInformationForm from './enterpriseInformationForm';
+import PartnersAddingForm from './partnersAddingForm';
+import PersonalInformationForm from './personalInformationForm';
+import DateForm from './dateForm';
+import PaymentMethodForm from './paymentMethodForm';
+import Userprofile from './userprofile';
+import UserAvatar from './userAvatar';
+
+
+
 
 export default class App extends Component{
 
@@ -17,43 +28,328 @@ export default class App extends Component{
 		this.state={
 			user : false,
 			months: [],
-			enterpriseInProcess: false,
-			enterpriseIdInProcess: ""
+			enterpriseInProcess: 0,
+			enterpriseSaved:0,
+			partnersInvitationSaved: 0,
+			enterpriseInProcessData: {}
 
 		}
 
-		this.sendEnterpriseInformation = this.sendEnterpriseInformation.bind(this);
+		this.sendPartnerInvitation = this.sendPartnerInvitation.bind(this);
 		this.switchEnterpriseInProcess = this.switchEnterpriseInProcess.bind(this);
+		this.sendEnterpriseInformation = this.sendEnterpriseInformation.bind(this);
+		this.inputTextHandler = this.inputTextHandler.bind(this);
+		this.selectHandler = this.selectHandler.bind(this);
+		this.rowInputsHandler = this.rowInputsHandler.bind(this);
+		this.deleteRowInputHandle = this.deleteRowInputHandle.bind(this);
+		this.sendPartnersInformation = this.sendPartnersInformation.bind(this);
+		this.inputTextHandlerRootLevel = this.inputTextHandlerRootLevel.bind(this);
+		this.sendSingingDateInformation = this.sendSingingDateInformation.bind(this);
+		this.isItLogin = this.isItLogin.bind(this);
+		this.deletingPartnerRow = this.deletingPartnerRow.bind(this);
+		this.rowPartnerInputHandler = this.rowPartnerInputHandler.bind(this);
+		this.logPageView = this.logPageView.bind(this);
+		this.updateEnterpriseInformation = this.updateEnterpriseInformation.bind(this);
+		this.rowAccountManagerInputHandler = this.rowAccountManagerInputHandler.bind(this);
+		this.updatePartnerInvitation = this.updatePartnerInvitation.bind(this);
+		this.switchBtnNavSelected = this.switchBtnNavSelected.bind(this);
 	
 	}
 
-	switchEnterpriseInProcess(){
-		if(this.state.enterpriseInProcess == true){
-			this.setState({enterpriseInProcess: false})
+
+	// no se esta utilizando pero sirve de ejemplo
+
+	switchStepState(key){
+		if(this.state[key] == 0){
+			this.setState({
+				[key] : 1
+			})
 		}else{
-			this.setState({enterpriseInProcess : true})
+			this.setState({
+				[key] : 0
+			})
 		}
 		
 	}
+
+	// FORMSTAGE
+	inputTextHandler(ev){
+		let target = ev.target;
+
+		let name = target.name;
+
+		let newData = this.state.enterpriseInProcessData;
+
+		if(name == "moneyInput" || name == "goodsInput"){
+
+			newData.partners[target.dataset.pos][name] = target.value;
+
+		}else{
+
+			newData.partners[target.dataset.pos].user[name] = target.value;
+
+		}
+
+		this.setState({enterpriseInProcessData : newData});
+	}
+
+	// FORMSTAGE
+	inputTextHandlerRootLevel(ev){
+		let target = ev.target;
+		let name = target.name;
+
+		let newData = this.state.enterpriseInProcessData
+
+		newData[name] = target.value;
+
+		this.setState({enterpriseInProcessData : newData});
+	}
+
+	// FORMSTAGE
+	selectHandler(ev){
+
+		let target = ev.target;
+
+		let newData = this.state.enterpriseInProcessData;
+
+		newData.partners[target.dataset.pos].user[target.name] = target.value;
+
+		this.setState({enterpriseInProcessData : newData});
+	}
+
+	// FORMSTAGE
+	rowInputsHandler(json){
+		
+
+		let newData = this.state.enterpriseInProcessData;
+
+		newData.partners[json.partnerSelected].goodsInput.push({
+			goodName : json.goodName,
+			goodValue : json.goodValue
+		})
+
+		this.setState({ enterpriseInProcessData : newData});
+	}
+
+	// FORMSTAGE
+	rowPartnerInputHandler(json){
 	
+
+		let newData = this.state.enterpriseInProcessData;
+
+		let partner = {
+			user : { name : json.partnerEmail},
+			position : json.position
+		}
+
+		
+
+		newData.partners.push(partner)
+
+		this.setState({ enterpriseInProcessData : newData});
+
+	}
+
+	rowAccountManagerInputHandler(json){
+	
+
+		let newData = this.state.enterpriseInProcessData;
+
+		newData.partners[0].position = json.position;
+
+		this.setState({ enterpriseInProcessData : newData});
+
+	}
+
+	// FORMSTAGE
+	deleteRowInputHandle(json){
+		
+		let newData = this.state.enterpriseInProcessData;
+
+		newData.partners[json.partnerSelected].goodsInput.splice(json.inputPos, 1)
+
+		this.setState({enterpriseInProcessData: newData})
+	}
+
+	// FORMSTAGE
+	deletingPartnerRow(json){
+		
+		if(this.state.partnersInvitationSaved == 1){
+
+			$.post('/api/delete_partner_invitation', json, (res)=>{
+				if(res.state == 1){
+					
+					
+					let newData = this.state.enterpriseInProcessData;
+
+					newData.partners.splice(json.partnerSelected, 1)
+
+					this.setState({enterpriseInProcessData: newData})
+				}
+			});
+
+		}else{
+			
+			let newData = this.state.enterpriseInProcessData;
+
+			newData.partners.splice(json.partnerSelected, 1)
+
+			this.setState({enterpriseInProcessData: newData})
+		}
+
+		
+
+	}
+
+	//REACTSTAGE
+	switchEnterpriseInProcess(){
+		if(this.state.enterpriseInProcess == 1){
+			this.setState({enterpriseInProcess: 0})
+		}else{
+			this.setState({enterpriseInProcess : 1})
+		}
+		
+	}
+
+	// REACTSTAGE STEP 1
 	sendEnterpriseInformation(json){
+		
+
 		$.post('/api/enterprise_information', json, (res)=>{
 			if(res){
 				console.log(res)
+				
+				let newEnterpriseProgressData = res.enterprise
 
+				this.setState({
+					enterpriseInProcessData : newEnterpriseProgressData,
+					enterpriseSaved: 1
+				})
+			}
+		});
+	}
+
+	//DBSTAGE STEP 4
+	sendSingingDateInformation(){
+
+		let json = this.state.enterpriseInProcessData;
+		
+		$.post('/api/signing_date_information', json, (res)=>{
+			if(res){
+				console.log("info de res")
+				console.log(res)
+
+				let newData = this.state.enterpriseInProcessData;
+
+				newData.price = res.price;
+
+				this.setState({enterpriseInProcessData : newData})
+
+			
+			
+			}
+		});
+
+	}
+
+	//DBSTAGE STEP 3
+	sendPartnersInformation(){
+
+		let json = this.state.enterpriseInProcessData
+
+		$.post('/api/partners_information', json, (res)=>{
+			if(res){
+				console.log("info de res")
+				console.log(res)
+
+				//let newData = this.state.enterpriseInProcessData.user
+
+				//this.setState({user: newData});
+
+				/*
 				this.state.user.enterprise.push(res.enterprise)
 
 				let newData = this.state.user
 
+				let newEnterpriseProgressData = res.enterprise
+
 				this.setState({
 					user : newData,
-					enterpriseInProcess : true,
-					enterpriseIdInProcess : res.enterprise._id
+					enterpriseInProcessData : newEnterpriseProgressData
+
+				})
+				*/
+			
+				//console.log(this.state.enterpriseInProcessData)
+			}
+		});
+	}
+	
+	//DBSTAGE STEP 2
+	sendPartnerInvitation(){
+
+
+		//capturo la data para enviarla
+
+		let json = this.state.enterpriseInProcessData;
+		
+		$.post('/api/partners_invitation', json, (res)=>{
+			if(res){
+				
+				let newEnterpriseProgressData = res.enterprise
+
+				this.setState({
+					enterpriseInProcessData : newEnterpriseProgressData,
+					partnersInvitationSaved : 1
+					
+				})
+			}
+		});
+	}
+
+	updatePartnerInvitation(){
+		let json = this.state.enterpriseInProcessData;
+		
+		$.post('/api/partners_invitation_update', json, (res)=>{
+			if(res){
+
+				console.log(res)
+				
+				let newEnterpriseProgressData = res.enterprise
+
+				this.setState({
+					enterpriseInProcessData : newEnterpriseProgressData
+					
+				})
+			}
+		});
+	}
+
+	//DBSTAGE STEP 2
+	updateEnterpriseInformation(json){
+
+		json._id = this.state.enterpriseInProcessData._id;
+
+		$.post('/api/enterprise_information_update', json, (res)=>{
+			if(res){
+
+				console.log(res)
+				
+
+				let newEnterpriseProgressData = res
+
+				this.setState({
+					enterpriseInProcessData : newEnterpriseProgressData
 
 				})
 			}
 		});
 	}
+
+
+	
+
+
 
 
 	
@@ -77,7 +373,7 @@ export default class App extends Component{
             },
             error: function(data){
                 console.log("error");
-                console.log(data);
+                
             }
         });
 	}
@@ -87,6 +383,64 @@ export default class App extends Component{
 		
 		
 	}
+	componentDidMount(){
+		$("#btnMovilMenu").click(function(){
+			
+			$("#movilMenu").slideDown();
+		})
+
+		$("#btnCloseMovilMenu").click(function(){
+			
+			$("#movilMenu").fadeOut();
+		})
+
+		
+	}
+
+
+
+	logPageView(){
+	//    ReactGA.set({page : window.location.pathname });
+	//    ReactGA.pageview(window.location.pathname);
+
+	    // instruccion para que suba el scroll hasta el tope cuando carga la ruta
+	    let {
+	        action
+	    } = this.state.location;
+
+	    if (action === 'PUSH') {
+	        window.scrollTo(0, 0);
+	    }
+	}
+	switchBtnNavSelected(pos){
+		if(pos == 0){
+			this.setState({
+				btnNavCons : 'btnNavSelected',
+				btnNavUs : '',
+				btnNavInfo : ''
+			})
+		} else if( pos == 1){
+			this.setState({
+				btnNavCons : '',
+				btnNavUs : 'btnNavSelected',
+				btnNavInfo : ''
+			})
+		}else if( pos == 2){
+			this.setState({
+				btnNavCons : '',
+				btnNavUs : '',
+				btnNavInfo : 'btnNavSelected',
+
+			})
+		}else{
+			this.setState({
+				btnNavCons : '',
+				btnNavUs : '',
+				btnNavInfo : '',
+
+			})
+		}
+	}
 
 	
 	render(){
@@ -94,11 +448,7 @@ export default class App extends Component{
 		let userLogin;
 
 		if(this.state.user != false){
-			userLogin = <figure className="userPhoto">
-							<Link to="/perfil">
-								<img src={this.state.user.photo}/>
-							</Link>
-						</figure>
+			userLogin = <UserAvatar user= {this.state.user} switchBtnNavSelected={this.switchBtnNavSelected}/>
 		}else{
 			userLogin = <div className="btnRegistration">
 								<Link to="/login">
@@ -115,11 +465,11 @@ export default class App extends Component{
 
 		return <div className="appContainer">
 					<header>
-						<div className="movilMenu">
+						<div id="movilMenu" className="movilMenu">
 							<div className="wrapperHeaderMovilMenu">
-								<span className="icon-cross"></span>
+								<span id="btnCloseMovilMenu" className="icon-cross"></span>
 								<figure className="movilMenuMainLogo">
-									<img src="#"/>
+									<img src="css/img/LogotipoLegaly.svg"/>
 								</figure>
 								<span></span>	
 							</div>
@@ -132,9 +482,6 @@ export default class App extends Component{
 								<ul>
 									<li>
 										<Link to="/constitucion" className="mediumContent">Constituye tu Empresa</Link>
-									</li>
-									<li>
-										<a href="#" className="mediumContent">Registra tu marca</a>
 									</li>
 									<li>
 										<a href="#" className="mediumContent">Quienes somos</a>
@@ -181,12 +528,12 @@ export default class App extends Component{
 							</div>
 							<div className="gridGeneralContactInfo">
 								<div className="subGrid">
-									<span className="icon-whatsapp"></span>
-									<p>942 914 542</p>
+									<span className="icon-office"></span>
+									<p>01 468 1546</p>
 								</div>
 								<div className="subGrid">
 									<span className="icon-mail_outline"></span>
-									<p>info@legitify.com</p>
+									<p>info@legaly.pe</p>
 								</div>
 								<div className="subGrid">
 									<span className="icon-clock"></span>
@@ -195,15 +542,16 @@ export default class App extends Component{
 							</div>
 						</div>	
 						<nav>
-							<span className="icon-align-justify btnMovilMenu"></span>
+							<span id="btnMovilMenu" className="icon-align-justify btnMovilMenu"></span>
 							<figure className="mainLogo">
-								<img src="#"/>
+								<Link to="/" onClick={this.switchBtnNavSelected.bind(this, 4)}>
+									<img src="css/img/LogotipoLegaly.svg"/>
+								</Link>
 							</figure>
 							<div className="gridNav">
-								<a href="#">Constituye tu Empresa</a>
-								<a href="#">Registra tu marca</a>
-								<a href="#">Quienes somos</a>
-								<a href="#">Información</a>
+								<Link to="/informacion-empresa" className="btnMainNav" className={this.state.btnNavCons} onClick={this.switchBtnNavSelected.bind(this, 0)}>Constituye tu Empresa</Link>
+								<a href="#" className="btnMainNav" className={this.state.btnNavUs} onClick={this.switchBtnNavSelected.bind(this, 1)}>Quienes somos</a>
+								<a href="#" className="btnMainNav" className={this.state.btnNavInfo} onClick={this.switchBtnNavSelected.bind(this, 2)}>Información</a>
 							</div>
 							
 
@@ -215,17 +563,18 @@ export default class App extends Component{
 
 
 					<div className="wrapperViews">
+
+						
 						<Route exact path="/" component={Landing}/>
-						
-						
-						<Route path="/informacion-empresa" render={(props) => ( 
-							<Incorporate user={this.state.user} enterpriseInProcess={this.state.enterpriseInProcess} enterpriseIdInProcess={this.state.enterpriseIdInProcess} sendEnterpriseInformation={this.sendEnterpriseInformation} enterpriseInProcess={this.enterpriseInProcess} />   )}/>
-						<Route path="/invitar-socios" render={(props)=>( <Incorporate user={this.state.user} enterpriseInProcess={this.state.enterpriseInProcess} enterpriseIdInProcess={this.state.enterpriseIdInProcess} />    )}/>
-						<Route path="/informacion-personal" render={(props)=>( <Incorporate/>    )}/>
-						<Route path="/fecha-firma" render={(props)=>( <Incorporate/>    )}/>
-						<Route path="/metodo-pago" render={(props)=>( <Incorporate/>    )}/>
-						<Route path="/perfil" render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<Userprofile/>) )}/>
-						
+					
+					
+						<Route path="/informacion-empresa" render={(props) => ( this.state.user == false ? (<Redirect to="/login"/>) : (<EnterpriseInformationForm user={this.state.user} sendEnterpriseInformation={this.sendEnterpriseInformation} enterpriseInProcessData={this.state.enterpriseInProcessData} enterpriseInProcess={this.state.enterpriseInProcess} enterpriseSaved={this.state.enterpriseSaved} updateEnterpriseInformation={this.updateEnterpriseInformation}/>)   )}/>
+						<Route path="/invitar-socios" render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<PartnersAddingForm user={this.state.user} sendPartnerInvitation={this.sendPartnerInvitation} enterpriseInProcessData={this.state.enterpriseInProcessData} rowPartnerInputHandler={this.rowPartnerInputHandler} deletingPartnerRow={this.deletingPartnerRow} rowAccountManagerInputHandler={this.rowAccountManagerInputHandler} partnersInvitationSaved={this.state.partnersInvitationSaved} updatePartnerInvitation={this.updatePartnerInvitation}/> )   )}/>
+						<Route path="/informacion-personal" render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<PersonalInformationForm user={this.state.user} enterpriseInProcessData={this.state.enterpriseInProcessData} inputTextHandler={this.inputTextHandler} selectHandler={this.selectHandler} rowInputsHandler={this.rowInputsHandler} deleteRowInputHandle={this.deleteRowInputHandle} sendPartnersInformation={this.sendPartnersInformation} enterpriseSaved={this.state.enterpriseSaved}/> )    )}/>
+						<Route path="/fecha-firma" render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<DateForm inputTextHandlerRootLevel={this.inputTextHandlerRootLevel} enterpriseInProcessData={this.state.enterpriseInProcessData} sendSingingDateInformation={this.sendSingingDateInformation} enterpriseSaved={this.state.enterpriseSaved}/>)    )}/>
+						<Route path="/metodo-pago" onUpdate={this.logPageView} render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<PaymentMethodForm enterpriseInProcessData={this.state.enterpriseInProcessData} enterpriseSaved={this.state.enterpriseSaved}/>)    )}/>
+						<Route path="/perfil" onUpdate={this.logPageView} render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<Userprofile user={this.state.user} isItLogin={this.isItLogin}/>) )}/>
+							
 
 					</div>
 
@@ -237,13 +586,13 @@ export default class App extends Component{
 								<div className="underlineWhite"></div>
 								<ul>
 									<li>Lun-Vie : 9am - 6pm / Sab : 9am - 1pm</li>
-									<li>Jr. Tomás Guido 150, Lince - CC. Risso</li>
-									<li>info@legitify.com</li>
-									<li>942 914 542</li>
+									<li>Jr. Tomás Guido 160, Lince - CC. Risso</li>
+									<li>info@legaly.pe</li>
+									<li>01 468 1546</li>
 								</ul>
 							</div>
 							<div id="footerGrid2" className="gridFooterInfo gridFooterA">
-								<h5>LEGITIFY ®</h5>
+								<h5>LEGALY ®</h5>
 								<div className="underlineWhite"></div>
 								<ul>
 									<li><a href="#">Constituye tu empresa</a></li>

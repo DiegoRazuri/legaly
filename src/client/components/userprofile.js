@@ -4,31 +4,80 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 import {Link} from 'react-router-dom'
+import uid from 'uid'
+
+import ServiceState from './serviceState';
+import ContactRow from './contactRow';
 
 export default class Userprofile extends Component{
 
+	componentWillMount(){
+		console.log("ejecutando componentWillMount")
+		console.log(this.props.user)
+		this.props.isItLogin();
+		
+		
+	}
+	
+	componentDidMount(){
+		window.scrollTo(0, 0)
+	}
+
 
 	render(){
+
+		let serviceState;
+		let contactRow =[]
+		let nationality;
+
+		this.props.user.enterprise.map((enterprise)=>{
+			if(enterprise.inProcess == true){
+
+				serviceState = <ServiceState enterpriseData = {enterprise}/>
+
+			}
+
+			let companyName = enterprise.name ? enterprise.name : enterprise.optionNames[0]
+
+			enterprise.partners.map((partner)=>{
+				if(partner.user._id != this.props.user._id ){
+					let key_id = uid()
+
+					contactRow.push( <ContactRow key={key_id} user={partner.user} companyName = {companyName}/>);
+				}
+			});
+		});
+
+		if(this.props.user.documentType){
+			if(this.props.user.documentType == "DNI"){
+				nationality = "peruana"
+
+			}else{
+				nationality = "extranjero"
+			}
+		}
+
 
 
 		return <div className="sectionUserprofile">
 					<div className="wrapperPersonalInformation">
 						<h4 className="bigTitlesSS">Información de identificación</h4>
 						<div className="underlineBlue"></div>
+						<a href="/logout" className="btnLogout">Cerrar sesión</a>
 						<div className="blockPersonalInformation">
 							<div className="gridPersonalInformationA">
 								<figure className="userProfilePhoto">
-									<img src="css/img/Fake-client.jpg"/>
+									<img src={this.props.user.photo}/>
 								</figure>
 								<div className="wrapperPersonalInformationText">
-									<h5 className="mediumContent">Paul Alexander Braga Eguren</h5>
+									<h5 className="mediumContent">{this.props.user.name}</h5>
 									<div className="gridUserInfo">
 										<span className="icon-head"></span>
-										<p className="smallContent">DNI 46080606</p>
+										<p className="smallContent">{this.props.user.documentType} {this.props.user.documentNumber}</p>
 									</div>
 									<div className="gridUserInfo">
 										<span className="icon-briefcase"></span>
-										<p className="smallContent">empresario</p>
+										<p className="smallContent">{this.props.user.position ? this.props.user.position : "--"}</p>
 									</div>
 								</div>
 							</div>
@@ -37,31 +86,31 @@ export default class Userprofile extends Component{
 								<ul>
 									<li>
 										<p className="dataName smallContent">Nacionalidad:</p>
-										<p className="userData smallContent">peruana</p>
+										<p className="userData smallContent">{nationality}</p>
 									</li>
 									<li>
 										<p className="dataName smallContent">Lugar de nacimiento:</p>
-										<p className="userData smallContent">iquitos</p>
+										<p className="userData smallContent">--</p>
 									</li>
 									<li>
 										<p className="dataName smallContent">Fecha de nacimiento:</p>
-										<p className="userData smallContent">21/08/1989</p>
+										<p className="userData smallContent">--</p>
 									</li>
 									<li>
 										<p className="dataName smallContent">Estado civil:</p>
-										<p className="userData smallContent">comprometido</p>
+										<p className="userData smallContent">{this.props.user.civilStatus}</p>
 									</li>
 									<li>
 										<p className="dataName smallContent">Domicilio:</p>
-										<p className="userData smallContent">jr. los cóndores 229 bellavista callao</p>
+										<p className="userData smallContent">{this.props.user.location}</p>
 									</li>
 									<li>
 										<p className="dataName smallContent">Teléfono:</p>
-										<p className="userData smallContent">996005400</p>
+										<p className="userData smallContent">--</p>
 									</li>
 									<li>
 										<p className="dataName smallContent">Correo:</p>
-										<p className="userData smallContent userDataEmail">plbraga@plaqart.com</p>
+										<p className="userData smallContent userDataEmail">{this.props.user.email}</p>
 									</li>
 								</ul>
 							</div>
@@ -73,77 +122,17 @@ export default class Userprofile extends Component{
 						<div className="wrapperUnderline">
 							<div className="underlineBlue"></div>	
 						</div>
-						<div className="blockServiceState">
-							<figure className="serviceImage">
-								<img src="css/img/Constitucion-icon.svg"/>
-							</figure>
-							<h6 className="bigTitlesOS serviceEnterpriseName">la empresa sa</h6>
-							<div className="wrapperPie">
-								<div className="pie">
-									<div className="dataBackground"></div>
-									<div className="pieData">50%</div>
-								</div>	
-							</div>
-							
-						</div>
-						<div className="blockServiceState">
-							<figure className="serviceImage">
-								<img src="css/img/Constitucion-icon.svg"/>
-							</figure>
-							<h6 className="bigTitlesOS serviceEnterpriseName">la empresa sa</h6>
-							<div className="wrapperPie">
-								<div className="pie">
-									<div className="dataBackground"></div>
-									<div className="pieData">50%</div>
-								</div>	
-							</div>
-							
-						</div>
-						<div className="blockServiceState">
-							<figure className="serviceImage">
-								<img src="css/img/Constitucion-icon.svg"/>
-							</figure>
-							<h6 className="bigTitlesOS serviceEnterpriseName">la empresa sa</h6>
-							<div className="wrapperPie">
-								<div className="pie">
-									<div className="dataBackground"></div>
-									<div className="pieData">50%</div>
-								</div>	
-							</div>
-							
-						</div>
+						
+						{serviceState}
+
 					</div>
 					<div className="wrapperPartnersNetwork">
 						<h4 className="bigTitlesSS">Red de socios</h4>
 						<div className="underlineBlue"></div>
 						<div className="wrapperPartners">
-							<div className="row">
-								<figure>
-									<img src="css/img/Fake-client.jpg"/>
-								</figure>
-								<div className="partnerInfo">
-									<p className="mediumContent">jaime prado hernandez</p>
-									<p className="enterpriseName mediumContent"><span className="icon-office"></span> La empresa sac</p>
-								</div>
-							</div>
-							<div className="row">
-								<figure>
-									<img src="css/img/Fake-client.jpg"/>
-								</figure>
-								<div className="partnerInfo">
-									<p className="mediumContent">jaime prado hernandez</p>
-									<p className="enterpriseName mediumContent"><span className="icon-office"></span> La empresa sac</p>
-								</div>
-							</div>
-							<div className="row">
-								<figure>
-									<img src="css/img/Fake-client.jpg"/>
-								</figure>
-								<div className="partnerInfo">
-									<p className="mediumContent">jaime prado hernandez</p>
-									<p className="enterpriseName mediumContent"><span className="icon-office"></span> La empresa sac</p>
-								</div>
-							</div>
+							
+							{contactRow}
+						
 						</div>
 					</div>
 				</div>

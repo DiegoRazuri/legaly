@@ -88,6 +88,21 @@ app.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
 	failureRedirect : '/'
 }))
 
+
+app.get('/auth/google', passport.authenticate('google', { scope: ['email profile'] }));
+app.get('/auth/google/callback', passport.authenticate('google', { 
+	failureRedirect: '/' 
+
+}), function(req, res){
+	res.redirect('/');
+});
+
+app.get('/login',
+	passport.authenticate('local', { failureRedirect: '/' }),
+	function(req,res){
+		res.redirect('/');
+	});
+
 app.get('/logout', (req, res) =>{
 	req.logout()
 	res.redirect('/')

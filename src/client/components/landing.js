@@ -8,6 +8,9 @@ import {Link} from 'react-router-dom'
 export default class Landing extends Component{
 
 	
+	componentDidMount(){
+		window.scrollTo(0, 0)
+	}
 	
 	render(){
 
@@ -19,7 +22,7 @@ export default class Landing extends Component{
 								<figure className="bannerIco">
 									<img src="css/img/Constitucion-icon.svg"/>
 								</figure>
-								<h1>Constituye tu empresa desde S/. 600.00 en solo 48 horas.</h1>
+								<h1>Constituye tu empresa desde S/. 650.00 en solo 48 horas.</h1>
 								<p>Todos los trámites garantizados desde la comodidad de tu oficina u hogar</p>
 								<div><Link to="/informacion-empresa">Constituir ahora</Link></div>
 								<a href="#">¿Cómo funciona?</a>

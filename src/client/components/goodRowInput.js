@@ -7,27 +7,44 @@ import ReactDom from 'react-dom';
 
 export default class GoodRowInput extends Component{
 
+	constructor (props){
+		super(props);
+		this.state={
 
+			partnerSelected: 0,
+			numberOfGoods : 1,
+		}
+
+		this.deletingRow = this.deletingRow.bind(this);
+		
+		
+	}
+
+	deletingRow(){
+		let json ={
+			partnerSelected: this.props.partnerSelected,
+			inputPos : this.props.goodListPos
+		}
+
+		this.props.deleteRowInputHandle.call(null, json)
+	}
 
 	
 	
 	render(){
 
-		return <div className="goodRow">
-					<div className="gridFormShort">
+		return <div className="goodRow goodRowInfo" data-goodlistpos={this.props.goodListPos}>
+					<div className="gridFormShort gridName">
 						<label className="smallContent">{this.props.number}. Bien</label>
-						<div className="inputSingleValue">
-							<input type="text"/>
-							<span className="icon-box"></span>
-						</div>
+						<p className="smallContent">{this.props.goodInfo.goodName}</p>
+						
 					</div>
-					<div className="gridFormShort">
+					<div className="gridFormShort gridValue">
 						<label className="smallContent">Valor</label>
-						<div className="inputSingleValue">
-							<input type="number"/>
-							<span className="icon-usd"></span>
-						</div>
+						<p className="smallContent">S/. {this.props.goodInfo.goodValue}.00</p>
+						
 					</div>
+					<span className="icon-cross smallContent" onClick={this.deletingRow.bind()}></span>
 				</div>
 
 	}

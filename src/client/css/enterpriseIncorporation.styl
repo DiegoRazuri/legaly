@@ -164,6 +164,20 @@
 						
 						a
 							text-decoration none
+							
+						p
+							text-align left
+							
+					.gridValue
+						width 41.5%
+						
+					.gridName
+						width 42%
+						
+					.icon-cross
+						width 4%
+						margin 24px 0px 0px 0px
+						cursor pointer
 						
 					.gridFormLarge
 						width 89%
@@ -197,6 +211,9 @@
 
 
 		.partnersAddingForm
+			.gridStepProgress
+				figure
+					width 100px
 			.gridForm
 				form
 					.partnerRow
@@ -207,7 +224,19 @@
 						
 						.gridFormShort
 							width 45%
+							
+					.gridFormLarge
+						display flex
+						justify-content center
+						align-items center
+						
+						.btnRed
+							margin 0px
+							
 		.personalInformationForm
+			.gridStepProgress
+				figure
+					width 50px
 			.gridForm
 				.wrapperPartnersList
 					margin 30px auto 0px auto
@@ -232,22 +261,47 @@
 							padding 0px
 					
 					.btnPartnerProfile
-						width 55px
-						height 55px
-						line-height 55px
+						width auto
+						height 30px
+						line-height 30px
 						margin 0px 10px 0px 0px
-						border-radius 50%
+						border-radius 5px
 						overflow hidden
+						cursor pointer
 						
 						figure
 							width 100%
 							margin 0px
-							padding 0px	
+							padding 0px
+							opacity 0.4
 							
 
 							img
 								width 100%
 						
+						p
+							margin 0px auto
+							padding 0px 8px
+							width auto
+							height 100%
+							text-align center
+							font-family "Open Sans"
+							font-size 0.9em
+							text-transform uppercase
+							
+					.btnPartnerProfileText
+						border solid 1px black
+						
+					.btnPartnerProfileSelected
+						border solid 1px #007EFF
+						
+						p
+							color #007EFF
+							
+						figure
+							opacity 1
+							
+							
 				form
 					.goodRow
 						width 95%
@@ -262,11 +316,12 @@
 			.gridForm
 				.wrapperBtnPayments
 					display flex
+					flex-direction column
+					align-items center
 					justify-content center
 					margin 10px auto
 
 					.btnPaymentMethod
-						border solid 1px red
 						width 40%
 						margin 20px 5px
 						
@@ -281,6 +336,41 @@
 						p
 							display block
 							margin 0px auto
+							
+					.deliveryInstructions
+						font-family "Open Sans"
+						font-weight lighter
+						font-size 1em
+						color #007EFF
+						text-align center
+						margin 0px auto 20px auto
+						width 80%
+						padding 0px
+						
+					.legalyContactInfo
+						font-family "Open Sans"
+						font-weight lighter
+						font-size 1em
+						color black
+						margin 0px auto
+						padding 0px
+						
+					a
+						text-decoration none
+						
+							
+						.btnPrint
+							background-color #007EFF
+							height 50px
+							line-height 50px
+							width 200px
+							margin 30px auto
+							color white
+							font-family "Open Sans"
+							font-size 1em
+							font-weight lighter
+							border-radius 2px
+							cursor pointer
 							
 				.btnServiceTicket
 					display flex
@@ -466,6 +556,7 @@
 		margin 20px auto 20px auto
 	
 	.gridUserSupport
+		text-decoration none
 		display flex
 		justify-content center
 		align-items center
@@ -591,6 +682,8 @@ select
 	background-size 0.8em
 	background-position-x 15px
 	padding-left: 40px;
+	
+
     
 			
 @media screen and (min-width: 767px)
@@ -667,6 +760,9 @@ select
 							margin 5px 2%
 							width 38%
 							
+							a
+								width 100%
+							
 							.inputCheckbox
 								margin-top 20px
 								
@@ -715,6 +811,7 @@ select
 					
 					figure
 						margin-top 120px
+						width 35px
 						
 					.helpTitle
 						margin-top 100px
@@ -738,9 +835,10 @@ select
 						margin 20px auto 0px auto
 						
 						.btnPartnerProfile
-							width 40px
+							width auto
 							height 40px
-							line-height 40px	
+							line-height 40px
+							cursor pointer	
 							
 							span
 								width 40px
@@ -757,6 +855,12 @@ select
 						.gridFormShort
 							margin 5px 2%
 							width 38%
+							
+						.gridName
+							width 37.5%
+							
+						.gridValue
+							width 34.5%
 							
 						.lblOptional
 							width 80%
@@ -806,6 +910,10 @@ select
 							order 1
 						
 			.partnersAddingForm
+				
+				.gridStepProgress
+					figure
+						width 100px
 				.gridForm
 					display flex
 					flex-wrap wrap
@@ -817,6 +925,12 @@ select
 						height 35px
 						margin-top 40px
 						margin-right 10%
+						
+					form .partnerRow
+						.gridEmail
+							width 37.5%
+						.gridPosition
+							width 34.5%
 							
 			.dateForm
 				width 580px
@@ -868,6 +982,7 @@ select
 						
 					
 					.gridUserSupport
+						text-decoration none
 						display flex
 						justify-content center
 						align-items center
@@ -915,15 +1030,14 @@ select
 							margin-top 70px
 							
 						.wrapperBtnPayments
-							margin-top 60px
+							margin-top 25px
 							
 							.btnPaymentMethod
-								width 200px
+								width 130px
 								margin 20px 20px
 								
-							.btnPaymentMethod:hover
-								border solid 2px #007EFF
-								cursor pointer
+							.deliveryInstructions
+								font-size 0.8em
 							
 							
 						.btnServiceTicket

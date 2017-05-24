@@ -10,9 +10,10 @@ let GoodsCapital = new mongoose.Schema({
 
 let PartnerSchema = new mongoose.Schema({
 
-	user: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Userprofiles' }],
+	user: { type: mongoose.Schema.Types.ObjectId, ref: 'Userprofiles' },
 	moneyInput: {type: Number},
-	goodsInput: [GoodsCapital]
+	goodsInput: [GoodsCapital],
+	position: {type: String}
 	
 })
 

@@ -7,6 +7,8 @@ import {Link, BrowserHistory} from 'react-router-dom'
 import uid from 'uid'
 
 import GoodRowInput from './goodRowInput';
+import BtnUserprofileInfo from './btnUserprofileInfo';
+import BtnUserprofileInfoText from './btnUserprofileInfoText';
 
 
 
@@ -15,300 +17,485 @@ export default class PersonalInformationForm extends Component{
 	constructor (props){
 		super(props);
 		this.state={
-			numberOfGoods : 3,
-			userDocumentType: "DNI",
-			userCivilStatus: "Soltero",
-			spouseDocumentType : "DNI"
+
+			partnerSelected: 0,
+			numberOfGoods : 1,
 		}
 
 		this.addGood = this.addGood.bind(this);
-		this.handleChangeUserDocumentType = this.handleChangeUserDocumentType.bind(this);
-		this.handleChangeUserCivilStatus = this.handleChangeUserCivilStatus.bind(this);
-		this.handleChangeSpouseDocumentType = this.handleChangeSpouseDocumentType.bind(this);
+		this.switchPartnerSelected = this.switchPartnerSelected.bind(this);
 		
-
 	}
 	
 
 	addGood(){
-	/*
-		let n = this.state.numberOfGoods;
 
-		let new_value = n+1;
+		let good_name = ReactDom.findDOMNode(this.refs.good_name_i).value.trim()
+		let good_value = ReactDom.findDOMNode(this.refs.good_value_i).value.trim()
 
-		this.setState({
-			numberOfGoods : new_value
-		});
-*/
+		let json ={
+			partnerSelected : this.state.partnerSelected,
+			goodName: good_name,
+			goodValue : good_value
+		}
 
-		let wrapper = document.getElementById("gridBForm");
+		this.props.rowInputsHandler.call(null, json)
 
-		let numWrapperGoodRow = document.getElementsByClassName("goodRow").length;
-
-		let num = numWrapperGoodRow +1;
-
-
-		let comp = `<div class="goodRow"><div class="gridFormShort"><label class="smallContent">${num}. Bien</label><div class="inputSingleValue"><input type="text"/><span class="icon-box"></span></div></div><div class="gridFormShort"><label class="smallContent">Valor</label><div class="inputSingleValue"><input type="number"/><span class="icon-usd"></span></div></div></div>`
-
-		wrapper.insertAdjacentHTML('beforeend', comp)
-
+		ReactDom.findDOMNode(this.refs.good_name_i).value = '';
+		ReactDom.findDOMNode(this.refs.good_value_i).value = '';
 
 	}
 
 
-	handleChangeUserDocumentType(ev){
-		this.setState({userDocumentType: ev.target.value});
+	switchPartnerSelected(pos){
+		this.setState({partnerSelected: pos})
 	}
-
-
-	handleChangeUserCivilStatus(ev){
-		this.setState({userCivilStatus: ev.target.value});
-	}
-
-
-	handleChangeSpouseDocumentType(ev){
-		this.setState({spouseDocumentType: ev.target.value});
-	}
-
-
-
 
 	handlePersonalInformationFormSubmit(){
-
-		let user_name_i = ReactDom.findDOMNode(this.refs.user_name_i).value.trim()
-		let user_document_type_i = this.state.userDocumentType;
-		let user_document_number_i = ReactDom.findDOMNode(this.refs.user_document_number_i).value.trim()
-		let user_email_i = ReactDom.findDOMNode(this.refs.user_email_i).value.trim()
-		let user_location_i = ReactDom.findDOMNode(this.refs.user_location_i).value.trim()
-		let user_civil_status_i = this.state.userCivilStatus;
-
-
-
-		if(this.state.userCivilStatus != "Soltero"){
-			let spouse_document_type_i = this.state.spouseDocumentType;
-			let supouse_document_number_i = ReactDom.findDOMNode(this.refs.supouse_document_number_i).value.trim()
-
-		}
-
-		let user_money_investment_i = ReactDom.findDOMNode(this.refs.user_money_investment_i).value.trim()
-
-
-		let inputs = document.getElementsByClassName("goodRow");
-
-		console.log(inputs[0]);
-
-		let arry=[];
-
-		for(let i = 0; i< inputs.length; i++){
-
-			if(inputs[i].children[0].children[1].children[0].value != ""){
-				
-				arry.push({
-					good_name: inputs[i].children[0].children[1].children[0].value,
-					good_value: inputs[i].children[1].children[1].children[0].value
-
-				})
-
-			}
-
-		}
-
-		let json = {
-			name : user_name_i,
-			user_document_type : user_document_type_i,
-			user_document_number : user_document_number_i,
-			email : user_email_i,
-			location : user_location_i,
-			civil_status : user_civil_status_i,
-			money_investment : user_money_investment_i,
-			goods_investment : arry
-		}
-
-		if(this.state.userCivilStatus != "Soltero"){
-			json.spouse_document_type = spouse_document_type_i;
-			json.supouse_document_number = supouse_document_number_i;
-		}
-
-		//INFO LISTA PARA ENVIAR AL SERVER
-		console.log(json);
+		
+		this.props.sendPartnersInformation.call(null)
 
 		return
 
 	}
 
+	
+	componentDidMount(){
+		window.scrollTo(0, 0)
+	}
 
 
 	render(){
 
+		let dataReaderPartner = this.props.enterpriseInProcessData.partners[this.state.partnerSelected];
+
+		let rowInputNumber;
+		let goodlistpos;
+
 		let goodRowInputs =[]
-		
 
-		for(let i=0; i< this.state.numberOfGoods; i++){
+		let btnAddingGoods, goodInputTextBox;
 
-			let key_id = uid();
+		//for para agregar listado de bienes
 
-			goodRowInputs.push(<GoodRowInput
-					number = {i+1}
-					key = {key_id}
-				/>)
-		}
+		if(this.props.enterpriseInProcessData.isItGoodsCapital == true){
 
-		return <div className="personalInformationForm">
-					<div className="gridStepProgress">
-						<span className="icon-cross"></span>
-						<ul className="stepProgress">
-							<li className="stepActive">1</li>
-							<li>2</li>
-							<li>3</li>
-						</ul>
-						<figure>
-							<img src="css/img/InfoEmpresa1.svg"/>
-						</figure>
-						<h4 className="bigTitlesOS">Constitución de empresa</h4>
-						<p className="mediumContent instructions">Ingresa la información que necesitas para emitir la minuta</p>
-						<h4 className="bigTitlesOS helpTitle">¿Necesitas ayuda?</h4>
-						<span className="icon-angle-down"></span>
-						<div className="gridUserSupport">
-							<span className="icon-whatsapp"></span>
-							<p className="smallContent">942 914 542</p>
-						</div>
-						<div className="gridUserSupport">
-							<span className="icon-mail_outline"></span>
-							<p className="smallContent">ayuda@legitify.com</p>
-						</div>
-					</div>
-					<div className="gridForm">
-						<h3 className="bigTitlesSS">Información personal</h3>
-						<div className="wrapperUnderline">
-							<div className="underlineBlue"></div>
-						</div>
-						
+			if(dataReaderPartner.goodsInput){
+				
+				for(let i=0; i< dataReaderPartner.goodsInput.length; i++){
 
-						<div className="wrapperPartnersList">
-							<div className="btnPartnerProfile btnNewPartner">
-								<span className="icon-add"></span>
-							</div>
-							<div className="btnPartnerProfile">
-								<figure>
-									<img src="css/img/Fake-client.jpg"/>
-								</figure>
-							</div>
-						</div>
+					let key_id = uid();
+					let num = i+1
 
-						<form>
-							<div className="gridFormLarge">
-								<label className="smallContent">Nombre completo:</label>
-								<div className="inputSingleValue">
-									<input type="text" ref="user_name_i"/>
-									<span className="icon-head"></span>
-								</div>
-							</div>
-							<div className="gridFormShort">
-								<label className="smallContent">Tipo de documento:</label>
-								<div className="inputSelect">
-									
-									<select  onChange={this.handleChangeUserDocumentType}>
-										<option>DNI</option>
-										<option>Pasaporte</option>
-										<option>Carné de extranjería</option>
-									</select>
-									<span className="icon-briefcase icoInputSelect"></span>
-								</div>
-							</div>
-							<div className="gridFormShort">
-								<label className="smallContent">Número de documento:</label>
-								<div className="inputSingleValue">
-									<input type="number" ref="user_document_number_i"/>
-									<span className="icon-credit-card"></span>
-								</div>
-							</div>
-							<div className="gridFormLarge">
-								<label className="smallContent">Correo:</label>
-								<div className="inputSingleValue">
-									<input type="email" ref="user_email_i"/>
-									<span></span>
-								</div>
-							</div>
-							<div className="gridFormLarge">
-								<label className="smallContent">Domicilio:</label>
-								<div className="inputSingleValue">
-									<input type="text" ref="user_location_i"/>
-									<span className="icon-room"></span>
-								</div>
-							</div>
-							<div className="gridFormShort">
-								<label className="smallContent">Estado civil:</label>
-								<div className="inputSelect">
-									
-									<select onChange={this.handleChangeUserCivilStatus}>
-										<option>Soltero</option>
-										<option>Casado</option>
-										<option>Divorciado</option>
-									</select>
-									<span className="icoInputSelect"></span>
-								</div>
-							</div>
-							<div className="gridFormShort">
-							</div>
-							
-							<label className="smallContent lblOptional">Documento de identidad del cónyugue</label>
-							
-							
-							<div className="gridFormShort">
-								<label className="smallContent">Tipo de documento:</label>
-								<div className="inputSelect">
-									
-									<select onChange={this.handleChangeSpouseDocumentType}>
-										<option>DNI</option>
-										<option>Pasaporte</option>
-										<option>Carné de extranjería</option>
-									</select>
-									<span className="icon-briefcase icoInputSelect"></span>
-								</div>
-							</div>
-							<div className="gridFormShort">
-								<label className="smallContent">Número de documento:</label>
-								<div className="inputSingleValue">
-									<input type="number" ref="supouse_document_number_i"/>
-									<span className="icon-credit-card"></span>
-								</div>
-							</div>
-						</form>
-						<div className="gridDesktopDivision"></div>
-						<form id="gridBForm" className="gridBForm">
-							
-							<div className="gridMovilDivision">Aporte de Capital</div>
-							<div className="btnRed addGood" onClick={this.addGood.bind(this)}>
+					goodRowInputs.push(<GoodRowInput
+							number = {num}
+							key = {key_id}
+							partnerSelected = {this.state.partnerSelected}
+							goodInfo = {dataReaderPartner.goodsInput[i]}
+							goodListPos = {i}
+							deleteRowInputHandle = {this.props.deleteRowInputHandle}
+
+						/>)
+				}
+
+				rowInputNumber = dataReaderPartner.goodsInput.length +1;
+
+			}else{
+				rowInputNumber = 1;
+				
+			}
+
+			//btn para agregar bienes
+
+			btnAddingGoods = <div className="btnRed addGood" onClick={this.addGood.bind(this)}>
 								<p>Agregar bien</p>
 								<span className="icon-box"></span>
 							</div>
 
-							<div className="gridFormLarge">
-								<label className="smallContent">Dinero:</label>
-								<div className="inputSingleValue">
-									<input type="number" ref="user_money_investment_i"/>
-									<span className="icon-usd"></span>
+			//input para agregar bienes
+
+			goodInputTextBox = <div className="goodRow">
+									<div className="gridFormShort">
+										<label className="smallContent">{rowInputNumber}. Bien</label>
+										<div className="inputSingleValue">
+											<input type="text" ref="good_name_i" name="goodName" data-pos={this.state.partnerSelected}/>
+											<span className="icon-box"></span>
+										</div>
+									</div>
+									<div className="gridFormShort">
+										<label className="smallContent">Valor</label>
+										<div className="inputSingleValue">
+											<input type="number" ref="good_value_i" name="goodValue" data-pos={this.state.partnerSelected}/>
+											<span className="icon-usd"></span>
+										</div>
+									</div>
+								</div>
+		}
+
+		
+
+
+		//agregando los inputs
+
+
+		let inputName, inputDocTypePartner, inputDocPartnerNumber, inputMail, inputLocation, inputCivilStatus, inputDocTypeCouple, inputDocNumCouple, inputMoneyInvestment;
+		
+		if(dataReaderPartner.user){
+			
+			
+			inputName = <input type="text" ref="user_name_i" value={dataReaderPartner.user.name} onChange={this.props.inputTextHandler.bind()} name="name" data-pos={this.state.partnerSelected}/>
+			
+			inputDocTypePartner = <select  onChange={this.props.selectHandler.bind()} value={dataReaderPartner.user.documentType != undefined ? dataReaderPartner.user.documentType : "" } name="documentType" data-pos={this.state.partnerSelected}>
+												<option disabled></option>
+												<option>DNI</option>
+												<option>Pasaporte</option>
+												<option>Carné de extranjería</option>
+											</select>;
+
+			inputDocPartnerNumber = <input type="number" ref="user_document_number_i" value={dataReaderPartner.user.documentNumber != undefined? dataReaderPartner.user.documentNumber : ""} onChange={this.props.inputTextHandler.bind()} name="documentNumber" data-pos={this.state.partnerSelected}/>
+
+			inputMail = <input type="email" ref="user_email_i" value={dataReaderPartner.user.email != undefined ? dataReaderPartner.user.email : ""} onChange={this.props.inputTextHandler.bind()} name="email" data-pos={this.state.partnerSelected}/>
+		
+			inputLocation = <input type="text" ref="user_location_i" value={dataReaderPartner.user.location != undefined ? dataReaderPartner.user.location : ""} onChange={this.props.inputTextHandler.bind()} name="location" data-pos={this.state.partnerSelected}/>
+		
+			inputCivilStatus = <select onChange={this.props.selectHandler.bind()} value={dataReaderPartner.user.civilStatus != undefined ? dataReaderPartner.user.civilStatus : ""} name="civilStatus" data-pos={this.state.partnerSelected}>
+									<option disabled></option>
+									<option>Soltero</option>
+									<option>Casado</option>
+									<option>Divorciado</option>
+								</select>
+
+			inputDocTypeCouple = <select onChange={this.props.selectHandler.bind()} value={dataReaderPartner.user.coupleDocumentType != undefined ? dataReaderPartner.user.coupleDocumentType : ""} name="coupleDocumentType" data-pos={this.state.partnerSelected}>
+									<option disabled></option>
+									<option>DNI</option>
+									<option>Pasaporte</option>
+									<option>Carné de extranjería</option>
+								</select>
+
+			inputDocNumCouple = <input type="number" ref="couple_document_number_i" value={dataReaderPartner.user.coupleDocumentNumber != undefined ? dataReaderPartner.user.coupleDocumentNumber : ""} onChange={this.props.inputTextHandler.bind()} name="coupleDocumentNumber" data-pos={this.state.partnerSelected}/>
+		
+			inputMoneyInvestment =<input type="number" ref="user_money_investment_i" value={dataReaderPartner.moneyInput != undefined ? dataReaderPartner.moneyInput : ""} onChange={this.props.inputTextHandler.bind()} name="moneyInput" data-pos={this.state.partnerSelected}/>
+		}
+
+
+		//agregando input de inversion en Dinero
+
+		let moneyCapitalInput;
+
+		if(this.props.enterpriseInProcessData.isItMoneyCapital == true){
+			
+
+			moneyCapitalInput = <div className="gridFormLarge">
+									<label className="smallContent">Dinero:</label>
+									<div className="inputSingleValue">
+										{inputMoneyInvestment}
+										
+										<span className="icon-usd"></span>
+									</div>
+								</div>
+
+		}
+
+
+		//agregando selectores de socios
+		
+
+		let btnUserprofileInfo =[];
+
+		if(this.props.enterpriseInProcessData.partners[0].user){
+			for(let i= 0; i< this.props.enterpriseInProcessData.partners.length; i++){
+
+				let key_id = uid()
+
+				
+
+			
+				
+				let btnText = this.props.enterpriseInProcessData.partners[i].user.name;
+
+				if(this.state.partnerSelected == i){
+					let classSelected = "btnPartnerProfile btnPartnerProfileText btnPartnerProfileSelected"
+
+					btnUserprofileInfo.push(<BtnUserprofileInfoText btnText={btnText} key={key_id} switchPartnerSelected={this.switchPartnerSelected} classSelected={classSelected} pos={i}/>)
+
+				}else{
+
+					let classSelected = "btnPartnerProfile btnPartnerProfileText"
+
+					btnUserprofileInfo.push(<BtnUserprofileInfoText btnText={btnText} key={key_id} switchPartnerSelected={this.switchPartnerSelected} classSelected={classSelected} pos={i}/>)
+
+				}
+				
+				
+				
+				
+			}
+		}
+
+		
+		
+
+		return <div className="sectionEnterpriseIncorporation">
+					<div className="wrapperIncorporationForm">
+
+						<div className="personalInformationForm">
+							<div className="gridStepProgress">
+								<span className="icon-cross"></span>
+								<ul className="stepProgress">
+									<li>1</li>
+									<li>2</li>
+									<li className="stepActive">3</li>
+								</ul>
+								<figure>
+									<img src="css/img/InfoPersonal3.svg"/>
+								</figure>
+								<h4 className="bigTitlesOS">Información personal</h4>
+								<p className="mediumContent instructions">Debes ingresar la información de cada socio.</p>
+								<h4 className="bigTitlesOS helpTitle">¿Necesitas ayuda?</h4>
+								<span className="icon-angle-down"></span>
+								<a href="http://www.facebook.com/legaly.pe" target="_blank" className="gridUserSupport">
+									<span className="icon-facebook"></span>
+									<p className="smallContent">www.facebook.com/legaly.pe</p>
+								</a>
+								<div className="gridUserSupport">
+									<span className="icon-mail_outline"></span>
+									<p className="smallContent">ayuda@legaly.pe</p>
 								</div>
 							</div>
+							<div className="gridForm">
+								<h3 className="bigTitlesSS">Información personal</h3>
+								<div className="wrapperUnderline">
+									<div className="underlineBlue"></div>
+								</div>
+								<div className="wrapperPartnersList">
+									
+									
+									{ btnUserprofileInfo }
 
-							{
-								goodRowInputs
-							}
-							
+								</div>
 
-							
-						</form>
-						<div className="wrapperBtnForm">
-							<div className="gridFormLarge wrapperBtnNext">
-								<Link to="/fecha-firma"><div className="btnNext" onClick={this.handlePersonalInformationFormSubmit.bind(this)}>Guardar información</div></Link>
-							</div>
-							<div className="gridFormLarge wrapperBtnTransparent">
-								<Link to="/invitar-socios"><div className="btnTransparentBackground">Anterior</div></Link>
+								
+								
+
+								<form>
+									<div className="gridFormLarge">
+										<label className="smallContent">Nombre completo:</label>
+										<div className="inputSingleValue">
+											{inputName}
+											<span className="icon-head"></span>
+										</div>
+									</div>
+									<div className="gridFormShort">
+										<label className="smallContent">Tipo de documento:</label>
+										<div className="inputSelect">
+											{inputDocTypePartner}
+											
+											<span className="icon-briefcase icoInputSelect"></span>
+										</div>
+									</div>
+									<div className="gridFormShort">
+										<label className="smallContent">Número de documento:</label>
+										<div className="inputSingleValue">
+											{inputDocPartnerNumber}
+											
+											<span className="icon-credit-card"></span>
+										</div>
+									</div>
+									<div className="gridFormLarge">
+										<label className="smallContent">Correo:</label>
+										<div className="inputSingleValue">
+											{inputMail}
+											
+											<span></span>
+										</div>
+									</div>
+									<div className="gridFormLarge">
+										<label className="smallContent">Domicilio:</label>
+										<div className="inputSingleValue">
+											{inputLocation}
+											
+											<span className="icon-room"></span>
+										</div>
+									</div>
+									<div className="gridFormShort">
+										<label className="smallContent">Estado civil:</label>
+										<div className="inputSelect">
+											{inputCivilStatus}
+											
+											<span className="icoInputSelect"></span>
+										</div>
+									</div>
+									<div className="gridFormShort">
+									</div>
+									
+									<label className="smallContent lblOptional">Documento de identidad del cónyugue</label>
+									
+									
+									<div className="gridFormShort">
+										<label className="smallContent">Tipo de documento:</label>
+										<div className="inputSelect">
+											{inputDocTypeCouple}
+
+											
+											<span className="icon-briefcase icoInputSelect"></span>
+										</div>
+									</div>
+									<div className="gridFormShort">
+										<label className="smallContent">Número de documento:</label>
+										<div className="inputSingleValue">
+											{inputDocNumCouple}
+											
+											<span className="icon-credit-card"></span>
+										</div>
+									</div>
+								</form>
+								<div className="gridDesktopDivision"></div>
+								<form id="gridBForm" className="gridBForm">
+									
+									<div className="gridMovilDivision">Aporte de Capital</div>
+
+									{ btnAddingGoods }
+
+									{ moneyCapitalInput }
+
+									
+									{
+										goodRowInputs
+									}
+
+									{ goodInputTextBox }
+
+									
+									
+
+									
+								</form>
+								<div className="wrapperBtnForm">
+									<div className="gridFormLarge wrapperBtnNext">
+										<Link to="/fecha-firma"><div className="btnNext" onClick={this.handlePersonalInformationFormSubmit.bind(this)}>Siguiente</div></Link>
+									</div>
+									<div className="gridFormLarge wrapperBtnTransparent">
+										
+									</div>
+								</div>
+								
 							</div>
 						</div>
-						
+
+					</div>
+					
+
+					<div id="faq1" className="wrapperFaq">
+						<figure>
+							<img src="./css/img/constitucion-photo.jpg"/>
+						</figure>
+						<div className="gridFaq">
+							<h1>¿Por qué es importante constituir mi empresa?</h1>
+							<div className="underlineBlue"></div>
+							<h2>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h2>
+							<div className="btnFaq">Quiero saber más</div>
+						</div>
+					</div>
+
+
+
+					<div className="wrapperComercialFAQ">
+						<div className="gridComercialFAQ">
+							<figure>
+								<img src="css/img/accesible.svg"/>
+							</figure>
+							<h2 className="landingTitles">¿Cúal es el precio?</h2>
+							<h3>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h3>
+						</div>
+						<div className="gridComercialFAQ">
+							<figure>
+								<img src="css/img/rapidez.svg"/>
+							</figure>
+							<h2 className="landingTitles">¿Cúanto debo esperar?</h2>
+							<h3>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h3>
+						</div>
+						<div className="gridComercialFAQ">
+							<figure>
+								<img src="css/img/delivery.svg"/>
+							</figure>
+							<h2 className="landingTitles">Brindamos lo siguiente</h2>
+							<h3>
+								<ul>
+									<li>Búsqueda y reserva de nombre</li>
+									<li>Estatutos de la empresa</li>
+									<li>Escritura pública ante notario</li>
+									<li>Inscripción registral en Sunarp</li>
+									<li>Ficha RUC</li>
+									<li>Copia literal</li>
+									<li>Compra de dominio web</li>
+								</ul>
+							</h3>
+						</div>
 					</div>
 				</div>
 
 	}
 }
+/*
+//agregando selectores de socios
+		
+
+		let btnUserprofileInfo =[];
+
+		if(this.props.enterpriseInProcessData.partners[0].user){
+			for(let i= 0; i< this.props.enterpriseInProcessData.partners.length; i++){
+
+				let key_id = uid()
+
+				
+
+				if(this.props.enterpriseInProcessData.partners[i].user.photo){
+
+					let photoUrl = this.props.enterpriseInProcessData.partners[i].user.photo;
+
+					if(this.state.partnerSelected == i){
+
+						let classSelected = "btnPartnerProfile btnPartnerProfileSelected"
+
+						btnUserprofileInfo.push(<BtnUserprofileInfo photoUrl={photoUrl} key={key_id} switchPartnerSelected={this.switchPartnerSelected} classSelected={classSelected} pos={i}/>)
+					}else{
+						let classSelected = "btnPartnerProfile"
+
+						btnUserprofileInfo.push(<BtnUserprofileInfo photoUrl={photoUrl} key={key_id} switchPartnerSelected={this.switchPartnerSelected} classSelected={classSelected} pos={i}/>)
+					}
+
+					
+
+				}else{
+					console.log("dentro de else")
+					console.log(this.props.enterpriseInProcessData.partners[i].user)
+					console.log(this.props.enterpriseInProcessData.partners[i].user.name[0])
+					let btnText = this.props.enterpriseInProcessData.partners[i].user.name[0];
+
+					if(this.state.partnerSelected == i){
+						let classSelected = "btnPartnerProfile btnPartnerProfileText btnPartnerProfileSelected"
+
+						btnUserprofileInfo.push(<BtnUserprofileInfoText btnText={btnText} key={key_id} switchPartnerSelected={this.switchPartnerSelected} classSelected={classSelected} pos={i}/>)
+
+					}else{
+
+						let classSelected = "btnPartnerProfile btnPartnerProfileText"
+
+						btnUserprofileInfo.push(<BtnUserprofileInfoText btnText={btnText} key={key_id} switchPartnerSelected={this.switchPartnerSelected} classSelected={classSelected} pos={i}/>)
+
+					}
+					
+					
+				}
+				
+			}
+		}
+*/
+
+/*
+<div className="btnPartnerProfile btnNewPartner">
+	<span className="icon-add"></span>
+</div>
+*/									
+
+//value={dataReader.name != undefined ? this.props.enterpriseInProcessData.partners[this.state.partnerSelected].user.name : ""}
