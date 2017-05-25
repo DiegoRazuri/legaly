@@ -28318,12 +28318,22 @@ var PartnersAddingForm = function (_Component) {
 												_react2.default.createElement(
 													'option',
 													null,
-													'Gerente de Producci\xF3n'
+													'Sub Gerente'
 												),
 												_react2.default.createElement(
 													'option',
 													null,
-													'Gerente de Finanzas'
+													'Apoderado Especial'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'Gerente Finanzas'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'Gerente Administrativo'
 												)
 											),
 											_react2.default.createElement('span', null)
@@ -28378,12 +28388,22 @@ var PartnersAddingForm = function (_Component) {
 												_react2.default.createElement(
 													'option',
 													null,
-													'Gerente de Producci\xF3n'
+													'Sub Gerente'
 												),
 												_react2.default.createElement(
 													'option',
 													null,
-													'Gerente de Finanzas'
+													'Apoderado Especial'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'Gerente Finanzas'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'Gerente Administrativo'
 												)
 											),
 											_react2.default.createElement('span', null)
@@ -28638,6 +28658,16 @@ var PaymentMethodForm = function (_Component) {
 
 			var year = dateArry[0];
 
+			var num_position = 0;
+
+			for (var i = 0; i < enterprise.partners.length; i++) {
+
+				if (this.props.enterpriseInProcessData.partners[i].position != '' && this.props.enterpriseInProcessData.partners[i].position != "Ninguno") {
+
+					num_positions = num_positions + 1;
+				}
+			}
+
 			return _react2.default.createElement(
 				'div',
 				{ className: 'sectionEnterpriseIncorporation' },
@@ -28735,7 +28765,7 @@ var PaymentMethodForm = function (_Component) {
 							_react2.default.createElement(
 								'p',
 								{ className: 'mediumContent detail' },
-								this.props.enterpriseInProcessData.partners.length,
+								num_position,
 								' Gerentes'
 							),
 							_react2.default.createElement(

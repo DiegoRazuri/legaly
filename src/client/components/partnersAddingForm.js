@@ -183,8 +183,10 @@ export default class PartnersAddingForm extends Component{
 													<option disabled></option>
 													<option>Ninguno</option>
 													<option>Gerente General</option>
-													<option>Gerente de Producción</option>
-													<option>Gerente de Finanzas</option>
+													<option>Sub Gerente</option>
+													<option>Apoderado Especial</option>
+													<option>Gerente Finanzas</option>
+													<option>Gerente Administrativo</option>
 												</select>
 												<span></span>
 											</div>
@@ -210,7 +212,10 @@ export default class PartnersAddingForm extends Component{
 													<option>Ninguno</option>
 													<option>Gerente General</option>
 													<option>Sub Gerente</option>
-													<option>Gerente de Finanzas</option>
+													<option>Apoderado Especial</option>
+													<option>Gerente Finanzas</option>
+													<option>Gerente Administrativo</option>
+		
 												</select>
 												<span></span>
 											</div>
