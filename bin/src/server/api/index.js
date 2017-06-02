@@ -28,6 +28,10 @@ var _partners = require('src/server/models/partners');
 
 var _partners2 = _interopRequireDefault(_partners);
 
+var _appadmin = require('src/server/models/appadmin');
+
+var _appadmin2 = _interopRequireDefault(_appadmin);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //configuracion para el router
@@ -202,7 +206,7 @@ router.post('/signing_date_information', jsonParser, function (req, res) {
 
 			var num = num_positions - 1;
 
-			vPartners = num * 40;
+			vPartners = num * 45;
 		} else {
 
 			vPartners = 0;
@@ -588,6 +592,298 @@ router.post('/delete_partner_invitation', jsonParser, function (req, res) {
 				}
 			});
 		}
+	});
+});
+
+//ENDPOINT Obtener la lista de empresas con servicio activo
+
+router.get('/all_enterprises', function (req, res) {
+	// este debe cambiar a 1 despues de programar el endpoint de actualizacion para recibir solo las activas
+
+	_enterprises2.default.find({ inProcess: false }).populate({
+		path: 'partners'
+	}).exec(function (err, enterprise) {
+		if (err) {
+			res.sendStatus(500).json(err);
+		} else {
+
+			var options = {
+				path: 'partners.user',
+				model: 'Userprofiles'
+			};
+
+			_enterprises2.default.populate(enterprise, options, function (err, enterprise_info) {
+				if (err) throw err;
+
+				var options = {
+					path: 'accountManager',
+					model: 'Userprofiles'
+				};
+
+				_enterprises2.default.populate(enterprise_info, options, function (err, e_data) {
+					if (err) {
+						res.sendStatus(500).json(err);
+					} else {
+						res.json(e_data);
+					}
+				});
+			});
+		}
+	});
+});
+
+//ENDPOINT listar usuarios admin
+
+router.get('/all_users_admin', function (req, res) {
+
+	_appadmin2.default.find({}).populate({
+		path: "users",
+		model: "Userprofiles"
+	}).exec(function (err, appAdmin) {
+		if (err) {
+			res.sendStatus(500).json(err);
+		} else {
+
+			var json = appAdmin[0].users;
+			res.json(json);
+		}
+	});
+});
+
+//ENDPOINT Detalle empresa
+
+router.post('/enterprise_detail', function (req, res) {
+	if (!req.body) return res.sendStatus(400);
+	var data = req.body;
+	console.log(data);
+
+	_enterprises2.default.findById(data.enterprise_id).populate({
+		path: "partners"
+	}).exec(function (err, enterprise) {
+		if (err) {
+			res.sendStatus(500).json(err);
+		} else {
+
+			var options = {
+				path: 'partners.user',
+				model: 'Userprofiles'
+			};
+
+			_userprofiles2.default.populate(enterprise, options, function (err, enterprise_info) {
+				if (err) throw err;
+
+				var options = {
+					path: 'accountManager',
+					model: 'Userprofiles'
+				};
+
+				_userprofiles2.default.populate(enterprise, options, function (err, result) {
+					if (err) {
+
+						res.sendStatus(500).json(err);
+					} else {
+
+						res.json(result);
+					}
+				});
+			});
+		}
+	});
+});
+
+// ENDPOINT Asignar permisos de usuario
+
+router.post('/add_user_admin', jsonParser, function (req, res) {
+	if (!req.body) return res.sendStatus(400);
+	var data = req.body;
+
+	_appadmin2.default.find({}, function (err, appadmin) {
+
+		if (err) {
+			res.sendStatus(500).json(err);
+		} else {
+
+			if (req.user._id == appadmin[0].theCreator) {
+				appadmin[0].users.push(data.user_id);
+
+				appadmin[0].save(function (err) {
+					if (err) {
+						res.sendStatus(500).json(err);
+					} else {
+
+						var json = { state: 1 };
+						res.json(json);
+					}
+				});
+			} else {
+				var json = { state: 0 };
+				res.json(json);
+			}
+		}
+	});
+});
+
+// ENDPOINT Eliminar userAdmin
+
+router.post('/delete_userAdmin', jsonParser, function (req, res) {
+	if (!req.body) return res.sendStatus(400);
+	var data = req.body;
+	console.log(data);
+
+	_appadmin2.default.find().populate({
+		path: 'users'
+	}).exec(function (err, adminData) {
+
+		console.log(adminData);
+		if (err) {
+			res.sendStatus(500).json(err);
+		} else {
+			for (var i = 0; i < adminData[0].users.length; i++) {
+
+				if (adminData[0].users[i]._id == data.user_id) {
+
+					adminData[0].users.splice(i, 1);
+
+					adminData[0].save(function (err) {
+						if (err) {
+							res.sendStatus(500).json(err);
+						} else {
+
+							var json = {
+								users: adminData[0].users
+							};
+							res.json(json);
+						}
+					});
+				}
+			}
+		}
+	});
+});
+
+// ENDPOINT crear super usuario
+
+router.post('/create_super_user', jsonParser, function (req, res) {
+	if (!req.body) return res.sendStatus(400);
+	var data = req.body;
+	console.log(data);
+
+	var appAdmin = new _appadmin2.default();
+
+	appAdmin.theCreator = req.user._id;
+	appAdmin.users.push(req.user._id);
+
+	appAdmin.save(function (err) {
+		if (err) {
+			res.sendStatus(500).json(err);
+		} else {
+
+			var _data = {
+				state: 1
+			};
+
+			res.json(_data);
+		}
+	});
+});
+
+// ENDPOINT confirmación si es the creator
+
+router.get('/is_it_the_creator', function (req, res) {
+	if (!req.body) return res.sendStatus(400);
+	var data = req.body;
+
+	_appadmin2.default.find().exec(function (err, appadmin) {
+
+		var adminData = appadmin[0];
+
+		if (err) {
+			res.sendStatus(500).json(err);
+		} else {
+			if (adminData.theCreator == req.user._id) {
+
+				var json = { state: 1 };
+				res.json(json);
+			} else {
+				var _json = { state: 0 };
+				res.json(_json);
+			}
+		}
+	});
+});
+
+// ENDPOINT confirmacion si es admin
+
+router.get('/is_it_admin', function (req, res) {
+	if (!req.body) return res.sendStatus(400);
+	var data = req.body;
+
+	_appadmin2.default.find().exec(function (err, appadmin) {
+		if (err) {
+			res.sendStatus(500).json(err);
+		} else {
+
+			for (var i = 0; i < appadmin[0].users.length; i++) {
+				if (req.user._id == appadmin[0].users[i]) {
+					var json = { state: 1 };
+					res.json(json);
+					break;
+				} else {
+					var _json2 = { state: 0 };
+					res.json(_json2);
+				}
+			}
+		}
+	});
+});
+
+//ENDPOINT update service state
+
+router.post('/update_service_state', jsonParser, function (req, res) {
+	if (!req.body) return res.sendStatus(400);
+	var data = req.body;
+
+	_enterprises2.default.findById(data.enterpriseId).exec(function (err, enterprise) {
+
+		enterprise.serviceState = data.serviceState;
+
+		enterprise.save(function (err) {
+			if (err) {
+				res.sendStatus(500).json(err);
+			} else {
+
+				_enterprises2.default.find({ inProcess: false }).populate({
+					path: 'partners'
+				}).exec(function (err, enterprise) {
+					if (err) {
+						res.sendStatus(500).json(err);
+					} else {
+
+						var options = {
+							path: 'partners.user',
+							model: 'Userprofiles'
+						};
+
+						_enterprises2.default.populate(enterprise, options, function (err, enterprise_info) {
+							if (err) throw err;
+
+							var options = {
+								path: 'accountManager',
+								model: 'Userprofiles'
+							};
+
+							_enterprises2.default.populate(enterprise_info, options, function (err, e_data) {
+								if (err) {
+									res.sendStatus(500).json(err);
+								} else {
+									res.json(e_data);
+								}
+							});
+						});
+					}
+				});
+			}
+		});
 	});
 });
 
