@@ -9,8 +9,8 @@ import api from 'src/server/api'
 import history from 'connect-history-api-fallback'
 
 //configuracion de session con Redis
-//const RedisStore = require('connect-redis')(expressSession);
-//var redis = require('redis').createClient(process.env.REDIS_URL);
+const RedisStore = require('connect-redis')(expressSession);
+var redis = require('redis').createClient(process.env.REDIS_URL);
 
 //configuracion de autenticacion con passport
 
@@ -45,7 +45,7 @@ var sessionKey = process.env.SESSION_KEY;
 
 app.use(expressSession({
 	// el campo de store debe ser comentado cuando se trabaja en local
-	//store : new RedisStore({ host: 'localhost', port: 6379, client: redis}),
+	store : new RedisStore({ host: 'localhost', port: 6379, client: redis}),
 	secret: sessionKey,
 	resave : false,
 	saveUninitialized: false

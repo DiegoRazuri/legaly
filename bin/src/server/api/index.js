@@ -818,23 +818,26 @@ router.get('/is_it_admin', function (req, res) {
 	if (!req.body) return res.sendStatus(400);
 	var data = req.body;
 
-	_appadmin2.default.find().exec(function (err, appadmin) {
-		if (err) {
-			res.sendStatus(500).json(err);
-		} else {
+	if (req.user) {
+		_appadmin2.default.find().exec(function (err, appadmin) {
+			if (err) {
+				res.sendStatus(500).json(err);
+			} else {
 
-			for (var i = 0; i < appadmin[0].users.length; i++) {
-				if (req.user._id == appadmin[0].users[i]) {
-					var json = { state: 1 };
-					res.json(json);
-					break;
-				} else {
-					var _json2 = { state: 0 };
-					res.json(_json2);
+				for (var i = 0; i < appadmin[0].users.length; i++) {
+
+					if (req.user._id == appadmin[0].users[i]) {
+						var json = { state: 1 };
+						res.json(json);
+						break;
+					} else {
+						var _json2 = { state: 0 };
+						res.json(_json2);
+					}
 				}
 			}
-		}
-	});
+		});
+	}
 });
 
 //ENDPOINT update service state
@@ -843,9 +846,13 @@ router.post('/update_service_state', jsonParser, function (req, res) {
 	if (!req.body) return res.sendStatus(400);
 	var data = req.body;
 
+	console.log(data);
+
 	_enterprises2.default.findById(data.enterpriseId).exec(function (err, enterprise) {
 
 		enterprise.serviceState = data.serviceState;
+
+		console.log(enterprise.serviceState);
 
 		enterprise.save(function (err) {
 			if (err) {
@@ -876,6 +883,8 @@ router.post('/update_service_state', jsonParser, function (req, res) {
 								if (err) {
 									res.sendStatus(500).json(err);
 								} else {
+
+									console.log(e_data);
 									res.json(e_data);
 								}
 							});
