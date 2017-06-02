@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 
 import uid from 'uid';
-import PartnerRowTrakingPanelDetailInfo from './partnerRowTrakingPanelDetailInfo';
+import TrackingPanelPartnerInfo from './trackingPanelPartnerInfo';
 
 export default class TrackingEnterpriseInfo extends Component{
 
@@ -139,7 +139,7 @@ export default class TrackingEnterpriseInfo extends Component{
 
 
 				partnerRowTrakingPanelDetailInfo.push(
-					<PartnerRowTrakingPanelDetailInfo
+					<TrackingPanelPartnerInfo
 					key= {key_id}
 					goodsInput = {goodsInput}
 					moneyInput = {moneyInput}

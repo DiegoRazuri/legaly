@@ -25141,7 +25141,7 @@ var App = function (_Component) {
 
 exports.default = App;
 
-},{"./dateForm":227,"./enterpriseInformationForm":228,"./incorporate":230,"./landing":231,"./loginForm":232,"./partnersAddingForm":235,"./paymentMethodForm":236,"./personalInformationForm":237,"./theCreatorPanel":239,"./trackingEnterpriseInfo":240,"./trackingPanel":241,"./userAvatar":242,"./userprofile":243,"react":218,"react-dom":41,"react-router-dom":178}],224:[function(require,module,exports){
+},{"./dateForm":227,"./enterpriseInformationForm":228,"./incorporate":230,"./landing":231,"./loginForm":232,"./partnersAddingForm":234,"./paymentMethodForm":235,"./personalInformationForm":236,"./theCreatorPanel":238,"./trackingEnterpriseInfo":239,"./trackingPanel":240,"./userAvatar":242,"./userprofile":243,"react":218,"react-dom":41,"react-router-dom":178}],224:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27314,7 +27314,7 @@ var Incorporate = function (_Component) {
 
 exports.default = Incorporate;
 
-},{"./dateForm":227,"./enterpriseInformationForm":228,"./partnersAddingForm":235,"./paymentMethodForm":236,"./personalInformationForm":237,"react":218,"react-dom":41,"react-router":188,"react-router-dom":178}],231:[function(require,module,exports){
+},{"./dateForm":227,"./enterpriseInformationForm":228,"./partnersAddingForm":234,"./paymentMethodForm":235,"./personalInformationForm":236,"react":218,"react-dom":41,"react-router":188,"react-router-dom":178}],231:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28071,264 +28071,6 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _uid = require('uid');
-
-var _uid2 = _interopRequireDefault(_uid);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *	module dependencies
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
-
-
-var PartnerRowTrakingPanelDetailInfo = function (_Component) {
-	_inherits(PartnerRowTrakingPanelDetailInfo, _Component);
-
-	function PartnerRowTrakingPanelDetailInfo() {
-		_classCallCheck(this, PartnerRowTrakingPanelDetailInfo);
-
-		return _possibleConstructorReturn(this, (PartnerRowTrakingPanelDetailInfo.__proto__ || Object.getPrototypeOf(PartnerRowTrakingPanelDetailInfo)).apply(this, arguments));
-	}
-
-	_createClass(PartnerRowTrakingPanelDetailInfo, [{
-		key: 'render',
-		value: function render() {
-			console.log(this.props.user);
-			console.log(this.props.moneyInput);
-			console.log(this.props.goodsInput);
-			console.log(this.props.position);
-
-			var coupleDocumentType = void 0,
-			    coupleDocumentNumber = void 0,
-			    rowCoupleData = void 0;
-			if (this.props.user.coupleDocumentType != undefined) {
-				coupleDocumentType = this.props.user.coupleDocumentType;
-				coupleDocumentNumber = this.props.user.coupleDocumentNumber;
-
-				rowCoupleData = _react2.default.createElement(
-					'div',
-					{ className: 'rowPartnerInfo' },
-					_react2.default.createElement(
-						'p',
-						{ className: 'fieldName' },
-						coupleDocumentType,
-						' de conyugue'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'fieldValue' },
-						coupleDocumentNumber
-					)
-				);
-			}
-
-			var rowGoodsInput = [];
-
-			if (this.props.goodsInput != undefined) {
-
-				for (var i = 0; i < this.props.goodsInput.length; i++) {
-
-					var key_id = (0, _uid2.default)();
-
-					rowGoodsInput.push(_react2.default.createElement(
-						'div',
-						{ className: 'rowPartnerInfo', key: key_id },
-						_react2.default.createElement(
-							'p',
-							{ className: 'fieldName' },
-							'Inversi\xF3n en Bienes'
-						),
-						_react2.default.createElement(
-							'ul',
-							null,
-							_react2.default.createElement(
-								'li',
-								null,
-								_react2.default.createElement(
-									'div',
-									null,
-									_react2.default.createElement(
-										'p',
-										{ className: 'subFieldName' },
-										'descripci\xF3n'
-									),
-									_react2.default.createElement(
-										'p',
-										{ className: 'fieldValue' },
-										this.props.goodsInput[i].goodName
-									)
-								),
-								_react2.default.createElement(
-									'div',
-									null,
-									_react2.default.createElement(
-										'p',
-										{ className: 'subFieldName' },
-										'valor'
-									),
-									_react2.default.createElement(
-										'p',
-										{ className: 'fieldValue' },
-										'S/. ',
-										this.props.goodsInput[i].goodValue,
-										'.00'
-									)
-								)
-							)
-						)
-					));
-				}
-			}
-
-			return _react2.default.createElement(
-				'div',
-				{ className: 'partnerInfoGrid' },
-				_react2.default.createElement(
-					'div',
-					{ className: 'rowPartnerInfo' },
-					_react2.default.createElement(
-						'p',
-						{ className: 'fieldName' },
-						'Nombre'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'fieldValue' },
-						this.props.user.name
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'rowPartnerInfo' },
-					_react2.default.createElement(
-						'p',
-						{ className: 'fieldName' },
-						'Cargo'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'fieldValue' },
-						this.props.position
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'rowPartnerInfo' },
-					_react2.default.createElement(
-						'p',
-						{ className: 'fieldName' },
-						'Inversi\xF3n en dinero'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'fieldValue' },
-						this.props.moneyInput,
-						'.00'
-					)
-				),
-				rowGoodsInput,
-				_react2.default.createElement(
-					'div',
-					{ className: 'rowPartnerInfo' },
-					_react2.default.createElement(
-						'p',
-						{ className: 'fieldName' },
-						'email'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'fieldValue' },
-						this.props.user.email
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'rowPartnerInfo' },
-					_react2.default.createElement(
-						'p',
-						{ className: 'fieldName' },
-						this.props.user.documentType
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'fieldValue' },
-						this.props.user.documentNumber
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'rowPartnerInfo' },
-					_react2.default.createElement(
-						'p',
-						{ className: 'fieldName' },
-						'direcci\xF3n'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'fieldValue' },
-						this.props.user.location
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'rowPartnerInfo' },
-					_react2.default.createElement(
-						'p',
-						{ className: 'fieldName' },
-						'Estado civil'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'fieldValue' },
-						this.props.user.civilStatus
-					)
-				),
-				rowCoupleData,
-				_react2.default.createElement(
-					'div',
-					{ className: 'rowPartnerInfo' },
-					_react2.default.createElement(
-						'p',
-						{ className: 'fieldName' },
-						'celular/telefono'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'fieldValue' },
-						this.props.user.phone_number
-					)
-				)
-			);
-		}
-	}]);
-
-	return PartnerRowTrakingPanelDetailInfo;
-}(_react.Component);
-
-exports.default = PartnerRowTrakingPanelDetailInfo;
-
-},{"react":218,"react-dom":41,"uid":220}],235:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = require('react-dom');
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
 var _reactRouterDom = require('react-router-dom');
 
 var _uid = require('uid');
@@ -28868,7 +28610,7 @@ var PartnersAddingForm = function (_Component) {
 
 exports.default = PartnersAddingForm;
 
-},{"./partnerRowInput":233,"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],236:[function(require,module,exports){
+},{"./partnerRowInput":233,"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],235:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -29277,7 +29019,7 @@ var PaymentMethodForm = function (_Component) {
 
 exports.default = PaymentMethodForm;
 
-},{"react":218,"react-dom":41,"react-router-dom":178}],237:[function(require,module,exports){
+},{"react":218,"react-dom":41,"react-router-dom":178}],236:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -30069,7 +29811,7 @@ var PersonalInformationForm = function (_Component) {
 
 exports.default = PersonalInformationForm;
 
-},{"./btnUserprofileInfo":224,"./btnUserprofileInfoText":225,"./goodRowInput":229,"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],238:[function(require,module,exports){
+},{"./btnUserprofileInfo":224,"./btnUserprofileInfoText":225,"./goodRowInput":229,"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],237:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -30153,7 +29895,7 @@ var ServiceState = function (_Component) {
 
 exports.default = ServiceState;
 
-},{"react":218,"react-dom":41,"react-router-dom":178}],239:[function(require,module,exports){
+},{"react":218,"react-dom":41,"react-router-dom":178}],238:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -30400,7 +30142,7 @@ var TheCreatorPanel = function (_Component) {
 
 exports.default = TheCreatorPanel;
 
-},{"react":218,"react-dom":41,"uid":220}],240:[function(require,module,exports){
+},{"react":218,"react-dom":41,"uid":220}],239:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -30421,9 +30163,9 @@ var _uid = require('uid');
 
 var _uid2 = _interopRequireDefault(_uid);
 
-var _partnerRowTrakingPanelDetailInfo = require('./partnerRowTrakingPanelDetailInfo');
+var _trackingPanelPartnerInfo = require('./trackingPanelPartnerInfo');
 
-var _partnerRowTrakingPanelDetailInfo2 = _interopRequireDefault(_partnerRowTrakingPanelDetailInfo);
+var _trackingPanelPartnerInfo2 = _interopRequireDefault(_trackingPanelPartnerInfo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30604,7 +30346,7 @@ var TrackingEnterpriseInfo = function (_Component) {
 						position = partner.position;
 					}
 
-					partnerRowTrakingPanelDetailInfo.push(_react2.default.createElement(_partnerRowTrakingPanelDetailInfo2.default, {
+					partnerRowTrakingPanelDetailInfo.push(_react2.default.createElement(_trackingPanelPartnerInfo2.default, {
 						key: key_id,
 						goodsInput: goodsInput,
 						moneyInput: moneyInput,
@@ -30859,7 +30601,7 @@ var TrackingEnterpriseInfo = function (_Component) {
 
 exports.default = TrackingEnterpriseInfo;
 
-},{"./partnerRowTrakingPanelDetailInfo":234,"react":218,"react-dom":41,"uid":220}],241:[function(require,module,exports){
+},{"./trackingPanelPartnerInfo":241,"react":218,"react-dom":41,"uid":220}],240:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -31213,7 +30955,261 @@ var TrackingPanel = function (_Component) {
 
 exports.default = TrackingPanel;
 
-},{"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],242:[function(require,module,exports){
+},{"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],241:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _uid = require('uid');
+
+var _uid2 = _interopRequireDefault(_uid);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *	module dependencies
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
+
+var TrackingPanelPartnerInfo = function (_Component) {
+	_inherits(TrackingPanelPartnerInfo, _Component);
+
+	function TrackingPanelPartnerInfo() {
+		_classCallCheck(this, TrackingPanelPartnerInfo);
+
+		return _possibleConstructorReturn(this, (TrackingPanelPartnerInfo.__proto__ || Object.getPrototypeOf(TrackingPanelPartnerInfo)).apply(this, arguments));
+	}
+
+	_createClass(TrackingPanelPartnerInfo, [{
+		key: 'render',
+		value: function render() {
+
+			var coupleDocumentType = void 0,
+			    coupleDocumentNumber = void 0,
+			    rowCoupleData = void 0;
+			if (this.props.user.coupleDocumentType != undefined) {
+				coupleDocumentType = this.props.user.coupleDocumentType;
+				coupleDocumentNumber = this.props.user.coupleDocumentNumber;
+
+				rowCoupleData = _react2.default.createElement(
+					'div',
+					{ className: 'rowPartnerInfo' },
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldName' },
+						coupleDocumentType,
+						' de conyugue'
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldValue' },
+						coupleDocumentNumber
+					)
+				);
+			}
+
+			var rowGoodsInput = [];
+
+			if (this.props.goodsInput != undefined) {
+
+				for (var i = 0; i < this.props.goodsInput.length; i++) {
+
+					var key_id = (0, _uid2.default)();
+
+					rowGoodsInput.push(_react2.default.createElement(
+						'div',
+						{ className: 'rowPartnerInfo', key: key_id },
+						_react2.default.createElement(
+							'p',
+							{ className: 'fieldName' },
+							'Inversi\xF3n en Bienes'
+						),
+						_react2.default.createElement(
+							'ul',
+							null,
+							_react2.default.createElement(
+								'li',
+								null,
+								_react2.default.createElement(
+									'div',
+									null,
+									_react2.default.createElement(
+										'p',
+										{ className: 'subFieldName' },
+										'descripci\xF3n'
+									),
+									_react2.default.createElement(
+										'p',
+										{ className: 'fieldValue' },
+										this.props.goodsInput[i].goodName
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									null,
+									_react2.default.createElement(
+										'p',
+										{ className: 'subFieldName' },
+										'valor'
+									),
+									_react2.default.createElement(
+										'p',
+										{ className: 'fieldValue' },
+										'S/. ',
+										this.props.goodsInput[i].goodValue,
+										'.00'
+									)
+								)
+							)
+						)
+					));
+				}
+			}
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'partnerInfoGrid' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'rowPartnerInfo' },
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldName' },
+						'Nombre'
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldValue' },
+						this.props.user.name
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'rowPartnerInfo' },
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldName' },
+						'Cargo'
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldValue' },
+						this.props.position
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'rowPartnerInfo' },
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldName' },
+						'Inversi\xF3n en dinero'
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldValue' },
+						this.props.moneyInput,
+						'.00'
+					)
+				),
+				rowGoodsInput,
+				_react2.default.createElement(
+					'div',
+					{ className: 'rowPartnerInfo' },
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldName' },
+						'email'
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldValue' },
+						this.props.user.email
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'rowPartnerInfo' },
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldName' },
+						this.props.user.documentType
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldValue' },
+						this.props.user.documentNumber
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'rowPartnerInfo' },
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldName' },
+						'direcci\xF3n'
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldValue' },
+						this.props.user.location
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'rowPartnerInfo' },
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldName' },
+						'Estado civil'
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldValue' },
+						this.props.user.civilStatus
+					)
+				),
+				rowCoupleData,
+				_react2.default.createElement(
+					'div',
+					{ className: 'rowPartnerInfo' },
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldName' },
+						'celular/telefono'
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldValue' },
+						this.props.user.phone_number
+					)
+				)
+			);
+		}
+	}]);
+
+	return TrackingPanelPartnerInfo;
+}(_react.Component);
+
+exports.default = TrackingPanelPartnerInfo;
+
+},{"react":218,"react-dom":41,"uid":220}],242:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -31583,7 +31579,7 @@ var Userprofile = function (_Component) {
 
 exports.default = Userprofile;
 
-},{"./contactRow":226,"./serviceState":238,"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],244:[function(require,module,exports){
+},{"./contactRow":226,"./serviceState":237,"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],244:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');

@@ -6,7 +6,7 @@ import ReactDom from 'react-dom';
 
 import uid from 'uid';
 
-export default class PartnerRowTrakingPanelDetailInfo extends Component{
+export default class TrackingPanelPartnerInfo extends Component{
 
 	
 	render(){
