@@ -30653,6 +30653,7 @@ var TrackingPanel = function (_Component) {
 
 		_this.getEnterprises = _this.getEnterprises.bind(_this);
 		_this.handleServiceState = _this.handleServiceState.bind(_this);
+		_this.handleOnChange = _this.handleOnChange.bind(_this);
 
 		return _this;
 	}
@@ -30671,16 +30672,48 @@ var TrackingPanel = function (_Component) {
 			});
 		}
 	}, {
+		key: 'handleOnChange',
+		value: function handleOnChange(ev) {
+
+			var target = ev.target;
+
+			var enterprise_id = target.name;
+
+			var new_enterprises_data = this.state.enterprises;
+
+			for (var i = 0; i < new_enterprises_data.length; i++) {
+				if (new_enterprises_data[i]._id == enterprise_id) {
+
+					new_enterprises_data[i].serviceState = target.value;
+
+					break;
+				}
+			}
+
+			this.setState({ enterprises: new_enterprises_data });
+		}
+	}, {
 		key: 'handleServiceState',
 		value: function handleServiceState() {
 			var _this3 = this;
 
 			var serviceStateSelect = _reactDom2.default.findDOMNode(this.refs.s_serviceState);
-			var serviceState = _reactDom2.default.findDOMNode(this.refs.s_serviceState).value.trim();
+
 			var enterprise_id = serviceStateSelect.dataset.userid;
 
+			var stateValue = void 0;
+
+			for (var i = 0; i < this.state.enterprises.length; i++) {
+				if (this.state.enterprises[i]._id == enterprise_id) {
+
+					stateValue = this.state.enterprises[i].serviceState;
+
+					break;
+				}
+			}
+
 			var json = {
-				serviceState: serviceState,
+				serviceState: stateValue,
 				enterpriseId: enterprise_id
 			};
 
@@ -30697,6 +30730,7 @@ var TrackingPanel = function (_Component) {
 		value: function componentWillMount() {
 			var _this4 = this;
 
+			console.log("usuario existe");
 			$.get('/api/is_it_admin', function (res) {
 				console.log("res");
 				console.log(res);
@@ -30801,7 +30835,7 @@ var TrackingPanel = function (_Component) {
 								{ className: 'trackingListGrid' },
 								_react2.default.createElement(
 									'select',
-									{ ref: 's_serviceState', defaultValue: enterprise.serviceState, 'data-userid': enterprise._id },
+									{ ref: 's_serviceState', name: enterprise._id, value: enterprise.serviceState, onChange: _this5.handleOnChange.bind(_this5), 'data-userid': enterprise._id },
 									_react2.default.createElement(
 										'option',
 										null,

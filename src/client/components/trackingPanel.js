@@ -22,6 +22,7 @@ export default class TrackingPanel extends Component{
 
 		this.getEnterprises = this.getEnterprises.bind(this);
 		this.handleServiceState = this.handleServiceState.bind(this);
+		this.handleOnChange = this.handleOnChange.bind(this);
 		
 	}
 
@@ -36,14 +37,51 @@ export default class TrackingPanel extends Component{
 		});
 	}
 
+	handleOnChange(ev){
+
+		let target = ev.target;
+
+		let enterprise_id = target.name;
+
+		let new_enterprises_data = this.state.enterprises;
+
+		for(let i = 0; i < new_enterprises_data.length; i++){
+			if(new_enterprises_data[i]._id == enterprise_id){
+				
+				new_enterprises_data[i].serviceState = target.value;
+
+
+				break;
+
+			}
+		}
+
+		this.setState({enterprises : new_enterprises_data});
+	}
+
 	handleServiceState(){
-		
+
 		let serviceStateSelect = ReactDom.findDOMNode(this.refs.s_serviceState)
-		let serviceState = ReactDom.findDOMNode(this.refs.s_serviceState).value.trim()
+		
 		let enterprise_id = serviceStateSelect.dataset.userid;
 
+		let stateValue;
+
+		for(let i = 0; i < this.state.enterprises.length; i++){
+			if(this.state.enterprises[i]._id == enterprise_id){
+				
+				stateValue = this.state.enterprises[i].serviceState;
+
+
+				break;
+
+			}
+		}
+		
+		
+
 		let json = {
-			serviceState :  serviceState,
+			serviceState :  stateValue,
 			enterpriseId : enterprise_id
 		}
 
@@ -60,20 +98,23 @@ export default class TrackingPanel extends Component{
 	}
 
 	componentWillMount(){
+	
+			console.log("usuario existe")
+			$.get('/api/is_it_admin', (res)=>{
+				console.log("res")
+				console.log(res)
+				
+				if(res.state == 1){
+					
+					this.setState({user_identified: res.state});
+
+					this.getEnterprises();
+					
+				}
+			});
 		
 
-		$.get('/api/is_it_admin', (res)=>{
-			console.log("res")
-			console.log(res)
-			
-			if(res.state == 1){
-				
-				this.setState({user_identified: res.state});
-
-				this.getEnterprises();
-				
-			}
-		});
+		
 
 	}
 
@@ -107,6 +148,8 @@ export default class TrackingPanel extends Component{
 
 					let enterprise_url = "panel-detalle-empresas/" + enterprise._id
 
+
+
 					enterpriseRow.push(<li className="trackingListRow" key={key_id}>
 									<div className="trackingListGrid">
 										
@@ -129,7 +172,7 @@ export default class TrackingPanel extends Component{
 										<p className="fieldValue">{day} de {month} del {year}</p>
 									</div>
 									<div className="trackingListGrid">
-										<select ref="s_serviceState" defaultValue={enterprise.serviceState} data-userid={enterprise._id}>
+										<select ref="s_serviceState" name={enterprise._id} value={enterprise.serviceState} onChange={this.handleOnChange.bind(this)} data-userid={enterprise._id}>
 											<option>1</option>
 											<option>2</option>
 											<option>3</option>

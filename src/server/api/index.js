@@ -922,25 +922,31 @@ router.get('/is_it_admin', function(req, res){
 	if (!req.body) return res.sendStatus(400)
 		let data = req.body;
 
-	AppAdmin.find().
-		exec(function(err, appadmin){
-			if(err){
-				res.sendStatus(500).json(err)
-			}else{
+	if(req.user){
+		AppAdmin.find().
+			exec(function(err, appadmin){
+				if(err){
+					res.sendStatus(500).json(err)
+				}else{
 
-				for(let i=0; i < appadmin[0].users.length; i++){
-					if(req.user._id == appadmin[0].users[i]){
-						let json = { state : 1}
-						res.json(json);
-						break;
-					}else{
-						let json = {state : 0}
-						res.json(json);
+					for(let i=0; i < appadmin[0].users.length; i++){
+
+
+						if(req.user._id == appadmin[0].users[i]){
+							let json = { state : 1}
+							res.json(json);
+							break;
+						}else{
+							let json = {state : 0}
+							res.json(json);
+						}
 					}
+					
 				}
-				
-			}
-		});
+			});
+	}
+
+	
 
 });
 
@@ -950,10 +956,14 @@ router.post('/update_service_state', jsonParser, function (req, res){
 	if (!req.body) return res.sendStatus(400)
 		let data = req.body;
 
+		console.log(data)
+
 		Enterprise.findById(data.enterpriseId).
 			exec(function(err, enterprise){
 
 				enterprise.serviceState = data.serviceState;
+
+				console.log(enterprise.serviceState)
 
 				enterprise.save(function(err){
 					if(err){
@@ -986,6 +996,8 @@ router.post('/update_service_state', jsonParser, function (req, res){
 											if(err){
 												res.sendStatus(500).json(err)
 											}else{
+
+												console.log(e_data)
 												res.json(e_data)
 											}
 										});

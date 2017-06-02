@@ -576,7 +576,7 @@ export default class App extends Component{
 						<Route path="/fecha-firma" render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<DateForm inputTextHandlerRootLevel={this.inputTextHandlerRootLevel} enterpriseInProcessData={this.state.enterpriseInProcessData} sendSingingDateInformation={this.sendSingingDateInformation} enterpriseSaved={this.state.enterpriseSaved}/>)    )}/>
 						<Route path="/metodo-pago" onUpdate={this.logPageView} render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<PaymentMethodForm enterpriseInProcessData={this.state.enterpriseInProcessData} enterpriseSaved={this.state.enterpriseSaved}/>)    )}/>
 						<Route path="/perfil" onUpdate={this.logPageView} render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<Userprofile user={this.state.user} isItLogin={this.isItLogin}/>) )}/>
-						<Route path="/panel-listado-empresas" onUpdate={this.logPageView} render={(props)=>( <TrackingPanel user={this.state.user} isItLogin={this.isItLogin}/>) }/>
+						<Route path="/panel-listado-empresas" onUpdate={this.logPageView} render={(props)=>( <TrackingPanel user={this.state.user} isItLogin={this.isItLogin}/> )}/>
 						<Route path="/panel-detalle-empresas/:enterprise_id" onUpdate={this.logPageView}  component={TrackingEnterpriseInfo}/>
 						<Route path="/the-creator-panel" onUpdate={this.logPageView} render={(props)=>( <TheCreatorPanel user={this.state.user} isItLogin={this.isItLogin}/>) }/>
 						
