@@ -10,11 +10,7 @@ export default class PartnerRowTrakingPanelDetailInfo extends Component{
 
 	
 	render(){
-		console.log(this.props.user)
-		console.log(this.props.moneyInput)
-		console.log(this.props.goodsInput)
-		console.log(this.props.position)
-
+		
 		let coupleDocumentType, coupleDocumentNumber, rowCoupleData;
 		if(this.props.user.coupleDocumentType != undefined){
 			coupleDocumentType = this.props.user.coupleDocumentType;
