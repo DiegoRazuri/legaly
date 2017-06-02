@@ -1,0 +1,174 @@
+.sectionTrackingPanel
+	display block
+	margin 110px auto 0px auto
+	
+	.wrapperTrackingPanel
+		width 80%
+		margin 20px auto
+		box-shadow 0px 1px 20px rgba(0,0,0,0.2)
+		padding 40px
+		
+		h1
+			margin 0px
+			text-align left
+		.underlineBlue
+			margin 10px 0px 0px 0px
+			
+		.wrapperList
+			display block
+			padding 0px
+			margin 30px auto
+			
+			.fieldsList
+				margin 0px 
+				padding 0px
+				list-style none
+				display flex
+				justify-content space-between
+				
+				
+				.trackingListGrid
+					display flex
+					justify-content center
+					width 12.5%
+
+					.field
+						font-size 0.8em
+						font-weight bold
+						height 20px
+						font-family "Open Sans"
+						text-align left
+			.trackingListRow
+				margin 0px 
+				padding 0px
+				list-style none
+				display flex
+				justify-content space-between
+				border-bottom solid 1px #ccc
+				
+				.trackingListGrid
+					display flex
+					justify-content center
+					width 12.5%
+					height 40px
+					align-items center
+					
+					p, .btnSaveData, .btnSeeMore
+						font-family "Open Sans"
+						text-align left
+					
+					
+						
+					.fieldValue
+						font-size 0.7em
+						font-weight lighter
+						
+					select
+						border solid 1px #ccc
+						padding 5px 14px 5px 40px
+						text-align center
+						
+					.btnSaveData, .btnSeeMore
+						color white
+						cursor pointer
+						padding 2px 8px
+						border-radius 5px
+						font-size 0.6em
+						height 20px
+						line-height 20px
+					.btnSaveData
+						background-color #007EFF
+						
+					.btnSeeMore
+						background-color #c0c0c0
+		
+.sectionTrackingEnterprise
+	display block
+	margin 100px auto 0px auto
+	.wrapperTrackingEnteprise
+		width 80%
+		margin 20px auto
+		box-shadow 0px 1px 20px rgba(0,0,0,0.2)
+		padding 15px
+		
+		h1
+			margin 0px
+			text-align left
+		.underlineBlue
+			margin 10px 0px 0px 0px
+		
+		.wrapperEnterpriseInfo
+			margin 20px 0px 
+			.rowEnterpriseInfo
+				margin 0px
+				width 100%
+				height auto
+				border-bottom solid 1px #ccc
+				display flex
+				justify-content space-between
+				
+				p
+					margin 3px 0px
+					padding 0px 
+				
+				.fieldName
+					font-family "Open Sans"
+					font-size 0.9em
+					font-weight bold
+					
+					
+				.fieldValue
+					font-family "Open Sans"
+					font-size 0.9em
+					font-weight lighter
+				
+				ul
+					margin 0px
+					padding 0px
+					list-style none
+		
+		.wrapperPartnerInfoList
+			
+			h2
+				text-align left
+			.partnerInfoGrid
+				border-bottom solid 2px black
+				margin 20px auto
+				width 100%
+				.rowPartnerInfo
+					margin 0px
+					width 100%
+					height auto
+					border-bottom solid 1px #ccc
+					display flex
+					justify-content space-between
+					p
+						margin 3px 0px
+						padding 0px 
+					
+					.fieldName
+						font-family "Open Sans"
+						font-size 0.9em
+						font-weight bold
+						
+						
+					.fieldValue
+						font-family "Open Sans"
+						font-size 0.9em
+						font-weight lighter
+						
+					ul
+						list-style none
+						margin 5px 0px
+						padding 0px
+						li
+							padding 10px
+							border solid 1px #ccc
+							
+							div
+								border-bottom solid 1px grey
+								
+@media screen and (min-width: 1180px)
+	.sectionTrackingEnterprise .wrapperTrackingEnteprise .wrapperPartnerInfoList .partnerInfoGrid
+		width 50%
+		margin 20px 0px

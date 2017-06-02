@@ -24156,6 +24156,18 @@ var _userAvatar = require('./userAvatar');
 
 var _userAvatar2 = _interopRequireDefault(_userAvatar);
 
+var _trackingPanel = require('./trackingPanel');
+
+var _trackingPanel2 = _interopRequireDefault(_trackingPanel);
+
+var _trackingEnterpriseInfo = require('./trackingEnterpriseInfo');
+
+var _trackingEnterpriseInfo2 = _interopRequireDefault(_trackingEnterpriseInfo);
+
+var _theCreatorPanel = require('./theCreatorPanel');
+
+var _theCreatorPanel2 = _interopRequireDefault(_theCreatorPanel);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -24866,6 +24878,13 @@ var App = function (_Component) {
 						} }),
 					_react2.default.createElement(_reactRouterDom.Route, { path: '/perfil', onUpdate: this.logPageView, render: function render(props) {
 							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_userprofile2.default, { user: _this9.state.user, isItLogin: _this9.isItLogin });
+						} }),
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/panel-listado-empresas', onUpdate: this.logPageView, render: function render(props) {
+							return _react2.default.createElement(_trackingPanel2.default, { user: _this9.state.user, isItLogin: _this9.isItLogin });
+						} }),
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/panel-detalle-empresas/:enterprise_id', onUpdate: this.logPageView, component: _trackingEnterpriseInfo2.default }),
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/the-creator-panel', onUpdate: this.logPageView, render: function render(props) {
+							return _react2.default.createElement(_theCreatorPanel2.default, { user: _this9.state.user, isItLogin: _this9.isItLogin });
 						} })
 				),
 				_react2.default.createElement(
@@ -25122,7 +25141,7 @@ var App = function (_Component) {
 
 exports.default = App;
 
-},{"./dateForm":227,"./enterpriseInformationForm":228,"./incorporate":230,"./landing":231,"./loginForm":232,"./partnersAddingForm":234,"./paymentMethodForm":235,"./personalInformationForm":236,"./userAvatar":238,"./userprofile":239,"react":218,"react-dom":41,"react-router-dom":178}],224:[function(require,module,exports){
+},{"./dateForm":227,"./enterpriseInformationForm":228,"./incorporate":230,"./landing":231,"./loginForm":232,"./partnersAddingForm":235,"./paymentMethodForm":236,"./personalInformationForm":237,"./theCreatorPanel":239,"./trackingEnterpriseInfo":240,"./trackingPanel":241,"./userAvatar":242,"./userprofile":243,"react":218,"react-dom":41,"react-router-dom":178}],224:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27295,7 +27314,7 @@ var Incorporate = function (_Component) {
 
 exports.default = Incorporate;
 
-},{"./dateForm":227,"./enterpriseInformationForm":228,"./partnersAddingForm":234,"./paymentMethodForm":235,"./personalInformationForm":236,"react":218,"react-dom":41,"react-router":188,"react-router-dom":178}],231:[function(require,module,exports){
+},{"./dateForm":227,"./enterpriseInformationForm":228,"./partnersAddingForm":235,"./paymentMethodForm":236,"./personalInformationForm":237,"react":218,"react-dom":41,"react-router":188,"react-router-dom":178}],231:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27947,6 +27966,264 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _uid = require('uid');
+
+var _uid2 = _interopRequireDefault(_uid);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *	module dependencies
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
+
+var ParnerRowTrakingPanelDetailInfo = function (_Component) {
+	_inherits(ParnerRowTrakingPanelDetailInfo, _Component);
+
+	function ParnerRowTrakingPanelDetailInfo() {
+		_classCallCheck(this, ParnerRowTrakingPanelDetailInfo);
+
+		return _possibleConstructorReturn(this, (ParnerRowTrakingPanelDetailInfo.__proto__ || Object.getPrototypeOf(ParnerRowTrakingPanelDetailInfo)).apply(this, arguments));
+	}
+
+	_createClass(ParnerRowTrakingPanelDetailInfo, [{
+		key: 'render',
+		value: function render() {
+			console.log(this.props.user);
+			console.log(this.props.moneyInput);
+			console.log(this.props.goodsInput);
+			console.log(this.props.position);
+
+			var coupleDocumentType = void 0,
+			    coupleDocumentNumber = void 0,
+			    rowCoupleData = void 0;
+			if (this.props.user.coupleDocumentType != undefined) {
+				coupleDocumentType = this.props.user.coupleDocumentType;
+				coupleDocumentNumber = this.props.user.coupleDocumentNumber;
+
+				rowCoupleData = _react2.default.createElement(
+					'div',
+					{ className: 'rowPartnerInfo' },
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldName' },
+						coupleDocumentType,
+						' de conyugue'
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldValue' },
+						coupleDocumentNumber
+					)
+				);
+			}
+
+			var rowGoodsInput = [];
+
+			if (this.props.goodsInput != undefined) {
+
+				for (var i = 0; i < this.props.goodsInput.length; i++) {
+
+					var key_id = (0, _uid2.default)();
+
+					rowGoodsInput.push(_react2.default.createElement(
+						'div',
+						{ className: 'rowPartnerInfo', key: key_id },
+						_react2.default.createElement(
+							'p',
+							{ className: 'fieldName' },
+							'Inversi\xF3n en Bienes'
+						),
+						_react2.default.createElement(
+							'ul',
+							null,
+							_react2.default.createElement(
+								'li',
+								null,
+								_react2.default.createElement(
+									'div',
+									null,
+									_react2.default.createElement(
+										'p',
+										{ className: 'subFieldName' },
+										'descripci\xF3n'
+									),
+									_react2.default.createElement(
+										'p',
+										{ className: 'fieldValue' },
+										this.props.goodsInput[i].goodName
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									null,
+									_react2.default.createElement(
+										'p',
+										{ className: 'subFieldName' },
+										'valor'
+									),
+									_react2.default.createElement(
+										'p',
+										{ className: 'fieldValue' },
+										'S/. ',
+										this.props.goodsInput[i].goodValue,
+										'.00'
+									)
+								)
+							)
+						)
+					));
+				}
+			}
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'partnerInfoGrid' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'rowPartnerInfo' },
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldName' },
+						'Nombre'
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldValue' },
+						this.props.user.name
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'rowPartnerInfo' },
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldName' },
+						'Cargo'
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldValue' },
+						this.props.position
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'rowPartnerInfo' },
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldName' },
+						'Inversi\xF3n en dinero'
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldValue' },
+						this.props.moneyInput,
+						'.00'
+					)
+				),
+				rowGoodsInput,
+				_react2.default.createElement(
+					'div',
+					{ className: 'rowPartnerInfo' },
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldName' },
+						'email'
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldValue' },
+						this.props.user.email
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'rowPartnerInfo' },
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldName' },
+						this.props.user.documentType
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldValue' },
+						this.props.user.documentNumber
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'rowPartnerInfo' },
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldName' },
+						'direcci\xF3n'
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldValue' },
+						this.props.user.location
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'rowPartnerInfo' },
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldName' },
+						'Estado civil'
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldValue' },
+						this.props.user.civilStatus
+					)
+				),
+				rowCoupleData,
+				_react2.default.createElement(
+					'div',
+					{ className: 'rowPartnerInfo' },
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldName' },
+						'celular/telefono'
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldValue' },
+						this.props.user.phone_number
+					)
+				)
+			);
+		}
+	}]);
+
+	return ParnerRowTrakingPanelDetailInfo;
+}(_react.Component);
+
+exports.default = ParnerRowTrakingPanelDetailInfo;
+
+},{"react":218,"react-dom":41,"uid":220}],234:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28035,7 +28312,7 @@ var PartnerRowInput = function (_Component) {
 
 exports.default = PartnerRowInput;
 
-},{"react":218,"react-dom":41}],234:[function(require,module,exports){
+},{"react":218,"react-dom":41}],235:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28591,7 +28868,7 @@ var PartnersAddingForm = function (_Component) {
 
 exports.default = PartnersAddingForm;
 
-},{"./partnerRowInput":233,"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],235:[function(require,module,exports){
+},{"./partnerRowInput":234,"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],236:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28660,11 +28937,11 @@ var PaymentMethodForm = function (_Component) {
 
 			var num_position = 0;
 
-			for (var i = 0; i < enterprise.partners.length; i++) {
+			for (var i = 0; i < this.props.enterpriseInProcessData.partners.length; i++) {
 
 				if (this.props.enterpriseInProcessData.partners[i].position != '' && this.props.enterpriseInProcessData.partners[i].position != "Ninguno") {
 
-					num_positions = num_positions + 1;
+					num_position = num_position + 1;
 				}
 			}
 
@@ -29000,7 +29277,7 @@ var PaymentMethodForm = function (_Component) {
 
 exports.default = PaymentMethodForm;
 
-},{"react":218,"react-dom":41,"react-router-dom":178}],236:[function(require,module,exports){
+},{"react":218,"react-dom":41,"react-router-dom":178}],237:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -29792,7 +30069,7 @@ var PersonalInformationForm = function (_Component) {
 
 exports.default = PersonalInformationForm;
 
-},{"./btnUserprofileInfo":224,"./btnUserprofileInfoText":225,"./goodRowInput":229,"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],237:[function(require,module,exports){
+},{"./btnUserprofileInfo":224,"./btnUserprofileInfoText":225,"./goodRowInput":229,"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],238:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -29876,7 +30153,1067 @@ var ServiceState = function (_Component) {
 
 exports.default = ServiceState;
 
-},{"react":218,"react-dom":41,"react-router-dom":178}],238:[function(require,module,exports){
+},{"react":218,"react-dom":41,"react-router-dom":178}],239:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _uid = require('uid');
+
+var _uid2 = _interopRequireDefault(_uid);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *	module dependencies
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
+
+var TheCreatorPanel = function (_Component) {
+	_inherits(TheCreatorPanel, _Component);
+
+	function TheCreatorPanel(props) {
+		_classCallCheck(this, TheCreatorPanel);
+
+		var _this = _possibleConstructorReturn(this, (TheCreatorPanel.__proto__ || Object.getPrototypeOf(TheCreatorPanel)).call(this, props));
+
+		_this.state = {
+
+			user_identified: 1,
+			usersAdmin: []
+
+		};
+
+		_this.createSuperUser = _this.createSuperUser.bind(_this);
+		_this.listAllUserAdmin = _this.listAllUserAdmin.bind(_this);
+		_this.addUserAdmin = _this.addUserAdmin.bind(_this);
+		_this.deleteUserAdmin = _this.deleteUserAdmin.bind(_this);
+
+		return _this;
+	}
+
+	_createClass(TheCreatorPanel, [{
+		key: 'listAllUserAdmin',
+		value: function listAllUserAdmin() {
+			var _this2 = this;
+
+			$.get('/api/all_users_admin', function (res) {
+
+				console.log("usuarios listados");
+
+				_this2.setState({ usersAdmin: res });
+			});
+		}
+	}, {
+		key: 'createSuperUser',
+		value: function createSuperUser() {
+			$.post('/api/create_super_user', function (res) {
+				if (res.state == 1) {
+
+					console.log("super usuario registrado");
+				}
+			});
+		}
+	}, {
+		key: 'addUserAdmin',
+		value: function addUserAdmin() {
+			var _this3 = this;
+
+			var user_id = _reactDom2.default.findDOMNode(this.refs.i_id).value.trim();
+
+			var json = {
+				user_id: user_id
+			};
+
+			$.post('/api/add_user_admin', json, function (res) {
+				if (res.state == 1) {
+
+					console.log(" usuario registrado");
+
+					_reactDom2.default.findDOMNode(_this3.refs.i_id).value = '';
+				}
+			});
+		}
+	}, {
+		key: 'deleteUserAdmin',
+		value: function deleteUserAdmin(user_id) {
+			var _this4 = this;
+
+			var json = {
+				user_id: user_id
+			};
+
+			$.post('/api/delete_userAdmin', json, function (res) {
+
+				_this4.setState({ usersAdmin: res.users });
+			});
+		}
+	}, {
+		key: 'componentWillMount',
+		value: function componentWillMount() {
+
+			/*
+   		$.get('/api/is_it_the_creator', (res)=>{
+   			
+   			if(res.state == 1){
+   				
+   				this.setState({user_identified: res.state});
+   
+   				this.listAllUserAdmin();
+   				
+   			}
+   		});
+   */
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this5 = this;
+
+			var panel = void 0;
+
+			if (this.state.user_identified == 1) {
+
+				console.log("super usuario identificado");
+
+				var usersList = [];
+
+				this.state.usersAdmin.map(function (user) {
+
+					var key_id = (0, _uid2.default)();
+
+					usersList.push(_react2.default.createElement(
+						'li',
+						{ key: key_id },
+						_react2.default.createElement(
+							'div',
+							{ className: 'grid' },
+							_react2.default.createElement(
+								'p',
+								null,
+								'User:'
+							),
+							_react2.default.createElement(
+								'p',
+								null,
+								user.name
+							),
+							_react2.default.createElement(
+								'p',
+								null,
+								'ID:'
+							),
+							_react2.default.createElement(
+								'p',
+								null,
+								user._id
+							)
+						),
+						_react2.default.createElement(
+							'span',
+							{ onClick: _this5.deleteUserAdmin.bind(_this5, user._id) },
+							'x'
+						)
+					));
+				});
+
+				panel = _react2.default.createElement(
+					'div',
+					{ className: 'sectionTheCreatorPanel' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'wrapperTheCreatorPanel' },
+						_react2.default.createElement(
+							'h1',
+							null,
+							'The Creator'
+						),
+						_react2.default.createElement('div', { className: 'underlineBlue' }),
+						_react2.default.createElement(
+							'ul',
+							null,
+							_react2.default.createElement(
+								'h3',
+								null,
+								'Team Admin'
+							),
+							usersList
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'form' },
+							_react2.default.createElement(
+								'form',
+								null,
+								_react2.default.createElement('input', { type: 'text', ref: 'i_id', name: 'user_id', placeholder: 'id de usuario' }),
+								_react2.default.createElement(
+									'div',
+									{ onClick: this.addUserAdmin.bind(this) },
+									'Agregar'
+								)
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'h2',
+							null,
+							'Registrar al super Usuario'
+						),
+						_react2.default.createElement(
+							'div',
+							{ onClick: this.createSuperUser.bind(this) },
+							' Registrar'
+						)
+					)
+				);
+			}
+
+			return _react2.default.createElement(
+				'div',
+				null,
+				panel
+			);
+		}
+	}]);
+
+	return TheCreatorPanel;
+}(_react.Component);
+
+exports.default = TheCreatorPanel;
+
+},{"react":218,"react-dom":41,"uid":220}],240:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _uid = require('uid');
+
+var _uid2 = _interopRequireDefault(_uid);
+
+var _parnerRowTrakingPanelDetailInfo = require('./parnerRowTrakingPanelDetailInfo');
+
+var _parnerRowTrakingPanelDetailInfo2 = _interopRequireDefault(_parnerRowTrakingPanelDetailInfo);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *	module dependencies
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
+
+var TrackingEnterpriseInfo = function (_Component) {
+	_inherits(TrackingEnterpriseInfo, _Component);
+
+	function TrackingEnterpriseInfo(props) {
+		_classCallCheck(this, TrackingEnterpriseInfo);
+
+		var _this = _possibleConstructorReturn(this, (TrackingEnterpriseInfo.__proto__ || Object.getPrototypeOf(TrackingEnterpriseInfo)).call(this, props));
+
+		_this.state = {
+
+			enterprise: {},
+			months: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"]
+
+		};
+
+		//this.getEnterprises = this.getEnterprises.bind(this);
+
+		return _this;
+	}
+
+	_createClass(TrackingEnterpriseInfo, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {}
+	}, {
+		key: 'componentWillMount',
+		value: function componentWillMount() {
+			var _this2 = this;
+
+			console.log(this.props.match.params.enterprise_id);
+
+			var json = {
+				enterprise_id: this.props.match.params.enterprise_id
+			};
+
+			$.post('/api/enterprise_detail', json, function (res) {
+				console.log("componentWillMount");
+				console.log(res);
+
+				if (res) {
+
+					_this2.setState({ enterprise: res });
+				}
+			});
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			console.log("TrackingEnterpriseInfo");
+			console.log(this.state.enterprise);
+
+			var isItGoods = void 0,
+			    isItMoney = void 0;
+			var signDate = void 0,
+			    signDateArry = void 0,
+			    signDay = void 0,
+			    signPos = void 0,
+			    signMonth = void 0,
+			    signYear = void 0;
+			var createdDay = void 0,
+			    createdPos = void 0,
+			    createdMonth = void 0,
+			    createdYear = void 0,
+			    createdDate = void 0,
+			    createdDateArry = void 0;
+			var parnerRowTrakingPanelDetailInfo = [];
+			var optionNames = [];
+			var dataReader = void 0;
+			var companyName = void 0,
+			    industry = void 0,
+			    societyType = void 0,
+			    totalCapital = void 0,
+			    accountManager = void 0,
+			    signAppointmentTime = void 0,
+			    signAppointmentLocation = void 0,
+			    price = void 0,
+			    inProcess = void 0,
+			    serviceState = void 0;
+
+			console.log(this.state.enterprise.inProcess);
+			if (this.state.enterprise.inProcess != undefined) {
+				console.log("dentro del if");
+				if (this.state.enterprise.isItMoneyCapital != false) {
+					isItMoney = _react2.default.createElement(
+						'li',
+						null,
+						_react2.default.createElement(
+							'p',
+							{ className: 'fieldValue' },
+							'Dinero'
+						)
+					);
+				}
+
+				if (this.state.enterprise.isItGoodsCapital != false) {
+					isItGoods = _react2.default.createElement(
+						'li',
+						null,
+						_react2.default.createElement(
+							'p',
+							{ className: 'fieldValue' },
+							'Bienes'
+						)
+					);
+				}
+
+				//fechas de firma
+
+				signDate = this.state.enterprise.signAppointmentDate;
+
+				signDateArry = signDate.split("-");
+
+				signDay = signDateArry[2].substr(0, 1);
+
+				signPos = parseInt(signDateArry[1]);
+
+				signMonth = this.state.months[signPos];
+
+				signYear = signDateArry[0];
+
+				//fechas de creaciones
+
+				createdDate = this.state.enterprise.createdAt;
+
+				createdDateArry = createdDate.split("-");
+
+				createdDay = createdDateArry[2].substr(0, 1);
+
+				createdPos = parseInt(createdDateArry[1]);
+
+				createdMonth = this.state.months[createdPos];
+
+				createdYear = createdDateArry[0];
+
+				this.state.enterprise.optionNames.map(function (name) {
+
+					var key_id = (0, _uid2.default)();
+
+					optionNames.push(_react2.default.createElement(
+						'li',
+						{ key: key_id, className: 'fieldValue' },
+						name
+					));
+				});
+
+				var goodsInput = void 0,
+				    moneyInput = void 0,
+				    position = void 0;
+
+				for (var i = 0; i < this.state.enterprise.partners.length; i++) {
+
+					console.log("dentro del for");
+
+					var partner = this.state.enterprise.partners[i];
+
+					console.log(partner.user.name);
+
+					var key_id = (0, _uid2.default)();
+
+					if (partner.goodsInput) {
+						goodsInput = partner.goodsInput;
+					}
+					if (partner.moneyInput) {
+						moneyInput = partner.moneyInput;
+					}
+					if (partner.position) {
+						position = partner.position;
+					}
+
+					parnerRowTrakingPanelDetailInfo.push(_react2.default.createElement(_parnerRowTrakingPanelDetailInfo2.default, {
+						key: key_id,
+						goodsInput: goodsInput,
+						moneyInput: moneyInput,
+						position: position,
+						user: partner.user
+					}));
+				}
+
+				dataReader = this.state.enterprise;
+
+				companyName = dataReader.optionNames[0] + dataReader.societyType;
+				industry = dataReader.industry;
+				societyType = dataReader.societyType;
+				totalCapital = dataReader.totalCapital;
+				accountManager = dataReader.accountManager[0].name;
+				signAppointmentTime = dataReader.signAppointmentTime;
+				signAppointmentLocation = dataReader.signAppointmentLocation;
+				price = dataReader.price;
+				inProcess = dataReader.inProcess;
+				serviceState = dataReader.serviceState;
+			}
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'sectionTrackingEnterprise' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'wrapperTrackingEnteprise' },
+					_react2.default.createElement(
+						'h1',
+						{ className: 'landingTitles' },
+						'Detalle Empresa'
+					),
+					_react2.default.createElement('div', { className: 'underlineBlue' }),
+					_react2.default.createElement(
+						'div',
+						{ className: 'wrapperEnterpriseInfo' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'rowEnterpriseInfo' },
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldName' },
+								'Nombre'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldValue' },
+								companyName
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'rowEnterpriseInfo' },
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldName' },
+								'Opciones de Nombre'
+							),
+							_react2.default.createElement(
+								'ul',
+								{ className: 'rowList' },
+								optionNames
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'rowEnterpriseInfo' },
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldName' },
+								'Rubro'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldValue' },
+								industry
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'rowEnterpriseInfo' },
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldName' },
+								'Tipo de sociedad'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldValue' },
+								societyType
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'rowEnterpriseInfo' },
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldName' },
+								'Composici\xF3n de capital social'
+							),
+							_react2.default.createElement(
+								'ul',
+								null,
+								isItMoney,
+								isItGoods
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'rowEnterpriseInfo' },
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldName' },
+								'Total de capital social'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldValue' },
+								totalCapital
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'rowEnterpriseInfo' },
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldName' },
+								'Usuario admin'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldValue' },
+								accountManager
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'rowEnterpriseInfo' },
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldName' },
+								'Fecha y hora de firma'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldValue' },
+								signDay,
+								' de ',
+								signMonth,
+								' del ',
+								signYear,
+								' a las ',
+								signAppointmentTime
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'rowEnterpriseInfo' },
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldName' },
+								'Lugar de firma'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldValue' },
+								signAppointmentLocation
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'rowEnterpriseInfo' },
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldName' },
+								'Precio'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldValue' },
+								'S/. ',
+								price,
+								'.00'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'rowEnterpriseInfo' },
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldName' },
+								'Estado de proceso'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldValue' },
+								inProcess
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'rowEnterpriseInfo' },
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldName' },
+								'Estado de servicio'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldValue' },
+								serviceState
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'rowEnterpriseInfo' },
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldName' },
+								'Fecha de registro'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldValue' },
+								createdDay,
+								' de ',
+								createdMonth,
+								' del ',
+								createdYear
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'wrapperPartnerInfoList' },
+							_react2.default.createElement(
+								'h2',
+								{ className: 'bigTitlesSS' },
+								'Socios'
+							),
+							_react2.default.createElement('div', { className: 'underlineBlue' }),
+							parnerRowTrakingPanelDetailInfo
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return TrackingEnterpriseInfo;
+}(_react.Component);
+
+exports.default = TrackingEnterpriseInfo;
+
+},{"./parnerRowTrakingPanelDetailInfo":233,"react":218,"react-dom":41,"uid":220}],241:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _reactRouterDom = require('react-router-dom');
+
+var _uid = require('uid');
+
+var _uid2 = _interopRequireDefault(_uid);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *	module dependencies
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
+
+var TrackingPanel = function (_Component) {
+	_inherits(TrackingPanel, _Component);
+
+	function TrackingPanel(props) {
+		_classCallCheck(this, TrackingPanel);
+
+		var _this = _possibleConstructorReturn(this, (TrackingPanel.__proto__ || Object.getPrototypeOf(TrackingPanel)).call(this, props));
+
+		_this.state = {
+
+			user_identified: 0,
+			enterprises: [],
+			months: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"]
+
+		};
+
+		_this.getEnterprises = _this.getEnterprises.bind(_this);
+		_this.handleServiceState = _this.handleServiceState.bind(_this);
+
+		return _this;
+	}
+
+	_createClass(TrackingPanel, [{
+		key: 'getEnterprises',
+		value: function getEnterprises() {
+			var _this2 = this;
+
+			$.get('/api/all_enterprises', function (res) {
+
+				console.log("empresas listadas");
+				console.log(res);
+
+				_this2.setState({ enterprises: res });
+			});
+		}
+	}, {
+		key: 'handleServiceState',
+		value: function handleServiceState() {
+			var _this3 = this;
+
+			var serviceStateSelect = _reactDom2.default.findDOMNode(this.refs.s_serviceState);
+			var serviceState = _reactDom2.default.findDOMNode(this.refs.s_serviceState).value.trim();
+			var enterprise_id = serviceStateSelect.dataset.userid;
+
+			var json = {
+				serviceState: serviceState,
+				enterpriseId: enterprise_id
+			};
+
+			$.post('/api/update_service_state', json, function (res) {
+
+				console.log("service state");
+				console.log(res);
+
+				_this3.setState({ enterprises: res });
+			});
+		}
+	}, {
+		key: 'componentWillMount',
+		value: function componentWillMount() {
+			var _this4 = this;
+
+			$.get('/api/is_it_admin', function (res) {
+				console.log("res");
+				console.log(res);
+
+				if (res.state == 1) {
+
+					_this4.setState({ user_identified: res.state });
+
+					_this4.getEnterprises();
+				}
+			});
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this5 = this;
+
+			var panel = void 0;
+			var enterpriseRow = [];
+
+			console.log(this.state.enterprises);
+
+			if (this.state.user_identified == 1) {
+
+				if (this.state.enterprises.length > 0) {
+
+					this.state.enterprises.map(function (enterprise) {
+						console.log(enterprise);
+
+						var date = enterprise.createdAt;
+
+						var dateArry = date.split("-");
+
+						var day = dateArry[2].substr(0, 1);
+
+						var pos = parseInt(dateArry[1]);
+
+						var month = _this5.state.months[pos];
+
+						var year = dateArry[0];
+
+						var key_id = (0, _uid2.default)();
+
+						var enterprise_url = "panel-detalle-empresas/" + enterprise._id;
+
+						enterpriseRow.push(_react2.default.createElement(
+							'li',
+							{ className: 'trackingListRow', key: key_id },
+							_react2.default.createElement(
+								'div',
+								{ className: 'trackingListGrid' },
+								_react2.default.createElement(
+									'p',
+									{ className: 'fieldValue' },
+									enterprise.optionNames[0]
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'trackingListGrid' },
+								_react2.default.createElement(
+									'p',
+									{ className: 'fieldValue' },
+									enterprise.accountManager[0].name
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'trackingListGrid' },
+								_react2.default.createElement(
+									'p',
+									{ className: 'fieldValue' },
+									' -- '
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'trackingListGrid' },
+								_react2.default.createElement(
+									'p',
+									{ className: 'fieldValue' },
+									'S/. ',
+									enterprise.price,
+									'.00'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'trackingListGrid' },
+								_react2.default.createElement(
+									'p',
+									{ className: 'fieldValue' },
+									day,
+									' de ',
+									month,
+									' del ',
+									year
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'trackingListGrid' },
+								_react2.default.createElement(
+									'select',
+									{ ref: 's_serviceState', defaultValue: enterprise.serviceState, 'data-userid': enterprise._id },
+									_react2.default.createElement(
+										'option',
+										null,
+										'1'
+									),
+									_react2.default.createElement(
+										'option',
+										null,
+										'2'
+									),
+									_react2.default.createElement(
+										'option',
+										null,
+										'3'
+									),
+									_react2.default.createElement(
+										'option',
+										null,
+										'4'
+									),
+									_react2.default.createElement(
+										'option',
+										null,
+										'5'
+									)
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'trackingListGrid' },
+								_react2.default.createElement('p', { className: 'field' }),
+								_react2.default.createElement(
+									'div',
+									{ className: 'btnSaveData', onClick: _this5.handleServiceState.bind() },
+									'Guardar'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'trackingListGrid' },
+								_react2.default.createElement('p', { className: 'field' }),
+								_react2.default.createElement(
+									_reactRouterDom.Link,
+									{ to: enterprise_url, className: 'btnSeeMore' },
+									'ver m\xE1s'
+								)
+							)
+						));
+					});
+				}
+
+				panel = _react2.default.createElement(
+					'div',
+					{ className: 'sectionTrackingPanel' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'wrapperTrackingPanel' },
+						_react2.default.createElement(
+							'h1',
+							{ className: 'landingTitles' },
+							'Lista de Empresas'
+						),
+						_react2.default.createElement('div', { className: 'underlineBlue' }),
+						_react2.default.createElement(
+							'ul',
+							{ className: 'wrapperList' },
+							_react2.default.createElement(
+								'li',
+								{ className: 'fieldsList' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'trackingListGrid' },
+									_react2.default.createElement(
+										'p',
+										{ className: 'field' },
+										'Nombre'
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'trackingListGrid' },
+									_react2.default.createElement(
+										'p',
+										{ className: 'field' },
+										'Usuario'
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'trackingListGrid' },
+									_react2.default.createElement(
+										'p',
+										{ className: 'field' },
+										'Telf de Contacto'
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'trackingListGrid' },
+									_react2.default.createElement(
+										'p',
+										{ className: 'field' },
+										'Precio'
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'trackingListGrid' },
+									_react2.default.createElement(
+										'p',
+										{ className: 'field' },
+										'Fecha de Registro'
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'trackingListGrid' },
+									_react2.default.createElement(
+										'p',
+										{ className: 'field' },
+										'Estado'
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'trackingListGrid' },
+									_react2.default.createElement('p', { className: 'field' })
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'trackingListGrid' },
+									_react2.default.createElement('p', { className: 'field' })
+								)
+							),
+							enterpriseRow
+						)
+					)
+				);
+			}
+
+			return _react2.default.createElement(
+				'div',
+				null,
+				panel
+			);
+		}
+	}]);
+
+	return TrackingPanel;
+}(_react.Component);
+
+exports.default = TrackingPanel;
+
+},{"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],242:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -29941,7 +31278,7 @@ var UserAvatar = function (_Component) {
 
 exports.default = UserAvatar;
 
-},{"react":218,"react-dom":41,"react-router-dom":178}],239:[function(require,module,exports){
+},{"react":218,"react-dom":41,"react-router-dom":178}],243:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -30246,7 +31583,7 @@ var Userprofile = function (_Component) {
 
 exports.default = Userprofile;
 
-},{"./contactRow":226,"./serviceState":237,"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],240:[function(require,module,exports){
+},{"./contactRow":226,"./serviceState":238,"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],244:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -30273,4 +31610,4 @@ var routes = _react2.default.createElement(
 
 _reactDom2.default.render(routes, document.getElementById('container'));
 
-},{"./components/app":223,"react":218,"react-dom":41,"react-router-dom":178}]},{},[240]);
+},{"./components/app":223,"react":218,"react-dom":41,"react-router-dom":178}]},{},[244]);

@@ -40,11 +40,11 @@ export default class PaymentMethodForm extends Component{
 		let num_position = 0
 
 
-		for(let i=0; i<enterprise.partners.length; i++){
+		for(let i=0; i<this.props.enterpriseInProcessData.partners.length; i++){
 						
 			if(this.props.enterpriseInProcessData.partners[i].position != '' && this.props.enterpriseInProcessData.partners[i].position != "Ninguno"){
 				
-				num_positions = num_positions + 1;
+				num_position = num_position + 1;
 			}
 		}
 

@@ -5,6 +5,7 @@ import multer from 'multer'
 import Userprofiles from 'src/server/models/userprofiles'
 import Enterprise from 'src/server/models/enterprises'
 import Partners from 'src/server/models/partners'
+import AppAdmin from 'src/server/models/appadmin'
 
 //configuracion para el router
 const router = express.Router();
@@ -191,7 +192,7 @@ router.post('/signing_date_information', jsonParser, function (req, res){
 
 						let num = num_positions - 1;
 
-						vPartners = num * 40;	
+						vPartners = num * 45;	
 
 					}else{
 
@@ -649,14 +650,355 @@ router.post('/delete_partner_invitation', jsonParser, function (req, res){
 				
 			}
 		});
+});
 
-	
+//ENDPOINT Obtener la lista de empresas con servicio activo
 
+router.get('/all_enterprises', function(req, res){
+	// este debe cambiar a 1 despues de programar el endpoint de actualizacion para recibir solo las activas
 
+	Enterprise.find({inProcess : false}).
+		populate({
+			path : 'partners'
+		}).
+		exec(function(err, enterprise){
+			if(err){
+				res.sendStatus(500).json(err)
+			}else{
 
+				let options = {
+					path : 'partners.user',
+					model : 'Userprofiles'
+				}
+				
+				Enterprise.populate(enterprise, options, function (err, enterprise_info){
+					if (err) throw err;
+
+					let options = {
+						path : 'accountManager',
+						model : 'Userprofiles'
+					}
+
+					Enterprise.populate(enterprise_info, options, function(err, e_data){
+						if(err){
+							res.sendStatus(500).json(err)
+						}else{
+							res.json(e_data)
+						}
+					});
+
+				});
+
+			}
+		})
 
 });
 
+
+//ENDPOINT listar usuarios admin
+
+router.get('/all_users_admin', function(req, res){
+
+	AppAdmin.find({}).
+		populate({
+			path: "users",
+			model : "Userprofiles"
+		}).
+		exec(function(err, appAdmin){
+			if(err){
+				res.sendStatus(500).json(err)
+			}else{
+
+				let json = appAdmin[0].users
+				res.json(json);
+
+			}
+		});
+
+});
+
+
+//ENDPOINT Detalle empresa
+
+router.post('/enterprise_detail', function(req, res){
+	if (!req.body) return res.sendStatus(400)
+		let data = req.body;
+		console.log(data)
+
+	Enterprise.findById(data.enterprise_id).
+		populate({
+			path: "partners"
+		}).
+		exec(function(err, enterprise){
+			if(err){
+				res.sendStatus(500).json(err)
+			}else{
+
+				let options = {
+					path : 'partners.user',
+					model : 'Userprofiles'
+				}
+
+				Userprofiles.populate(enterprise, options, function(err, enterprise_info){
+					if (err) throw err;
+					
+				
+					let options = {
+						path : 'accountManager',
+						model : 'Userprofiles'
+					} 
+
+					Userprofiles.populate(enterprise, options, function(err, result){
+						if(err){
+
+							res.sendStatus(500).json(err)
+
+						}else{
+
+							res.json(result);
+						}
+					});
+				});
+
+				
+
+			}
+		});
+
+});
+
+
+// ENDPOINT Asignar permisos de usuario
+
+router.post('/add_user_admin', jsonParser, function (req, res){
+	if (!req.body) return res.sendStatus(400)
+		let data = req.body;
+		
+
+		AppAdmin.find({}, function(err, appadmin){
+
+			
+			if(err){
+				res.sendStatus(500).json(err)
+			}else{
+
+				if(req.user._id == appadmin[0].theCreator){
+					appadmin[0].users.push(data.user_id);
+
+					appadmin[0].save(function(err){
+						if(err){
+							res.sendStatus(500).json(err)
+						}else{
+
+							let json = { state : 1}
+							res.json(json);
+
+						}
+					})
+
+				}else{
+					let json = {state : 0}	
+					res.json(json);
+				}
+
+			}
+
+		});
+		
+
+	
+});
+
+
+// ENDPOINT Eliminar userAdmin
+
+router.post('/delete_userAdmin', jsonParser, function (req, res){
+	if (!req.body) return res.sendStatus(400)
+		let data = req.body;
+		console.log(data)
+
+
+		AppAdmin.find().
+			populate({
+				path : 'users'
+			}).
+			exec(function(err, adminData){
+
+				console.log(adminData)
+				if(err){
+					res.sendStatus(500).json(err)
+				}else{
+					for(let i = 0; i < adminData[0].users.length; i++){
+
+						if(adminData[0].users[i]._id == data.user_id){
+
+							adminData[0].users.splice(i, 1);
+
+							adminData[0].save(function(err){
+								if(err){
+									res.sendStatus(500).json(err)
+								}else{
+
+									let json = {
+										users : adminData[0].users
+									}
+									res.json(json)
+
+								}
+							})
+
+						}
+					}
+				}
+			});
+
+	
+});
+
+// ENDPOINT crear super usuario
+
+router.post('/create_super_user', jsonParser, function (req, res){
+	if (!req.body) return res.sendStatus(400)
+		let data = req.body;
+		console.log(data)
+
+		let appAdmin = new AppAdmin()
+
+		appAdmin.theCreator = req.user._id;
+		appAdmin.users.push(req.user._id);
+
+
+		appAdmin.save(function(err){
+			if(err){
+				res.sendStatus(500).json(err)
+			}else{
+
+				let data = {
+					state : 1
+				}
+
+				res.json(data)
+
+			}
+		});
+
+
+
+	
+});
+
+
+// ENDPOINT confirmación si es the creator
+
+router.get('/is_it_the_creator', function(req, res){
+	if (!req.body) return res.sendStatus(400)
+		let data = req.body;
+		
+
+	AppAdmin.find().
+		exec(function(err, appadmin){
+
+			let adminData = appadmin[0];
+
+			if(err){
+				res.sendStatus(500).json(err)
+			}else{
+				if(adminData.theCreator == req.user._id){
+
+					let json ={ state : 1}
+					res.json(json);
+				}else{
+					let json = {state : 0}
+					res.json(json);
+				}
+			}
+		});
+
+});
+
+// ENDPOINT confirmacion si es admin
+
+router.get('/is_it_admin', function(req, res){
+	if (!req.body) return res.sendStatus(400)
+		let data = req.body;
+
+	AppAdmin.find().
+		exec(function(err, appadmin){
+			if(err){
+				res.sendStatus(500).json(err)
+			}else{
+
+				for(let i=0; i < appadmin[0].users.length; i++){
+					if(req.user._id == appadmin[0].users[i]){
+						let json = { state : 1}
+						res.json(json);
+						break;
+					}else{
+						let json = {state : 0}
+						res.json(json);
+					}
+				}
+				
+			}
+		});
+
+});
+
+//ENDPOINT update service state
+
+router.post('/update_service_state', jsonParser, function (req, res){
+	if (!req.body) return res.sendStatus(400)
+		let data = req.body;
+
+		Enterprise.findById(data.enterpriseId).
+			exec(function(err, enterprise){
+
+				enterprise.serviceState = data.serviceState;
+
+				enterprise.save(function(err){
+					if(err){
+						res.sendStatus(500).json(err)
+					}else{
+
+						Enterprise.find({inProcess : false}).
+							populate({
+								path : 'partners'
+							}).
+							exec(function(err, enterprise){
+								if(err){
+									res.sendStatus(500).json(err)
+								}else{
+
+									let options = {
+										path : 'partners.user',
+										model : 'Userprofiles'
+									}
+									
+									Enterprise.populate(enterprise, options, function (err, enterprise_info){
+										if (err) throw err;
+
+										let options = {
+											path : 'accountManager',
+											model : 'Userprofiles'
+										}
+
+										Enterprise.populate(enterprise_info, options, function(err, e_data){
+											if(err){
+												res.sendStatus(500).json(err)
+											}else{
+												res.json(e_data)
+											}
+										});
+
+									});
+
+								}
+							})
+
+					}
+				});
+			});
+});
 
 
 export default router
