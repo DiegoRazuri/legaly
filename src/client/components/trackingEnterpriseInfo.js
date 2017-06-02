@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 
 import uid from 'uid'
-import ParnerRowTrakingPanelDetailInfo from './parnerRowTrakingPanelDetailInfo'
+import PartnerRowTrakingPanelDetailInfo from './partnerRowTrakingPanelDetailInfo'
 
 export default class TrackingEnterpriseInfo extends Component{
 
@@ -59,7 +59,7 @@ export default class TrackingEnterpriseInfo extends Component{
 		let isItGoods, isItMoney;
 		let signDate, signDateArry, signDay, signPos, signMonth, signYear;
 		let createdDay, createdPos, createdMonth, createdYear, createdDate, createdDateArry;
-		let parnerRowTrakingPanelDetailInfo = [];
+		let partnerRowTrakingPanelDetailInfo = [];
 		let optionNames = [];
 		let dataReader;
 		let companyName, industry, societyType, totalCapital, accountManager, signAppointmentTime, signAppointmentLocation, price, inProcess, serviceState;
@@ -138,8 +138,8 @@ export default class TrackingEnterpriseInfo extends Component{
 				}
 
 
-				parnerRowTrakingPanelDetailInfo.push(
-					<ParnerRowTrakingPanelDetailInfo
+				partnerRowTrakingPanelDetailInfo.push(
+					<PartnerRowTrakingPanelDetailInfo
 					key= {key_id}
 					goodsInput = {goodsInput}
 					moneyInput = {moneyInput}
@@ -247,7 +247,7 @@ export default class TrackingEnterpriseInfo extends Component{
 
 
 								{
-									parnerRowTrakingPanelDetailInfo
+									partnerRowTrakingPanelDetailInfo
 								}
 
 

@@ -27966,6 +27966,111 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *	module dependencies
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
+
+var PartnerRowInput = function (_Component) {
+	_inherits(PartnerRowInput, _Component);
+
+	function PartnerRowInput(props) {
+		_classCallCheck(this, PartnerRowInput);
+
+		var _this = _possibleConstructorReturn(this, (PartnerRowInput.__proto__ || Object.getPrototypeOf(PartnerRowInput)).call(this, props));
+
+		_this.state = {
+
+			partnerSelected: 0,
+			numberOfGoods: 1
+		};
+
+		_this.deletingRow = _this.deletingRow.bind(_this);
+
+		return _this;
+	}
+
+	_createClass(PartnerRowInput, [{
+		key: 'deletingRow',
+		value: function deletingRow() {
+			var json = {
+				partnerSelected: this.props.partnerListPos,
+				user_id: this.props.user_id,
+				enterprise_id: this.props.enterprise_id,
+				partner_id: this.props.partner_id
+			};
+
+			this.props.deletingPartnerRow.call(null, json);
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'partnerRow partnerRowInfo', 'data-partnerlistpos': this.props.partnerListPos },
+				_react2.default.createElement(
+					'div',
+					{ className: 'gridFormShort gridEmail' },
+					_react2.default.createElement(
+						'label',
+						{ className: 'smallContent' },
+						this.props.number,
+						'. Socio'
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'smallContent' },
+						this.props.name
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'gridFormShort gridPosition' },
+					_react2.default.createElement(
+						'label',
+						{ className: 'smallContent' },
+						'Cargo'
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'smallContent' },
+						this.props.position
+					)
+				),
+				_react2.default.createElement('span', { className: 'icon-cross smallContent', onClick: this.deletingRow.bind() })
+			);
+		}
+	}]);
+
+	return PartnerRowInput;
+}(_react.Component);
+
+exports.default = PartnerRowInput;
+
+},{"react":218,"react-dom":41}],234:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _uid = require('uid');
 
 var _uid2 = _interopRequireDefault(_uid);
@@ -27981,16 +28086,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
 
-var ParnerRowTrakingPanelDetailInfo = function (_Component) {
-	_inherits(ParnerRowTrakingPanelDetailInfo, _Component);
+var PartnerRowTrakingPanelDetailInfo = function (_Component) {
+	_inherits(PartnerRowTrakingPanelDetailInfo, _Component);
 
-	function ParnerRowTrakingPanelDetailInfo() {
-		_classCallCheck(this, ParnerRowTrakingPanelDetailInfo);
+	function PartnerRowTrakingPanelDetailInfo() {
+		_classCallCheck(this, PartnerRowTrakingPanelDetailInfo);
 
-		return _possibleConstructorReturn(this, (ParnerRowTrakingPanelDetailInfo.__proto__ || Object.getPrototypeOf(ParnerRowTrakingPanelDetailInfo)).apply(this, arguments));
+		return _possibleConstructorReturn(this, (PartnerRowTrakingPanelDetailInfo.__proto__ || Object.getPrototypeOf(PartnerRowTrakingPanelDetailInfo)).apply(this, arguments));
 	}
 
-	_createClass(ParnerRowTrakingPanelDetailInfo, [{
+	_createClass(PartnerRowTrakingPanelDetailInfo, [{
 		key: 'render',
 		value: function render() {
 			console.log(this.props.user);
@@ -28202,117 +28307,12 @@ var ParnerRowTrakingPanelDetailInfo = function (_Component) {
 		}
 	}]);
 
-	return ParnerRowTrakingPanelDetailInfo;
+	return PartnerRowTrakingPanelDetailInfo;
 }(_react.Component);
 
-exports.default = ParnerRowTrakingPanelDetailInfo;
+exports.default = PartnerRowTrakingPanelDetailInfo;
 
-},{"react":218,"react-dom":41,"uid":220}],234:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = require('react-dom');
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *	module dependencies
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
-
-
-var PartnerRowInput = function (_Component) {
-	_inherits(PartnerRowInput, _Component);
-
-	function PartnerRowInput(props) {
-		_classCallCheck(this, PartnerRowInput);
-
-		var _this = _possibleConstructorReturn(this, (PartnerRowInput.__proto__ || Object.getPrototypeOf(PartnerRowInput)).call(this, props));
-
-		_this.state = {
-
-			partnerSelected: 0,
-			numberOfGoods: 1
-		};
-
-		_this.deletingRow = _this.deletingRow.bind(_this);
-
-		return _this;
-	}
-
-	_createClass(PartnerRowInput, [{
-		key: 'deletingRow',
-		value: function deletingRow() {
-			var json = {
-				partnerSelected: this.props.partnerListPos,
-				user_id: this.props.user_id,
-				enterprise_id: this.props.enterprise_id,
-				partner_id: this.props.partner_id
-			};
-
-			this.props.deletingPartnerRow.call(null, json);
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-
-			return _react2.default.createElement(
-				'div',
-				{ className: 'partnerRow partnerRowInfo', 'data-partnerlistpos': this.props.partnerListPos },
-				_react2.default.createElement(
-					'div',
-					{ className: 'gridFormShort gridEmail' },
-					_react2.default.createElement(
-						'label',
-						{ className: 'smallContent' },
-						this.props.number,
-						'. Socio'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'smallContent' },
-						this.props.name
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'gridFormShort gridPosition' },
-					_react2.default.createElement(
-						'label',
-						{ className: 'smallContent' },
-						'Cargo'
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'smallContent' },
-						this.props.position
-					)
-				),
-				_react2.default.createElement('span', { className: 'icon-cross smallContent', onClick: this.deletingRow.bind() })
-			);
-		}
-	}]);
-
-	return PartnerRowInput;
-}(_react.Component);
-
-exports.default = PartnerRowInput;
-
-},{"react":218,"react-dom":41}],235:[function(require,module,exports){
+},{"react":218,"react-dom":41,"uid":220}],235:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28868,7 +28868,7 @@ var PartnersAddingForm = function (_Component) {
 
 exports.default = PartnersAddingForm;
 
-},{"./partnerRowInput":234,"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],236:[function(require,module,exports){
+},{"./partnerRowInput":233,"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],236:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -30421,9 +30421,9 @@ var _uid = require('uid');
 
 var _uid2 = _interopRequireDefault(_uid);
 
-var _parnerRowTrakingPanelDetailInfo = require('./parnerRowTrakingPanelDetailInfo');
+var _partnerRowTrakingPanelDetailInfo = require('./partnerRowTrakingPanelDetailInfo');
 
-var _parnerRowTrakingPanelDetailInfo2 = _interopRequireDefault(_parnerRowTrakingPanelDetailInfo);
+var _partnerRowTrakingPanelDetailInfo2 = _interopRequireDefault(_partnerRowTrakingPanelDetailInfo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30500,7 +30500,7 @@ var TrackingEnterpriseInfo = function (_Component) {
 			    createdYear = void 0,
 			    createdDate = void 0,
 			    createdDateArry = void 0;
-			var parnerRowTrakingPanelDetailInfo = [];
+			var partnerRowTrakingPanelDetailInfo = [];
 			var optionNames = [];
 			var dataReader = void 0;
 			var companyName = void 0,
@@ -30604,7 +30604,7 @@ var TrackingEnterpriseInfo = function (_Component) {
 						position = partner.position;
 					}
 
-					parnerRowTrakingPanelDetailInfo.push(_react2.default.createElement(_parnerRowTrakingPanelDetailInfo2.default, {
+					partnerRowTrakingPanelDetailInfo.push(_react2.default.createElement(_partnerRowTrakingPanelDetailInfo2.default, {
 						key: key_id,
 						goodsInput: goodsInput,
 						moneyInput: moneyInput,
@@ -30615,7 +30615,7 @@ var TrackingEnterpriseInfo = function (_Component) {
 
 				dataReader = this.state.enterprise;
 
-				companyName = dataReader.optionNames[0] + dataReader.societyType;
+				companyName = dataReader.optionNames[0] + " " + dataReader.societyType;
 				industry = dataReader.industry;
 				societyType = dataReader.societyType;
 				totalCapital = dataReader.totalCapital;
@@ -30846,7 +30846,7 @@ var TrackingEnterpriseInfo = function (_Component) {
 								'Socios'
 							),
 							_react2.default.createElement('div', { className: 'underlineBlue' }),
-							parnerRowTrakingPanelDetailInfo
+							partnerRowTrakingPanelDetailInfo
 						)
 					)
 				)
@@ -30859,7 +30859,7 @@ var TrackingEnterpriseInfo = function (_Component) {
 
 exports.default = TrackingEnterpriseInfo;
 
-},{"./parnerRowTrakingPanelDetailInfo":233,"react":218,"react-dom":41,"uid":220}],241:[function(require,module,exports){
+},{"./partnerRowTrakingPanelDetailInfo":234,"react":218,"react-dom":41,"uid":220}],241:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
