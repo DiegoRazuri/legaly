@@ -4,8 +4,8 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 
-import uid from 'uid'
-import PartnerRowTrakingPanelDetailInfo from './partnerRowTrakingPanelDetailInfo'
+import uid from 'uid';
+import PartnerRowTrakingPanelDetailInfo from './partnerRowTrakingPanelDetailInfo';
 
 export default class TrackingEnterpriseInfo extends Component{
 
