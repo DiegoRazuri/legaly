@@ -818,27 +818,34 @@ router.get('/is_it_the_creator', function (req, res) {
 
 // ENDPOINT confirmacion si es admin
 
-router.get('/is_it_admin', function (req, res) {
+router.post('/is_it_admin', function (req, res) {
 	if (!req.body) return res.sendStatus(400);
-	var data = req.body;
+
+	console.log("is_it_admin");
+	console.log(req.user._id);
 
 	if (req.user) {
-		_appadmin2.default.find().exec(function (err, appadmin) {
+		_appadmin2.default.find().populate({
+			path: "users"
+		}).exec(function (err, appadmin) {
 			if (err) {
 				res.sendStatus(500).json(err);
 			} else {
 
-				for (var i = 0; i < appadmin[0].users.length; i++) {
+				var json = void 0;
 
-					if (req.user._id == appadmin[0].users[i]) {
-						var json = { state: 1 };
-						res.json(json);
+				for (var i = 0; i < appadmin[0].users.length; i++) {
+					console.log("usuario");
+					console.log(appadmin[0].users[i]);
+					if (req.user._id == appadmin[0].users[i]._id) {
+						json = { state: 1 };
+
 						break;
 					} else {
-						var _json2 = { state: 0 };
-						res.json(_json2);
+						json = { state: 0 };
 					}
 				}
+				res.json(json);
 			}
 		});
 	}
