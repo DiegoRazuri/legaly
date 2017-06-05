@@ -100,7 +100,7 @@ export default class TrackingPanel extends Component{
 	componentWillMount(){
 	
 			console.log("usuario existe")
-			$.get('/api/is_it_admin', (res)=>{
+			$.post('/api/is_it_admin', (res)=>{
 				console.log("res")
 				console.log(res)
 				

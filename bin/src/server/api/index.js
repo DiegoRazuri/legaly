@@ -704,16 +704,20 @@ router.post('/add_user_admin', jsonParser, function (req, res) {
 		} else {
 
 			if (req.user._id == appadmin[0].theCreator) {
-				appadmin[0].users.push(data.user_id);
 
-				appadmin[0].save(function (err) {
-					if (err) {
-						res.sendStatus(500).json(err);
-					} else {
+				_userprofiles2.default.findById(data.user_id).exec(function (err, user) {
 
-						var json = { state: 1 };
-						res.json(json);
-					}
+					appadmin[0].users.push(user._id);
+
+					appadmin[0].save(function (err) {
+						if (err) {
+							res.sendStatus(500).json(err);
+						} else {
+
+							var json = { state: 1 };
+							res.json(json);
+						}
+					});
 				});
 			} else {
 				var json = { state: 0 };

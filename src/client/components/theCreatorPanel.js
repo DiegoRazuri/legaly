@@ -87,7 +87,7 @@ export default class TheCreatorPanel extends Component{
 
 	componentWillMount(){
 		
-/*
+
 		$.get('/api/is_it_the_creator', (res)=>{
 			
 			if(res.state == 1){
@@ -98,7 +98,7 @@ export default class TheCreatorPanel extends Component{
 				
 			}
 		});
-*/
+
 	}
 
 

@@ -30009,24 +30009,22 @@ var TheCreatorPanel = function (_Component) {
 	}, {
 		key: 'componentWillMount',
 		value: function componentWillMount() {
+			var _this5 = this;
 
-			/*
-   		$.get('/api/is_it_the_creator', (res)=>{
-   			
-   			if(res.state == 1){
-   				
-   				this.setState({user_identified: res.state});
-   
-   				this.listAllUserAdmin();
-   				
-   			}
-   		});
-   */
+			$.get('/api/is_it_the_creator', function (res) {
+
+				if (res.state == 1) {
+
+					_this5.setState({ user_identified: res.state });
+
+					_this5.listAllUserAdmin();
+				}
+			});
 		}
 	}, {
 		key: 'render',
 		value: function render() {
-			var _this5 = this;
+			var _this6 = this;
 
 			var panel = void 0;
 
@@ -30069,7 +30067,7 @@ var TheCreatorPanel = function (_Component) {
 						),
 						_react2.default.createElement(
 							'span',
-							{ onClick: _this5.deleteUserAdmin.bind(_this5, user._id) },
+							{ onClick: _this6.deleteUserAdmin.bind(_this6, user._id) },
 							'x'
 						)
 					));
@@ -30731,7 +30729,7 @@ var TrackingPanel = function (_Component) {
 			var _this4 = this;
 
 			console.log("usuario existe");
-			$.get('/api/is_it_admin', function (res) {
+			$.post('/api/is_it_admin', function (res) {
 				console.log("res");
 				console.log(res);
 

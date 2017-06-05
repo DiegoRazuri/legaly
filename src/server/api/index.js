@@ -783,18 +783,24 @@ router.post('/add_user_admin', jsonParser, function (req, res){
 			}else{
 
 				if(req.user._id == appadmin[0].theCreator){
-					appadmin[0].users.push(data.user_id);
 
-					appadmin[0].save(function(err){
-						if(err){
-							res.sendStatus(500).json(err)
-						}else{
+					Userprofiles.findById(data.user_id).
+						exec(function(err, user){
 
-							let json = { state : 1}
-							res.json(json);
+							appadmin[0].users.push(user._id);
 
-						}
-					})
+							appadmin[0].save(function(err){
+								if(err){
+									res.sendStatus(500).json(err)
+								}else{
+
+									let json = { state : 1}
+									res.json(json);
+
+								}
+							})
+						});
+					
 
 				}else{
 					let json = {state : 0}	
@@ -918,29 +924,37 @@ router.get('/is_it_the_creator', function(req, res){
 
 // ENDPOINT confirmacion si es admin
 
-router.get('/is_it_admin', function(req, res){
+router.post('/is_it_admin', function(req, res){
 	if (!req.body) return res.sendStatus(400)
-		let data = req.body;
+		
+	console.log("is_it_admin")
+	console.log(req.user._id)
 
 	if(req.user){
 		AppAdmin.find().
+			populate({
+				path : "users"
+			}).
 			exec(function(err, appadmin){
 				if(err){
 					res.sendStatus(500).json(err)
 				}else{
 
+					let json;
+
 					for(let i=0; i < appadmin[0].users.length; i++){
-
-
-						if(req.user._id == appadmin[0].users[i]){
-							let json = { state : 1}
-							res.json(json);
+						console.log("usuario")
+						console.log(appadmin[0].users[i])
+						if(req.user._id == appadmin[0].users[i]._id){
+							json = { state : 1}
+							
 							break;
 						}else{
-							let json = {state : 0}
-							res.json(json);
+							json = {state : 0}
+							
 						}
 					}
+					res.json(json);
 					
 				}
 			});
