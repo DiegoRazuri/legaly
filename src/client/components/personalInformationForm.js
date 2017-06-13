@@ -20,10 +20,12 @@ export default class PersonalInformationForm extends Component{
 
 			partnerSelected: 0,
 			numberOfGoods : 1,
+			goodsSeparation : ""
 		}
 
 		this.addGood = this.addGood.bind(this);
 		this.switchPartnerSelected = this.switchPartnerSelected.bind(this);
+		this.handleGoodSeparator = this.handleGoodSeparator.bind(this);
 		
 	}
 	
@@ -57,6 +59,12 @@ export default class PersonalInformationForm extends Component{
 
 		return
 
+	}
+
+	handleGoodSeparator(ev){
+		this.setState({
+			goodsSeparation : ev.target.value
+		})
 	}
 
 	
@@ -138,7 +146,7 @@ export default class PersonalInformationForm extends Component{
 		//agregando los inputs
 
 
-		let inputName, inputDocTypePartner, inputDocPartnerNumber, inputMail, inputLocation, inputCivilStatus, inputDocTypeCouple, inputDocNumCouple, inputMoneyInvestment;
+		let inputName, inputDocTypePartner, inputDocPartnerNumber, inputMail, inputLocation, inputCivilStatus, inputDocTypeCouple, inputDocNumCouple, inputMoneyInvestment, inputGoodsSeparation, inputRegistryNumber, inputRegistryOffice, inputPosition;
 		
 		if(dataReaderPartner.user){
 			
@@ -175,6 +183,83 @@ export default class PersonalInformationForm extends Component{
 			inputDocNumCouple = <input type="number" ref="couple_document_number_i" value={dataReaderPartner.user.coupleDocumentNumber != undefined ? dataReaderPartner.user.coupleDocumentNumber : ""} onChange={this.props.inputTextHandler.bind()} name="coupleDocumentNumber" data-pos={this.state.partnerSelected}/>
 		
 			inputMoneyInvestment =<input type="number" ref="user_money_investment_i" value={dataReaderPartner.moneyInput != undefined ? dataReaderPartner.moneyInput : ""} onChange={this.props.inputTextHandler.bind()} name="moneyInput" data-pos={this.state.partnerSelected}/>
+	
+			inputGoodsSeparation = <div className="wrapperInputRadio">
+										<label>
+											<input type="radio" name="goodsSeparation" onChange={this.props.selectHandler.bind()} checked={dataReaderPartner.user.goodsSeparation === "1"} value="1" data-pos={this.state.partnerSelected}/>Si
+										</label>
+										<label>
+											<input type="radio" name="goodsSeparation" onChange={this.props.selectHandler.bind()} checked={dataReaderPartner.user.goodsSeparation === "0"} value="0" data-pos={this.state.partnerSelected}/>No
+										</label>
+										
+										
+									</div>
+
+			inputRegistryNumber = <input type="text" value={dataReaderPartner.user.registryNumber != undefined ? dataReaderPartner.user.registryNumber : ""} onChange={this.props.inputTextHandler.bind()} name="registryNumber" data-pos={this.state.partnerSelected}/>
+
+			inputRegistryOffice = <select onChange={this.props.selectHandler.bind()} value={dataReaderPartner.user.regitryOffice != undefined ? dataReaderPartner.user.regitryOffice : ""} name="regitryOffice" data-pos={this.state.partnerSelected}>
+									<option disabled></option>
+									<option>ABANCAY</option>
+									<option>AREQUIPA</option>
+									<option>AYACUCHO</option>
+									<option>BAGUA</option>
+									<option>BARRANCA</option>
+									<option>CAJAMARCA</option>
+									<option>CALLAO</option>
+									<option>CAMANA</option>
+									<option>CASMA</option>
+									<option>CASTILLA-APLAO</option>
+									<option>CAÑETE</option>
+									<option>CHACHAPOYAS</option>
+									<option>CHEPEN</option>
+									<option>CHICLAYO</option>
+									<option>CHIMBOTE</option>
+									<option>CHINCHA</option>
+									<option>CHOTA</option>
+									<option>CUSCO</option>
+									<option>ESPINAR</option>
+									<option>HUACHO</option>
+									<option>HUAMACHUCO</option>
+									<option>HUANCAVELICA</option>
+									<option>HUANCAYO</option>
+									<option>HUANTA</option>
+									<option>HUANUCO</option>
+									<option>HUARAL</option>
+									<option>HUARAZ</option>
+									<option>ICA</option>
+									<option>ILO</option>
+									<option>ISLAY - MOLLENDO</option>
+									<option>JAEN</option>
+									<option>JUANJUI</option>
+									<option>JULIACA</option>
+									<option>LA MERCED</option>
+									<option>LIMA</option>
+									<option>MADRE DE DIOS</option>
+									<option>MAYNAS</option>
+									<option>MOQUEGUA</option>
+									<option>MOYOBAMBA</option>
+									<option>NAZCA</option>
+									<option>OTUZCO</option>
+									<option>PASCO</option>
+									<option>PISCO</option>
+									<option>PIURA</option>
+									<option>PUCALLPA</option>
+									<option>PUNO</option>
+									<option>QUILLABAMBA</option>
+									<option>SAN PEDRO</option>
+									<option>SATIPO</option>
+									<option>SICUANI</option>
+									<option>SULLANA</option>
+									<option>TACNA</option>
+									<option>TARAPOTO</option>
+									<option>TARMA</option>
+									<option>TINGO MARIA</option>
+									<option>TRUJILLO</option>
+									<option>TUMBES</option>
+									<option>YURIMAGUAS</option>
+								</select>
+
+			inputPosition = <input type="text" value={dataReaderPartner.user.position != undefined ? dataReaderPartner.user.position : ""} onChange={this.props.inputTextHandler.bind()} name="position" data-pos={this.state.partnerSelected}/>
 		}
 
 
@@ -302,6 +387,14 @@ export default class PersonalInformationForm extends Component{
 										</div>
 									</div>
 									<div className="gridFormLarge">
+										<label className="smallContent">Ocupación:</label>
+										<div className="inputSingleValue">
+											{inputPosition}
+											
+											<span></span>
+										</div>
+									</div>
+									<div className="gridFormLarge">
 										<label className="smallContent">Correo:</label>
 										<div className="inputSingleValue">
 											{inputMail}
@@ -309,6 +402,7 @@ export default class PersonalInformationForm extends Component{
 											<span></span>
 										</div>
 									</div>
+
 									<div className="gridFormLarge">
 										<label className="smallContent">Domicilio:</label>
 										<div className="inputSingleValue">
@@ -319,14 +413,44 @@ export default class PersonalInformationForm extends Component{
 									</div>
 									<div className="gridFormShort">
 										<label className="smallContent">Estado civil:</label>
+										<br/>
 										<div className="inputSelect">
 											{inputCivilStatus}
 											
 											<span className="icoInputSelect"></span>
 										</div>
 									</div>
+									
 									<div className="gridFormShort">
+										<label className="smallContent">¿Cuentas con separación de bienes?</label>
+										<div className="inputSelect wrapperRadios">
+											{inputGoodsSeparation}
+											
+										</div>
 									</div>
+
+									<label className="smallContent lblOptional">Si cuentas con separación de bienes ingresa estos datos</label>
+
+									<div className="gridFormShort">
+										<label className="smallContent">Nº de partida registral:</label>
+										<div className="inputSingleValue">
+											{inputRegistryNumber}
+											
+											<span className="icon-credit-card"></span>
+										</div>
+									</div>
+									<div className="gridFormShort">
+										<label className="smallContent">Oficina Registral:</label>
+										<div className="inputSelect">
+											{inputRegistryOffice}
+
+											
+											<span className="icon-briefcase icoInputSelect"></span>
+										</div>
+									</div>
+									
+
+									
 									
 									<label className="smallContent lblOptional">Documento de identidad del cónyugue</label>
 									

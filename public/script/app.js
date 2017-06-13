@@ -24217,13 +24217,25 @@ var App = function (_Component) {
 		_this.rowAccountManagerInputHandler = _this.rowAccountManagerInputHandler.bind(_this);
 		_this.updatePartnerInvitation = _this.updatePartnerInvitation.bind(_this);
 		_this.switchBtnNavSelected = _this.switchBtnNavSelected.bind(_this);
+		_this.resetEnterpriseRegistrationData = _this.resetEnterpriseRegistrationData.bind(_this);
 
 		return _this;
 	}
 
-	// no se esta utilizando pero sirve de ejemplo
-
 	_createClass(App, [{
+		key: 'resetEnterpriseRegistrationData',
+		value: function resetEnterpriseRegistrationData() {
+			this.setState({
+				enterpriseInProcessData: {},
+				partnersInvitationSaved: 0,
+				enterpriseSaved: 0,
+				enterpriseInProcess: 0
+			});
+		}
+
+		// no se esta utilizando pero sirve de ejemplo
+
+	}, {
 		key: 'switchStepState',
 		value: function switchStepState(key) {
 			if (this.state[key] == 0) {
@@ -24860,7 +24872,9 @@ var App = function (_Component) {
 				_react2.default.createElement(
 					'div',
 					{ className: 'wrapperViews' },
-					_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _landing2.default }),
+					_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render(props) {
+							return _react2.default.createElement(_landing2.default, { resetEnterpriseRegistrationData: _this9.resetEnterpriseRegistrationData });
+						} }),
 					_react2.default.createElement(_reactRouterDom.Route, { path: '/informacion-empresa', render: function render(props) {
 							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_enterpriseInformationForm2.default, { user: _this9.state.user, sendEnterpriseInformation: _this9.sendEnterpriseInformation, enterpriseInProcessData: _this9.state.enterpriseInProcessData, enterpriseInProcess: _this9.state.enterpriseInProcess, enterpriseSaved: _this9.state.enterpriseSaved, updateEnterpriseInformation: _this9.updateEnterpriseInformation });
 						} }),
@@ -25607,19 +25621,7 @@ var DateForm = function (_Component) {
 										)
 									)
 								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'gridFormLarge gridFormMutable wrapperBtnTransparent' },
-									_react2.default.createElement(
-										_reactRouterDom.Link,
-										{ to: '/informacion-perosnal' },
-										_react2.default.createElement(
-											'div',
-											{ className: 'btnTransparentBackground' },
-											'Anterior'
-										)
-									)
-								)
+								_react2.default.createElement('div', { className: 'gridFormLarge gridFormMutable wrapperBtnTransparent' })
 							)
 						)
 					)
@@ -25758,6 +25760,9 @@ var DateForm = function (_Component) {
 
 	return DateForm;
 }(_react.Component);
+
+//<Link to="/informacion-perosnal"><div className="btnTransparentBackground">Anterior</div></Link>
+
 
 exports.default = DateForm;
 
@@ -27357,6 +27362,7 @@ var Landing = function (_Component) {
 		key: 'componentDidMount',
 		value: function componentDidMount() {
 			window.scrollTo(0, 0);
+			this.props.resetEnterpriseRegistrationData.call(null);
 		}
 	}, {
 		key: 'render',
@@ -28456,19 +28462,7 @@ var PartnersAddingForm = function (_Component) {
 										)
 									)
 								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'gridFormLarge gridFormMutable wrapperBtnTransparent' },
-									_react2.default.createElement(
-										_reactRouterDom.Link,
-										{ to: '/informacion-empresa' },
-										_react2.default.createElement(
-											'div',
-											{ className: 'btnTransparentBackground' },
-											'Anterior'
-										)
-									)
-								)
+								_react2.default.createElement('div', { className: 'gridFormLarge gridFormMutable wrapperBtnTransparent' })
 							)
 						)
 					)
@@ -28608,6 +28602,9 @@ var PartnersAddingForm = function (_Component) {
 	return PartnersAddingForm;
 }(_react.Component);
 
+//<Link to="/informacion-empresa"><div className="btnTransparentBackground">Anterior</div></Link>
+
+
 exports.default = PartnersAddingForm;
 
 },{"./partnerRowInput":233,"react":218,"react-dom":41,"react-router-dom":178,"uid":220}],235:[function(require,module,exports){
@@ -28728,7 +28725,7 @@ var PaymentMethodForm = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'legalyContactInfo' },
-										'constituciones@haztuempresa.com'
+										'pagos@legaly.pe'
 									),
 									_react2.default.createElement(
 										'p',
@@ -29076,11 +29073,13 @@ var PersonalInformationForm = function (_Component) {
 		_this.state = {
 
 			partnerSelected: 0,
-			numberOfGoods: 1
+			numberOfGoods: 1,
+			goodsSeparation: ""
 		};
 
 		_this.addGood = _this.addGood.bind(_this);
 		_this.switchPartnerSelected = _this.switchPartnerSelected.bind(_this);
+		_this.handleGoodSeparator = _this.handleGoodSeparator.bind(_this);
 
 		return _this;
 	}
@@ -29115,6 +29114,13 @@ var PersonalInformationForm = function (_Component) {
 			this.props.sendPartnersInformation.call(null);
 
 			return;
+		}
+	}, {
+		key: 'handleGoodSeparator',
+		value: function handleGoodSeparator(ev) {
+			this.setState({
+				goodsSeparation: ev.target.value
+			});
 		}
 	}, {
 		key: 'componentDidMount',
@@ -29225,7 +29231,11 @@ var PersonalInformationForm = function (_Component) {
 			    inputCivilStatus = void 0,
 			    inputDocTypeCouple = void 0,
 			    inputDocNumCouple = void 0,
-			    inputMoneyInvestment = void 0;
+			    inputMoneyInvestment = void 0,
+			    inputGoodsSeparation = void 0,
+			    inputRegistryNumber = void 0,
+			    inputRegistryOffice = void 0,
+			    inputPosition = void 0;
 
 			if (dataReaderPartner.user) {
 
@@ -29303,6 +29313,323 @@ var PersonalInformationForm = function (_Component) {
 				inputDocNumCouple = _react2.default.createElement('input', { type: 'number', ref: 'couple_document_number_i', value: dataReaderPartner.user.coupleDocumentNumber != undefined ? dataReaderPartner.user.coupleDocumentNumber : "", onChange: this.props.inputTextHandler.bind(), name: 'coupleDocumentNumber', 'data-pos': this.state.partnerSelected });
 
 				inputMoneyInvestment = _react2.default.createElement('input', { type: 'number', ref: 'user_money_investment_i', value: dataReaderPartner.moneyInput != undefined ? dataReaderPartner.moneyInput : "", onChange: this.props.inputTextHandler.bind(), name: 'moneyInput', 'data-pos': this.state.partnerSelected });
+
+				inputGoodsSeparation = _react2.default.createElement(
+					'div',
+					{ className: 'wrapperInputRadio' },
+					_react2.default.createElement(
+						'label',
+						null,
+						_react2.default.createElement('input', { type: 'radio', name: 'goodsSeparation', onChange: this.props.selectHandler.bind(), checked: dataReaderPartner.user.goodsSeparation === "1", value: '1', 'data-pos': this.state.partnerSelected }),
+						'Si'
+					),
+					_react2.default.createElement(
+						'label',
+						null,
+						_react2.default.createElement('input', { type: 'radio', name: 'goodsSeparation', onChange: this.props.selectHandler.bind(), checked: dataReaderPartner.user.goodsSeparation === "0", value: '0', 'data-pos': this.state.partnerSelected }),
+						'No'
+					)
+				);
+
+				inputRegistryNumber = _react2.default.createElement('input', { type: 'text', value: dataReaderPartner.user.registryNumber != undefined ? dataReaderPartner.user.registryNumber : "", onChange: this.props.inputTextHandler.bind(), name: 'registryNumber', 'data-pos': this.state.partnerSelected });
+
+				inputRegistryOffice = _react2.default.createElement(
+					'select',
+					{ onChange: this.props.selectHandler.bind(), value: dataReaderPartner.user.regitryOffice != undefined ? dataReaderPartner.user.regitryOffice : "", name: 'regitryOffice', 'data-pos': this.state.partnerSelected },
+					_react2.default.createElement('option', { disabled: true }),
+					_react2.default.createElement(
+						'option',
+						null,
+						'ABANCAY'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'AREQUIPA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'AYACUCHO'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'BAGUA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'BARRANCA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'CAJAMARCA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'CALLAO'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'CAMANA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'CASMA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'CASTILLA-APLAO'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'CA\xD1ETE'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'CHACHAPOYAS'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'CHEPEN'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'CHICLAYO'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'CHIMBOTE'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'CHINCHA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'CHOTA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'CUSCO'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'ESPINAR'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'HUACHO'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'HUAMACHUCO'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'HUANCAVELICA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'HUANCAYO'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'HUANTA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'HUANUCO'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'HUARAL'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'HUARAZ'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'ICA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'ILO'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'ISLAY - MOLLENDO'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'JAEN'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'JUANJUI'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'JULIACA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'LA MERCED'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'LIMA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'MADRE DE DIOS'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'MAYNAS'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'MOQUEGUA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'MOYOBAMBA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'NAZCA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'OTUZCO'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'PASCO'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'PISCO'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'PIURA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'PUCALLPA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'PUNO'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'QUILLABAMBA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'SAN PEDRO'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'SATIPO'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'SICUANI'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'SULLANA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'TACNA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'TARAPOTO'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'TARMA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'TINGO MARIA'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'TRUJILLO'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'TUMBES'
+					),
+					_react2.default.createElement(
+						'option',
+						null,
+						'YURIMAGUAS'
+					)
+				);
+
+				inputPosition = _react2.default.createElement('input', { type: 'text', value: dataReaderPartner.user.position != undefined ? dataReaderPartner.user.position : "", onChange: this.props.inputTextHandler.bind(), name: 'position', 'data-pos': this.state.partnerSelected });
 			}
 
 			//agregando input de inversion en Dinero
@@ -29499,6 +29826,21 @@ var PersonalInformationForm = function (_Component) {
 									_react2.default.createElement(
 										'label',
 										{ className: 'smallContent' },
+										'Ocupaci\xF3n:'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'inputSingleValue' },
+										inputPosition,
+										_react2.default.createElement('span', null)
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormLarge' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'smallContent' },
 										'Correo:'
 									),
 									_react2.default.createElement(
@@ -29531,6 +29873,7 @@ var PersonalInformationForm = function (_Component) {
 										{ className: 'smallContent' },
 										'Estado civil:'
 									),
+									_react2.default.createElement('br', null),
 									_react2.default.createElement(
 										'div',
 										{ className: 'inputSelect' },
@@ -29538,7 +29881,55 @@ var PersonalInformationForm = function (_Component) {
 										_react2.default.createElement('span', { className: 'icoInputSelect' })
 									)
 								),
-								_react2.default.createElement('div', { className: 'gridFormShort' }),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormShort' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'smallContent' },
+										'\xBFCuentas con separaci\xF3n de bienes?'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'inputSelect wrapperRadios' },
+										inputGoodsSeparation
+									)
+								),
+								_react2.default.createElement(
+									'label',
+									{ className: 'smallContent lblOptional' },
+									'Si cuentas con separaci\xF3n de bienes ingresa estos datos'
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormShort' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'smallContent' },
+										'N\xBA de partida registral:'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'inputSingleValue' },
+										inputRegistryNumber,
+										_react2.default.createElement('span', { className: 'icon-credit-card' })
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormShort' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'smallContent' },
+										'Oficina Registral:'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'inputSelect' },
+										inputRegistryOffice,
+										_react2.default.createElement('span', { className: 'icon-briefcase icoInputSelect' })
+									)
+								),
 								_react2.default.createElement(
 									'label',
 									{ className: 'smallContent lblOptional' },
@@ -31034,7 +31425,10 @@ var TrackingPanelPartnerInfo = function (_Component) {
 
 			var coupleDocumentType = void 0,
 			    coupleDocumentNumber = void 0,
-			    rowCoupleData = void 0;
+			    rowCoupleData = void 0,
+			    rowGoodsSeparationData = void 0,
+			    rowRegistryNumber = void 0,
+			    rowRegitryOffice = void 0;
 			if (this.props.user.coupleDocumentType != undefined) {
 				coupleDocumentType = this.props.user.coupleDocumentType;
 				coupleDocumentNumber = this.props.user.coupleDocumentNumber;
@@ -31052,6 +31446,51 @@ var TrackingPanelPartnerInfo = function (_Component) {
 						'p',
 						{ className: 'fieldValue' },
 						coupleDocumentNumber
+					)
+				);
+
+				rowGoodsSeparationData = _react2.default.createElement(
+					'div',
+					{ className: 'rowPartnerInfo' },
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldName' },
+						'Cuenta con separaci\xF3n de bienes'
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldValue' },
+						this.props.user.goodsSeparation == "1" ? "si" : "no"
+					)
+				);
+
+				rowRegistryNumber = _react2.default.createElement(
+					'div',
+					{ className: 'rowPartnerInfo' },
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldName' },
+						'Partida registral'
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldValue' },
+						this.props.user.registryNumber
+					)
+				);
+
+				rowRegitryOffice = _react2.default.createElement(
+					'div',
+					{ className: 'rowPartnerInfo' },
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldName' },
+						'Oficina registral'
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'fieldValue' },
+						this.props.user.regitryOffice
 					)
 				);
 			}
@@ -31156,6 +31595,7 @@ var TrackingPanelPartnerInfo = function (_Component) {
 					_react2.default.createElement(
 						'p',
 						{ className: 'fieldValue' },
+						'S/ ',
 						this.props.moneyInput,
 						'.00'
 					)
@@ -31218,6 +31658,9 @@ var TrackingPanelPartnerInfo = function (_Component) {
 					)
 				),
 				rowCoupleData,
+				rowGoodsSeparationData,
+				rowRegistryNumber,
+				rowRegitryOffice,
 				_react2.default.createElement(
 					'div',
 					{ className: 'rowPartnerInfo' },

@@ -55,7 +55,17 @@ export default class App extends Component{
 		this.rowAccountManagerInputHandler = this.rowAccountManagerInputHandler.bind(this);
 		this.updatePartnerInvitation = this.updatePartnerInvitation.bind(this);
 		this.switchBtnNavSelected = this.switchBtnNavSelected.bind(this);
+		this.resetEnterpriseRegistrationData = this.resetEnterpriseRegistrationData.bind(this);
 	
+	}
+
+	resetEnterpriseRegistrationData(){
+		this.setState({
+			enterpriseInProcessData :{},
+			partnersInvitationSaved : 0,
+			enterpriseSaved : 0,
+			enterpriseInProcess : 0
+		})
 	}
 
 
@@ -567,8 +577,7 @@ export default class App extends Component{
 					<div className="wrapperViews">
 
 						
-						<Route exact path="/" component={Landing}/>
-					
+						<Route exact path="/" render={(props)=>( <Landing resetEnterpriseRegistrationData={this.resetEnterpriseRegistrationData} />) }/>
 					
 						<Route path="/informacion-empresa" render={(props) => ( this.state.user == false ? (<Redirect to="/login"/>) : (<EnterpriseInformationForm user={this.state.user} sendEnterpriseInformation={this.sendEnterpriseInformation} enterpriseInProcessData={this.state.enterpriseInProcessData} enterpriseInProcess={this.state.enterpriseInProcess} enterpriseSaved={this.state.enterpriseSaved} updateEnterpriseInformation={this.updateEnterpriseInformation}/>)   )}/>
 						<Route path="/invitar-socios" render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<PartnersAddingForm user={this.state.user} sendPartnerInvitation={this.sendPartnerInvitation} enterpriseInProcessData={this.state.enterpriseInProcessData} rowPartnerInputHandler={this.rowPartnerInputHandler} deletingPartnerRow={this.deletingPartnerRow} rowAccountManagerInputHandler={this.rowAccountManagerInputHandler} partnersInvitationSaved={this.state.partnersInvitationSaved} updatePartnerInvitation={this.updatePartnerInvitation}/> )   )}/>

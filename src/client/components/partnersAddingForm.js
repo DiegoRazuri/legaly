@@ -232,7 +232,7 @@ export default class PartnersAddingForm extends Component{
 										<Link to="/informacion-personal"><div className="btnNext" onClick={this.handlePartnerAddingFormSubmit.bind(this)}>Siguiente</div></Link>
 									</div>
 									<div className="gridFormLarge gridFormMutable wrapperBtnTransparent">
-										<Link to="/informacion-empresa"><div className="btnTransparentBackground">Anterior</div></Link>
+										
 									</div>
 								</form>
 							</div>
@@ -291,3 +291,5 @@ export default class PartnersAddingForm extends Component{
 				</div>
 	}
 }
+
+//<Link to="/informacion-empresa"><div className="btnTransparentBackground">Anterior</div></Link>

@@ -65,7 +65,7 @@ export default class PaymentMethodForm extends Component{
 											
 										</div>
 										<p className="deliveryInstructions">Establece la hora, fecha y dirección de tu preferencia para que uno de nuestros colaboradores vaya con los papeles necesarios para la firma y huella digital de todos los socios. Por lo tanto, todos los fundadores deben de estar para dicha reunión.</p>
-										<p className="legalyContactInfo">constituciones@haztuempresa.com</p>
+										<p className="legalyContactInfo">pagos@legaly.pe</p>
 										<p className="legalyContactInfo">BCP cta xxx 192 - 111111111</p>
 										<Link to="/"><div className="btnPrint mediumContent">Confirmar</div></Link>
 									</div>

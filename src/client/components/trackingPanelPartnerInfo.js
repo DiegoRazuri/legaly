@@ -11,7 +11,7 @@ export default class TrackingPanelPartnerInfo extends Component{
 	
 	render(){
 		
-		let coupleDocumentType, coupleDocumentNumber, rowCoupleData;
+		let coupleDocumentType, coupleDocumentNumber, rowCoupleData, rowGoodsSeparationData, rowRegistryNumber, rowRegitryOffice;
 		if(this.props.user.coupleDocumentType != undefined){
 			coupleDocumentType = this.props.user.coupleDocumentType;
 			coupleDocumentNumber = this.props.user.coupleDocumentNumber;
@@ -19,6 +19,21 @@ export default class TrackingPanelPartnerInfo extends Component{
 			rowCoupleData = <div className="rowPartnerInfo">
 						<p className="fieldName">{coupleDocumentType} de conyugue</p>
 						<p className="fieldValue">{coupleDocumentNumber}</p>
+					</div>
+
+			rowGoodsSeparationData = <div className="rowPartnerInfo">
+						<p className="fieldName">Cuenta con separación de bienes</p>
+						<p className="fieldValue">{this.props.user.goodsSeparation == "1" ? "si":"no"}</p>
+					</div>
+
+			rowRegistryNumber = <div className="rowPartnerInfo">
+						<p className="fieldName">Partida registral</p>
+						<p className="fieldValue">{this.props.user.registryNumber}</p>
+					</div>
+
+			rowRegitryOffice = <div className="rowPartnerInfo">
+						<p className="fieldName">Oficina registral</p>
+						<p className="fieldValue">{this.props.user.regitryOffice}</p>
 					</div>
 		}
 
@@ -62,7 +77,7 @@ export default class TrackingPanelPartnerInfo extends Component{
 					</div>
 					<div className="rowPartnerInfo">
 						<p className="fieldName">Inversión en dinero</p>
-						<p className="fieldValue">{this.props.moneyInput}.00</p>
+						<p className="fieldValue">S/ {this.props.moneyInput}.00</p>
 					</div>
 					
 					{rowGoodsInput}
@@ -85,6 +100,9 @@ export default class TrackingPanelPartnerInfo extends Component{
 					</div>
 					
 					{rowCoupleData}
+					{rowGoodsSeparationData}
+					{rowRegistryNumber}
+					{rowRegitryOffice}
 
 					<div className="rowPartnerInfo">
 						<p className="fieldName">celular/telefono</p>

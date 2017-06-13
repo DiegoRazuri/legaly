@@ -302,6 +302,16 @@ router.post('/partners_information', jsonParser, function (req, res){
 									if(partnersJsonData[i].user.coupleDocumentNumber){
 										user.coupleDocumentNumber = partnersJsonData[i].user.coupleDocumentNumber;
 									}
+									if(partnersJsonData[i].user.goodsSeparation){
+										let goodsSeparation = parseInt(partnersJsonData[i].user.goodsSeparation);
+										user.goodsSeparation = goodsSeparation;
+									}
+									if(partnersJsonData[i].user.registryNumber){
+										user.registryNumber = partnersJsonData[i].user.registryNumber;
+									}
+									if(partnersJsonData[i].user.regitryOffice){
+										user.regitryOffice = partnersJsonData[i].user.regitryOffice;
+									}
 
 									user.save(function(err){
 										if(err){

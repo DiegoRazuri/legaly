@@ -100,7 +100,7 @@ export default class DateForm extends Component{
 										<Link to="/metodo-pago"><div className="btnNext" onClick={this.handleDateFormSubmit.bind(this)}>Siguiente</div></Link>
 									</div>
 									<div className="gridFormLarge gridFormMutable wrapperBtnTransparent">
-										<Link to="/informacion-perosnal"><div className="btnTransparentBackground">Anterior</div></Link>
+										
 									</div>
 								</form>
 							</div>
@@ -162,3 +162,5 @@ export default class DateForm extends Component{
 
 	}
 }
+
+//<Link to="/informacion-perosnal"><div className="btnTransparentBackground">Anterior</div></Link>
