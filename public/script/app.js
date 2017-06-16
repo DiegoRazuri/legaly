@@ -25805,8 +25805,10 @@ var EnterpriseInformationForm = function (_Component) {
 		var _this = _possibleConstructorReturn(this, (EnterpriseInformationForm.__proto__ || Object.getPrototypeOf(EnterpriseInformationForm)).call(this, props));
 
 		_this.state = {
+			redirect: false,
 			industry: "",
-			societyType: ""
+			societyType: "",
+			validationForm: false
 
 		};
 
@@ -25845,10 +25847,80 @@ var EnterpriseInformationForm = function (_Component) {
 
 			};
 
-			if (this.props.enterpriseSaved == 1) {
-				this.props.updateEnterpriseInformation.call(null, json);
-			} else {
-				this.props.sendEnterpriseInformation.call(null, json);
+			var i_optionnames = void 0,
+			    i_industry = void 0,
+			    i_societyType = void 0,
+			    i_totalCapital = void 0,
+			    i_goods = void 0,
+			    i_money = void 0;
+
+			i_optionnames = _reactDom2.default.findDOMNode(this.refs.companyNames_i);
+			i_industry = _reactDom2.default.findDOMNode(this.refs.selectEnterpriseIndustry);
+			i_societyType = _reactDom2.default.findDOMNode(this.refs.selectSocietyType);
+			i_totalCapital = _reactDom2.default.findDOMNode(this.refs.investment_i);
+			i_goods = _reactDom2.default.findDOMNode(this.refs.checkboxGoods);
+			i_money = _reactDom2.default.findDOMNode(this.refs.checkboxMoney);
+
+			i_optionnames.parentNode.parentNode.classList.remove("inputError");
+			i_industry.parentNode.classList.remove("inputError");
+			i_societyType.parentNode.classList.remove("inputError");
+			i_totalCapital.parentNode.classList.remove("inputError");
+			i_goods.classList.remove("inputError");
+			i_money.classList.remove("inputError");
+
+			var errors = 0;
+
+			if (json.optionNames.length == 0) {
+
+				i_optionnames.parentNode.parentNode.classList.add("inputError");
+
+				errors += 1;
+			}
+
+			if (json.industry == "") {
+
+				i_industry.parentNode.classList.add("inputError");
+
+				errors += 1;
+			}
+
+			if (json.societyType == "") {
+
+				i_societyType.parentNode.classList.add("inputError");
+
+				errors += 1;
+			}
+
+			if (json.totalCapital == "") {
+
+				i_totalCapital.parentNode.classList.add("inputError");
+
+				errors += 1;
+			}
+
+			if (json.isItGoodsCapital == "" && json.isItMoneyCapital == "") {
+
+				i_goods.classList.add("inputError");
+				i_money.classList.add("inputError");
+
+				errors += 1;
+			}
+
+			if (errors == 0) {
+
+				if (this.props.enterpriseSaved == 1) {
+					this.props.updateEnterpriseInformation.call(null, json);
+
+					this.setState({
+						redirect: true
+					});
+				} else {
+					this.props.sendEnterpriseInformation.call(null, json);
+
+					this.setState({
+						redirect: true
+					});
+				}
 			}
 
 			return;
@@ -25978,1013 +26050,1018 @@ var EnterpriseInformationForm = function (_Component) {
    		
    */
 
-			return _react2.default.createElement(
-				'div',
-				{ className: 'sectionEnterpriseIncorporation' },
-				_react2.default.createElement(
+			if (this.state.redirect) {
+				return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/invitar-socios' });
+			} else {
+
+				return _react2.default.createElement(
 					'div',
-					{ className: 'wrapperIncorporationForm' },
+					{ className: 'sectionEnterpriseIncorporation' },
 					_react2.default.createElement(
 						'div',
-						{ className: 'enterpriseInformationForm' },
+						{ className: 'wrapperIncorporationForm' },
 						_react2.default.createElement(
 							'div',
-							{ className: 'gridStepProgress' },
-							_react2.default.createElement('span', { className: 'icon-cross' }),
+							{ className: 'enterpriseInformationForm' },
 							_react2.default.createElement(
-								'ul',
-								{ className: 'stepProgress' },
+								'div',
+								{ className: 'gridStepProgress' },
+								_react2.default.createElement('span', { className: 'icon-cross' }),
 								_react2.default.createElement(
-									'li',
-									{ className: 'stepActive' },
-									'1'
+									'ul',
+									{ className: 'stepProgress' },
+									_react2.default.createElement(
+										'li',
+										{ className: 'stepActive' },
+										'1'
+									),
+									_react2.default.createElement(
+										'li',
+										null,
+										'2'
+									),
+									_react2.default.createElement(
+										'li',
+										null,
+										'3'
+									)
 								),
 								_react2.default.createElement(
-									'li',
+									'figure',
 									null,
-									'2'
+									_react2.default.createElement('img', { src: 'css/img/InfoEmpresa1.svg' })
 								),
 								_react2.default.createElement(
-									'li',
-									null,
-									'3'
-								)
-							),
-							_react2.default.createElement(
-								'figure',
-								null,
-								_react2.default.createElement('img', { src: 'css/img/InfoEmpresa1.svg' })
-							),
-							_react2.default.createElement(
-								'h4',
-								{ className: 'bigTitlesOS' },
-								'Constituci\xF3n de empresa'
-							),
-							_react2.default.createElement(
-								'p',
-								{ className: 'mediumContent instructions' },
-								'Ingresa la informaci\xF3n que necesitas para emitir la minuta'
-							),
-							_react2.default.createElement(
-								'h4',
-								{ className: 'bigTitlesOS helpTitle' },
-								'\xBFNecesitas ayuda?'
-							),
-							_react2.default.createElement('span', { className: 'icon-angle-down' }),
-							_react2.default.createElement(
-								'a',
-								{ href: 'http://www.facebook.com/legaly.pe', target: '_blank', className: 'gridUserSupport' },
-								_react2.default.createElement('span', { className: 'icon-facebook' }),
+									'h4',
+									{ className: 'bigTitlesOS' },
+									'Constituci\xF3n de empresa'
+								),
 								_react2.default.createElement(
 									'p',
-									{ className: 'smallContent' },
-									'www.facebook.com/legaly.pe'
+									{ className: 'mediumContent instructions' },
+									'Ingresa la informaci\xF3n que necesitas para emitir la minuta'
+								),
+								_react2.default.createElement(
+									'h4',
+									{ className: 'bigTitlesOS helpTitle' },
+									'\xBFNecesitas ayuda?'
+								),
+								_react2.default.createElement('span', { className: 'icon-angle-down' }),
+								_react2.default.createElement(
+									'a',
+									{ href: 'http://www.facebook.com/legaly.pe', target: '_blank', className: 'gridUserSupport' },
+									_react2.default.createElement('span', { className: 'icon-facebook' }),
+									_react2.default.createElement(
+										'p',
+										{ className: 'smallContent' },
+										'www.facebook.com/legaly.pe'
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridUserSupport' },
+									_react2.default.createElement('span', { className: 'icon-mail_outline' }),
+									_react2.default.createElement(
+										'p',
+										{ className: 'smallContent' },
+										'ayuda@legaly.pe'
+									)
 								)
 							),
 							_react2.default.createElement(
 								'div',
-								{ className: 'gridUserSupport' },
-								_react2.default.createElement('span', { className: 'icon-mail_outline' }),
+								{ className: 'gridForm' },
 								_react2.default.createElement(
-									'p',
-									{ className: 'smallContent' },
-									'ayuda@legaly.pe'
+									'h3',
+									{ className: 'bigTitlesSS' },
+									'Constituci\xF3n de empresa'
+								),
+								_react2.default.createElement('div', { className: 'underlineBlue' }),
+								_react2.default.createElement(
+									'form',
+									null,
+									_react2.default.createElement(
+										'div',
+										{ className: 'gridFormLarge' },
+										_react2.default.createElement(
+											'label',
+											{ className: 'smallContent' },
+											'Ingresa de 3 a 5 posibles nombres en orden de prioridad'
+										),
+										_react2.default.createElement(
+											'div',
+											{ className: 'inputMultipleValues' },
+											_react2.default.createElement(
+												'div',
+												{ id: 'wrapperInputValues', className: 'wrapperInputValues' },
+												_react2.default.createElement('input', { autoFocus: true, type: 'text', id: 'inputMultipleValuesNames', ref: 'companyNames_i', onBlur: this.catchNames.bind(this, 0) })
+											),
+											_react2.default.createElement('span', { className: 'icon-flag2' })
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'gridFormLarge' },
+										_react2.default.createElement(
+											'label',
+											{ className: 'smallContent' },
+											'Elige un tipo de sociedad'
+										),
+										_react2.default.createElement(
+											'div',
+											{ className: 'inputSelect' },
+											_react2.default.createElement(
+												'select',
+												{ id: 'selectEnterpriseIncorporationForm', value: this.state.societyType, ref: 'selectSocietyType', onChange: this.handleChangeSocietyType },
+												_react2.default.createElement('option', { disabled: true }),
+												_react2.default.createElement(
+													'option',
+													null,
+													'S.A.C.'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'S.A.'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'E.I.R.L.'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'S.R.L.'
+												)
+											),
+											_react2.default.createElement('span', { className: 'icon-flag2 icoInputSelect' })
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'gridFormLarge' },
+										_react2.default.createElement(
+											'label',
+											{ className: 'smallContent' },
+											'\xBFA qu\xE9 se dedicar\xE1 tu empresa?'
+										),
+										_react2.default.createElement(
+											'div',
+											{ className: 'inputSelect' },
+											_react2.default.createElement(
+												'select',
+												{ id: 'selectEnterpriseIncorporationForm', value: this.state.industry, ref: 'selectEnterpriseIndustry', onChange: this.handleChange },
+												_react2.default.createElement('option', { disabled: true }),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ASESORIA EMPRESARIAL'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ASESORIA ENERGETICA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ASESORIA FINANCIERA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ASESORIA INFORMATICA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'BEBIDAS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'BIBLIOTECA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'BUFFET- CATERING'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ABARROTES'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ACCESORIOS MEDICOS/ INSTRUMENTOS MEDICOS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'AGENCIA DE ADUANAS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'AGENCIA DE VIAJES Y TURISMO'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'AGENTE DE CARGA INTERNACIONAL'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'AIRE ACONDICIONADO'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ALIMENTOS NATURALES'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ANALISIS DE ECOSISTEMAS/EVALUACION DE IMPACTO AMBIENTAL'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ARTEFACTOS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ARTESANIA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ARTICULOS DE BASAR'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ARTICULOS DE SEGURIDAD'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ARTICULOS ELECTRONICOS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ASESORIA CONTABLE'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'CORRETAJE INMOBILIARIOADUANAS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'CORTINAS Y PERSIANASTURISMO'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'COSMETOLOGIA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'CRIANZA DE ANIMALES'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'DEPORTE'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'DISE\xD1O DE INTERIORES'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'DISE\xD1O GRAFICO'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'EDITORIAL'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ESTIMULACION TEMPRANA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'FUEGOS ARTIFICIALES'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'IDIOMAS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'LAVANDERIA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'MANTENIMIENTO AERONAVES'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'PANADERIA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'PLASTICOS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'PSICOLOGOS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'RESIDUOS SOLIDOS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'SERVICIOS MEDICOS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'TOPOGRAFIA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'YOGA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ASESORIA EN GENERAL'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'JARDINERIA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ESCUELA DE MANEJO'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'MANUALIDADES'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'REDES Y MERCADEO'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ASESORIA PARA TESIS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'GIMNASIO'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'CONSULTORIA EN INGENIERIA ELECTRICA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'CONSULTORIA NAVAL'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'CONSULTORIA Y EVALUACION DE PROYECTOS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'EQUIPO DE CARNICERIA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ESTAMPADOS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ADMINISTRACION DE EDIFICIOS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ARTICULOS DE LIMPIESA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ASESORIA MINERA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ASESORIA PETROLERA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ASESOR\xCDA RADIOLOGICA Y MEDICINA NUCLEAR'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'CERTIFICACION DE CURSOS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'CONSULTORIA EN SALUD E HIGIENE OCUPACIONAl'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'CONSULTORIA EN SEGURIDAD INDUSTRIAL'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'CONTROL DE CALIDAD'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'SERVICIO DE COMUNICACI\xD3N'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'SERVICIOS DENTALES'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'SERVICIOS EDUCATIVOS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'SISTEMAS CONTRA INCENDIOS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'SPA- SALON DE BELLESA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'SUPERMERCADO'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'TALLER AUTOMOTRIS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'TECNOLOGIA NUCLEAR'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'TELE- COMUNICACIONES'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'TEXTILES'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'TRAGAMONEDAS Y CASINOS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'TRANSPORTE'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'VEHICULOS Y ACCESORIOS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'VETERINARIA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'VIDRIERIA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'CONSULTORIA METAL- MECANICA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'PERFUMERIA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'PESQUERIA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'PINTURA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'PORTUARIO LOGISTICA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'PRENDAS DE VESTIR'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'PRESTAMOS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'PRODUCTORA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'PUBLICIDAD'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'RECICLAJE'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'RESTAURANTE'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'SELECCI\xD3N DE PERSONAL'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'MARKETING'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'MENSAJERIA Y COURIER'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'METALMECANICA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'METALURGIA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'MINERIA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'MODELAJE'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'MUEBLES'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'OPTICA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'PANADERIA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'PERFORACION Y DEMOLICION'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'ESTUDIO DE SUELOS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'EVENTOS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'FARMACIA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'FERRETERIA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'FORESTAL'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'FOTOGRAFIA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'FRUTAS Y VERDURAS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'FUMIGACION Y EXTINTORES'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'FUNERARIAS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'GANADERIA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'GASOLINERA Y ESTACION DE SERVICIOS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'HOSPEDAJE'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'IMPRENTA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'INDUSTRIA PETROLERA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'INGENIERIA DE MINAS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'INSTALACIONES DE GAS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'INTERMEDIACION TURISTICA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'JOYERIA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'LACTEOS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'LIBRER\xCDA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'LICORERIA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'MADERERA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'MAQUINARIA AGROINDUSTRIAL'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'COMPUTACI\xD3N E INFORM\xC1TICA'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'CONSTRUCCION'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'CONSTRUCCION DE POZOS'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'CONSULTORIA AMBIENTAL'
+												),
+												_react2.default.createElement(
+													'option',
+													null,
+													'CONSULTORIA EN INGENIERIA ELECTRICA'
+												)
+											),
+											_react2.default.createElement('span', { className: 'icon-briefcase icoInputSelect' })
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'gridFormLarge gridFormMutable' },
+										_react2.default.createElement(
+											'label',
+											{ className: 'smallContent' },
+											'\xBFCu\xE1l es el capital del negocio?'
+										),
+										_react2.default.createElement(
+											'div',
+											{ className: 'inputSingleValue' },
+											_react2.default.createElement('input', { type: 'number', min: '1', ref: 'investment_i' }),
+											_react2.default.createElement('span', { className: 'icon-dollar' })
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'gridFormLarge gridFormMutable' },
+										_react2.default.createElement(
+											'label',
+											{ className: 'smallContent' },
+											'Capital constituido por:'
+										),
+										_react2.default.createElement(
+											'div',
+											{ className: 'inputCheckbox' },
+											_react2.default.createElement(
+												'div',
+												{ className: 'wrapperCheckbox' },
+												_react2.default.createElement('input', { type: 'checkbox', name: 'goods_investment', id: 'checkboxGoods', ref: 'checkboxGoods' }),
+												_react2.default.createElement('span', { className: 'icon-box' }),
+												_react2.default.createElement(
+													'label',
+													{ className: 'smallContent' },
+													'Bienes'
+												)
+											),
+											_react2.default.createElement(
+												'div',
+												{ className: 'wrapperCheckbox' },
+												_react2.default.createElement('input', { type: 'checkbox', name: 'money_investment', id: 'checkboxMoney', ref: 'checkboxMoney' }),
+												_react2.default.createElement('span', { className: 'icon-dollar' }),
+												_react2.default.createElement(
+													'label',
+													{ className: 'smallContent' },
+													'Dinero'
+												)
+											)
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'gridFormLarge gridFormMutable btnStepWrapperNext' },
+										_react2.default.createElement(
+											'a',
+											null,
+											_react2.default.createElement(
+												'div',
+												{ className: 'btnNext', onClick: this.handleEnterpriseInformationSubmit.bind(this) },
+												'Siguiente'
+											)
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'gridFormShort btnStepWrapperBack' },
+										_react2.default.createElement(
+											_reactRouterDom.Link,
+											{ to: '/' },
+											_react2.default.createElement(
+												'div',
+												{ className: 'btnTransparentBackground' },
+												'Cancelar'
+											)
+										)
+									)
 								)
 							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ id: 'faq1', className: 'wrapperFaq' },
+						_react2.default.createElement(
+							'figure',
+							null,
+							_react2.default.createElement('img', { src: './css/img/constitucion-photo.jpg' })
 						),
 						_react2.default.createElement(
 							'div',
-							{ className: 'gridForm' },
+							{ className: 'gridFaq' },
 							_react2.default.createElement(
-								'h3',
-								{ className: 'bigTitlesSS' },
-								'Constituci\xF3n de empresa'
+								'h1',
+								null,
+								'\xBFPor qu\xE9 es importante constituir mi empresa?'
 							),
 							_react2.default.createElement('div', { className: 'underlineBlue' }),
 							_react2.default.createElement(
-								'form',
+								'h2',
 								null,
-								_react2.default.createElement(
-									'div',
-									{ className: 'gridFormLarge' },
-									_react2.default.createElement(
-										'label',
-										{ className: 'smallContent' },
-										'Ingresa de 3 a 5 posibles nombres en orden de prioridad'
-									),
-									_react2.default.createElement(
-										'div',
-										{ className: 'inputMultipleValues' },
-										_react2.default.createElement(
-											'div',
-											{ id: 'wrapperInputValues', className: 'wrapperInputValues' },
-											_react2.default.createElement('input', { autoFocus: true, type: 'text', id: 'inputMultipleValuesNames', ref: 'companyNames_i', onBlur: this.catchNames.bind(this, 0) })
-										),
-										_react2.default.createElement('span', { className: 'icon-flag2' })
-									)
-								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'gridFormLarge' },
-									_react2.default.createElement(
-										'label',
-										{ className: 'smallContent' },
-										'Elige un tipo de sociedad'
-									),
-									_react2.default.createElement(
-										'div',
-										{ className: 'inputSelect' },
-										_react2.default.createElement(
-											'select',
-											{ id: 'selectEnterpriseIncorporationForm', value: this.state.societyType, ref: 'selectSocietyType', onChange: this.handleChangeSocietyType },
-											_react2.default.createElement('option', { disabled: true }),
-											_react2.default.createElement(
-												'option',
-												null,
-												'S.A.C.'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'S.A.'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'E.I.R.L.'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'S.R.L.'
-											)
-										),
-										_react2.default.createElement('span', { className: 'icon-flag2 icoInputSelect' })
-									)
-								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'gridFormLarge' },
-									_react2.default.createElement(
-										'label',
-										{ className: 'smallContent' },
-										'\xBFA qu\xE9 se dedicar\xE1 tu empresa?'
-									),
-									_react2.default.createElement(
-										'div',
-										{ className: 'inputSelect' },
-										_react2.default.createElement(
-											'select',
-											{ id: 'selectEnterpriseIncorporationForm', value: this.state.industry, ref: 'selectEnterpriseIndustry', onChange: this.handleChange },
-											_react2.default.createElement('option', { disabled: true }),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ASESORIA EMPRESARIAL'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ASESORIA ENERGETICA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ASESORIA FINANCIERA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ASESORIA INFORMATICA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'BEBIDAS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'BIBLIOTECA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'BUFFET- CATERING'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ABARROTES'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ACCESORIOS MEDICOS/ INSTRUMENTOS MEDICOS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'AGENCIA DE ADUANAS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'AGENCIA DE VIAJES Y TURISMO'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'AGENTE DE CARGA INTERNACIONAL'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'AIRE ACONDICIONADO'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ALIMENTOS NATURALES'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ANALISIS DE ECOSISTEMAS/EVALUACION DE IMPACTO AMBIENTAL'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ARTEFACTOS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ARTESANIA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ARTICULOS DE BASAR'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ARTICULOS DE SEGURIDAD'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ARTICULOS ELECTRONICOS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ASESORIA CONTABLE'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'CORRETAJE INMOBILIARIOADUANAS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'CORTINAS Y PERSIANASTURISMO'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'COSMETOLOGIA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'CRIANZA DE ANIMALES'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'DEPORTE'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'DISE\xD1O DE INTERIORES'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'DISE\xD1O GRAFICO'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'EDITORIAL'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ESTIMULACION TEMPRANA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'FUEGOS ARTIFICIALES'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'IDIOMAS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'LAVANDERIA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'MANTENIMIENTO AERONAVES'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'PANADERIA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'PLASTICOS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'PSICOLOGOS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'RESIDUOS SOLIDOS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'SERVICIOS MEDICOS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'TOPOGRAFIA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'YOGA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ASESORIA EN GENERAL'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'JARDINERIA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ESCUELA DE MANEJO'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'MANUALIDADES'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'REDES Y MERCADEO'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ASESORIA PARA TESIS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'GIMNASIO'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'CONSULTORIA EN INGENIERIA ELECTRICA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'CONSULTORIA NAVAL'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'CONSULTORIA Y EVALUACION DE PROYECTOS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'EQUIPO DE CARNICERIA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ESTAMPADOS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ADMINISTRACION DE EDIFICIOS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ARTICULOS DE LIMPIESA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ASESORIA MINERA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ASESORIA PETROLERA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ASESOR\xCDA RADIOLOGICA Y MEDICINA NUCLEAR'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'CERTIFICACION DE CURSOS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'CONSULTORIA EN SALUD E HIGIENE OCUPACIONAl'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'CONSULTORIA EN SEGURIDAD INDUSTRIAL'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'CONTROL DE CALIDAD'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'SERVICIO DE COMUNICACI\xD3N'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'SERVICIOS DENTALES'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'SERVICIOS EDUCATIVOS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'SISTEMAS CONTRA INCENDIOS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'SPA- SALON DE BELLESA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'SUPERMERCADO'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'TALLER AUTOMOTRIS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'TECNOLOGIA NUCLEAR'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'TELE- COMUNICACIONES'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'TEXTILES'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'TRAGAMONEDAS Y CASINOS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'TRANSPORTE'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'VEHICULOS Y ACCESORIOS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'VETERINARIA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'VIDRIERIA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'CONSULTORIA METAL- MECANICA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'PERFUMERIA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'PESQUERIA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'PINTURA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'PORTUARIO LOGISTICA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'PRENDAS DE VESTIR'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'PRESTAMOS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'PRODUCTORA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'PUBLICIDAD'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'RECICLAJE'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'RESTAURANTE'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'SELECCI\xD3N DE PERSONAL'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'MARKETING'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'MENSAJERIA Y COURIER'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'METALMECANICA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'METALURGIA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'MINERIA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'MODELAJE'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'MUEBLES'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'OPTICA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'PANADERIA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'PERFORACION Y DEMOLICION'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'ESTUDIO DE SUELOS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'EVENTOS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'FARMACIA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'FERRETERIA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'FORESTAL'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'FOTOGRAFIA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'FRUTAS Y VERDURAS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'FUMIGACION Y EXTINTORES'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'FUNERARIAS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'GANADERIA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'GASOLINERA Y ESTACION DE SERVICIOS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'HOSPEDAJE'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'IMPRENTA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'INDUSTRIA PETROLERA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'INGENIERIA DE MINAS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'INSTALACIONES DE GAS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'INTERMEDIACION TURISTICA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'JOYERIA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'LACTEOS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'LIBRER\xCDA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'LICORERIA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'MADERERA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'MAQUINARIA AGROINDUSTRIAL'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'COMPUTACI\xD3N E INFORM\xC1TICA'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'CONSTRUCCION'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'CONSTRUCCION DE POZOS'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'CONSULTORIA AMBIENTAL'
-											),
-											_react2.default.createElement(
-												'option',
-												null,
-												'CONSULTORIA EN INGENIERIA ELECTRICA'
-											)
-										),
-										_react2.default.createElement('span', { className: 'icon-briefcase icoInputSelect' })
-									)
-								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'gridFormLarge gridFormMutable' },
-									_react2.default.createElement(
-										'label',
-										{ className: 'smallContent' },
-										'\xBFCu\xE1l es el capital del negocio?'
-									),
-									_react2.default.createElement(
-										'div',
-										{ className: 'inputSingleValue' },
-										_react2.default.createElement('input', { type: 'number', min: '1', ref: 'investment_i' }),
-										_react2.default.createElement('span', { className: 'icon-dollar' })
-									)
-								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'gridFormLarge gridFormMutable' },
-									_react2.default.createElement(
-										'label',
-										{ className: 'smallContent' },
-										'Capital constituido por:'
-									),
-									_react2.default.createElement(
-										'div',
-										{ className: 'inputCheckbox' },
-										_react2.default.createElement(
-											'div',
-											{ className: 'wrapperCheckbox' },
-											_react2.default.createElement('input', { type: 'checkbox', name: 'goods_investment', id: 'checkboxGoods' }),
-											_react2.default.createElement('span', { className: 'icon-box' }),
-											_react2.default.createElement(
-												'label',
-												{ className: 'smallContent' },
-												'Bienes'
-											)
-										),
-										_react2.default.createElement(
-											'div',
-											{ className: 'wrapperCheckbox' },
-											_react2.default.createElement('input', { type: 'checkbox', name: 'money_investment', id: 'checkboxMoney' }),
-											_react2.default.createElement('span', { className: 'icon-dollar' }),
-											_react2.default.createElement(
-												'label',
-												{ className: 'smallContent' },
-												'Dinero'
-											)
-										)
-									)
-								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'gridFormLarge gridFormMutable btnStepWrapperNext' },
-									_react2.default.createElement(
-										_reactRouterDom.Link,
-										{ to: '/invitar-socios' },
-										_react2.default.createElement(
-											'div',
-											{ className: 'btnNext', onClick: this.handleEnterpriseInformationSubmit.bind(this) },
-											'Siguiente'
-										)
-									)
-								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'gridFormShort btnStepWrapperBack' },
-									_react2.default.createElement(
-										_reactRouterDom.Link,
-										{ to: '/' },
-										_react2.default.createElement(
-											'div',
-											{ className: 'btnTransparentBackground' },
-											'Cancelar'
-										)
-									)
-								)
+								'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'btnFaq' },
+								'Quiero saber m\xE1s'
 							)
 						)
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ id: 'faq1', className: 'wrapperFaq' },
-					_react2.default.createElement(
-						'figure',
-						null,
-						_react2.default.createElement('img', { src: './css/img/constitucion-photo.jpg' })
 					),
 					_react2.default.createElement(
 						'div',
-						{ className: 'gridFaq' },
+						{ className: 'wrapperComercialFAQ' },
 						_react2.default.createElement(
-							'h1',
-							null,
-							'\xBFPor qu\xE9 es importante constituir mi empresa?'
-						),
-						_react2.default.createElement('div', { className: 'underlineBlue' }),
-						_react2.default.createElement(
-							'h2',
-							null,
-							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+							'div',
+							{ className: 'gridComercialFAQ' },
+							_react2.default.createElement(
+								'figure',
+								null,
+								_react2.default.createElement('img', { src: 'css/img/accesible.svg' })
+							),
+							_react2.default.createElement(
+								'h2',
+								{ className: 'landingTitles' },
+								'\xBFC\xFAal es el precio?'
+							),
+							_react2.default.createElement(
+								'h3',
+								null,
+								'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+							)
 						),
 						_react2.default.createElement(
 							'div',
-							{ className: 'btnFaq' },
-							'Quiero saber m\xE1s'
-						)
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'wrapperComercialFAQ' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'gridComercialFAQ' },
-						_react2.default.createElement(
-							'figure',
-							null,
-							_react2.default.createElement('img', { src: 'css/img/accesible.svg' })
-						),
-						_react2.default.createElement(
-							'h2',
-							{ className: 'landingTitles' },
-							'\xBFC\xFAal es el precio?'
-						),
-						_react2.default.createElement(
-							'h3',
-							null,
-							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'gridComercialFAQ' },
-						_react2.default.createElement(
-							'figure',
-							null,
-							_react2.default.createElement('img', { src: 'css/img/rapidez.svg' })
-						),
-						_react2.default.createElement(
-							'h2',
-							{ className: 'landingTitles' },
-							'\xBFC\xFAanto debo esperar?'
-						),
-						_react2.default.createElement(
-							'h3',
-							null,
-							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'gridComercialFAQ' },
-						_react2.default.createElement(
-							'figure',
-							null,
-							_react2.default.createElement('img', { src: 'css/img/delivery.svg' })
-						),
-						_react2.default.createElement(
-							'h2',
-							{ className: 'landingTitles' },
-							'Brindamos lo siguiente'
-						),
-						_react2.default.createElement(
-							'h3',
-							null,
+							{ className: 'gridComercialFAQ' },
 							_react2.default.createElement(
-								'ul',
+								'figure',
+								null,
+								_react2.default.createElement('img', { src: 'css/img/rapidez.svg' })
+							),
+							_react2.default.createElement(
+								'h2',
+								{ className: 'landingTitles' },
+								'\xBFC\xFAanto debo esperar?'
+							),
+							_react2.default.createElement(
+								'h3',
+								null,
+								'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'gridComercialFAQ' },
+							_react2.default.createElement(
+								'figure',
+								null,
+								_react2.default.createElement('img', { src: 'css/img/delivery.svg' })
+							),
+							_react2.default.createElement(
+								'h2',
+								{ className: 'landingTitles' },
+								'Brindamos lo siguiente'
+							),
+							_react2.default.createElement(
+								'h3',
 								null,
 								_react2.default.createElement(
-									'li',
+									'ul',
 									null,
-									'B\xFAsqueda y reserva de nombre'
-								),
-								_react2.default.createElement(
-									'li',
-									null,
-									'Estatutos de la empresa'
-								),
-								_react2.default.createElement(
-									'li',
-									null,
-									'Escritura p\xFAblica ante notario'
-								),
-								_react2.default.createElement(
-									'li',
-									null,
-									'Inscripci\xF3n registral en Sunarp'
-								),
-								_react2.default.createElement(
-									'li',
-									null,
-									'Ficha RUC'
-								),
-								_react2.default.createElement(
-									'li',
-									null,
-									'Copia literal'
-								),
-								_react2.default.createElement(
-									'li',
-									null,
-									'Compra de dominio web'
+									_react2.default.createElement(
+										'li',
+										null,
+										'B\xFAsqueda y reserva de nombre'
+									),
+									_react2.default.createElement(
+										'li',
+										null,
+										'Estatutos de la empresa'
+									),
+									_react2.default.createElement(
+										'li',
+										null,
+										'Escritura p\xFAblica ante notario'
+									),
+									_react2.default.createElement(
+										'li',
+										null,
+										'Inscripci\xF3n registral en Sunarp'
+									),
+									_react2.default.createElement(
+										'li',
+										null,
+										'Ficha RUC'
+									),
+									_react2.default.createElement(
+										'li',
+										null,
+										'Copia literal'
+									),
+									_react2.default.createElement(
+										'li',
+										null,
+										'Compra de dominio web'
+									)
 								)
 							)
 						)
 					)
-				)
-			);
+				);
+			}
 		}
 	}]);
 
@@ -28111,18 +28188,32 @@ var PartnersAddingForm = function (_Component) {
 		_this.state = {
 			positionSelected: "",
 			AccountManagerPositionSelected: "",
-			enterpriseSaved: 0
+			enterpriseSaved: 0,
+			redirect: false
 
 		};
 
 		_this.selectPositionHandler = _this.selectPositionHandler.bind(_this);
 		_this.addPartner = _this.addPartner.bind(_this);
 		_this.handlePartnerAddingFormSubmit = _this.handlePartnerAddingFormSubmit.bind(_this);
+		_this.validationForm = _this.validationForm.bind(_this);
 
 		return _this;
 	}
 
 	_createClass(PartnersAddingForm, [{
+		key: 'validationForm',
+		value: function validationForm() {
+			var isItGG = 0;
+			this.props.enterpriseInProcessData.partners.map(function (partner) {
+				if (partner.position == "Gerente General") {
+					isItGG = 1;
+				}
+			});
+
+			return isItGG;
+		}
+	}, {
 		key: 'addPartner',
 		value: function addPartner() {
 			var email = _reactDom2.default.findDOMNode(this.refs.inputPartnerEmail).value.trim();
@@ -28146,14 +28237,37 @@ var PartnersAddingForm = function (_Component) {
 				var json = { position: this.state.AccountManagerPositionSelected };
 
 				this.props.rowAccountManagerInputHandler.call(null, json);
-				this.props.sendPartnerInvitation.call(null);
+
+				var validation = this.validationForm();
+
+				if (validation == 1) {
+
+					this.props.sendPartnerInvitation.call(null);
+
+					this.setState({
+						redirect: true
+					});
+				} else {
+					document.getElementById("lblValidationMsg").innerHTML = "Debes seleccionar al menos a un socio como Gerente General.";
+				}
 			} else {
 
 				var _json = { position: this.state.AccountManagerPositionSelected };
 
 				this.props.rowAccountManagerInputHandler.call(null, _json);
 
-				this.props.updatePartnerInvitation.call(null);
+				var _validation = this.validationForm();
+
+				if (_validation == 1) {
+
+					this.props.updatePartnerInvitation.call(null);
+
+					this.setState({
+						redirect: true
+					});
+				} else {
+					document.getElementById("lblValidationMsg").innerHTML = "Debes seleccionar al menos a un socio como Gerente General.";
+				}
 			}
 		}
 	}, {
@@ -28208,394 +28322,400 @@ var PartnersAddingForm = function (_Component) {
 				}
 			}
 
-			return _react2.default.createElement(
-				'div',
-				{ className: 'sectionEnterpriseIncorporation' },
-				_react2.default.createElement(
+			if (this.state.redirect) {
+				return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/informacion-personal' });
+			} else {
+
+				return _react2.default.createElement(
 					'div',
-					{ className: 'wrapperIncorporationForm' },
+					{ className: 'sectionEnterpriseIncorporation' },
 					_react2.default.createElement(
 						'div',
-						{ className: 'partnersAddingForm' },
+						{ className: 'wrapperIncorporationForm' },
 						_react2.default.createElement(
 							'div',
-							{ className: 'gridStepProgress' },
-							_react2.default.createElement('span', { className: 'icon-cross' }),
-							_react2.default.createElement(
-								'ul',
-								{ className: 'stepProgress' },
-								_react2.default.createElement(
-									'li',
-									null,
-									'1'
-								),
-								_react2.default.createElement(
-									'li',
-									{ className: 'stepActive' },
-									'2'
-								),
-								_react2.default.createElement(
-									'li',
-									null,
-									'3'
-								)
-							),
-							_react2.default.createElement(
-								'figure',
-								null,
-								_react2.default.createElement('img', { src: 'css/img/Infosocios2.svg' })
-							),
-							_react2.default.createElement(
-								'h4',
-								{ className: 'bigTitlesOS' },
-								'Agrega a tus socios'
-							),
-							_react2.default.createElement(
-								'p',
-								{ className: 'mediumContent instructions' },
-								'Incorpora a todos las personas que conformar\xE1n la sociedad.'
-							),
-							_react2.default.createElement(
-								'h4',
-								{ className: 'bigTitlesOS helpTitle' },
-								'\xBFNecesitas ayuda?'
-							),
-							_react2.default.createElement('span', { className: 'icon-angle-down' }),
-							_react2.default.createElement(
-								'a',
-								{ href: 'http://www.facebook.com/legaly.pe', target: '_blank', className: 'gridUserSupport' },
-								_react2.default.createElement('span', { className: 'icon-facebook' }),
-								_react2.default.createElement(
-									'p',
-									{ className: 'smallContent' },
-									'www.facebook.com/legaly.pe'
-								)
-							),
+							{ className: 'partnersAddingForm' },
 							_react2.default.createElement(
 								'div',
-								{ className: 'gridUserSupport' },
-								_react2.default.createElement('span', { className: 'icon-mail_outline' }),
+								{ className: 'gridStepProgress' },
+								_react2.default.createElement('span', { className: 'icon-cross' }),
 								_react2.default.createElement(
-									'p',
-									{ className: 'smallContent' },
-									'ayuda@legaly.pe'
-								)
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridForm' },
-							_react2.default.createElement(
-								'div',
-								{ className: 'wrapperFormTitle' },
-								_react2.default.createElement(
-									'h3',
-									{ className: 'bigTitlesSS' },
-									'Invita a los fundadores'
-								),
-								_react2.default.createElement('div', { className: 'underlineBlue' })
-							),
-							_react2.default.createElement(
-								'form',
-								{ id: 'partnerForm' },
-								_react2.default.createElement(
-									'div',
-									{ className: 'partnerRow partnerRowInfo', 'data-partnerlistpos': 0 },
+									'ul',
+									{ className: 'stepProgress' },
 									_react2.default.createElement(
-										'div',
-										{ className: 'gridFormShort gridEmail' },
-										_react2.default.createElement(
-											'label',
-											{ className: 'smallContent' },
-											'1. Socio'
-										),
-										_react2.default.createElement(
-											'p',
-											{ className: 'smallContent' },
-											this.props.enterpriseInProcessData.partners ? this.props.enterpriseInProcessData.partners[0].user.name : ""
-										)
+										'li',
+										null,
+										'1'
 									),
 									_react2.default.createElement(
+										'li',
+										{ className: 'stepActive' },
+										'2'
+									),
+									_react2.default.createElement(
+										'li',
+										null,
+										'3'
+									)
+								),
+								_react2.default.createElement(
+									'figure',
+									null,
+									_react2.default.createElement('img', { src: 'css/img/Infosocios2.svg' })
+								),
+								_react2.default.createElement(
+									'h4',
+									{ className: 'bigTitlesOS' },
+									'Agrega a tus socios'
+								),
+								_react2.default.createElement(
+									'p',
+									{ className: 'mediumContent instructions' },
+									'Incorpora a todos las personas que conformar\xE1n la sociedad.'
+								),
+								_react2.default.createElement(
+									'h4',
+									{ className: 'bigTitlesOS helpTitle' },
+									'\xBFNecesitas ayuda?'
+								),
+								_react2.default.createElement('span', { className: 'icon-angle-down' }),
+								_react2.default.createElement(
+									'a',
+									{ href: 'http://www.facebook.com/legaly.pe', target: '_blank', className: 'gridUserSupport' },
+									_react2.default.createElement('span', { className: 'icon-facebook' }),
+									_react2.default.createElement(
+										'p',
+										{ className: 'smallContent' },
+										'www.facebook.com/legaly.pe'
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridUserSupport' },
+									_react2.default.createElement('span', { className: 'icon-mail_outline' }),
+									_react2.default.createElement(
+										'p',
+										{ className: 'smallContent' },
+										'ayuda@legaly.pe'
+									)
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'gridForm' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'wrapperFormTitle' },
+									_react2.default.createElement(
+										'h3',
+										{ className: 'bigTitlesSS' },
+										'Invita a los fundadores'
+									),
+									_react2.default.createElement('div', { className: 'underlineBlue' })
+								),
+								_react2.default.createElement('label', { id: 'lblValidationMsg', className: 'smallContent' }),
+								_react2.default.createElement(
+									'form',
+									{ id: 'partnerForm' },
+									_react2.default.createElement(
 										'div',
-										{ className: 'gridFormShort' },
-										_react2.default.createElement(
-											'label',
-											{ className: 'smallContent' },
-											'Cargo'
-										),
+										{ className: 'partnerRow partnerRowInfo', 'data-partnerlistpos': 0 },
 										_react2.default.createElement(
 											'div',
-											{ className: 'inputSelect' },
+											{ className: 'gridFormShort gridEmail' },
 											_react2.default.createElement(
-												'select',
-												{ onChange: this.selectPositionHandler.bind(), ref: 'AccountManagerPositionSelected', value: this.state.AccountManagerPositionSelected, name: 'AccountManagerPositionSelected' },
-												_react2.default.createElement('option', { disabled: true }),
-												_react2.default.createElement(
-													'option',
-													null,
-													'Ninguno'
-												),
-												_react2.default.createElement(
-													'option',
-													null,
-													'Gerente General'
-												),
-												_react2.default.createElement(
-													'option',
-													null,
-													'Sub Gerente'
-												),
-												_react2.default.createElement(
-													'option',
-													null,
-													'Apoderado Especial'
-												),
-												_react2.default.createElement(
-													'option',
-													null,
-													'Gerente Finanzas'
-												),
-												_react2.default.createElement(
-													'option',
-													null,
-													'Gerente Administrativo'
-												)
+												'label',
+												{ className: 'smallContent' },
+												'1. Socio'
 											),
-											_react2.default.createElement('span', null)
-										)
-									),
-									_react2.default.createElement('span', { className: '' })
-								),
-								partnerRow,
-								_react2.default.createElement(
-									'div',
-									{ className: 'partnerRow' },
-									_react2.default.createElement(
-										'div',
-										{ className: 'gridFormShort' },
-										_react2.default.createElement(
-											'label',
-											{ className: 'smallContent' },
-											'Socio'
+											_react2.default.createElement(
+												'p',
+												{ className: 'smallContent' },
+												this.props.enterpriseInProcessData.partners ? this.props.enterpriseInProcessData.partners[0].user.name : ""
+											)
 										),
 										_react2.default.createElement(
 											'div',
-											{ className: 'inputSingleValue' },
-											_react2.default.createElement('input', { ref: 'inputPartnerEmail', className: 'inputPartnerEmail', type: 'text', placeholder: 'Nombre Completo' }),
+											{ className: 'gridFormShort' },
+											_react2.default.createElement(
+												'label',
+												{ className: 'smallContent' },
+												'Cargo'
+											),
+											_react2.default.createElement(
+												'div',
+												{ className: 'inputSelect' },
+												_react2.default.createElement(
+													'select',
+													{ onChange: this.selectPositionHandler.bind(), ref: 'AccountManagerPositionSelected', value: this.state.AccountManagerPositionSelected, name: 'AccountManagerPositionSelected' },
+													_react2.default.createElement('option', { disabled: true }),
+													_react2.default.createElement(
+														'option',
+														null,
+														'Ninguno'
+													),
+													_react2.default.createElement(
+														'option',
+														null,
+														'Gerente General'
+													),
+													_react2.default.createElement(
+														'option',
+														null,
+														'Sub Gerente'
+													),
+													_react2.default.createElement(
+														'option',
+														null,
+														'Apoderado Especial'
+													),
+													_react2.default.createElement(
+														'option',
+														null,
+														'Gerente Finanzas'
+													),
+													_react2.default.createElement(
+														'option',
+														null,
+														'Gerente Administrativo'
+													)
+												),
+												_react2.default.createElement('span', null)
+											)
+										),
+										_react2.default.createElement('span', { className: '' })
+									),
+									partnerRow,
+									_react2.default.createElement(
+										'div',
+										{ className: 'partnerRow' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'gridFormShort' },
+											_react2.default.createElement(
+												'label',
+												{ className: 'smallContent' },
+												'Socio'
+											),
+											_react2.default.createElement(
+												'div',
+												{ className: 'inputSingleValue' },
+												_react2.default.createElement('input', { ref: 'inputPartnerEmail', className: 'inputPartnerEmail', type: 'text', placeholder: 'Nombre Completo' }),
+												_react2.default.createElement('span', { className: 'icon-head' })
+											)
+										),
+										_react2.default.createElement(
+											'div',
+											{ className: 'gridFormShort' },
+											_react2.default.createElement(
+												'label',
+												{ className: 'smallContent' },
+												'Cargo'
+											),
+											_react2.default.createElement(
+												'div',
+												{ className: 'inputSelect' },
+												_react2.default.createElement(
+													'select',
+													{ onChange: this.selectPositionHandler.bind(), ref: 'positionSelect', value: this.state.positionSelected, name: 'positionSelected' },
+													_react2.default.createElement('option', { disabled: true }),
+													_react2.default.createElement(
+														'option',
+														null,
+														'Ninguno'
+													),
+													_react2.default.createElement(
+														'option',
+														null,
+														'Gerente General'
+													),
+													_react2.default.createElement(
+														'option',
+														null,
+														'Sub Gerente'
+													),
+													_react2.default.createElement(
+														'option',
+														null,
+														'Apoderado Especial'
+													),
+													_react2.default.createElement(
+														'option',
+														null,
+														'Gerente Finanzas'
+													),
+													_react2.default.createElement(
+														'option',
+														null,
+														'Gerente Administrativo'
+													)
+												),
+												_react2.default.createElement('span', null)
+											)
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'gridFormLarge' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'btnRed btnAddPartner', onClick: this.addPartner.bind(this) },
+											_react2.default.createElement(
+												'p',
+												null,
+												'Agregar socio'
+											),
 											_react2.default.createElement('span', { className: 'icon-head' })
 										)
 									),
 									_react2.default.createElement(
 										'div',
-										{ className: 'gridFormShort' },
+										{ className: 'gridFormLarge gridFormMutable wrapperBtnNext' },
 										_react2.default.createElement(
-											'label',
-											{ className: 'smallContent' },
-											'Cargo'
-										),
-										_react2.default.createElement(
-											'div',
-											{ className: 'inputSelect' },
-											_react2.default.createElement(
-												'select',
-												{ onChange: this.selectPositionHandler.bind(), ref: 'positionSelect', value: this.state.positionSelected, name: 'positionSelected' },
-												_react2.default.createElement('option', { disabled: true }),
-												_react2.default.createElement(
-													'option',
-													null,
-													'Ninguno'
-												),
-												_react2.default.createElement(
-													'option',
-													null,
-													'Gerente General'
-												),
-												_react2.default.createElement(
-													'option',
-													null,
-													'Sub Gerente'
-												),
-												_react2.default.createElement(
-													'option',
-													null,
-													'Apoderado Especial'
-												),
-												_react2.default.createElement(
-													'option',
-													null,
-													'Gerente Finanzas'
-												),
-												_react2.default.createElement(
-													'option',
-													null,
-													'Gerente Administrativo'
-												)
-											),
-											_react2.default.createElement('span', null)
-										)
-									)
-								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'gridFormLarge' },
-									_react2.default.createElement(
-										'div',
-										{ className: 'btnRed btnAddPartner', onClick: this.addPartner.bind(this) },
-										_react2.default.createElement(
-											'p',
+											'a',
 											null,
-											'Agregar socio'
-										),
-										_react2.default.createElement('span', { className: 'icon-head' })
-									)
-								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'gridFormLarge gridFormMutable wrapperBtnNext' },
-									_react2.default.createElement(
-										_reactRouterDom.Link,
-										{ to: '/informacion-personal' },
-										_react2.default.createElement(
-											'div',
-											{ className: 'btnNext', onClick: this.handlePartnerAddingFormSubmit.bind(this) },
-											'Siguiente'
+											_react2.default.createElement(
+												'div',
+												{ className: 'btnNext', onClick: this.handlePartnerAddingFormSubmit.bind(this) },
+												'Siguiente'
+											)
 										)
-									)
-								),
-								_react2.default.createElement('div', { className: 'gridFormLarge gridFormMutable wrapperBtnTransparent' })
+									),
+									_react2.default.createElement('div', { className: 'gridFormLarge gridFormMutable wrapperBtnTransparent' })
+								)
 							)
 						)
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ id: 'faq1', className: 'wrapperFaq' },
-					_react2.default.createElement(
-						'figure',
-						null,
-						_react2.default.createElement('img', { src: './css/img/constitucion-photo.jpg' })
 					),
 					_react2.default.createElement(
 						'div',
-						{ className: 'gridFaq' },
+						{ id: 'faq1', className: 'wrapperFaq' },
 						_react2.default.createElement(
-							'h1',
+							'figure',
 							null,
-							'\xBFPor qu\xE9 es importante constituir mi empresa?'
-						),
-						_react2.default.createElement('div', { className: 'underlineBlue' }),
-						_react2.default.createElement(
-							'h2',
-							null,
-							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+							_react2.default.createElement('img', { src: './css/img/constitucion-photo.jpg' })
 						),
 						_react2.default.createElement(
 							'div',
-							{ className: 'btnFaq' },
-							'Quiero saber m\xE1s'
-						)
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'wrapperComercialFAQ' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'gridComercialFAQ' },
-						_react2.default.createElement(
-							'figure',
-							null,
-							_react2.default.createElement('img', { src: 'css/img/accesible.svg' })
-						),
-						_react2.default.createElement(
-							'h2',
-							{ className: 'landingTitles' },
-							'\xBFC\xFAal es el precio?'
-						),
-						_react2.default.createElement(
-							'h3',
-							null,
-							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'gridComercialFAQ' },
-						_react2.default.createElement(
-							'figure',
-							null,
-							_react2.default.createElement('img', { src: 'css/img/rapidez.svg' })
-						),
-						_react2.default.createElement(
-							'h2',
-							{ className: 'landingTitles' },
-							'\xBFC\xFAanto debo esperar?'
-						),
-						_react2.default.createElement(
-							'h3',
-							null,
-							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'gridComercialFAQ' },
-						_react2.default.createElement(
-							'figure',
-							null,
-							_react2.default.createElement('img', { src: 'css/img/delivery.svg' })
-						),
-						_react2.default.createElement(
-							'h2',
-							{ className: 'landingTitles' },
-							'Brindamos lo siguiente'
-						),
-						_react2.default.createElement(
-							'h3',
-							null,
+							{ className: 'gridFaq' },
 							_react2.default.createElement(
-								'ul',
+								'h1',
+								null,
+								'\xBFPor qu\xE9 es importante constituir mi empresa?'
+							),
+							_react2.default.createElement('div', { className: 'underlineBlue' }),
+							_react2.default.createElement(
+								'h2',
+								null,
+								'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'btnFaq' },
+								'Quiero saber m\xE1s'
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'wrapperComercialFAQ' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'gridComercialFAQ' },
+							_react2.default.createElement(
+								'figure',
+								null,
+								_react2.default.createElement('img', { src: 'css/img/accesible.svg' })
+							),
+							_react2.default.createElement(
+								'h2',
+								{ className: 'landingTitles' },
+								'\xBFC\xFAal es el precio?'
+							),
+							_react2.default.createElement(
+								'h3',
+								null,
+								'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'gridComercialFAQ' },
+							_react2.default.createElement(
+								'figure',
+								null,
+								_react2.default.createElement('img', { src: 'css/img/rapidez.svg' })
+							),
+							_react2.default.createElement(
+								'h2',
+								{ className: 'landingTitles' },
+								'\xBFC\xFAanto debo esperar?'
+							),
+							_react2.default.createElement(
+								'h3',
+								null,
+								'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'gridComercialFAQ' },
+							_react2.default.createElement(
+								'figure',
+								null,
+								_react2.default.createElement('img', { src: 'css/img/delivery.svg' })
+							),
+							_react2.default.createElement(
+								'h2',
+								{ className: 'landingTitles' },
+								'Brindamos lo siguiente'
+							),
+							_react2.default.createElement(
+								'h3',
 								null,
 								_react2.default.createElement(
-									'li',
+									'ul',
 									null,
-									'B\xFAsqueda y reserva de nombre'
-								),
-								_react2.default.createElement(
-									'li',
-									null,
-									'Estatutos de la empresa'
-								),
-								_react2.default.createElement(
-									'li',
-									null,
-									'Escritura p\xFAblica ante notario'
-								),
-								_react2.default.createElement(
-									'li',
-									null,
-									'Inscripci\xF3n registral en Sunarp'
-								),
-								_react2.default.createElement(
-									'li',
-									null,
-									'Ficha RUC'
-								),
-								_react2.default.createElement(
-									'li',
-									null,
-									'Copia literal'
-								),
-								_react2.default.createElement(
-									'li',
-									null,
-									'Compra de dominio web'
+									_react2.default.createElement(
+										'li',
+										null,
+										'B\xFAsqueda y reserva de nombre'
+									),
+									_react2.default.createElement(
+										'li',
+										null,
+										'Estatutos de la empresa'
+									),
+									_react2.default.createElement(
+										'li',
+										null,
+										'Escritura p\xFAblica ante notario'
+									),
+									_react2.default.createElement(
+										'li',
+										null,
+										'Inscripci\xF3n registral en Sunarp'
+									),
+									_react2.default.createElement(
+										'li',
+										null,
+										'Ficha RUC'
+									),
+									_react2.default.createElement(
+										'li',
+										null,
+										'Copia literal'
+									),
+									_react2.default.createElement(
+										'li',
+										null,
+										'Compra de dominio web'
+									)
 								)
 							)
 						)
 					)
-				)
-			);
+				);
+			}
 		}
 	}]);
 
@@ -28730,7 +28850,7 @@ var PaymentMethodForm = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'legalyContactInfo' },
-										'BCP cta xxx 192 - 111111111'
+										'BCP cta 193 - 34732322-0-52'
 									),
 									_react2.default.createElement(
 										_reactRouterDom.Link,
@@ -29074,7 +29194,9 @@ var PersonalInformationForm = function (_Component) {
 
 			partnerSelected: 0,
 			numberOfGoods: 1,
-			goodsSeparation: ""
+			goodsSeparation: "",
+			validation: 0,
+			redirect: 0
 		};
 
 		_this.addGood = _this.addGood.bind(_this);
@@ -29085,6 +29207,70 @@ var PersonalInformationForm = function (_Component) {
 	}
 
 	_createClass(PersonalInformationForm, [{
+		key: 'validationForm',
+		value: function validationForm() {
+
+			var errors = 0;
+
+			var i_name = void 0,
+			    i_documentType = void 0,
+			    i_documentNum = void 0,
+			    i_position = void 0,
+			    i_email = void 0,
+			    i_phone = void 0,
+			    i_location = void 0,
+			    i_civilStatus = void 0,
+			    i_goodsSeparation = void 0,
+			    i_registryNum = void 0,
+			    i_registryOffice = void 0,
+			    i_coupleDocType = void 0,
+			    i_copuleDocNum = void 0,
+			    i_moneyInvestment = void 0,
+			    i_nameGoodsInvestment = void 0,
+			    i_valueGoodsInvestment = void 0;
+
+			i_name = _reactDom2.default.findDOMNode(this.refs.user_name_i);
+			i_documentType = _reactDom2.default.findDOMNode(this.refs.select_document_type);
+			i_documentNum = _reactDom2.default.findDOMNode(this.refs.user_document_number_i);
+			i_position = _reactDom2.default.findDOMNode(this.refs.user_position);
+			i_email = _reactDom2.default.findDOMNode(this.refs.user_email_i);
+			i_phone = _reactDom2.default.findDOMNode(this.refs.user_phone);
+			i_location = _reactDom2.default.findDOMNode(this.refs.user_location_i);
+			i_civilStatus = _reactDom2.default.findDOMNode(this.refs.user_civil_status);
+			i_goodsSeparation = document.getElementsByClassName("inputRadioButtonPersonalInfo");
+			i_registryNum = _reactDom2.default.findDOMNode(this.refs.user_registry_num);
+			i_registryOffice = _reactDom2.default.findDOMNode(this.refs.user_registry_office);
+			i_coupleDocType = _reactDom2.default.findDOMNode(this.refs.couple_doc_type);
+			i_copuleDocNum = _reactDom2.default.findDOMNode(this.refs.couple_document_number_i);
+
+			if (this.props.enterpriseInProcessData.isItGoodsCapital) {
+				i_nameGoodsInvestment = _reactDom2.default.findDOMNode(this.refs.good_name_i);
+				i_valueGoodsInvestment = _reactDom2.default.findDOMNode(this.refs.good_value_i);
+			}
+
+			if (this.props.enterpriseInProcessData.isItMoneyCapital) {
+				i_moneyInvestment = _reactDom2.default.findDOMNode(this.refs.user_money_investment_i);
+			}
+
+			input.parentNode.parentNode.classList.remove("inputError");
+
+			this.props.enterpriseInProcessData.partners.map(function (partner) {
+
+				if (json.optionNames.length == 0) {
+
+					i_optionnames.parentNode.parentNode.classList.add("inputError");
+
+					errors += 1;
+				}
+			});
+
+			if (errors > 0) {
+				this.setState({ validation: 0 });
+			} else {
+				this.setState({ validation: 1 });
+			}
+		}
+	}, {
 		key: 'addGood',
 		value: function addGood() {
 
@@ -29235,7 +29421,8 @@ var PersonalInformationForm = function (_Component) {
 			    inputGoodsSeparation = void 0,
 			    inputRegistryNumber = void 0,
 			    inputRegistryOffice = void 0,
-			    inputPosition = void 0;
+			    inputPosition = void 0,
+			    inputPhoneNumber = void 0;
 
 			if (dataReaderPartner.user) {
 
@@ -29243,7 +29430,7 @@ var PersonalInformationForm = function (_Component) {
 
 				inputDocTypePartner = _react2.default.createElement(
 					'select',
-					{ onChange: this.props.selectHandler.bind(), value: dataReaderPartner.user.documentType != undefined ? dataReaderPartner.user.documentType : "", name: 'documentType', 'data-pos': this.state.partnerSelected },
+					{ onChange: this.props.selectHandler.bind(), value: dataReaderPartner.user.documentType != undefined ? dataReaderPartner.user.documentType : "", name: 'documentType', 'data-pos': this.state.partnerSelected, ref: 'select_document_type' },
 					_react2.default.createElement('option', { disabled: true }),
 					_react2.default.createElement(
 						'option',
@@ -29270,7 +29457,7 @@ var PersonalInformationForm = function (_Component) {
 
 				inputCivilStatus = _react2.default.createElement(
 					'select',
-					{ onChange: this.props.selectHandler.bind(), value: dataReaderPartner.user.civilStatus != undefined ? dataReaderPartner.user.civilStatus : "", name: 'civilStatus', 'data-pos': this.state.partnerSelected },
+					{ onChange: this.props.selectHandler.bind(), value: dataReaderPartner.user.civilStatus != undefined ? dataReaderPartner.user.civilStatus : "", name: 'civilStatus', 'data-pos': this.state.partnerSelected, ref: 'user_civil_status' },
 					_react2.default.createElement('option', { disabled: true }),
 					_react2.default.createElement(
 						'option',
@@ -29291,7 +29478,7 @@ var PersonalInformationForm = function (_Component) {
 
 				inputDocTypeCouple = _react2.default.createElement(
 					'select',
-					{ onChange: this.props.selectHandler.bind(), value: dataReaderPartner.user.coupleDocumentType != undefined ? dataReaderPartner.user.coupleDocumentType : "", name: 'coupleDocumentType', 'data-pos': this.state.partnerSelected },
+					{ onChange: this.props.selectHandler.bind(), value: dataReaderPartner.user.coupleDocumentType != undefined ? dataReaderPartner.user.coupleDocumentType : "", name: 'coupleDocumentType', 'data-pos': this.state.partnerSelected, ref: 'couple_doc_type' },
 					_react2.default.createElement('option', { disabled: true }),
 					_react2.default.createElement(
 						'option',
@@ -29320,22 +29507,22 @@ var PersonalInformationForm = function (_Component) {
 					_react2.default.createElement(
 						'label',
 						null,
-						_react2.default.createElement('input', { type: 'radio', name: 'goodsSeparation', onChange: this.props.selectHandler.bind(), checked: dataReaderPartner.user.goodsSeparation === "1", value: '1', 'data-pos': this.state.partnerSelected }),
+						_react2.default.createElement('input', { type: 'radio', name: 'goodsSeparation', onChange: this.props.selectHandler.bind(), checked: dataReaderPartner.user.goodsSeparation === "1", value: '1', 'data-pos': this.state.partnerSelected, className: 'inputRadioButtonPersonalInfo' }),
 						'Si'
 					),
 					_react2.default.createElement(
 						'label',
 						null,
-						_react2.default.createElement('input', { type: 'radio', name: 'goodsSeparation', onChange: this.props.selectHandler.bind(), checked: dataReaderPartner.user.goodsSeparation === "0", value: '0', 'data-pos': this.state.partnerSelected }),
+						_react2.default.createElement('input', { type: 'radio', name: 'goodsSeparation', onChange: this.props.selectHandler.bind(), checked: dataReaderPartner.user.goodsSeparation === "0", value: '0', 'data-pos': this.state.partnerSelected, className: 'inputRadioButtonPersonalInfo' }),
 						'No'
 					)
 				);
 
-				inputRegistryNumber = _react2.default.createElement('input', { type: 'text', value: dataReaderPartner.user.registryNumber != undefined ? dataReaderPartner.user.registryNumber : "", onChange: this.props.inputTextHandler.bind(), name: 'registryNumber', 'data-pos': this.state.partnerSelected });
+				inputRegistryNumber = _react2.default.createElement('input', { type: 'text', value: dataReaderPartner.user.registryNumber != undefined ? dataReaderPartner.user.registryNumber : "", onChange: this.props.inputTextHandler.bind(), name: 'registryNumber', 'data-pos': this.state.partnerSelected, ref: 'user_registry_num' });
 
 				inputRegistryOffice = _react2.default.createElement(
 					'select',
-					{ onChange: this.props.selectHandler.bind(), value: dataReaderPartner.user.regitryOffice != undefined ? dataReaderPartner.user.regitryOffice : "", name: 'regitryOffice', 'data-pos': this.state.partnerSelected },
+					{ onChange: this.props.selectHandler.bind(), value: dataReaderPartner.user.regitryOffice != undefined ? dataReaderPartner.user.regitryOffice : "", name: 'regitryOffice', 'data-pos': this.state.partnerSelected, ref: 'user_registry_office' },
 					_react2.default.createElement('option', { disabled: true }),
 					_react2.default.createElement(
 						'option',
@@ -29629,7 +29816,9 @@ var PersonalInformationForm = function (_Component) {
 					)
 				);
 
-				inputPosition = _react2.default.createElement('input', { type: 'text', value: dataReaderPartner.user.position != undefined ? dataReaderPartner.user.position : "", onChange: this.props.inputTextHandler.bind(), name: 'position', 'data-pos': this.state.partnerSelected });
+				inputPosition = _react2.default.createElement('input', { type: 'text', value: dataReaderPartner.user.position != undefined ? dataReaderPartner.user.position : "", onChange: this.props.inputTextHandler.bind(), name: 'position', 'data-pos': this.state.partnerSelected, ref: 'user_position' });
+
+				inputPhoneNumber = _react2.default.createElement('input', { type: 'text', value: dataReaderPartner.user.phoneNumber != undefined ? dataReaderPartner.user.phoneNumber : "", onChange: this.props.inputTextHandler.bind(), name: 'phoneNumber', 'data-pos': this.state.partnerSelected, ref: 'user_phone' });
 			}
 
 			//agregando input de inversion en Dinero
@@ -29768,6 +29957,11 @@ var PersonalInformationForm = function (_Component) {
 								_react2.default.createElement('div', { className: 'underlineBlue' })
 							),
 							_react2.default.createElement(
+								'label',
+								{ id: 'lblValidationMsgPersonalInformation', className: 'smallContent' },
+								'Ac\xE1 puedes ingresar la informaci\xF3n personal de cada socio.'
+							),
+							_react2.default.createElement(
 								'div',
 								{ className: 'wrapperPartnersList' },
 								btnUserprofileInfo
@@ -29847,6 +30041,21 @@ var PersonalInformationForm = function (_Component) {
 										'div',
 										{ className: 'inputSingleValue' },
 										inputMail,
+										_react2.default.createElement('span', null)
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridFormLarge' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'smallContent' },
+										'Celular:'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'inputSingleValue' },
+										inputPhoneNumber,
 										_react2.default.createElement('span', null)
 									)
 								),

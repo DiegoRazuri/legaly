@@ -20,13 +20,69 @@ export default class PersonalInformationForm extends Component{
 
 			partnerSelected: 0,
 			numberOfGoods : 1,
-			goodsSeparation : ""
+			goodsSeparation : "",
+			validation : 0,
+			redirect : 0
 		}
 
 		this.addGood = this.addGood.bind(this);
 		this.switchPartnerSelected = this.switchPartnerSelected.bind(this);
 		this.handleGoodSeparator = this.handleGoodSeparator.bind(this);
 		
+	}
+
+	validationForm(){
+
+		let errors = 0;
+
+		let i_name, i_documentType, i_documentNum, i_position, i_email, i_phone, i_location, 
+			i_civilStatus, i_goodsSeparation, i_registryNum, i_registryOffice, 
+			i_coupleDocType, i_copuleDocNum, i_moneyInvestment, i_nameGoodsInvestment, i_valueGoodsInvestment;
+
+		i_name = ReactDom.findDOMNode(this.refs.user_name_i);
+		i_documentType = ReactDom.findDOMNode(this.refs.select_document_type);
+		i_documentNum = ReactDom.findDOMNode(this.refs.user_document_number_i);
+		i_position = ReactDom.findDOMNode(this.refs.user_position);
+		i_email = ReactDom.findDOMNode(this.refs.user_email_i);
+		i_phone = ReactDom.findDOMNode(this.refs.user_phone);
+		i_location = ReactDom.findDOMNode(this.refs.user_location_i);
+		i_civilStatus = ReactDom.findDOMNode(this.refs.user_civil_status);
+		i_goodsSeparation = document.getElementsByClassName("inputRadioButtonPersonalInfo");
+		i_registryNum = ReactDom.findDOMNode(this.refs.user_registry_num);
+		i_registryOffice = ReactDom.findDOMNode(this.refs.user_registry_office);
+		i_coupleDocType = ReactDom.findDOMNode(this.refs.couple_doc_type);
+		i_copuleDocNum = ReactDom.findDOMNode(this.refs.couple_document_number_i);
+		
+		if(this.props.enterpriseInProcessData.isItGoodsCapital){
+			i_nameGoodsInvestment = ReactDom.findDOMNode(this.refs.good_name_i);
+			i_valueGoodsInvestment = ReactDom.findDOMNode(this.refs.good_value_i);
+		}
+
+		if(this.props.enterpriseInProcessData.isItMoneyCapital){
+			i_moneyInvestment = ReactDom.findDOMNode(this.refs.user_money_investment_i);
+		}
+
+		
+		input.parentNode.parentNode.classList.remove("inputError");
+
+		this.props.enterpriseInProcessData.partners.map((partner)=>{
+
+			if(json.optionNames.length == 0){
+
+				i_optionnames.parentNode.parentNode.classList.add("inputError");
+
+				errors += 1;
+
+			}
+		
+		});
+
+		if(errors > 0){
+			this.setState({validation : 0})
+		}else{
+			this.setState({validation : 1})
+		}
+
 	}
 	
 
@@ -146,14 +202,14 @@ export default class PersonalInformationForm extends Component{
 		//agregando los inputs
 
 
-		let inputName, inputDocTypePartner, inputDocPartnerNumber, inputMail, inputLocation, inputCivilStatus, inputDocTypeCouple, inputDocNumCouple, inputMoneyInvestment, inputGoodsSeparation, inputRegistryNumber, inputRegistryOffice, inputPosition;
+		let inputName, inputDocTypePartner, inputDocPartnerNumber, inputMail, inputLocation, inputCivilStatus, inputDocTypeCouple, inputDocNumCouple, inputMoneyInvestment, inputGoodsSeparation, inputRegistryNumber, inputRegistryOffice, inputPosition, inputPhoneNumber;
 		
 		if(dataReaderPartner.user){
 			
 			
 			inputName = <input type="text" ref="user_name_i" value={dataReaderPartner.user.name} onChange={this.props.inputTextHandler.bind()} name="name" data-pos={this.state.partnerSelected}/>
 			
-			inputDocTypePartner = <select  onChange={this.props.selectHandler.bind()} value={dataReaderPartner.user.documentType != undefined ? dataReaderPartner.user.documentType : "" } name="documentType" data-pos={this.state.partnerSelected}>
+			inputDocTypePartner = <select  onChange={this.props.selectHandler.bind()} value={dataReaderPartner.user.documentType != undefined ? dataReaderPartner.user.documentType : "" } name="documentType" data-pos={this.state.partnerSelected} ref="select_document_type">
 												<option disabled></option>
 												<option>DNI</option>
 												<option>Pasaporte</option>
@@ -166,14 +222,14 @@ export default class PersonalInformationForm extends Component{
 		
 			inputLocation = <input type="text" ref="user_location_i" value={dataReaderPartner.user.location != undefined ? dataReaderPartner.user.location : ""} onChange={this.props.inputTextHandler.bind()} name="location" data-pos={this.state.partnerSelected}/>
 		
-			inputCivilStatus = <select onChange={this.props.selectHandler.bind()} value={dataReaderPartner.user.civilStatus != undefined ? dataReaderPartner.user.civilStatus : ""} name="civilStatus" data-pos={this.state.partnerSelected}>
+			inputCivilStatus = <select onChange={this.props.selectHandler.bind()} value={dataReaderPartner.user.civilStatus != undefined ? dataReaderPartner.user.civilStatus : ""} name="civilStatus" data-pos={this.state.partnerSelected} ref="user_civil_status">
 									<option disabled></option>
 									<option>Soltero</option>
 									<option>Casado</option>
 									<option>Divorciado</option>
 								</select>
 
-			inputDocTypeCouple = <select onChange={this.props.selectHandler.bind()} value={dataReaderPartner.user.coupleDocumentType != undefined ? dataReaderPartner.user.coupleDocumentType : ""} name="coupleDocumentType" data-pos={this.state.partnerSelected}>
+			inputDocTypeCouple = <select onChange={this.props.selectHandler.bind()} value={dataReaderPartner.user.coupleDocumentType != undefined ? dataReaderPartner.user.coupleDocumentType : ""} name="coupleDocumentType" data-pos={this.state.partnerSelected} ref="couple_doc_type">
 									<option disabled></option>
 									<option>DNI</option>
 									<option>Pasaporte</option>
@@ -186,18 +242,18 @@ export default class PersonalInformationForm extends Component{
 	
 			inputGoodsSeparation = <div className="wrapperInputRadio">
 										<label>
-											<input type="radio" name="goodsSeparation" onChange={this.props.selectHandler.bind()} checked={dataReaderPartner.user.goodsSeparation === "1"} value="1" data-pos={this.state.partnerSelected}/>Si
+											<input type="radio" name="goodsSeparation" onChange={this.props.selectHandler.bind()} checked={dataReaderPartner.user.goodsSeparation === "1"} value="1" data-pos={this.state.partnerSelected} className="inputRadioButtonPersonalInfo"/>Si
 										</label>
 										<label>
-											<input type="radio" name="goodsSeparation" onChange={this.props.selectHandler.bind()} checked={dataReaderPartner.user.goodsSeparation === "0"} value="0" data-pos={this.state.partnerSelected}/>No
+											<input type="radio" name="goodsSeparation" onChange={this.props.selectHandler.bind()} checked={dataReaderPartner.user.goodsSeparation === "0"} value="0" data-pos={this.state.partnerSelected} className="inputRadioButtonPersonalInfo"/>No
 										</label>
 										
 										
 									</div>
 
-			inputRegistryNumber = <input type="text" value={dataReaderPartner.user.registryNumber != undefined ? dataReaderPartner.user.registryNumber : ""} onChange={this.props.inputTextHandler.bind()} name="registryNumber" data-pos={this.state.partnerSelected}/>
+			inputRegistryNumber = <input type="text" value={dataReaderPartner.user.registryNumber != undefined ? dataReaderPartner.user.registryNumber : ""} onChange={this.props.inputTextHandler.bind()} name="registryNumber" data-pos={this.state.partnerSelected} ref="user_registry_num"/>
 
-			inputRegistryOffice = <select onChange={this.props.selectHandler.bind()} value={dataReaderPartner.user.regitryOffice != undefined ? dataReaderPartner.user.regitryOffice : ""} name="regitryOffice" data-pos={this.state.partnerSelected}>
+			inputRegistryOffice = <select onChange={this.props.selectHandler.bind()} value={dataReaderPartner.user.regitryOffice != undefined ? dataReaderPartner.user.regitryOffice : ""} name="regitryOffice" data-pos={this.state.partnerSelected} ref="user_registry_office">
 									<option disabled></option>
 									<option>ABANCAY</option>
 									<option>AREQUIPA</option>
@@ -259,7 +315,9 @@ export default class PersonalInformationForm extends Component{
 									<option>YURIMAGUAS</option>
 								</select>
 
-			inputPosition = <input type="text" value={dataReaderPartner.user.position != undefined ? dataReaderPartner.user.position : ""} onChange={this.props.inputTextHandler.bind()} name="position" data-pos={this.state.partnerSelected}/>
+			inputPosition = <input type="text" value={dataReaderPartner.user.position != undefined ? dataReaderPartner.user.position : ""} onChange={this.props.inputTextHandler.bind()} name="position" data-pos={this.state.partnerSelected} ref="user_position"/>
+
+			inputPhoneNumber = <input type="text" value={dataReaderPartner.user.phoneNumber != undefined ? dataReaderPartner.user.phoneNumber : ""} onChange={this.props.inputTextHandler.bind()} name="phoneNumber" data-pos={this.state.partnerSelected} ref="user_phone"/>
 		}
 
 
@@ -352,6 +410,7 @@ export default class PersonalInformationForm extends Component{
 								<div className="wrapperUnderline">
 									<div className="underlineBlue"></div>
 								</div>
+								<label id="lblValidationMsgPersonalInformation" className="smallContent">Acá puedes ingresar la información personal de cada socio.</label>
 								<div className="wrapperPartnersList">
 									
 									
@@ -398,6 +457,14 @@ export default class PersonalInformationForm extends Component{
 										<label className="smallContent">Correo:</label>
 										<div className="inputSingleValue">
 											{inputMail}
+											
+											<span></span>
+										</div>
+									</div>
+									<div className="gridFormLarge">
+										<label className="smallContent">Celular:</label>
+										<div className="inputSingleValue">
+											{inputPhoneNumber}
 											
 											<span></span>
 										</div>

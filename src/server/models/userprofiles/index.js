@@ -24,7 +24,7 @@ let UserprofileSchema = new mongoose.Schema({
 	coupleDocumentType: { type: String},
 	coupleDocumentNumber: {type: Number},
 	enterprise: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Enterprises' }],
-	phone_number: {type: Number},
+	phoneNumber: {type: Number},
 	provider: { type: String },
 	contacts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Userprofiles' }],
 	userState: { type: Number, default: 0 },

@@ -312,6 +312,9 @@ router.post('/partners_information', jsonParser, function (req, res){
 									if(partnersJsonData[i].user.regitryOffice){
 										user.regitryOffice = partnersJsonData[i].user.regitryOffice;
 									}
+									if(partnersJsonData[i].user.phoneNumber){
+										user.phoneNumber = partnersJsonData[i].user.phoneNumber;
+									}
 
 									user.save(function(err){
 										if(err){

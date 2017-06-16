@@ -96,6 +96,10 @@
 							align-items center
 							width 100%
 							
+							label
+								input
+									margin-right 6px
+							
 					.inputSingleValue
 						input
 							width 100%
@@ -223,6 +227,11 @@
 				figure
 					width 100px
 			.gridForm
+				
+				#lblValidationMsg
+					color red
+					font-size 0.9em
+					margin 20px 0px 0px 65px
 				form
 					.partnerRow
 						width 95%
@@ -246,6 +255,12 @@
 				figure
 					width 50px
 			.gridForm
+				
+				#lblValidationMsgPersonalInformation
+					color #40AC2C
+					margin 20px 0px 0px 57px
+					font-size 0.9em
+					
 				.wrapperPartnersList
 					margin 30px auto 0px auto
 					padding 0px 
@@ -273,9 +288,10 @@
 						height 30px
 						line-height 30px
 						margin 0px 10px 0px 0px
-						border-radius 5px
+						border-radius 17px
 						overflow hidden
 						cursor pointer
+						
 						
 						figure
 							width 100%
@@ -295,16 +311,20 @@
 							text-align center
 							font-family "Open Sans"
 							font-size 0.9em
-							text-transform uppercase
+							text-transform capitalize
 							
 					.btnPartnerProfileText
-						border solid 1px black
-						
-					.btnPartnerProfileSelected
-						border solid 1px #007EFF
+						background-color #BDBDBD
+						opacity 0.4
 						
 						p
-							color #007EFF
+							color white
+						
+					.btnPartnerProfileSelected
+						background-color #40AC2C
+						opacity 1
+						p
+							color white
 							
 						figure
 							opacity 1
@@ -576,6 +596,8 @@
 			color black
 			font-size 0.9em
 					
+.inputError
+	box-shadow 0px 0px 3px red
 
 .btnNext
 	background-color #007EFF

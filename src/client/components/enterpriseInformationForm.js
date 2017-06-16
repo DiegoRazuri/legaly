@@ -10,8 +10,10 @@ export default class EnterpriseInformationForm extends Component{
 	constructor (props){
 		super(props);
 		this.state={
+			redirect : false,
 			industry : "",
-			societyType : ""
+			societyType : "",
+			validationForm : false
 
 		}
 
@@ -50,12 +52,90 @@ export default class EnterpriseInformationForm extends Component{
 			
 		}
 
-		if(this.props.enterpriseSaved == 1){
-			this.props.updateEnterpriseInformation.call(null, json)
+		let i_optionnames, i_industry, i_societyType, i_totalCapital, i_goods, i_money;
 
-		}else{
-			this.props.sendEnterpriseInformation.call(null, json)
+		i_optionnames = ReactDom.findDOMNode(this.refs.companyNames_i)
+		i_industry = ReactDom.findDOMNode(this.refs.selectEnterpriseIndustry);
+		i_societyType = ReactDom.findDOMNode(this.refs.selectSocietyType);
+		i_totalCapital = ReactDom.findDOMNode(this.refs.investment_i);
+		i_goods = ReactDom.findDOMNode(this.refs.checkboxGoods);
+		i_money = ReactDom.findDOMNode(this.refs.checkboxMoney);
+
+		i_optionnames.parentNode.parentNode.classList.remove("inputError");
+		i_industry.parentNode.classList.remove("inputError");
+		i_societyType.parentNode.classList.remove("inputError");
+		i_totalCapital.parentNode.classList.remove("inputError");
+		i_goods.classList.remove("inputError");
+		i_money.classList.remove("inputError");
+
+
+		let errors = 0;
+
+		if(json.optionNames.length == 0){
+
+			i_optionnames.parentNode.parentNode.classList.add("inputError");
+
+			errors += 1;
+
 		}
+
+		if(json.industry == ""){
+
+			i_industry.parentNode.classList.add("inputError");
+
+			errors += 1;
+
+		}
+
+		if(json.societyType == ""){
+
+			i_societyType.parentNode.classList.add("inputError");
+
+			errors += 1;
+
+		}
+
+		if(json.totalCapital == ""){
+
+			i_totalCapital.parentNode.classList.add("inputError");
+
+			errors += 1;
+
+		}
+
+		if(json.isItGoodsCapital == "" && json.isItMoneyCapital == ""){
+
+			i_goods.classList.add("inputError");
+			i_money.classList.add("inputError");
+
+			errors += 1;
+
+		}
+
+		
+
+		if(errors == 0){
+
+			if(this.props.enterpriseSaved == 1){
+				this.props.updateEnterpriseInformation.call(null, json)
+
+				this.setState({
+					redirect :true
+				})
+
+				
+
+			}else{
+				this.props.sendEnterpriseInformation.call(null, json)
+				
+				this.setState({
+					redirect :true
+				})
+			}
+			
+		}
+
+		
 
 		
 	
@@ -207,286 +287,295 @@ export default class EnterpriseInformationForm extends Component{
 		
 */
 
-		return <div className="sectionEnterpriseIncorporation">
-					<div className="wrapperIncorporationForm">
+		if(this.state.redirect){
+			return <Redirect to="/invitar-socios"/>
+		}
+		else{
 
-						<div className="enterpriseInformationForm">
-							<div className="gridStepProgress">
-								<span className="icon-cross"></span>
-								<ul className="stepProgress">
-									<li className="stepActive">1</li>
-									<li>2</li>
-									<li>3</li>
-								</ul>
-								<figure>
-									<img src="css/img/InfoEmpresa1.svg"/>
-								</figure>
-								<h4 className="bigTitlesOS">Constitución de empresa</h4>
-								<p className="mediumContent instructions">Ingresa la información que necesitas para emitir la minuta</p>
-								<h4 className="bigTitlesOS helpTitle">¿Necesitas ayuda?</h4>
-								<span className="icon-angle-down"></span>
-								<a href="http://www.facebook.com/legaly.pe" target="_blank" className="gridUserSupport">
-									<span className="icon-facebook"></span>
-									<p className="smallContent">www.facebook.com/legaly.pe</p>
-								</a>
-								<div className="gridUserSupport">
-									<span className="icon-mail_outline"></span>
-									<p className="smallContent">ayuda@legaly.pe</p>
+			return <div className="sectionEnterpriseIncorporation">
+						<div className="wrapperIncorporationForm">
+
+							<div className="enterpriseInformationForm">
+								<div className="gridStepProgress">
+									<span className="icon-cross"></span>
+									<ul className="stepProgress">
+										<li className="stepActive">1</li>
+										<li>2</li>
+										<li>3</li>
+									</ul>
+									<figure>
+										<img src="css/img/InfoEmpresa1.svg"/>
+									</figure>
+									<h4 className="bigTitlesOS">Constitución de empresa</h4>
+									<p className="mediumContent instructions">Ingresa la información que necesitas para emitir la minuta</p>
+									<h4 className="bigTitlesOS helpTitle">¿Necesitas ayuda?</h4>
+									<span className="icon-angle-down"></span>
+									<a href="http://www.facebook.com/legaly.pe" target="_blank" className="gridUserSupport">
+										<span className="icon-facebook"></span>
+										<p className="smallContent">www.facebook.com/legaly.pe</p>
+									</a>
+									<div className="gridUserSupport">
+										<span className="icon-mail_outline"></span>
+										<p className="smallContent">ayuda@legaly.pe</p>
+									</div>
+								</div>
+								<div className="gridForm">
+									<h3 className="bigTitlesSS">Constitución de empresa</h3>
+									<div className="underlineBlue"></div>
+									<form>
+										<div className="gridFormLarge">
+											<label className="smallContent">Ingresa de 3 a 5 posibles nombres en orden de prioridad</label>
+											<div className="inputMultipleValues">
+												<div id="wrapperInputValues" className="wrapperInputValues">
+													<input autoFocus type="text" id="inputMultipleValuesNames" ref="companyNames_i" onBlur={this.catchNames.bind(this, 0)}/>
+												</div>
+												<span className="icon-flag2"></span>
+											</div>
+										</div>
+										<div className="gridFormLarge">
+											<label className="smallContent">Elige un tipo de sociedad</label>
+											<div className="inputSelect">
+												
+												<select id="selectEnterpriseIncorporationForm" value={this.state.societyType} ref="selectSocietyType" onChange={this.handleChangeSocietyType}>
+													<option disabled></option>
+													<option>S.A.C.</option>
+													<option>S.A.</option>
+													<option>E.I.R.L.</option>
+													<option>S.R.L.</option>
+													
+												</select>
+												<span className="icon-flag2 icoInputSelect"></span>
+											</div>
+
+										</div>
+										<div className="gridFormLarge">
+											<label className="smallContent">¿A qué se dedicará tu empresa?</label>
+											<div className="inputSelect">
+												
+												<select id="selectEnterpriseIncorporationForm" value={this.state.industry} ref="selectEnterpriseIndustry" onChange={this.handleChange}>
+													<option disabled></option>
+													<option>ASESORIA EMPRESARIAL</option>
+													<option>ASESORIA ENERGETICA</option>
+													<option>ASESORIA FINANCIERA</option>
+													<option>ASESORIA INFORMATICA</option>
+													<option>BEBIDAS</option>
+													<option>BIBLIOTECA</option>
+													<option>BUFFET- CATERING</option>
+													<option>ABARROTES</option>
+													<option>ACCESORIOS MEDICOS/ INSTRUMENTOS MEDICOS</option>
+													<option>AGENCIA DE ADUANAS</option>
+													<option>AGENCIA DE VIAJES Y TURISMO</option>
+													<option>AGENTE DE CARGA INTERNACIONAL</option>
+
+													<option>AIRE ACONDICIONADO</option>
+													<option>ALIMENTOS NATURALES</option>
+													<option>ANALISIS DE ECOSISTEMAS/EVALUACION DE IMPACTO AMBIENTAL</option>
+													<option>ARTEFACTOS</option>
+													<option>ARTESANIA</option>
+													<option>ARTICULOS DE BASAR</option>
+													<option>ARTICULOS DE SEGURIDAD</option>
+													<option>ARTICULOS ELECTRONICOS</option>
+													<option>ASESORIA CONTABLE</option>
+													<option>CORRETAJE INMOBILIARIOADUANAS</option>
+													<option>CORTINAS Y PERSIANASTURISMO</option>
+													<option>COSMETOLOGIA</option>
+													<option>CRIANZA DE ANIMALES</option>
+													<option>DEPORTE</option>
+													<option>DISEÑO DE INTERIORES</option>
+													<option>DISEÑO GRAFICO</option>
+													<option>EDITORIAL</option>
+													<option>ESTIMULACION TEMPRANA</option>
+													<option>FUEGOS ARTIFICIALES</option>
+													<option>IDIOMAS</option>
+													<option>LAVANDERIA</option>
+													<option>MANTENIMIENTO AERONAVES</option>
+													<option>PANADERIA</option>
+													<option>PLASTICOS</option>
+													<option>PSICOLOGOS</option>
+													<option>RESIDUOS SOLIDOS</option>
+													<option>SERVICIOS MEDICOS</option>
+													<option>TOPOGRAFIA</option>
+													<option>YOGA</option>
+													<option>ASESORIA EN GENERAL</option>
+													<option>JARDINERIA</option>
+													<option>ESCUELA DE MANEJO</option>
+													<option>MANUALIDADES</option>
+													<option>REDES Y MERCADEO</option>
+													<option>ASESORIA PARA TESIS</option>
+													<option>GIMNASIO</option>
+													<option>CONSULTORIA EN INGENIERIA ELECTRICA</option>
+													<option>CONSULTORIA NAVAL</option>
+													<option>CONSULTORIA Y EVALUACION DE PROYECTOS</option>
+													<option>EQUIPO DE CARNICERIA</option>
+													<option>ESTAMPADOS</option>
+													<option>ADMINISTRACION DE EDIFICIOS</option>
+													<option>ARTICULOS DE LIMPIESA</option>
+													<option>ASESORIA MINERA</option>
+													<option>ASESORIA PETROLERA</option>
+													<option>ASESORÍA RADIOLOGICA Y MEDICINA NUCLEAR</option>
+													<option>CERTIFICACION DE CURSOS</option>
+													<option>CONSULTORIA EN SALUD E HIGIENE OCUPACIONAl</option>
+													<option>CONSULTORIA EN SEGURIDAD INDUSTRIAL</option>
+													<option>CONTROL DE CALIDAD</option>
+													<option>SERVICIO DE COMUNICACIÓN</option>
+													<option>SERVICIOS DENTALES</option>
+													<option>SERVICIOS EDUCATIVOS</option>
+													<option>SISTEMAS CONTRA INCENDIOS</option>
+													<option>SPA- SALON DE BELLESA</option>
+													<option>SUPERMERCADO</option>
+													<option>TALLER AUTOMOTRIS</option>
+													<option>TECNOLOGIA NUCLEAR</option>
+													<option>TELE- COMUNICACIONES</option>
+													<option>TEXTILES</option>
+													<option>TRAGAMONEDAS Y CASINOS</option>
+													<option>TRANSPORTE</option>
+													<option>VEHICULOS Y ACCESORIOS</option>
+													<option>VETERINARIA</option>
+													<option>VIDRIERIA</option>
+													<option>CONSULTORIA METAL- MECANICA</option>
+													<option>PERFUMERIA</option>
+													<option>PESQUERIA</option>
+													<option>PINTURA</option>
+													<option>PORTUARIO LOGISTICA</option>
+													<option>PRENDAS DE VESTIR</option>
+													<option>PRESTAMOS</option>
+													<option>PRODUCTORA</option>
+													<option>PUBLICIDAD</option>
+													<option>RECICLAJE</option>
+
+													<option>RESTAURANTE</option>
+													<option>SELECCIÓN DE PERSONAL</option>
+													<option>MARKETING</option>
+													<option>MENSAJERIA Y COURIER</option>
+													<option>METALMECANICA</option>
+													<option>METALURGIA</option>
+													<option>MINERIA</option>
+													<option>MODELAJE</option>
+													<option>MUEBLES</option>
+													<option>OPTICA</option>
+													<option>PANADERIA</option>
+													<option>PERFORACION Y DEMOLICION</option>
+													<option>ESTUDIO DE SUELOS</option>
+													<option>EVENTOS</option>
+													<option>FARMACIA</option>
+													<option>FERRETERIA</option>
+													<option>FORESTAL</option>
+													<option>FOTOGRAFIA</option>
+													<option>FRUTAS Y VERDURAS</option>
+													<option>FUMIGACION Y EXTINTORES</option>
+													<option>FUNERARIAS</option>
+													<option>GANADERIA</option>
+													<option>GASOLINERA Y ESTACION DE SERVICIOS</option>
+													<option>HOSPEDAJE</option>
+													<option>IMPRENTA</option>
+													<option>INDUSTRIA PETROLERA</option>
+													<option>INGENIERIA DE MINAS</option>
+													<option>INSTALACIONES DE GAS</option>
+													<option>INTERMEDIACION TURISTICA</option>
+													<option>JOYERIA</option>
+													<option>LACTEOS</option>
+													<option>LIBRERÍA</option>
+													<option>LICORERIA</option>
+													<option>MADERERA</option>
+													<option>MAQUINARIA AGROINDUSTRIAL</option>
+													<option>COMPUTACIÓN E INFORMÁTICA</option>
+													<option>CONSTRUCCION</option>
+													<option>CONSTRUCCION DE POZOS</option>
+													<option>CONSULTORIA AMBIENTAL</option>
+													<option>CONSULTORIA EN INGENIERIA ELECTRICA</option>
+
+												</select>
+												<span className="icon-briefcase icoInputSelect"></span>
+											</div>
+
+										</div>
+										<div className="gridFormLarge gridFormMutable">
+											<label className="smallContent">¿Cuál es el capital del negocio?</label>
+											<div className="inputSingleValue">
+												<input type="number" min="1" ref="investment_i"/>
+												<span className="icon-dollar"></span>
+											</div>
+										</div>
+										<div className="gridFormLarge gridFormMutable">
+											<label className="smallContent">Capital constituido por:</label>
+											<div className="inputCheckbox">
+												<div className="wrapperCheckbox">
+													<input type="checkbox" name="goods_investment" id="checkboxGoods" ref="checkboxGoods"/>
+													<span className="icon-box"></span>
+													<label className="smallContent">Bienes</label>
+												</div>
+												<div className="wrapperCheckbox">
+													<input type="checkbox" name="money_investment" id="checkboxMoney" ref="checkboxMoney"/>
+													<span className="icon-dollar"></span>
+													<label className="smallContent">Dinero</label>
+												</div>
+											</div>
+										</div>
+										<div className="gridFormLarge gridFormMutable btnStepWrapperNext">
+											<a><div className="btnNext" onClick={this.handleEnterpriseInformationSubmit.bind(this)}>Siguiente</div></a>
+										</div>
+										<div className="gridFormShort btnStepWrapperBack">
+											<Link to="/"><div className="btnTransparentBackground">Cancelar</div></Link>
+										</div>
+									</form>
 								</div>
 							</div>
-							<div className="gridForm">
-								<h3 className="bigTitlesSS">Constitución de empresa</h3>
+
+						</div>
+						
+
+						<div id="faq1" className="wrapperFaq">
+							<figure>
+								<img src="./css/img/constitucion-photo.jpg"/>
+							</figure>
+							<div className="gridFaq">
+								<h1>¿Por qué es importante constituir mi empresa?</h1>
 								<div className="underlineBlue"></div>
-								<form>
-									<div className="gridFormLarge">
-										<label className="smallContent">Ingresa de 3 a 5 posibles nombres en orden de prioridad</label>
-										<div className="inputMultipleValues">
-											<div id="wrapperInputValues" className="wrapperInputValues">
-												<input autoFocus type="text" id="inputMultipleValuesNames" ref="companyNames_i" onBlur={this.catchNames.bind(this, 0)}/>
-											</div>
-											<span className="icon-flag2"></span>
-										</div>
-									</div>
-									<div className="gridFormLarge">
-										<label className="smallContent">Elige un tipo de sociedad</label>
-										<div className="inputSelect">
-											
-											<select id="selectEnterpriseIncorporationForm" value={this.state.societyType} ref="selectSocietyType" onChange={this.handleChangeSocietyType}>
-												<option disabled></option>
-												<option>S.A.C.</option>
-												<option>S.A.</option>
-												<option>E.I.R.L.</option>
-												<option>S.R.L.</option>
-												
-											</select>
-											<span className="icon-flag2 icoInputSelect"></span>
-										</div>
-
-									</div>
-									<div className="gridFormLarge">
-										<label className="smallContent">¿A qué se dedicará tu empresa?</label>
-										<div className="inputSelect">
-											
-											<select id="selectEnterpriseIncorporationForm" value={this.state.industry} ref="selectEnterpriseIndustry" onChange={this.handleChange}>
-												<option disabled></option>
-												<option>ASESORIA EMPRESARIAL</option>
-												<option>ASESORIA ENERGETICA</option>
-												<option>ASESORIA FINANCIERA</option>
-												<option>ASESORIA INFORMATICA</option>
-												<option>BEBIDAS</option>
-												<option>BIBLIOTECA</option>
-												<option>BUFFET- CATERING</option>
-												<option>ABARROTES</option>
-												<option>ACCESORIOS MEDICOS/ INSTRUMENTOS MEDICOS</option>
-												<option>AGENCIA DE ADUANAS</option>
-												<option>AGENCIA DE VIAJES Y TURISMO</option>
-												<option>AGENTE DE CARGA INTERNACIONAL</option>
-
-												<option>AIRE ACONDICIONADO</option>
-												<option>ALIMENTOS NATURALES</option>
-												<option>ANALISIS DE ECOSISTEMAS/EVALUACION DE IMPACTO AMBIENTAL</option>
-												<option>ARTEFACTOS</option>
-												<option>ARTESANIA</option>
-												<option>ARTICULOS DE BASAR</option>
-												<option>ARTICULOS DE SEGURIDAD</option>
-												<option>ARTICULOS ELECTRONICOS</option>
-												<option>ASESORIA CONTABLE</option>
-												<option>CORRETAJE INMOBILIARIOADUANAS</option>
-												<option>CORTINAS Y PERSIANASTURISMO</option>
-												<option>COSMETOLOGIA</option>
-												<option>CRIANZA DE ANIMALES</option>
-												<option>DEPORTE</option>
-												<option>DISEÑO DE INTERIORES</option>
-												<option>DISEÑO GRAFICO</option>
-												<option>EDITORIAL</option>
-												<option>ESTIMULACION TEMPRANA</option>
-												<option>FUEGOS ARTIFICIALES</option>
-												<option>IDIOMAS</option>
-												<option>LAVANDERIA</option>
-												<option>MANTENIMIENTO AERONAVES</option>
-												<option>PANADERIA</option>
-												<option>PLASTICOS</option>
-												<option>PSICOLOGOS</option>
-												<option>RESIDUOS SOLIDOS</option>
-												<option>SERVICIOS MEDICOS</option>
-												<option>TOPOGRAFIA</option>
-												<option>YOGA</option>
-												<option>ASESORIA EN GENERAL</option>
-												<option>JARDINERIA</option>
-												<option>ESCUELA DE MANEJO</option>
-												<option>MANUALIDADES</option>
-												<option>REDES Y MERCADEO</option>
-												<option>ASESORIA PARA TESIS</option>
-												<option>GIMNASIO</option>
-												<option>CONSULTORIA EN INGENIERIA ELECTRICA</option>
-												<option>CONSULTORIA NAVAL</option>
-												<option>CONSULTORIA Y EVALUACION DE PROYECTOS</option>
-												<option>EQUIPO DE CARNICERIA</option>
-												<option>ESTAMPADOS</option>
-												<option>ADMINISTRACION DE EDIFICIOS</option>
-												<option>ARTICULOS DE LIMPIESA</option>
-												<option>ASESORIA MINERA</option>
-												<option>ASESORIA PETROLERA</option>
-												<option>ASESORÍA RADIOLOGICA Y MEDICINA NUCLEAR</option>
-												<option>CERTIFICACION DE CURSOS</option>
-												<option>CONSULTORIA EN SALUD E HIGIENE OCUPACIONAl</option>
-												<option>CONSULTORIA EN SEGURIDAD INDUSTRIAL</option>
-												<option>CONTROL DE CALIDAD</option>
-												<option>SERVICIO DE COMUNICACIÓN</option>
-												<option>SERVICIOS DENTALES</option>
-												<option>SERVICIOS EDUCATIVOS</option>
-												<option>SISTEMAS CONTRA INCENDIOS</option>
-												<option>SPA- SALON DE BELLESA</option>
-												<option>SUPERMERCADO</option>
-												<option>TALLER AUTOMOTRIS</option>
-												<option>TECNOLOGIA NUCLEAR</option>
-												<option>TELE- COMUNICACIONES</option>
-												<option>TEXTILES</option>
-												<option>TRAGAMONEDAS Y CASINOS</option>
-												<option>TRANSPORTE</option>
-												<option>VEHICULOS Y ACCESORIOS</option>
-												<option>VETERINARIA</option>
-												<option>VIDRIERIA</option>
-												<option>CONSULTORIA METAL- MECANICA</option>
-												<option>PERFUMERIA</option>
-												<option>PESQUERIA</option>
-												<option>PINTURA</option>
-												<option>PORTUARIO LOGISTICA</option>
-												<option>PRENDAS DE VESTIR</option>
-												<option>PRESTAMOS</option>
-												<option>PRODUCTORA</option>
-												<option>PUBLICIDAD</option>
-												<option>RECICLAJE</option>
-
-												<option>RESTAURANTE</option>
-												<option>SELECCIÓN DE PERSONAL</option>
-												<option>MARKETING</option>
-												<option>MENSAJERIA Y COURIER</option>
-												<option>METALMECANICA</option>
-												<option>METALURGIA</option>
-												<option>MINERIA</option>
-												<option>MODELAJE</option>
-												<option>MUEBLES</option>
-												<option>OPTICA</option>
-												<option>PANADERIA</option>
-												<option>PERFORACION Y DEMOLICION</option>
-												<option>ESTUDIO DE SUELOS</option>
-												<option>EVENTOS</option>
-												<option>FARMACIA</option>
-												<option>FERRETERIA</option>
-												<option>FORESTAL</option>
-												<option>FOTOGRAFIA</option>
-												<option>FRUTAS Y VERDURAS</option>
-												<option>FUMIGACION Y EXTINTORES</option>
-												<option>FUNERARIAS</option>
-												<option>GANADERIA</option>
-												<option>GASOLINERA Y ESTACION DE SERVICIOS</option>
-												<option>HOSPEDAJE</option>
-												<option>IMPRENTA</option>
-												<option>INDUSTRIA PETROLERA</option>
-												<option>INGENIERIA DE MINAS</option>
-												<option>INSTALACIONES DE GAS</option>
-												<option>INTERMEDIACION TURISTICA</option>
-												<option>JOYERIA</option>
-												<option>LACTEOS</option>
-												<option>LIBRERÍA</option>
-												<option>LICORERIA</option>
-												<option>MADERERA</option>
-												<option>MAQUINARIA AGROINDUSTRIAL</option>
-												<option>COMPUTACIÓN E INFORMÁTICA</option>
-												<option>CONSTRUCCION</option>
-												<option>CONSTRUCCION DE POZOS</option>
-												<option>CONSULTORIA AMBIENTAL</option>
-												<option>CONSULTORIA EN INGENIERIA ELECTRICA</option>
-
-											</select>
-											<span className="icon-briefcase icoInputSelect"></span>
-										</div>
-
-									</div>
-									<div className="gridFormLarge gridFormMutable">
-										<label className="smallContent">¿Cuál es el capital del negocio?</label>
-										<div className="inputSingleValue">
-											<input type="number" min="1" ref="investment_i"/>
-											<span className="icon-dollar"></span>
-										</div>
-									</div>
-									<div className="gridFormLarge gridFormMutable">
-										<label className="smallContent">Capital constituido por:</label>
-										<div className="inputCheckbox">
-											<div className="wrapperCheckbox">
-												<input type="checkbox" name="goods_investment" id="checkboxGoods"/>
-												<span className="icon-box"></span>
-												<label className="smallContent">Bienes</label>
-											</div>
-											<div className="wrapperCheckbox">
-												<input type="checkbox" name="money_investment" id="checkboxMoney"/>
-												<span className="icon-dollar"></span>
-												<label className="smallContent">Dinero</label>
-											</div>
-										</div>
-									</div>
-									<div className="gridFormLarge gridFormMutable btnStepWrapperNext">
-										<Link to="/invitar-socios"><div className="btnNext" onClick={this.handleEnterpriseInformationSubmit.bind(this)}>Siguiente</div></Link>
-									</div>
-									<div className="gridFormShort btnStepWrapperBack">
-										<Link to="/"><div className="btnTransparentBackground">Cancelar</div></Link>
-									</div>
-								</form>
+								<h2>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h2>
+								<div className="btnFaq">Quiero saber más</div>
 							</div>
 						</div>
 
-					</div>
-					
 
-					<div id="faq1" className="wrapperFaq">
-						<figure>
-							<img src="./css/img/constitucion-photo.jpg"/>
-						</figure>
-						<div className="gridFaq">
-							<h1>¿Por qué es importante constituir mi empresa?</h1>
-							<div className="underlineBlue"></div>
-							<h2>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h2>
-							<div className="btnFaq">Quiero saber más</div>
+
+						<div className="wrapperComercialFAQ">
+							<div className="gridComercialFAQ">
+								<figure>
+									<img src="css/img/accesible.svg"/>
+								</figure>
+								<h2 className="landingTitles">¿Cúal es el precio?</h2>
+								<h3>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h3>
+							</div>
+							<div className="gridComercialFAQ">
+								<figure>
+									<img src="css/img/rapidez.svg"/>
+								</figure>
+								<h2 className="landingTitles">¿Cúanto debo esperar?</h2>
+								<h3>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h3>
+							</div>
+							<div className="gridComercialFAQ">
+								<figure>
+									<img src="css/img/delivery.svg"/>
+								</figure>
+								<h2 className="landingTitles">Brindamos lo siguiente</h2>
+								<h3>
+									<ul>
+										<li>Búsqueda y reserva de nombre</li>
+										<li>Estatutos de la empresa</li>
+										<li>Escritura pública ante notario</li>
+										<li>Inscripción registral en Sunarp</li>
+										<li>Ficha RUC</li>
+										<li>Copia literal</li>
+										<li>Compra de dominio web</li>
+									</ul>
+								</h3>
+							</div>
 						</div>
 					</div>
 
+		}
 
-
-					<div className="wrapperComercialFAQ">
-						<div className="gridComercialFAQ">
-							<figure>
-								<img src="css/img/accesible.svg"/>
-							</figure>
-							<h2 className="landingTitles">¿Cúal es el precio?</h2>
-							<h3>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h3>
-						</div>
-						<div className="gridComercialFAQ">
-							<figure>
-								<img src="css/img/rapidez.svg"/>
-							</figure>
-							<h2 className="landingTitles">¿Cúanto debo esperar?</h2>
-							<h3>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h3>
-						</div>
-						<div className="gridComercialFAQ">
-							<figure>
-								<img src="css/img/delivery.svg"/>
-							</figure>
-							<h2 className="landingTitles">Brindamos lo siguiente</h2>
-							<h3>
-								<ul>
-									<li>Búsqueda y reserva de nombre</li>
-									<li>Estatutos de la empresa</li>
-									<li>Escritura pública ante notario</li>
-									<li>Inscripción registral en Sunarp</li>
-									<li>Ficha RUC</li>
-									<li>Copia literal</li>
-									<li>Compra de dominio web</li>
-								</ul>
-							</h3>
-						</div>
-					</div>
-				</div>
+		
 
 	}
 }
