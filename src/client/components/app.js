@@ -21,8 +21,6 @@ import TrackingPanel from './trackingPanel';
 import TrackingEnterpriseInfo from './trackingEnterpriseInfo';
 import TheCreatorPanel from './theCreatorPanel';
 
-
-
 export default class App extends Component{
 
 	constructor (props){
