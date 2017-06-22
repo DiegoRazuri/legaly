@@ -315,6 +315,9 @@ router.post('/partners_information', jsonParser, function (req, res){
 									if(partnersJsonData[i].user.phoneNumber){
 										user.phoneNumber = partnersJsonData[i].user.phoneNumber;
 									}
+									if(partnersJsonData[i].user.profession){
+										user.profession = partnersJsonData[i].user.profession;
+									}
 
 									user.save(function(err){
 										if(err){

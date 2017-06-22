@@ -17,7 +17,8 @@ export default class PartnersAddingForm extends Component{
 			positionSelected : "",
 			AccountManagerPositionSelected : "",
 			enterpriseSaved : 0,
-			redirect : false
+			redirect : false,
+			name:""
 
 
 		}
@@ -26,6 +27,7 @@ export default class PartnersAddingForm extends Component{
 		this.addPartner = this.addPartner.bind(this);
 		this.handlePartnerAddingFormSubmit = this.handlePartnerAddingFormSubmit.bind(this);
 		this.validationForm = this.validationForm.bind(this);
+		this.handlePartnerNameValidation = this.handlePartnerNameValidation.bind(this);
 		
 	}
 
@@ -39,7 +41,27 @@ export default class PartnersAddingForm extends Component{
 			}
 		});
 
+		if(this.state.name != ""){
+			console.log("nombre escrito sin dar click en boton")
+			isItGG = 0;
+
+			document.getElementById("lblValidationMsgAddPartner").innerHTML = "Debes darle click en el boton Agregar Socio";
+
+		}
+		console.log("se salto restriccion de nombre lleno");
+
 		return isItGG;
+	}
+
+	handlePartnerNameValidation(ev){
+
+		console.log("validation partnername")
+
+		let target = ev.target;
+
+		let name = target.value;
+
+		this.setState({ name : name});
 	}
 
 	addPartner(){
@@ -53,6 +75,8 @@ export default class PartnersAddingForm extends Component{
 		}
 
 		this.props.rowPartnerInputHandler.call(null, json)
+
+		this.setState({name: ""})
 
 		ReactDom.findDOMNode(this.refs.inputPartnerEmail).value = '';
 		ReactDom.findDOMNode(this.refs.positionSelect).value = '';
@@ -252,7 +276,7 @@ export default class PartnersAddingForm extends Component{
 											<div className="gridFormShort">
 												<label className="smallContent">Socio</label>
 												<div className="inputSingleValue">
-													<input ref="inputPartnerEmail" className="inputPartnerEmail" type="text" placeholder="Nombre Completo"/>
+													<input ref="inputPartnerEmail" className="inputPartnerEmail" type="text" placeholder="Nombre Completo" onChange={this.handlePartnerNameValidation.bind(this)}/>
 													<span className="icon-head"></span>
 												</div>
 											</div>
@@ -274,6 +298,7 @@ export default class PartnersAddingForm extends Component{
 											</div>
 
 										</div>
+										<label id="lblValidationMsgAddPartner" className="smallContent"></label>
 										<div className="gridFormLarge">
 											<div className="btnRed btnAddPartner" onClick={this.addPartner.bind(this)}>
 												<p>Agregar socio</p>
