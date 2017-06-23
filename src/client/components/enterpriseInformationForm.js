@@ -350,10 +350,11 @@ export default class EnterpriseInformationForm extends Component{
 										</div>
 										<div className="gridFormLarge">
 											<label className="smallContent">¿A qué se dedicará tu empresa?</label>
-											<div className="inputSingleValue">
+											<div className="inputTxtarea">
 												
-												<input type="text" ref="selectEnterpriseIndustry" onChange={this.handleChange.bind()} name="industry"/>
-												<span className="icon-briefcase icoInputSelect"></span>
+												
+												<textarea className="inputTxtarea" rows="4" type="text" ref="selectEnterpriseIndustry" onChange={this.handleChange.bind()} name="industry"></textarea>
+												
 											</div>
 
 										</div>

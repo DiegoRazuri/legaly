@@ -63,7 +63,7 @@ export default class Userprofile extends Component{
 					<div className="wrapperPersonalInformation">
 						<h4 className="bigTitlesSS">Información de identificación</h4>
 						<div className="underlineBlue"></div>
-						<a href="/logout" className="btnLogout">Cerrar sesión</a>
+						
 						<div className="blockPersonalInformation">
 							<div className="gridPersonalInformationA">
 								<figure className="userProfilePhoto">
@@ -77,8 +77,12 @@ export default class Userprofile extends Component{
 									</div>
 									<div className="gridUserInfo">
 										<span className="icon-briefcase"></span>
-										<p className="smallContent">{this.props.user.position ? this.props.user.position : "--"}</p>
+										<p className="smallContent">{this.props.user.profession ? this.props.user.profession : "--"}</p>
 									</div>
+									<div className="gridUserInfo wrapperBtnLogout">
+										<a href="/logout" className="btnLogout">Cerrar sesión</a>
+									</div>
+
 								</div>
 							</div>
 							<div className="underlineGrey"></div>
@@ -106,7 +110,7 @@ export default class Userprofile extends Component{
 									</li>
 									<li>
 										<p className="dataName smallContent">Teléfono:</p>
-										<p className="userData smallContent">--</p>
+										<p className="userData smallContent">{this.props.user.phoneNumber ? this.props.user.phoneNumber : "--"}</p>
 									</li>
 									<li>
 										<p className="dataName smallContent">Correo:</p>
