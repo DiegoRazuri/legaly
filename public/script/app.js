@@ -33556,6 +33556,10 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _createBrowserHistory = require('history/createBrowserHistory');
+
+var _createBrowserHistory2 = _interopRequireDefault(_createBrowserHistory);
+
 var _reactRouterDom = require('react-router-dom');
 
 var _reactGa = require('react-ga');
@@ -33571,18 +33575,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _reactGa2.default.initialize('UA-101594950-1');
 
 function logPageView() {
-  //ReactGA.set({page : window.location.pathname });
-  //ReactGA.pageview(window.location.pathname);
-  _reactGa2.default.set({ page: window.location.pathname + window.location.search });
-  _reactGa2.default.pageview(window.location.pathname + window.location.search);
+   //ReactGA.set({page : window.location.pathname });
+   //ReactGA.pageview(window.location.pathname);
+   //ReactGA.set({ page: window.location.pathname + window.location.search });
+   //ReactGA.pageview(window.location.pathname + window.location.search);
+
 }
 
+var history = (0, _createBrowserHistory2.default)();
+history.listen(function (location, action) {
+   _reactGa2.default.set({ page: location.pathname });
+   _reactGa2.default.pageview(location.pathname);
+});
+
 var routes = _react2.default.createElement(
-  _reactRouterDom.BrowserRouter,
-  { onUpdate: logPageView },
-  _react2.default.createElement(_app2.default, null)
+   _reactRouterDom.BrowserRouter,
+   { history: history },
+   _react2.default.createElement(_app2.default, null)
 );
 
 _reactDom2.default.render(routes, document.getElementById('container'));
 
-},{"./components/app":234,"react":229,"react-dom":43,"react-ga":170,"react-router-dom":189}]},{},[255]);
+},{"./components/app":234,"history/createBrowserHistory":29,"react":229,"react-dom":43,"react-ga":170,"react-router-dom":189}]},{},[255]);

@@ -4,6 +4,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import createHistory from 'history/createBrowserHistory'
 
 import {
   BrowserRouter as Router,
@@ -16,14 +17,25 @@ import App from './components/app'
 
 ReactGA.initialize('UA-101594950-1');
 
+
 function logPageView(){
 	//ReactGA.set({page : window.location.pathname });
     //ReactGA.pageview(window.location.pathname);
-    ReactGA.set({ page: window.location.pathname + window.location.search });
-    ReactGA.pageview(window.location.pathname + window.location.search);
+    //ReactGA.set({ page: window.location.pathname + window.location.search });
+    //ReactGA.pageview(window.location.pathname + window.location.search);
+    
 }
 
-const routes = (<Router onUpdate={logPageView}>
+const history = createHistory()
+history.listen((location, action)=>{
+	ReactGA.set({page : location.pathname });
+    ReactGA.pageview(location.pathname);
+})
+
+
+
+
+const routes = (<Router history={history}>
 
                    
                 {<App/>}
@@ -31,6 +43,8 @@ const routes = (<Router onUpdate={logPageView}>
 
              
             </Router>);
+
+
 
 
 ReactDOM.render(
