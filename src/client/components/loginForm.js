@@ -25,30 +25,30 @@ export default class LoginForm extends Component{
 					<div className="underlineBlue"></div>
 
 					
-
-					<div className="btnLoginForm fbLogin">
-						<a href="/auth/facebook">
-							<span className="icon-facebook"></span>
-							<p>Registrarme con facebook</p>
-							<span></span>
-						</a>	
-					
+					<div className="wrapperBtnLogin">
+						<div className="btnLoginForm fbLogin">
+							<a href="/auth/facebook">
+								<span className="icon-facebook"></span>
+								<p>Registrarme con facebook</p>
+								<span></span>
+							</a>	
+						
+						</div>
+						<div className="btnLoginForm linkedinLogin">
+							<a href="/auth/linkedin">
+								<span className="icon-linkedin"></span>
+								<p>Registrarme con linkedin</p>
+								<span></span>
+							</a>
+						</div>
+						<div className="btnLoginForm googleLogin">
+							<a href="/auth/google">
+								<span className="icon-google"></span>
+								<p>Registrarme con google</p>
+								<span></span>
+							</a>
+						</div>
 					</div>
-					<div className="btnLoginForm linkedinLogin">
-						<a href="/auth/linkedin">
-							<span className="icon-linkedin"></span>
-							<p>Registrarme con linkedin</p>
-							<span></span>
-						</a>
-					</div>
-					<div className="btnLoginForm googleLogin">
-						<a href="/auth/google">
-							<span className="icon-google"></span>
-							<p>Registrarme con google</p>
-							<span></span>
-						</a>
-					</div>
-
 
 				</div>
 			</div>

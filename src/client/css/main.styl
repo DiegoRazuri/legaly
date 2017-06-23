@@ -632,13 +632,12 @@ body
 							.gridConstitucionEmpresas, .gridRegistraMarca
 								background-color white
 								width 94%
-								margin auto
 								padding 25px 0px
 								display flex
 								flex-direction column
 								flex-wrap wrap
 								align-items center
-								position absolute
+								position relative
 								box-shadow 0px 2px 16px rgba(0,0,0,0.6)
 								
 
@@ -1041,15 +1040,18 @@ body
 				height 100vh
 				z-index 9999
 				display flex
-				align-items center
+				align-content center
 				
 				.wrapperLogin
+					width 100%
 					display flex
 					flex-direction column
 					align-items center
-					justify-content center
+					align-content center
+					justify-content flex-start
 					
 					.wrapperBtnClose
+						margin-top 10px
 						color black
 						width 100%
 						display flex
@@ -1057,6 +1059,8 @@ body
 						
 						a
 							text-decoration none
+							margin-top 10px
+							margin-right 10px
 							
 							span
 								font-size 1em
@@ -1124,48 +1128,54 @@ body
 						border-radius 3px
 						background-color #007EFF
 						
-					.fbLogin
-						background-color #4464A2
-					.linkedinLogin
-						background-color #0282BD
-						
-					.googleLogin
-						background-color #f3575d
-						
-					.underlineGrey
-						margin 10px auto
+					.wrapperBtnLogin
+						margin-top 15%
+						width 100%
+						display flex
+						flex-direction column
+						align-items center
+						.fbLogin
+							background-color #4464A2
+						.linkedinLogin
+							background-color #0282BD
+							
+						.googleLogin
+							background-color #f3575d
+							
+						.underlineGrey
+							margin 10px auto
+										
+						.btnLoginForm
+							cursor pointer
+							height 40px
+							width 90%
+							margin 10px 0px
+							
+							a
+								width 100%
+								height 100%
+								text-decoration none
+								display flex
+								justify-content center
+								align-items center
+							
+								span
+									width 30px
+									color white
+									font-size 1.2em
+									text-align center
+									margin 0px auto
+									padding 0px
 									
-					.btnLoginForm
-						cursor pointer
-						height 40px
-						width 90%
-						margin 10px 0px
-						
-						a
-							width 100%
-							height 100%
-							text-decoration none
-							display flex
-							justify-content center
-							align-items center
-						
-							span
-								width 30px
-								color white
-								font-size 1.2em
-								text-align center
-								margin 0px auto
-								padding 0px
-								
-							p
-								font-family "Open Sans"
-								font-weight lighter
-								font-size 0.9em
-								color white
-								text-align center
-								width auto
-								margin 0px
-								padding 0px		
+								p
+									font-family "Open Sans"
+									font-weight lighter
+									font-size 0.9em
+									color white
+									text-align center
+									width auto
+									margin 0px
+									padding 0px		
 
 	.userPhoto
 		display block

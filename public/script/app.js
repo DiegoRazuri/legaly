@@ -27538,47 +27538,51 @@ var LoginForm = function (_Component) {
 					_react2.default.createElement('div', { className: 'underlineBlue' }),
 					_react2.default.createElement(
 						'div',
-						{ className: 'btnLoginForm fbLogin' },
+						{ className: 'wrapperBtnLogin' },
 						_react2.default.createElement(
-							'a',
-							{ href: '/auth/facebook' },
-							_react2.default.createElement('span', { className: 'icon-facebook' }),
+							'div',
+							{ className: 'btnLoginForm fbLogin' },
 							_react2.default.createElement(
-								'p',
-								null,
-								'Registrarme con facebook'
-							),
-							_react2.default.createElement('span', null)
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'btnLoginForm linkedinLogin' },
+								'a',
+								{ href: '/auth/facebook' },
+								_react2.default.createElement('span', { className: 'icon-facebook' }),
+								_react2.default.createElement(
+									'p',
+									null,
+									'Registrarme con facebook'
+								),
+								_react2.default.createElement('span', null)
+							)
+						),
 						_react2.default.createElement(
-							'a',
-							{ href: '/auth/linkedin' },
-							_react2.default.createElement('span', { className: 'icon-linkedin' }),
+							'div',
+							{ className: 'btnLoginForm linkedinLogin' },
 							_react2.default.createElement(
-								'p',
-								null,
-								'Registrarme con linkedin'
-							),
-							_react2.default.createElement('span', null)
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'btnLoginForm googleLogin' },
+								'a',
+								{ href: '/auth/linkedin' },
+								_react2.default.createElement('span', { className: 'icon-linkedin' }),
+								_react2.default.createElement(
+									'p',
+									null,
+									'Registrarme con linkedin'
+								),
+								_react2.default.createElement('span', null)
+							)
+						),
 						_react2.default.createElement(
-							'a',
-							{ href: '/auth/google' },
-							_react2.default.createElement('span', { className: 'icon-google' }),
+							'div',
+							{ className: 'btnLoginForm googleLogin' },
 							_react2.default.createElement(
-								'p',
-								null,
-								'Registrarme con google'
-							),
-							_react2.default.createElement('span', null)
+								'a',
+								{ href: '/auth/google' },
+								_react2.default.createElement('span', { className: 'icon-google' }),
+								_react2.default.createElement(
+									'p',
+									null,
+									'Registrarme con google'
+								),
+								_react2.default.createElement('span', null)
+							)
 						)
 					)
 				)
