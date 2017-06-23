@@ -28464,7 +28464,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'h1',
 								null,
-								'Constituye tu empresa desde S/. 650.00 en solo 48 horas.'
+								'Constituye tu empresa desde S/ 650.00 sin moverte de tu lugar.'
 							),
 							_react2.default.createElement(
 								'p',
@@ -28559,7 +28559,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'h3',
 								null,
-								'Todos los tr\xE1mites garantizados desde la comodidad de tu oficina u hogar.'
+								'Ahorra tiempo y llena el formulario desde donde te encuentres. Ser\xE1 procesado de inmediato.'
 							)
 						),
 						_react2.default.createElement(
@@ -28578,7 +28578,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'h3',
 								null,
-								'Todos los tr\xE1mites garantizados desde la comodidad de tu oficina u hogar.'
+								'Nuestra plataforma y asesores te orientar\xE1n para ajustar tu inversi\xF3n y prevenir futuros gastos.'
 							)
 						),
 						_react2.default.createElement(
@@ -28597,7 +28597,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'h3',
 								null,
-								'Todos los tr\xE1mites garantizados desde la comodidad de tu oficina u hogar.'
+								'Invierte tu tiempo en construir tu negocio, nosotros llevamos a tus manos toda la documentaci\xF3n.'
 							)
 						),
 						_react2.default.createElement(
@@ -28616,7 +28616,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'h3',
 								null,
-								'Todos los tr\xE1mites garantizados desde la comodidad de tu oficina u hogar.'
+								'Contamos con el respaldo de la notaria P\xE1rraga y colaboradores certificados por el colegio de notarios'
 							)
 						)
 					)
@@ -28814,7 +28814,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'p',
 								{ className: 'number' },
-								'135'
+								'423'
 							),
 							_react2.default.createElement(
 								'p',
@@ -29807,9 +29807,7 @@ var PaymentMethodForm = function (_Component) {
 		key: 'render',
 		value: function render() {
 
-			console.log("estos son los datos de fecha");
-
-			var months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"];
+			var months = ["Enero", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"];
 
 			var date = this.props.enterpriseInProcessData.signAppointmentDate;
 
@@ -29818,11 +29816,8 @@ var PaymentMethodForm = function (_Component) {
 			var day = dateArry[2];
 
 			var pos = dateArry[1];
-			console.log(pos);
 
 			var month = months[parseInt(pos)];
-
-			console.log(month);
 
 			var year = dateArry[0];
 
@@ -32170,7 +32165,7 @@ var TrackingEnterpriseInfo = function (_Component) {
 
 				signDateArry = signDate.split("-");
 
-				signDay = signDateArry[2].substr(0, 1);
+				signDay = signDateArry[2].substr(0, 2);
 
 				signPos = parseInt(signDateArry[1]);
 
@@ -32184,7 +32179,7 @@ var TrackingEnterpriseInfo = function (_Component) {
 
 				createdDateArry = createdDate.split("-");
 
-				createdDay = createdDateArry[2].substr(0, 1);
+				createdDay = createdDateArry[2].substr(0, 2);
 
 				createdPos = parseInt(createdDateArry[1]);
 
@@ -32527,8 +32522,7 @@ var TrackingPanel = function (_Component) {
 		_this.state = {
 
 			user_identified: 0,
-			enterprises: [],
-			months: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"]
+			enterprises: []
 
 		};
 
@@ -32639,17 +32633,18 @@ var TrackingPanel = function (_Component) {
 				if (this.state.enterprises.length > 0) {
 
 					this.state.enterprises.map(function (enterprise) {
-						console.log(enterprise);
+
+						var months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"];
 
 						var date = enterprise.createdAt;
 
 						var dateArry = date.split("-");
 
-						var day = dateArry[2].substr(0, 1);
+						var day = dateArry[2].substr(0, 2);
 
 						var pos = parseInt(dateArry[1]);
 
-						var month = _this5.state.months[pos];
+						var month = months[parseInt(pos)];
 
 						var year = dateArry[0];
 
@@ -33575,14 +33570,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _reactGa2.default.initialize('UA-101594950-1');
 
-function reactGA() {
-  _reactGa2.default.set({ page: window.location.pathname });
-  _reactGa2.default.pageview(window.location.pathname);
+function logPageView() {
+  //ReactGA.set({page : window.location.pathname });
+  //ReactGA.pageview(window.location.pathname);
+  _reactGa2.default.set({ page: window.location.pathname + window.location.search });
+  _reactGa2.default.pageview(window.location.pathname + window.location.search);
 }
 
 var routes = _react2.default.createElement(
   _reactRouterDom.BrowserRouter,
-  { onUpdate: reactGA },
+  { onUpdate: logPageView },
   _react2.default.createElement(_app2.default, null)
 );
 

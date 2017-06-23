@@ -16,12 +16,14 @@ import App from './components/app'
 
 ReactGA.initialize('UA-101594950-1');
 
-function reactGA(){
-	ReactGA.set({page : window.location.pathname });
-    ReactGA.pageview(window.location.pathname);
+function logPageView(){
+	//ReactGA.set({page : window.location.pathname });
+    //ReactGA.pageview(window.location.pathname);
+    ReactGA.set({ page: window.location.pathname + window.location.search });
+    ReactGA.pageview(window.location.pathname + window.location.search);
 }
 
-const routes = (<Router onUpdate={reactGA}>
+const routes = (<Router onUpdate={logPageView}>
 
                    
                 {<App/>}

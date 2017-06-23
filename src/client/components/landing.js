@@ -23,7 +23,7 @@ export default class Landing extends Component{
 								<figure className="bannerIco">
 									<img src="css/img/Constitucion-icon.svg"/>
 								</figure>
-								<h1>Constituye tu empresa desde S/. 650.00 en solo 48 horas.</h1>
+								<h1>Constituye tu empresa desde S/ 650.00 sin moverte de tu lugar.</h1>
 								<p>Todos los trámites garantizados desde la comodidad de tu oficina u hogar</p>
 								<div><Link to="/informacion-empresa">Constituir ahora</Link></div>
 								<a href="#">¿Cómo funciona?</a>
@@ -52,14 +52,14 @@ export default class Landing extends Component{
 									<img src="css/img/rapidez.svg"/>
 								</figure>
 								<h2>Rapidez</h2>
-								<h3>Todos los trámites garantizados desde la comodidad de tu oficina u hogar.</h3>
+								<h3>Ahorra tiempo y llena el formulario desde donde te encuentres. Será procesado de inmediato.</h3>
 							</div>
 							<div className="gridBenefit">
 								<figure>
 									<img src="css/img/accesible.svg"/>
 								</figure>
 								<h2>Accesible</h2>
-								<h3>Todos los trámites garantizados desde la comodidad de tu oficina u hogar.</h3>
+								<h3>Nuestra plataforma y asesores te orientarán para ajustar tu inversión y prevenir futuros gastos.</h3>
 							</div>
 							
 							<div className="gridBenefit">
@@ -67,14 +67,14 @@ export default class Landing extends Component{
 									<img src="css/img/delivery.svg"/>
 								</figure>
 								<h2>Delivery</h2>
-								<h3>Todos los trámites garantizados desde la comodidad de tu oficina u hogar.</h3>
+								<h3>Invierte tu tiempo en construir tu negocio, nosotros llevamos a tus manos toda la documentación.</h3>
 							</div>
 							<div className="gridBenefit">
 								<figure>
 									<img src="css/img/seguridad.svg"/>
 								</figure>
 								<h2>Seguridad</h2>
-								<h3>Todos los trámites garantizados desde la comodidad de tu oficina u hogar.</h3>
+								<h3>Contamos con el respaldo de la notaria Párraga y colaboradores certificados por el colegio de notarios</h3>
 							</div>
 						</div>
 						
@@ -161,7 +161,7 @@ export default class Landing extends Component{
 						<div className="wrapperInfoCounters">
 							<div className="gridCounter">
 								<span className="icon-paper"></span>
-								<p className="number">135</p>
+								<p className="number">423</p>
 								<p className="counterName">Empresas constituidas</p>
 							</div>
 							<div className="gridCounter">
