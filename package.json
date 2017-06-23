@@ -16,6 +16,7 @@
     "create-react-class": "*",
     "express": "*",
     "express-session": "*",
+    "history": "^4.6.3",
     "jquery": "*",
     "mongoose": "*",
     "multer": "*",

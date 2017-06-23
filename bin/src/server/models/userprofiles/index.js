@@ -20,7 +20,7 @@ var UserprofileSchema = new _mongoose2.default.Schema({
 	lastname: { type: String, default: ' ' },
 	profile_provider_link: { type: String },
 	username: { type: String },
-	position: { type: String },
+	profession: { type: String },
 	photo: { type: String },
 	link: { type: String },
 	email: { type: String },
