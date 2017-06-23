@@ -29793,10 +29793,7 @@ var PaymentMethodForm = function (_Component) {
 
 		var _this = _possibleConstructorReturn(this, (PaymentMethodForm.__proto__ || Object.getPrototypeOf(PaymentMethodForm)).call(this, props));
 
-		_this.state = {
-
-			months: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"]
-		};
+		_this.state = {};
 
 		return _this;
 	}
@@ -29810,6 +29807,10 @@ var PaymentMethodForm = function (_Component) {
 		key: 'render',
 		value: function render() {
 
+			console.log("estos son los datos de fecha");
+
+			var months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"];
+
 			var date = this.props.enterpriseInProcessData.signAppointmentDate;
 
 			var dateArry = date.split("-");
@@ -29817,8 +29818,11 @@ var PaymentMethodForm = function (_Component) {
 			var day = dateArry[2];
 
 			var pos = dateArry[1];
+			console.log(pos);
 
-			var month = this.state.months[pos];
+			var month = months[parseInt(pos)];
+
+			console.log(month);
 
 			var year = dateArry[0];
 

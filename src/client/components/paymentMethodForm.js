@@ -11,7 +11,7 @@ export default class PaymentMethodForm extends Component{
 		super(props);
 		this.state={
 
-			months: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"]
+			
 		}
 		
 	}
@@ -25,6 +25,8 @@ export default class PaymentMethodForm extends Component{
 	
 	render(){
 
+		let months = ["Enero", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"]
+
 		let date = this.props.enterpriseInProcessData.signAppointmentDate
 
 		let dateArry = date.split("-")
@@ -33,7 +35,7 @@ export default class PaymentMethodForm extends Component{
 
 		let pos = dateArry[1]
 
-		let month = this.state.months[pos];
+		let month = months[parseInt(pos)];
 
 		let year = dateArry[0]
 

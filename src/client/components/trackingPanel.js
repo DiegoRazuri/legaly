@@ -14,8 +14,8 @@ export default class TrackingPanel extends Component{
 		this.state={
 
 			user_identified : 0,
-			enterprises: [],
-			months: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"]
+			enterprises: []
+			
 			
 
 		}
@@ -130,17 +130,19 @@ export default class TrackingPanel extends Component{
 
 
 				this.state.enterprises.map((enterprise)=>{
-					console.log(enterprise)
+					
+
+					let months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"]
 
 					let date = enterprise.createdAt
 
 					let dateArry = date.split("-")
 
-					let day = dateArry[2].substr(0, 1)
+					let day = dateArry[2].substr(0, 2)
 
 					let pos = parseInt(dateArry[1])
 
-					let month = this.state.months[pos];
+					let month = months[parseInt(pos)];
 
 					let year = dateArry[0]
 

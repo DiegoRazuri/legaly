@@ -82,7 +82,7 @@ export default class TrackingEnterpriseInfo extends Component{
 
 			signDateArry = signDate.split("-")
 
-			signDay = signDateArry[2].substr(0, 1)
+			signDay = signDateArry[2].substr(0, 2)
 
 			signPos = parseInt(signDateArry[1])
 
@@ -96,7 +96,7 @@ export default class TrackingEnterpriseInfo extends Component{
 
 			createdDateArry = createdDate.split("-")
 
-			createdDay = createdDateArry[2].substr(0, 1)
+			createdDay = createdDateArry[2].substr(0, 2)
 
 			createdPos = parseInt(createdDateArry[1])
 
