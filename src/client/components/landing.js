@@ -106,7 +106,7 @@ export default class Landing extends Component{
 						<h4 className="landingTitles">Clientes satisfechos nos cuentas su experiencia</h4>
 						<div className="underlineBlue"></div>
 						<div className="wrapperWidgetTestimonials">
-							<span id="btnBack" className="btnWidgetTestimonials icon-caret-left"></span>
+							
 							<div className="wrapperInfoTestimonials">
 								<div id="testimonial1" className="gridTestimonial">
 									<figure>
@@ -124,21 +124,22 @@ export default class Landing extends Component{
 								</div>
 								<div id="testimonial2" className="gridTestimonial">
 									<figure>
-										<img src="css/img/sean-rico.jpg"/>
+										<img src="css/img/cristian-rivero.jpeg"/>
 									</figure>
 									<div className="gridScore">
 										<span className="icon-star"></span>
 										<span className="icon-star"></span>
 										<span className="icon-star"></span>
 										<span className="icon-star"></span>
+										<span className="icon-star"></span>
 									</div>
-									<p className="testimonial">Perfecto, rápido y muy eficientes.</p>
-									<p className="clientName">Sean Rico</p>
-									<p className="clientEnterpriseName">Plataforma Zas S.A.C.</p>
+									<p className="testimonial">Muy responsables, son un gran equipo.</p>
+									<p className="clientName">Cristian Rivero</p>
+									<p className="clientEnterpriseName">CRISTIAN RIVERO PRODUCCIONES E.I.R.L.</p>
 								</div>
 								<div id="testimonial3" className="gridTestimonial">
 									<figure>
-										<img src="css/img/sean-rico.jpg"/>
+										<img src="css/img/roll-star.png"/>
 									</figure>
 									<div className="gridScore">
 										<span className="icon-star"></span>
@@ -146,13 +147,13 @@ export default class Landing extends Component{
 										<span className="icon-star"></span>
 										<span className="icon-star"></span>
 									</div>
-									<p className="testimonial">Perfecto, rápido y muy eficientes.</p>
-									<p className="clientName">Sean Rico</p>
-									<p className="clientEnterpriseName">Plataforma Zas S.A.C.</p>
+									<p className="testimonial">Se ahorra tiempo, un servicio super práctico.</p>
+									<p className="clientName">Francisco Sierralta Sarco</p>
+									<p className="clientEnterpriseName">Roll Star Sushi Bar E.I.R.L.</p>
 								</div>
 								
 							</div>
-							<span id="btnForward" className="btnWidgetTestimonials icon-caret-right"></span>
+							
 						</div>
 					</div>
 					<div className="wrapperCounters">

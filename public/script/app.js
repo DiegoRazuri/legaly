@@ -28697,7 +28697,6 @@ var Landing = function (_Component) {
 					_react2.default.createElement(
 						'div',
 						{ className: 'wrapperWidgetTestimonials' },
-						_react2.default.createElement('span', { id: 'btnBack', className: 'btnWidgetTestimonials icon-caret-left' }),
 						_react2.default.createElement(
 							'div',
 							{ className: 'wrapperInfoTestimonials' },
@@ -28739,11 +28738,12 @@ var Landing = function (_Component) {
 								_react2.default.createElement(
 									'figure',
 									null,
-									_react2.default.createElement('img', { src: 'css/img/sean-rico.jpg' })
+									_react2.default.createElement('img', { src: 'css/img/cristian-rivero.jpeg' })
 								),
 								_react2.default.createElement(
 									'div',
 									{ className: 'gridScore' },
+									_react2.default.createElement('span', { className: 'icon-star' }),
 									_react2.default.createElement('span', { className: 'icon-star' }),
 									_react2.default.createElement('span', { className: 'icon-star' }),
 									_react2.default.createElement('span', { className: 'icon-star' }),
@@ -28752,17 +28752,17 @@ var Landing = function (_Component) {
 								_react2.default.createElement(
 									'p',
 									{ className: 'testimonial' },
-									'Perfecto, r\xE1pido y muy eficientes.'
+									'Muy responsables, son un gran equipo.'
 								),
 								_react2.default.createElement(
 									'p',
 									{ className: 'clientName' },
-									'Sean Rico'
+									'Cristian Rivero'
 								),
 								_react2.default.createElement(
 									'p',
 									{ className: 'clientEnterpriseName' },
-									'Plataforma Zas S.A.C.'
+									'CRISTIAN RIVERO PRODUCCIONES E.I.R.L.'
 								)
 							),
 							_react2.default.createElement(
@@ -28771,7 +28771,7 @@ var Landing = function (_Component) {
 								_react2.default.createElement(
 									'figure',
 									null,
-									_react2.default.createElement('img', { src: 'css/img/sean-rico.jpg' })
+									_react2.default.createElement('img', { src: 'css/img/roll-star.png' })
 								),
 								_react2.default.createElement(
 									'div',
@@ -28784,21 +28784,20 @@ var Landing = function (_Component) {
 								_react2.default.createElement(
 									'p',
 									{ className: 'testimonial' },
-									'Perfecto, r\xE1pido y muy eficientes.'
+									'Se ahorra tiempo, un servicio super pr\xE1ctico.'
 								),
 								_react2.default.createElement(
 									'p',
 									{ className: 'clientName' },
-									'Sean Rico'
+									'Francisco Sierralta Sarco'
 								),
 								_react2.default.createElement(
 									'p',
 									{ className: 'clientEnterpriseName' },
-									'Plataforma Zas S.A.C.'
+									'Roll Star Sushi Bar E.I.R.L.'
 								)
 							)
-						),
-						_react2.default.createElement('span', { id: 'btnForward', className: 'btnWidgetTestimonials icon-caret-right' })
+						)
 					)
 				),
 				_react2.default.createElement(
