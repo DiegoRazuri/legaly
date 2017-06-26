@@ -1970,7 +1970,17 @@ var createLocation = exports.createLocation = function createLocation(path, stat
     if (state !== undefined && location.state === undefined) location.state = state;
   }
 
-  location.key = key;
+  try {
+    location.pathname = decodeURI(location.pathname);
+  } catch (e) {
+    if (e instanceof URIError) {
+      throw new URIError('Pathname "' + location.pathname + '" could not be decoded. ' + 'This is likely caused by an invalid percent-encoding.');
+    } else {
+      throw e;
+    }
+  }
+
+  if (key) location.key = key;
 
   if (currentLocation) {
     // Resolve incomplete/relative pathname relative to current location.
@@ -1978,6 +1988,11 @@ var createLocation = exports.createLocation = function createLocation(path, stat
       location.pathname = currentLocation.pathname;
     } else if (location.pathname.charAt(0) !== '/') {
       location.pathname = (0, _resolvePathname2.default)(location.pathname, currentLocation.pathname);
+    }
+  } else {
+    // When there is no prior location and pathname is empty, set it to /
+    if (!location.pathname) {
+      location.pathname = '/';
     }
   }
 
@@ -1999,8 +2014,12 @@ var stripLeadingSlash = exports.stripLeadingSlash = function stripLeadingSlash(p
   return path.charAt(0) === '/' ? path.substr(1) : path;
 };
 
-var stripPrefix = exports.stripPrefix = function stripPrefix(path, prefix) {
-  return path.indexOf(prefix) === 0 ? path.substr(prefix.length) : path;
+var hasBasename = exports.hasBasename = function hasBasename(path, prefix) {
+  return new RegExp('^' + prefix + '(\\/|\\?|#|$)', 'i').test(path);
+};
+
+var stripBasename = exports.stripBasename = function stripBasename(path, prefix) {
+  return hasBasename(path, prefix) ? path.substr(prefix.length) : path;
 };
 
 var stripTrailingSlash = exports.stripTrailingSlash = function stripTrailingSlash(path) {
@@ -2024,8 +2043,6 @@ var parsePath = exports.parsePath = function parsePath(path) {
     pathname = pathname.substr(0, searchIndex);
   }
 
-  pathname = decodeURI(pathname);
-
   return {
     pathname: pathname,
     search: search === '?' ? '' : search,
@@ -2039,7 +2056,7 @@ var createPath = exports.createPath = function createPath(location) {
       hash = location.hash;
 
 
-  var path = encodeURI(pathname || '/');
+  var path = pathname || '/';
 
   if (search && search !== '?') path += search.charAt(0) === '?' ? search : '?' + search;
 
@@ -2124,12 +2141,11 @@ var createBrowserHistory = function createBrowserHistory() {
 
     var path = pathname + search + hash;
 
-    if (basename) path = (0, _PathUtils.stripPrefix)(path, basename);
+    (0, _warning2.default)(!basename || (0, _PathUtils.hasBasename)(path, basename), 'You are attempting to use a basename on a page whose URL path does not begin ' + 'with the basename. Expected path "' + path + '" to begin with "' + basename + '".');
 
-    return _extends({}, (0, _PathUtils.parsePath)(path), {
-      state: state,
-      key: key
-    });
+    if (basename) path = (0, _PathUtils.stripBasename)(path, basename);
+
+    return (0, _LocationUtils.createLocation)(path, state, key);
   };
 
   var createKey = function createKey() {
@@ -2445,9 +2461,11 @@ var createHashHistory = function createHashHistory() {
   var getDOMLocation = function getDOMLocation() {
     var path = decodePath(getHashPath());
 
-    if (basename) path = (0, _PathUtils.stripPrefix)(path, basename);
+    (0, _warning2.default)(!basename || (0, _PathUtils.hasBasename)(path, basename), 'You are attempting to use a basename on a page whose URL path does not begin ' + 'with the basename. Expected path "' + path + '" to begin with "' + basename + '".');
 
-    return (0, _PathUtils.parsePath)(path);
+    if (basename) path = (0, _PathUtils.stripBasename)(path, basename);
+
+    return (0, _LocationUtils.createLocation)(path);
   };
 
   var transitionManager = (0, _createTransitionManager2.default)();
@@ -25801,7 +25819,6 @@ var App = function (_Component) {
 
 			$.post('/api/enterprise_information', json, function (res) {
 				if (res) {
-					console.log(res);
 
 					var newEnterpriseProgressData = res.enterprise;
 
@@ -25824,8 +25841,6 @@ var App = function (_Component) {
 
 			$.post('/api/signing_date_information', json, function (res) {
 				if (res) {
-					console.log("info de res");
-					console.log(res);
 
 					var newData = _this4.state.enterpriseInProcessData;
 
@@ -25846,8 +25861,6 @@ var App = function (_Component) {
 
 			$.post('/api/partners_information', json, function (res) {
 				if (res) {
-					console.log("info de res");
-					console.log(res);
 
 					//let newData = this.state.enterpriseInProcessData.user
 
@@ -25902,8 +25915,6 @@ var App = function (_Component) {
 			$.post('/api/partners_invitation_update', json, function (res) {
 				if (res) {
 
-					console.log(res);
-
 					var newEnterpriseProgressData = res.enterprise;
 
 					_this6.setState({
@@ -25925,8 +25936,6 @@ var App = function (_Component) {
 
 			$.post('/api/enterprise_information_update', json, function (res) {
 				if (res) {
-
-					console.log(res);
 
 					var newEnterpriseProgressData = res;
 
@@ -28238,9 +28247,6 @@ var Incorporate = function (_Component) {
 	_createClass(Incorporate, [{
 		key: 'render',
 		value: function render() {
-			console.log("Incorporate props");
-			console.log(this.props.enterpriseInProcess);
-			console.log(this.props.user);
 
 			return _react2.default.createElement(
 				'div',
@@ -28701,7 +28707,7 @@ var Landing = function (_Component) {
 								_react2.default.createElement(
 									'figure',
 									null,
-									_react2.default.createElement('img', { src: 'css/img/Fake-client.jpg' })
+									_react2.default.createElement('img', { src: 'css/img/sean-rico.jpg' })
 								),
 								_react2.default.createElement(
 									'div',
@@ -28714,17 +28720,17 @@ var Landing = function (_Component) {
 								_react2.default.createElement(
 									'p',
 									{ className: 'testimonial' },
-									'Todos los tr\xE1mites garantizados desde la comodidad de tu hogar'
+									'Perfecto, r\xE1pido y muy eficientes.'
 								),
 								_react2.default.createElement(
 									'p',
 									{ className: 'clientName' },
-									'Eugenio Vizcarra'
+									'Sean Rico'
 								),
 								_react2.default.createElement(
 									'p',
 									{ className: 'clientEnterpriseName' },
-									'LA EMPRESA S.A.C.'
+									'Plataforma Zas S.A.C.'
 								)
 							),
 							_react2.default.createElement(
@@ -28733,7 +28739,7 @@ var Landing = function (_Component) {
 								_react2.default.createElement(
 									'figure',
 									null,
-									_react2.default.createElement('img', { src: 'css/img/Fake-client.jpg' })
+									_react2.default.createElement('img', { src: 'css/img/sean-rico.jpg' })
 								),
 								_react2.default.createElement(
 									'div',
@@ -28746,17 +28752,17 @@ var Landing = function (_Component) {
 								_react2.default.createElement(
 									'p',
 									{ className: 'testimonial' },
-									'Todos los tr\xE1mites garantizados desde la comodidad de tu hogar'
+									'Perfecto, r\xE1pido y muy eficientes.'
 								),
 								_react2.default.createElement(
 									'p',
 									{ className: 'clientName' },
-									'Eugenio Vizcarra'
+									'Sean Rico'
 								),
 								_react2.default.createElement(
 									'p',
 									{ className: 'clientEnterpriseName' },
-									'LA EMPRESA S.A.C.'
+									'Plataforma Zas S.A.C.'
 								)
 							),
 							_react2.default.createElement(
@@ -28765,7 +28771,7 @@ var Landing = function (_Component) {
 								_react2.default.createElement(
 									'figure',
 									null,
-									_react2.default.createElement('img', { src: 'css/img/Fake-client.jpg' })
+									_react2.default.createElement('img', { src: 'css/img/sean-rico.jpg' })
 								),
 								_react2.default.createElement(
 									'div',
@@ -28778,17 +28784,17 @@ var Landing = function (_Component) {
 								_react2.default.createElement(
 									'p',
 									{ className: 'testimonial' },
-									'Todos los tr\xE1mites garantizados desde la comodidad de tu hogar'
+									'Perfecto, r\xE1pido y muy eficientes.'
 								),
 								_react2.default.createElement(
 									'p',
 									{ className: 'clientName' },
-									'Eugenio Vizcarra'
+									'Sean Rico'
 								),
 								_react2.default.createElement(
 									'p',
 									{ className: 'clientEnterpriseName' },
-									'LA EMPRESA S.A.C.'
+									'Plataforma Zas S.A.C.'
 								)
 							)
 						),
@@ -29877,7 +29883,7 @@ var PaymentMethodForm = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'legalyContactInfo' },
-										'BCP cta 193 - 34732322-0-52'
+										'BBVA Continental cta 0011 - 0153 - 0200633- 000 - 41'
 									),
 									_react2.default.createElement(
 										_reactRouterDom.Link,
@@ -30241,8 +30247,6 @@ var PersonalInformationForm = function (_Component) {
 		value: function validationForm() {
 			var _this2 = this;
 
-			console.log("evaluando formulario");
-
 			var errorFlag = 0;
 			var errorPartnerPos = [];
 
@@ -30340,8 +30344,6 @@ var PersonalInformationForm = function (_Component) {
 					}
 
 					if (partner.user.profession == "" || partner.user.profession == undefined) {
-
-						console.log("no hay position");
 
 						i_position.parentNode.classList.add("inputError");
 
@@ -30542,12 +30544,9 @@ var PersonalInformationForm = function (_Component) {
 			var validation = this.validationForm();
 
 			if (validation == 0) {
-				console.log("errorFlag igual a  0");
 
 				//this.props.sendPartnersInformation.call(null)
-			} else {
-				console.log("no se envio data por error de validacion");
-			}
+			} else {}
 		}
 	}, {
 		key: 'handleGoodSeparator',
@@ -31835,8 +31834,6 @@ var TheCreatorPanel = function (_Component) {
 
 			$.get('/api/all_users_admin', function (res) {
 
-				console.log("usuarios listados");
-
 				_this2.setState({ usersAdmin: res });
 			});
 		}
@@ -31844,10 +31841,7 @@ var TheCreatorPanel = function (_Component) {
 		key: 'createSuperUser',
 		value: function createSuperUser() {
 			$.post('/api/create_super_user', function (res) {
-				if (res.state == 1) {
-
-					console.log("super usuario registrado");
-				}
+				if (res.state == 1) {}
 			});
 		}
 	}, {
@@ -31863,8 +31857,6 @@ var TheCreatorPanel = function (_Component) {
 
 			$.post('/api/add_user_admin', json, function (res) {
 				if (res.state == 1) {
-
-					console.log(" usuario registrado");
 
 					_reactDom2.default.findDOMNode(_this3.refs.i_id).value = '';
 				}
@@ -31907,8 +31899,6 @@ var TheCreatorPanel = function (_Component) {
 			var panel = void 0;
 
 			if (this.state.user_identified == 1) {
-
-				console.log("super usuario identificado");
 
 				var usersList = [];
 
@@ -32082,15 +32072,11 @@ var TrackingEnterpriseInfo = function (_Component) {
 		value: function componentWillMount() {
 			var _this2 = this;
 
-			console.log(this.props.match.params.enterprise_id);
-
 			var json = {
 				enterprise_id: this.props.match.params.enterprise_id
 			};
 
 			$.post('/api/enterprise_detail', json, function (res) {
-				console.log("componentWillMount");
-				console.log(res);
 
 				if (res) {
 
@@ -32101,8 +32087,6 @@ var TrackingEnterpriseInfo = function (_Component) {
 	}, {
 		key: 'render',
 		value: function render() {
-			console.log("TrackingEnterpriseInfo");
-			console.log(this.state.enterprise);
 
 			var isItGoods = void 0,
 			    isItMoney = void 0;
@@ -32132,9 +32116,8 @@ var TrackingEnterpriseInfo = function (_Component) {
 			    inProcess = void 0,
 			    serviceState = void 0;
 
-			console.log(this.state.enterprise.inProcess);
 			if (this.state.enterprise.inProcess != undefined) {
-				console.log("dentro del if");
+
 				if (this.state.enterprise.isItMoneyCapital != false) {
 					isItMoney = _react2.default.createElement(
 						'li',
@@ -32204,11 +32187,7 @@ var TrackingEnterpriseInfo = function (_Component) {
 
 				for (var i = 0; i < this.state.enterprise.partners.length; i++) {
 
-					console.log("dentro del for");
-
 					var partner = this.state.enterprise.partners[i];
-
-					console.log(partner.user.name);
 
 					var key_id = (0, _uid2.default)();
 
@@ -32540,9 +32519,6 @@ var TrackingPanel = function (_Component) {
 
 			$.get('/api/all_enterprises', function (res) {
 
-				console.log("empresas listadas");
-				console.log(res);
-
 				_this2.setState({ enterprises: res });
 			});
 		}
@@ -32594,9 +32570,6 @@ var TrackingPanel = function (_Component) {
 
 			$.post('/api/update_service_state', json, function (res) {
 
-				console.log("service state");
-				console.log(res);
-
 				_this3.setState({ enterprises: res });
 			});
 		}
@@ -32605,10 +32578,7 @@ var TrackingPanel = function (_Component) {
 		value: function componentWillMount() {
 			var _this4 = this;
 
-			console.log("usuario existe");
 			$.post('/api/is_it_admin', function (res) {
-				console.log("res");
-				console.log(res);
 
 				if (res.state == 1) {
 
@@ -32625,8 +32595,6 @@ var TrackingPanel = function (_Component) {
 
 			var panel = void 0;
 			var enterpriseRow = [];
-
-			console.log(this.state.enterprises);
 
 			if (this.state.user_identified == 1) {
 
@@ -33290,8 +33258,7 @@ var Userprofile = function (_Component) {
 	_createClass(Userprofile, [{
 		key: 'componentWillMount',
 		value: function componentWillMount() {
-			console.log("ejecutando componentWillMount");
-			console.log(this.props.user);
+
 			this.props.isItLogin();
 		}
 	}, {

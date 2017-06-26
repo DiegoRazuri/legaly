@@ -110,7 +110,7 @@ export default class Landing extends Component{
 							<div className="wrapperInfoTestimonials">
 								<div id="testimonial1" className="gridTestimonial">
 									<figure>
-										<img src="css/img/Fake-client.jpg"/>
+										<img src="css/img/sean-rico.jpg"/>
 									</figure>
 									<div className="gridScore">
 										<span className="icon-star"></span>
@@ -118,13 +118,13 @@ export default class Landing extends Component{
 										<span className="icon-star"></span>
 										<span className="icon-star"></span>
 									</div>
-									<p className="testimonial">Todos los trámites garantizados desde la comodidad de tu hogar</p>
-									<p className="clientName">Eugenio Vizcarra</p>
-									<p className="clientEnterpriseName">LA EMPRESA S.A.C.</p>
+									<p className="testimonial">Perfecto, rápido y muy eficientes.</p>
+									<p className="clientName">Sean Rico</p>
+									<p className="clientEnterpriseName">Plataforma Zas S.A.C.</p>
 								</div>
 								<div id="testimonial2" className="gridTestimonial">
 									<figure>
-										<img src="css/img/Fake-client.jpg"/>
+										<img src="css/img/sean-rico.jpg"/>
 									</figure>
 									<div className="gridScore">
 										<span className="icon-star"></span>
@@ -132,13 +132,13 @@ export default class Landing extends Component{
 										<span className="icon-star"></span>
 										<span className="icon-star"></span>
 									</div>
-									<p className="testimonial">Todos los trámites garantizados desde la comodidad de tu hogar</p>
-									<p className="clientName">Eugenio Vizcarra</p>
-									<p className="clientEnterpriseName">LA EMPRESA S.A.C.</p>
+									<p className="testimonial">Perfecto, rápido y muy eficientes.</p>
+									<p className="clientName">Sean Rico</p>
+									<p className="clientEnterpriseName">Plataforma Zas S.A.C.</p>
 								</div>
 								<div id="testimonial3" className="gridTestimonial">
 									<figure>
-										<img src="css/img/Fake-client.jpg"/>
+										<img src="css/img/sean-rico.jpg"/>
 									</figure>
 									<div className="gridScore">
 										<span className="icon-star"></span>
@@ -146,9 +146,9 @@ export default class Landing extends Component{
 										<span className="icon-star"></span>
 										<span className="icon-star"></span>
 									</div>
-									<p className="testimonial">Todos los trámites garantizados desde la comodidad de tu hogar</p>
-									<p className="clientName">Eugenio Vizcarra</p>
-									<p className="clientEnterpriseName">LA EMPRESA S.A.C.</p>
+									<p className="testimonial">Perfecto, rápido y muy eficientes.</p>
+									<p className="clientName">Sean Rico</p>
+									<p className="clientEnterpriseName">Plataforma Zas S.A.C.</p>
 								</div>
 								
 							</div>
