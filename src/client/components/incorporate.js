@@ -17,9 +17,9 @@ export default class Incorporate extends Component{
 
 
 	render(){
-		console.log("Incorporate props")
-		console.log(this.props.enterpriseInProcess)
-		console.log(this.props.user)
+		
+		
+		
 
 		return <div className="sectionEnterpriseIncorporation">
 					<div className="wrapperIncorporationForm">

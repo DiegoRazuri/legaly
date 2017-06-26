@@ -30,7 +30,7 @@ export default class TrackingEnterpriseInfo extends Component{
 
 	componentWillMount(){
 
-		console.log(this.props.match.params.enterprise_id)
+		
 
 		let json = {
 			enterprise_id: this.props.match.params.enterprise_id
@@ -40,8 +40,8 @@ export default class TrackingEnterpriseInfo extends Component{
 		
 
 		$.post('/api/enterprise_detail', json, (res)=>{
-			console.log("componentWillMount")
-			console.log(res)
+			
+			
 			
 			if(res){
 				
@@ -53,8 +53,7 @@ export default class TrackingEnterpriseInfo extends Component{
 
 	
 	render(){
-		console.log("TrackingEnterpriseInfo")
-		console.log(this.state.enterprise)
+		
 
 		let isItGoods, isItMoney;
 		let signDate, signDateArry, signDay, signPos, signMonth, signYear;
@@ -64,9 +63,9 @@ export default class TrackingEnterpriseInfo extends Component{
 		let dataReader;
 		let companyName, industry, societyType, totalCapital, accountManager, signAppointmentTime, signAppointmentLocation, price, inProcess, serviceState;
 
-		console.log(this.state.enterprise.inProcess)
+		
 		if(this.state.enterprise.inProcess != undefined){
-			console.log("dentro del if")
+		
 			if(this.state.enterprise.isItMoneyCapital != false){
 				isItMoney = <li><p className="fieldValue">Dinero</p></li>
 			}
@@ -117,12 +116,12 @@ export default class TrackingEnterpriseInfo extends Component{
 
 			for(let i = 0; i< this.state.enterprise.partners.length; i++){
 
-				console.log("dentro del for")
+				
 
 
 				let partner = this.state.enterprise.partners[i];
 
-				console.log(partner.user.name);
+				
 
 				let key_id = uid()
 				

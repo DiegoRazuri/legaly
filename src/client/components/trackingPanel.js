@@ -29,8 +29,8 @@ export default class TrackingPanel extends Component{
 	getEnterprises(){
 		$.get('/api/all_enterprises', (res)=>{
 			
-			console.log("empresas listadas")
-			console.log(res)
+			
+			
 		
 			this.setState({enterprises : res})
 
@@ -87,9 +87,7 @@ export default class TrackingPanel extends Component{
 
 		$.post('/api/update_service_state', json, (res)=>{
 			
-			console.log("service state")
-			console.log(res)
-		
+			
 			this.setState({enterprises : res})
 
 		});
@@ -99,10 +97,8 @@ export default class TrackingPanel extends Component{
 
 	componentWillMount(){
 	
-			console.log("usuario existe")
+			
 			$.post('/api/is_it_admin', (res)=>{
-				console.log("res")
-				console.log(res)
 				
 				if(res.state == 1){
 					
@@ -122,7 +118,7 @@ export default class TrackingPanel extends Component{
 		let panel;
 		let enterpriseRow = [];
 
-		console.log(this.state.enterprises)
+		
 
 		if(this.state.user_identified == 1){
 

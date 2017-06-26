@@ -227,7 +227,7 @@ export default class App extends Component{
 
 		$.post('/api/enterprise_information', json, (res)=>{
 			if(res){
-				console.log(res)
+				
 				
 				let newEnterpriseProgressData = res.enterprise
 
@@ -246,8 +246,8 @@ export default class App extends Component{
 		
 		$.post('/api/signing_date_information', json, (res)=>{
 			if(res){
-				console.log("info de res")
-				console.log(res)
+				
+				
 
 				let newData = this.state.enterpriseInProcessData;
 
@@ -269,8 +269,8 @@ export default class App extends Component{
 
 		$.post('/api/partners_information', json, (res)=>{
 			if(res){
-				console.log("info de res")
-				console.log(res)
+				
+				
 
 				//let newData = this.state.enterpriseInProcessData.user
 
@@ -323,7 +323,7 @@ export default class App extends Component{
 		$.post('/api/partners_invitation_update', json, (res)=>{
 			if(res){
 
-				console.log(res)
+				
 				
 				let newEnterpriseProgressData = res.enterprise
 
@@ -343,7 +343,7 @@ export default class App extends Component{
 		$.post('/api/enterprise_information_update', json, (res)=>{
 			if(res){
 
-				console.log(res)
+				
 				
 
 				let newEnterpriseProgressData = res

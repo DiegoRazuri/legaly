@@ -12,8 +12,7 @@ import ContactRow from './contactRow';
 export default class Userprofile extends Component{
 
 	componentWillMount(){
-		console.log("ejecutando componentWillMount")
-		console.log(this.props.user)
+		
 		this.props.isItLogin();
 		
 		

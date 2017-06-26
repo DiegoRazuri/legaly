@@ -36,7 +36,7 @@ export default class PersonalInformationForm extends Component{
 
 	validationForm(){
 
-		console.log("evaluando formulario")
+		
 
 		let errorFlag = 0;
 		let errorPartnerPos = [];
@@ -131,7 +131,7 @@ export default class PersonalInformationForm extends Component{
 
 				if(partner.user.profession == "" || partner.user.profession == undefined){
 
-					console.log("no hay position")
+					
 
 					i_position.parentNode.classList.add("inputError");
 
@@ -359,11 +359,11 @@ export default class PersonalInformationForm extends Component{
 				let validation = this.validationForm();
 
 				if(validation == 0){
-					console.log("errorFlag igual a  0")
+					
 
 					//this.props.sendPartnersInformation.call(null)
 				}else{
-					console.log("no se envio data por error de validacion")
+					
 				
 				}
 

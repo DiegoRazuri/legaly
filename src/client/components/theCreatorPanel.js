@@ -29,7 +29,7 @@ export default class TheCreatorPanel extends Component{
 	listAllUserAdmin(){
 		$.get('/api/all_users_admin', (res)=>{
 			
-			console.log("usuarios listados")
+			
 		
 			this.setState({usersAdmin : res})
 
@@ -41,7 +41,7 @@ export default class TheCreatorPanel extends Component{
 			if(res.state == 1){
 				
 				
-				console.log("super usuario registrado")
+				
 			}
 		});
 	}
@@ -58,7 +58,7 @@ export default class TheCreatorPanel extends Component{
 			if(res.state == 1){
 				
 				
-				console.log(" usuario registrado");
+				
 
 				ReactDom.findDOMNode(this.refs.i_id).value = '';
 			}
@@ -109,7 +109,7 @@ export default class TheCreatorPanel extends Component{
 		if(this.state.user_identified == 1){
 				
 				
-			console.log("super usuario identificado")
+			
 
 			let usersList =[];
 
