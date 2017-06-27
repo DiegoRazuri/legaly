@@ -118,13 +118,11 @@ export default class DateForm extends Component{
 					let newMonth = parseInt(dayArry[1])
 					newMonth += 1;
 
-					if(newMonth.length == 1){
+					if(newMonth <= 9 ){
 
-						console.log("month + 1")
-						newMonth = "0" + newMonth.toString();
+						let val = "0" + newMonth.toString();
 
-						console.log(newMonth)
-						dayArry[1] = newMonth;
+						dayArry[1] = val;
 					}else{
 						dayArry[1] = newMonth;
 					}
@@ -132,13 +130,19 @@ export default class DateForm extends Component{
 					
 				}
 
-				dayArry[0] = dayNum;
+				if(dayNum <= 9){
+					let val = "0" + dayNum;
+					dayArry[0] = val;
+				}else{
+					dayArry[0] = dayNum;
+				}
 
+/*
 				if(dayArry[1].length == 1){
 					let val = dayArry[1].toString(); 
 					dayArry[1] = "0" + val;
 				}
-
+*/
 
 				dateComplete = dayArry[2] + "-" + dayArry[1] + "-" + dayArry[0]
 				dateComplete.toString();
@@ -154,13 +158,11 @@ export default class DateForm extends Component{
 					let newMonth = parseInt(dayArry[1])
 					newMonth += 1;
 
-					if(newMonth.length == 1){
+					if(newMonth <= 9 ){
 
-						console.log("month + 1")
-						newMonth = "0" + newMonth.toString();
+						let val = "0" + newMonth.toString();
 
-						console.log(newMonth)
-						dayArry[1] = newMonth;
+						dayArry[1] = val;
 					}else{
 						dayArry[1] = newMonth;
 					}
@@ -168,18 +170,24 @@ export default class DateForm extends Component{
 					
 				}
 
-				dayArry[0] = dayNum;
+				if(dayNum <= 9){
+					let val = "0" + dayNum;
+					dayArry[0] = val;
+				}else{
+					dayArry[0] = dayNum;
+				}
 
+				
+/*
 				if(dayArry[1].length == 1){
 					let val = dayArry[1].toString(); 
 					dayArry[1] = "0" + val;
 				}
-
+*/
 				dateComplete = dayArry[2] + "-" + dayArry[1] + "-" + dayArry[0]
 				dateComplete.toString();
 			}
 
-			console.log(dateComplete)
 
 
 			let dataReaderEnterprise = this.props.enterpriseInProcessData;

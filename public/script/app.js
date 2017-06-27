@@ -26904,24 +26904,29 @@ var DateForm = function (_Component) {
 						var newMonth = parseInt(dayArry[1]);
 						newMonth += 1;
 
-						if (newMonth.length == 1) {
+						if (newMonth <= 9) {
 
-							console.log("month + 1");
-							newMonth = "0" + newMonth.toString();
+							var val = "0" + newMonth.toString();
 
-							console.log(newMonth);
-							dayArry[1] = newMonth;
+							dayArry[1] = val;
 						} else {
 							dayArry[1] = newMonth;
 						}
 					}
 
-					dayArry[0] = dayNum;
-
-					if (dayArry[1].length == 1) {
-						var val = dayArry[1].toString();
-						dayArry[1] = "0" + val;
+					if (dayNum <= 9) {
+						var _val = "0" + dayNum;
+						dayArry[0] = _val;
+					} else {
+						dayArry[0] = dayNum;
 					}
+
+					/*
+     				if(dayArry[1].length == 1){
+     					let val = dayArry[1].toString(); 
+     					dayArry[1] = "0" + val;
+     				}
+     */
 
 					dateComplete = dayArry[2] + "-" + dayArry[1] + "-" + dayArry[0];
 					dateComplete.toString();
@@ -26936,25 +26941,29 @@ var DateForm = function (_Component) {
 						var _newMonth = parseInt(_dayArry[1]);
 						_newMonth += 1;
 
-						if (_newMonth.length == 1) {
+						if (_newMonth <= 9) {
 
-							console.log("month + 1");
-							_newMonth = "0" + _newMonth.toString();
+							var _val2 = "0" + _newMonth.toString();
 
-							console.log(_newMonth);
-							_dayArry[1] = _newMonth;
+							_dayArry[1] = _val2;
 						} else {
 							_dayArry[1] = _newMonth;
 						}
 					}
 
-					_dayArry[0] = _dayNum;
-
-					if (_dayArry[1].length == 1) {
-						var _val = _dayArry[1].toString();
-						_dayArry[1] = "0" + _val;
+					if (_dayNum <= 9) {
+						var _val3 = "0" + _dayNum;
+						_dayArry[0] = _val3;
+					} else {
+						_dayArry[0] = _dayNum;
 					}
 
+					/*
+     				if(dayArry[1].length == 1){
+     					let val = dayArry[1].toString(); 
+     					dayArry[1] = "0" + val;
+     				}
+     */
 					dateComplete = _dayArry[2] + "-" + _dayArry[1] + "-" + _dayArry[0];
 					dateComplete.toString();
 				}
