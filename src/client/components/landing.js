@@ -133,7 +133,7 @@ export default class Landing extends Component{
 										<span className="icon-star"></span>
 										<span className="icon-star"></span>
 									</div>
-									<p className="testimonial">Muy responsables, son un gran equipo.</p>
+									<p className="testimonial">Muy responsables en su trabajo y son una empresa comprometida con la satisfacción de sus clientes, mucho éxito!</p>
 									<p className="clientName">Cristian Rivero</p>
 									<p className="clientEnterpriseName">CRISTIAN RIVERO PRODUCCIONES E.I.R.L.</p>
 								</div>
@@ -147,7 +147,7 @@ export default class Landing extends Component{
 										<span className="icon-star"></span>
 										<span className="icon-star"></span>
 									</div>
-									<p className="testimonial">Se ahorra tiempo, un servicio super práctico.</p>
+									<p className="testimonial">Ahorre mucho tiempo. Tienen un servicio súper práctico y rápido. Esto es lo que necesitaba y lo encontré en este gran equipo.</p>
 									<p className="clientName">Francisco Sierralta Sarco</p>
 									<p className="clientEnterpriseName">Roll Star Sushi Bar E.I.R.L.</p>
 								</div>

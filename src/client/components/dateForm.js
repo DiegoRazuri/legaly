@@ -110,13 +110,36 @@ export default class DateForm extends Component{
 				let dayArry = day.split("/")
 				let dayNum = parseInt(dayArry[0])
 				dayNum += numOfDays;
-				dayArry[0] = dayNum;
+				
 
+				if(dayNum >= 31){
+					dayNum = dayNum - 30
+
+					let newMonth = parseInt(dayArry[1])
+					newMonth += 1;
+
+					if(newMonth.length == 1){
+
+						console.log("month + 1")
+						newMonth = "0" + newMonth.toString();
+
+						console.log(newMonth)
+						dayArry[1] = newMonth;
+					}else{
+						dayArry[1] = newMonth;
+					}
+					
+					
+				}
+
+				dayArry[0] = dayNum;
 
 				if(dayArry[1].length == 1){
 					let val = dayArry[1].toString(); 
 					dayArry[1] = "0" + val;
 				}
+
+
 				dateComplete = dayArry[2] + "-" + dayArry[1] + "-" + dayArry[0]
 				dateComplete.toString();
 
@@ -124,6 +147,27 @@ export default class DateForm extends Component{
 				let dayArry = day.split("/")
 				let dayNum = parseInt(dayArry[0])
 				dayNum += numOfDays;
+
+				if(dayNum >= 31){
+					dayNum = dayNum - 30
+
+					let newMonth = parseInt(dayArry[1])
+					newMonth += 1;
+
+					if(newMonth.length == 1){
+
+						console.log("month + 1")
+						newMonth = "0" + newMonth.toString();
+
+						console.log(newMonth)
+						dayArry[1] = newMonth;
+					}else{
+						dayArry[1] = newMonth;
+					}
+
+					
+				}
+
 				dayArry[0] = dayNum;
 
 				if(dayArry[1].length == 1){
@@ -134,6 +178,8 @@ export default class DateForm extends Component{
 				dateComplete = dayArry[2] + "-" + dayArry[1] + "-" + dayArry[0]
 				dateComplete.toString();
 			}
+
+			console.log(dateComplete)
 
 
 			let dataReaderEnterprise = this.props.enterpriseInProcessData;

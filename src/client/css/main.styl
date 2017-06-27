@@ -789,7 +789,7 @@ body
 						.wrapperWidgetTestimonials
 							display flex
 							justify-content center
-							height 300px
+							height auto
 							margin-top 30px
 							
 							.btnWidgetTestimonials
@@ -800,14 +800,16 @@ body
 							
 							.wrapperInfoTestimonials
 								width 90%
-								height 300px
+								height auto
 								display flex
-								justify-content space-around								
+								justify-content space-around
+								flex-direction column							
 								
 								.gridTestimonial
 									display flex
 									flex-direction column
 									align-items center
+									margin-bottom 30px
 
 									figure
 										width 100px
@@ -1450,9 +1452,11 @@ body
 			.wrapperWidgetTestimonials 
 				height 320px
 				.wrapperInfoTestimonials 
-					
+					flex-direction row
+					padding-bottom 30px
 	
 					.gridTestimonial
+						margin-bottom auto
 						figure
 							margin 16px auto 16px auto
 						.testimonial

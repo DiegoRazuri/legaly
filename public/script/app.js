@@ -26897,18 +26897,57 @@ var DateForm = function (_Component) {
 					var dayArry = day.split("/");
 					var dayNum = parseInt(dayArry[0]);
 					dayNum += numOfDays;
+
+					if (dayNum >= 31) {
+						dayNum = dayNum - 30;
+
+						var newMonth = parseInt(dayArry[1]);
+						newMonth += 1;
+
+						if (newMonth.length == 1) {
+
+							console.log("month + 1");
+							newMonth = "0" + newMonth.toString();
+
+							console.log(newMonth);
+							dayArry[1] = newMonth;
+						} else {
+							dayArry[1] = newMonth;
+						}
+					}
+
 					dayArry[0] = dayNum;
 
 					if (dayArry[1].length == 1) {
 						var val = dayArry[1].toString();
 						dayArry[1] = "0" + val;
 					}
+
 					dateComplete = dayArry[2] + "-" + dayArry[1] + "-" + dayArry[0];
 					dateComplete.toString();
 				} else {
 					var _dayArry = day.split("/");
 					var _dayNum = parseInt(_dayArry[0]);
 					_dayNum += numOfDays;
+
+					if (_dayNum >= 31) {
+						_dayNum = _dayNum - 30;
+
+						var _newMonth = parseInt(_dayArry[1]);
+						_newMonth += 1;
+
+						if (_newMonth.length == 1) {
+
+							console.log("month + 1");
+							_newMonth = "0" + _newMonth.toString();
+
+							console.log(_newMonth);
+							_dayArry[1] = _newMonth;
+						} else {
+							_dayArry[1] = _newMonth;
+						}
+					}
+
 					_dayArry[0] = _dayNum;
 
 					if (_dayArry[1].length == 1) {
@@ -26919,6 +26958,8 @@ var DateForm = function (_Component) {
 					dateComplete = _dayArry[2] + "-" + _dayArry[1] + "-" + _dayArry[0];
 					dateComplete.toString();
 				}
+
+				console.log(dateComplete);
 
 				var dataReaderEnterprise = this.props.enterpriseInProcessData;
 
@@ -28752,7 +28793,7 @@ var Landing = function (_Component) {
 								_react2.default.createElement(
 									'p',
 									{ className: 'testimonial' },
-									'Muy responsables, son un gran equipo.'
+									'Muy responsables en su trabajo y son una empresa comprometida con la satisfacci\xF3n de sus clientes, mucho \xE9xito!'
 								),
 								_react2.default.createElement(
 									'p',
@@ -28784,7 +28825,7 @@ var Landing = function (_Component) {
 								_react2.default.createElement(
 									'p',
 									{ className: 'testimonial' },
-									'Se ahorra tiempo, un servicio super pr\xE1ctico.'
+									'Ahorre mucho tiempo. Tienen un servicio s\xFAper pr\xE1ctico y r\xE1pido. Esto es lo que necesitaba y lo encontr\xE9 en este gran equipo.'
 								),
 								_react2.default.createElement(
 									'p',
