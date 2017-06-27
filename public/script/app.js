@@ -26104,7 +26104,7 @@ var App = function (_Component) {
 									null,
 									_react2.default.createElement(
 										_reactRouterDom.Link,
-										{ to: '/constitucion', className: 'mediumContent' },
+										{ to: '/informacion-empresa', className: 'mediumContent' },
 										'Constituye tu Empresa'
 									)
 								),
@@ -26967,8 +26967,6 @@ var DateForm = function (_Component) {
 					dateComplete = _dayArry[2] + "-" + _dayArry[1] + "-" + _dayArry[0];
 					dateComplete.toString();
 				}
-
-				console.log(dateComplete);
 
 				var dataReaderEnterprise = this.props.enterpriseInProcessData;
 

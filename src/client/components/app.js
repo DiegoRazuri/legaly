@@ -491,7 +491,7 @@ export default class App extends Component{
 								<div className="underlineWhite"></div>
 								<ul>
 									<li>
-										<Link to="/constitucion" className="mediumContent">Constituye tu Empresa</Link>
+										<Link to="/informacion-empresa" className="mediumContent">Constituye tu Empresa</Link>
 									</li>
 									<li>
 										<a href="#" className="mediumContent">Quienes somos</a>
