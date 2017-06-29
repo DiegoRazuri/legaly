@@ -455,7 +455,7 @@ export default class App extends Component{
 	
 	render(){
 		
-		let userLogin;
+		let userLogin, btnMovilLogin;
 
 		if(this.state.user != false){
 			userLogin = <UserAvatar user= {this.state.user} switchBtnNavSelected={this.switchBtnNavSelected}/>
@@ -465,6 +465,15 @@ export default class App extends Component{
 									<span className="icon-head"></span>
 									<p>Registrate</p>
 								</Link>
+							</div>
+
+		}
+
+		if(this.state.user != true){
+			
+			btnMovilLogin = <div className="wrapperBtnRegistration">
+								<span className="icon-head"></span>
+								<Link to="/login" className="mediumContent">Registrate</Link>
 							</div>
 
 		}
@@ -484,10 +493,9 @@ export default class App extends Component{
 								<span></span>	
 							</div>
 							<div className="wrapperMovilMenuBtn">
-								<div className="wrapperBtnRegistration">
-									<span className="icon-head"></span>
-									<Link to="/login" className="mediumContent">Registrate</Link>
-								</div>
+								
+								{btnMovilLogin}
+								
 								<div className="underlineWhite"></div>
 								<ul>
 									<li>

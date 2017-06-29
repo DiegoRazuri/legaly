@@ -87,11 +87,10 @@ export default class PaymentMethodForm extends Component{
 								<p className="detailName mediumContent">Detalles</p>
 								<p className="mediumContent detail">{num_position} Gerentes</p>
 								<p className="mediumContent detail">{this.props.enterpriseInProcessData.totalCapital} capital</p>
-								<p className="mediumContent detail">8 páginas</p>
 								<p className="detailName mediumContent">Precio</p>
-								<p className="price mediumContent">S/. {this.props.enterpriseInProcessData.price}.00</p>
+								<p className="price mediumContent">S/. {this.props.enterpriseInProcessData.price}</p>
 								<p className="detailName mediumContent">Delivery</p>
-								<p className="mediumContent detail">72 horas</p>
+								<p className="mediumContent detail">7 días posterior a la toma de firma</p>
 								<div className="btnPrint mediumContent">Imprimir Recibo</div>
 								<div className="underlineGrey"></div>
 								<h3 className="bigTitlesSS subtitle">Delivery</h3>

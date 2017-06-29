@@ -26041,7 +26041,8 @@ var App = function (_Component) {
 			    _React$createElement3,
 			    _this9 = this;
 
-			var userLogin = void 0;
+			var userLogin = void 0,
+			    btnMovilLogin = void 0;
 
 			if (this.state.user != false) {
 				userLogin = _react2.default.createElement(_userAvatar2.default, { user: this.state.user, switchBtnNavSelected: this.switchBtnNavSelected });
@@ -26058,6 +26059,20 @@ var App = function (_Component) {
 							null,
 							'Registrate'
 						)
+					)
+				);
+			}
+
+			if (this.state.user != true) {
+
+				btnMovilLogin = _react2.default.createElement(
+					'div',
+					{ className: 'wrapperBtnRegistration' },
+					_react2.default.createElement('span', { className: 'icon-head' }),
+					_react2.default.createElement(
+						_reactRouterDom.Link,
+						{ to: '/login', className: 'mediumContent' },
+						'Registrate'
 					)
 				);
 			}
@@ -26085,16 +26100,7 @@ var App = function (_Component) {
 						_react2.default.createElement(
 							'div',
 							{ className: 'wrapperMovilMenuBtn' },
-							_react2.default.createElement(
-								'div',
-								{ className: 'wrapperBtnRegistration' },
-								_react2.default.createElement('span', { className: 'icon-head' }),
-								_react2.default.createElement(
-									_reactRouterDom.Link,
-									{ to: '/login', className: 'mediumContent' },
-									'Registrate'
-								)
-							),
+							btnMovilLogin,
 							_react2.default.createElement('div', { className: 'underlineWhite' }),
 							_react2.default.createElement(
 								'ul',
@@ -29992,11 +29998,6 @@ var PaymentMethodForm = function (_Component) {
 							),
 							_react2.default.createElement(
 								'p',
-								{ className: 'mediumContent detail' },
-								'8 p\xE1ginas'
-							),
-							_react2.default.createElement(
-								'p',
 								{ className: 'detailName mediumContent' },
 								'Precio'
 							),
@@ -30004,8 +30005,7 @@ var PaymentMethodForm = function (_Component) {
 								'p',
 								{ className: 'price mediumContent' },
 								'S/. ',
-								this.props.enterpriseInProcessData.price,
-								'.00'
+								this.props.enterpriseInProcessData.price
 							),
 							_react2.default.createElement(
 								'p',
@@ -30015,7 +30015,7 @@ var PaymentMethodForm = function (_Component) {
 							_react2.default.createElement(
 								'p',
 								{ className: 'mediumContent detail' },
-								'72 horas'
+								'7 d\xEDas posterior a la toma de firma'
 							),
 							_react2.default.createElement(
 								'div',
