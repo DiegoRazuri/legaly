@@ -28543,13 +28543,19 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'p',
 								null,
-								'\xBFDudas?'
+								'\xBFConsultas? Te contestamos al instante'
 							),
 							_react2.default.createElement(
 								'p',
 								null,
 								_react2.default.createElement('span', { className: 'icon-whatsapp' }),
 								' 942 914 542'
+							),
+							_react2.default.createElement(
+								'p',
+								null,
+								_react2.default.createElement('span', { className: 'icon-mail_outline' }),
+								' info@legaly.pe'
 							),
 							_react2.default.createElement(
 								'div',

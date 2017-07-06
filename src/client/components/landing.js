@@ -24,8 +24,9 @@ export default class Landing extends Component{
 									<img src="css/img/Constitucion-icon.svg"/>
 								</figure>
 								<h1>Constituye tu empresa desde S/ 850.00 toma de firmas y entrega de documentos a domicilio</h1>
-								<p>¿Dudas?</p>
+								<p>¿Consultas? Te contestamos al instante</p>
 								<p><span className="icon-whatsapp"></span> 942 914 542</p>
+								<p><span className="icon-mail_outline"></span> info@legaly.pe</p>
 								<div><Link to="/informacion-empresa">Iniciar proceso</Link></div>
 								
 							</div>
