@@ -469,8 +469,12 @@ export default class App extends Component{
 
 		}
 
-		if(this.state.user != true){
+		if(this.state.user != false){
 			
+			btnMovilLogin = <UserAvatar user= {this.state.user} switchBtnNavSelected={this.switchBtnNavSelected}/>
+
+		}else{
+
 			btnMovilLogin = <div className="wrapperBtnRegistration">
 								<span className="icon-head"></span>
 								<Link to="/login" className="mediumContent">Registrate</Link>
@@ -523,10 +527,10 @@ export default class App extends Component{
 										<p className="smallContent">Lun-Vie: 9am - 6pm Sab: 9am - 1pm </p>
 									</li>
 									<li className="rowMenuMovil wrapperMovilMenuSocialNetwork">
-										<a href="#">
+										<a href="https://www.facebook.com/legaly.pe" target="_blank">
 											<span className="icon-facebook"></span>
 										</a>
-										<a href="#">
+										<a href="https://www.instagram.com/legaly.pe/" target="_blank">
 											<span className="icon-instagram"></span>
 										</a>
 										<a href="#">
@@ -540,9 +544,9 @@ export default class App extends Component{
 						</div>
 						<div className="wrapperGeneralInfo">
 							<div className="gridSocialNetworks">
-								<a href="#" className="socialNetworkIco"><span className="icon-facebook"></span></a>
-								<a href="#" className="socialNetworkIco"><span className="socialNetwork icon-instagram"></span></a>
-								<a href="#" className="socialNetworkIco"><span className="socialNetwork icon-youtube"></span></a>
+								<a href="https://www.facebook.com/legaly.pe" target="_blank" className="socialNetworkIco"><span className="icon-facebook"></span></a>
+								<a href="https://www.instagram.com/legaly.pe/" className="socialNetworkIco" target="_blank"><span className="socialNetwork icon-instagram"></span></a>
+								<a href="#" className="socialNetworkIco" target="_blank"><span className="socialNetwork icon-youtube"></span></a>
 							</div>
 							<div className="gridGeneralContactInfo">
 								<div className="subGrid">
@@ -655,8 +659,8 @@ export default class App extends Component{
 									<span className="icon-arrow-right"></span>
 								</div>
 								<div className="gridFooterInfoSocialNetwork">
-									<a href="#" className="socialNetworkIco"><span className="icon-facebook"></span></a>
-									<a href="#" className="socialNetworkIco"><span className="socialNetwork icon-instagram"></span></a>
+									<a href="https://www.facebook.com/legaly.pe" target="_blank" className="socialNetworkIco"><span className="icon-facebook"></span></a>
+									<a href="https://www.instagram.com/legaly.pe" target="_blank" className="socialNetworkIco"><span className="socialNetwork icon-instagram"></span></a>
 									<a href="#" className="socialNetworkIco"><span className="socialNetwork icon-youtube"></span></a>
 								</div>
 								
@@ -679,3 +683,15 @@ export default class App extends Component{
 	<Route path="/metodo-pago" render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<Incorporate/>) )}/>
 	<Route path="/perfil" render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<Userprofile/>) )}/>
 						*/
+
+
+/*
+
+userLogin = <div className="btnRegistration">
+				<Link to="/login">
+					<span className="icon-head"></span>
+					<p>Registrate</p>
+				</Link>
+			</div>
+
+*/

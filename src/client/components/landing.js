@@ -23,10 +23,11 @@ export default class Landing extends Component{
 								<figure className="bannerIco">
 									<img src="css/img/Constitucion-icon.svg"/>
 								</figure>
-								<h1>Constituye tu empresa desde S/ 650.00 sin moverte de tu lugar.</h1>
-								<p>Todos los trámites garantizados desde la comodidad de tu oficina u hogar</p>
-								<div><Link to="/informacion-empresa">Constituir ahora</Link></div>
-								<a href="#">¿Cómo funciona?</a>
+								<h1>Constituye tu empresa desde S/ 850.00 toma de firmas y entrega de documentos a domicilio</h1>
+								<p>¿Dudas?</p>
+								<p><span className="icon-whatsapp"></span> 942 914 542</p>
+								<div><Link to="/informacion-empresa">Iniciar proceso</Link></div>
+								
 							</div>
 							<div className="gridRegistraMarca">
 								<figure className="bannerIco">
@@ -39,12 +40,11 @@ export default class Landing extends Component{
 							</div>
 						</div>
 						<div className="gridPagination">
-							<span className="gridActive">·</span>
-							<span>·</span>
+							
 						</div>
 					</div>
 					<div className="wrapperBenefits">
-						<h4 className="landingTitles">¿Como te podemos ayudar?</h4>
+						<h4 className="landingTitles">¿Por qué constituir con nosotros?</h4>
 						<div className="underlineBlue"></div>
 						<div className="wrapperInfoBenefits">
 							<div className="gridBenefit">
@@ -52,14 +52,14 @@ export default class Landing extends Component{
 									<img src="css/img/rapidez.svg"/>
 								</figure>
 								<h2>Rapidez</h2>
-								<h3>Ahorra tiempo y llena el formulario desde donde te encuentres. Será procesado de inmediato.</h3>
+								<h3>Inicia el proceso online, llena los formularios, indica la fecha de toma de firmas y envíanos el depósito.</h3>
 							</div>
 							<div className="gridBenefit">
 								<figure>
 									<img src="css/img/accesible.svg"/>
 								</figure>
 								<h2>Accesible</h2>
-								<h3>Nuestra plataforma y asesores te orientarán para ajustar tu inversión y prevenir futuros gastos.</h3>
+								<h3>Reserva del nombre<br/>Elaboración o revisión de minuta<br/>Escritura pública<br/>Inscripción en Sunarp<br/>Inscripción de R.U.C. (consultar condiciones).</h3>
 							</div>
 							
 							<div className="gridBenefit">
@@ -67,14 +67,14 @@ export default class Landing extends Component{
 									<img src="css/img/delivery.svg"/>
 								</figure>
 								<h2>Delivery</h2>
-								<h3>Invierte tu tiempo en construir tu negocio, nosotros llevamos a tus manos toda la documentación.</h3>
+								<h3>Nos encargamos de hacer la toma de firmas y huella en tu oficina u hogar para que no pierdas tiempo haciendo colas, además del delivery de documentos.</h3>
 							</div>
 							<div className="gridBenefit">
 								<figure>
 									<img src="css/img/seguridad.svg"/>
 								</figure>
 								<h2>Seguridad</h2>
-								<h3>Contamos con el respaldo de la notaria Párraga y colaboradores certificados por el colegio de notarios</h3>
+								<h3>Contamos con el respaldo de la <a href="http://www.notariaparraga.com/">Notaria Párraga</a> y colaboradores certificados por el colegio de notarios.</h3>
 							</div>
 						</div>
 						
@@ -108,20 +108,7 @@ export default class Landing extends Component{
 						<div className="wrapperWidgetTestimonials">
 							
 							<div className="wrapperInfoTestimonials">
-								<div id="testimonial1" className="gridTestimonial">
-									<figure>
-										<img src="css/img/sean-rico.jpg"/>
-									</figure>
-									<div className="gridScore">
-										<span className="icon-star"></span>
-										<span className="icon-star"></span>
-										<span className="icon-star"></span>
-										<span className="icon-star"></span>
-									</div>
-									<p className="testimonial">Perfecto, rápido y muy eficientes.</p>
-									<p className="clientName">Sean Rico</p>
-									<p className="clientEnterpriseName">Plataforma Zas S.A.C.</p>
-								</div>
+								
 								<div id="testimonial2" className="gridTestimonial">
 									<figure>
 										<img src="css/img/cristian-rivero.jpeg"/>
@@ -150,6 +137,20 @@ export default class Landing extends Component{
 									<p className="testimonial">Ahorre mucho tiempo. Tienen un servicio súper práctico y rápido. Esto es lo que necesitaba y lo encontré en este gran equipo.</p>
 									<p className="clientName">Francisco Sierralta Sarco</p>
 									<p className="clientEnterpriseName">Roll Star Sushi Bar E.I.R.L.</p>
+								</div>
+								<div id="testimonial1" className="gridTestimonial">
+									<figure>
+										<img src="css/img/sean-rico.jpg"/>
+									</figure>
+									<div className="gridScore">
+										<span className="icon-star"></span>
+										<span className="icon-star"></span>
+										<span className="icon-star"></span>
+										<span className="icon-star"></span>
+									</div>
+									<p className="testimonial">Perfecto, rápido y muy eficientes.</p>
+									<p className="clientName">Sean Rico</p>
+									<p className="clientEnterpriseName">Plataforma Zas S.A.C.</p>
 								</div>
 								
 							</div>
@@ -181,3 +182,11 @@ export default class Landing extends Component{
 
 	}
 }
+
+//<a href="#">¿Cómo funciona?</a>
+
+/*
+<span className="gridActive">·</span>
+<span>·</span>
+
+*/

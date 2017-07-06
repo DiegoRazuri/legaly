@@ -26063,7 +26063,10 @@ var App = function (_Component) {
 				);
 			}
 
-			if (this.state.user != true) {
+			if (this.state.user != false) {
+
+				btnMovilLogin = _react2.default.createElement(_userAvatar2.default, { user: this.state.user, switchBtnNavSelected: this.switchBtnNavSelected });
+			} else {
 
 				btnMovilLogin = _react2.default.createElement(
 					'div',
@@ -26172,12 +26175,12 @@ var App = function (_Component) {
 									{ className: 'rowMenuMovil wrapperMovilMenuSocialNetwork' },
 									_react2.default.createElement(
 										'a',
-										{ href: '#' },
+										{ href: 'https://www.facebook.com/legaly.pe', target: '_blank' },
 										_react2.default.createElement('span', { className: 'icon-facebook' })
 									),
 									_react2.default.createElement(
 										'a',
-										{ href: '#' },
+										{ href: 'https://www.instagram.com/legaly.pe/', target: '_blank' },
 										_react2.default.createElement('span', { className: 'icon-instagram' })
 									),
 									_react2.default.createElement(
@@ -26197,17 +26200,17 @@ var App = function (_Component) {
 							{ className: 'gridSocialNetworks' },
 							_react2.default.createElement(
 								'a',
-								{ href: '#', className: 'socialNetworkIco' },
+								{ href: 'https://www.facebook.com/legaly.pe', target: '_blank', className: 'socialNetworkIco' },
 								_react2.default.createElement('span', { className: 'icon-facebook' })
 							),
 							_react2.default.createElement(
 								'a',
-								{ href: '#', className: 'socialNetworkIco' },
+								{ href: 'https://www.instagram.com/legaly.pe/', className: 'socialNetworkIco', target: '_blank' },
 								_react2.default.createElement('span', { className: 'socialNetwork icon-instagram' })
 							),
 							_react2.default.createElement(
 								'a',
-								{ href: '#', className: 'socialNetworkIco' },
+								{ href: '#', className: 'socialNetworkIco', target: '_blank' },
 								_react2.default.createElement('span', { className: 'socialNetwork icon-youtube' })
 							)
 						),
@@ -26528,12 +26531,12 @@ var App = function (_Component) {
 								{ className: 'gridFooterInfoSocialNetwork' },
 								_react2.default.createElement(
 									'a',
-									{ href: '#', className: 'socialNetworkIco' },
+									{ href: 'https://www.facebook.com/legaly.pe', target: '_blank', className: 'socialNetworkIco' },
 									_react2.default.createElement('span', { className: 'icon-facebook' })
 								),
 								_react2.default.createElement(
 									'a',
-									{ href: '#', className: 'socialNetworkIco' },
+									{ href: 'https://www.instagram.com/legaly.pe', target: '_blank', className: 'socialNetworkIco' },
 									_react2.default.createElement('span', { className: 'socialNetwork icon-instagram' })
 								),
 								_react2.default.createElement(
@@ -26563,6 +26566,17 @@ var App = function (_Component) {
 	<Route path="/metodo-pago" render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<Incorporate/>) )}/>
 	<Route path="/perfil" render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<Userprofile/>) )}/>
 						*/
+
+/*
+
+userLogin = <div className="btnRegistration">
+				<Link to="/login">
+					<span className="icon-head"></span>
+					<p>Registrate</p>
+				</Link>
+			</div>
+
+*/
 
 
 exports.default = App;
@@ -28524,12 +28538,18 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'h1',
 								null,
-								'Constituye tu empresa desde S/ 650.00 sin moverte de tu lugar.'
+								'Constituye tu empresa desde S/ 850.00 toma de firmas y entrega de documentos a domicilio'
 							),
 							_react2.default.createElement(
 								'p',
 								null,
-								'Todos los tr\xE1mites garantizados desde la comodidad de tu oficina u hogar'
+								'\xBFDudas?'
+							),
+							_react2.default.createElement(
+								'p',
+								null,
+								_react2.default.createElement('span', { className: 'icon-whatsapp' }),
+								' 942 914 542'
 							),
 							_react2.default.createElement(
 								'div',
@@ -28537,13 +28557,8 @@ var Landing = function (_Component) {
 								_react2.default.createElement(
 									_reactRouterDom.Link,
 									{ to: '/informacion-empresa' },
-									'Constituir ahora'
+									'Iniciar proceso'
 								)
-							),
-							_react2.default.createElement(
-								'a',
-								{ href: '#' },
-								'\xBFC\xF3mo funciona?'
 							)
 						),
 						_react2.default.createElement(
@@ -28576,20 +28591,7 @@ var Landing = function (_Component) {
 							)
 						)
 					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'gridPagination' },
-						_react2.default.createElement(
-							'span',
-							{ className: 'gridActive' },
-							'\xB7'
-						),
-						_react2.default.createElement(
-							'span',
-							null,
-							'\xB7'
-						)
-					)
+					_react2.default.createElement('div', { className: 'gridPagination' })
 				),
 				_react2.default.createElement(
 					'div',
@@ -28597,7 +28599,7 @@ var Landing = function (_Component) {
 					_react2.default.createElement(
 						'h4',
 						{ className: 'landingTitles' },
-						'\xBFComo te podemos ayudar?'
+						'\xBFPor qu\xE9 constituir con nosotros?'
 					),
 					_react2.default.createElement('div', { className: 'underlineBlue' }),
 					_react2.default.createElement(
@@ -28619,7 +28621,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'h3',
 								null,
-								'Ahorra tiempo y llena el formulario desde donde te encuentres. Ser\xE1 procesado de inmediato.'
+								'Inicia el proceso online, llena los formularios, indica la fecha de toma de firmas y env\xEDanos el dep\xF3sito.'
 							)
 						),
 						_react2.default.createElement(
@@ -28638,7 +28640,15 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'h3',
 								null,
-								'Nuestra plataforma y asesores te orientar\xE1n para ajustar tu inversi\xF3n y prevenir futuros gastos.'
+								'Reserva del nombre',
+								_react2.default.createElement('br', null),
+								'Elaboraci\xF3n o revisi\xF3n de minuta',
+								_react2.default.createElement('br', null),
+								'Escritura p\xFAblica',
+								_react2.default.createElement('br', null),
+								'Inscripci\xF3n en Sunarp',
+								_react2.default.createElement('br', null),
+								'Inscripci\xF3n de R.U.C. (consultar condiciones).'
 							)
 						),
 						_react2.default.createElement(
@@ -28657,7 +28667,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'h3',
 								null,
-								'Invierte tu tiempo en construir tu negocio, nosotros llevamos a tus manos toda la documentaci\xF3n.'
+								'Nos encargamos de hacer la toma de firmas y huella en tu oficina u hogar para que no pierdas tiempo haciendo colas, adem\xE1s del delivery de documentos.'
 							)
 						),
 						_react2.default.createElement(
@@ -28676,7 +28686,13 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'h3',
 								null,
-								'Contamos con el respaldo de la notaria P\xE1rraga y colaboradores certificados por el colegio de notarios'
+								'Contamos con el respaldo de la ',
+								_react2.default.createElement(
+									'a',
+									{ href: 'http://www.notariaparraga.com/' },
+									'Notaria P\xE1rraga'
+								),
+								' y colaboradores certificados por el colegio de notarios.'
 							)
 						)
 					)
@@ -28756,38 +28772,6 @@ var Landing = function (_Component) {
 							{ className: 'wrapperInfoTestimonials' },
 							_react2.default.createElement(
 								'div',
-								{ id: 'testimonial1', className: 'gridTestimonial' },
-								_react2.default.createElement(
-									'figure',
-									null,
-									_react2.default.createElement('img', { src: 'css/img/sean-rico.jpg' })
-								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'gridScore' },
-									_react2.default.createElement('span', { className: 'icon-star' }),
-									_react2.default.createElement('span', { className: 'icon-star' }),
-									_react2.default.createElement('span', { className: 'icon-star' }),
-									_react2.default.createElement('span', { className: 'icon-star' })
-								),
-								_react2.default.createElement(
-									'p',
-									{ className: 'testimonial' },
-									'Perfecto, r\xE1pido y muy eficientes.'
-								),
-								_react2.default.createElement(
-									'p',
-									{ className: 'clientName' },
-									'Sean Rico'
-								),
-								_react2.default.createElement(
-									'p',
-									{ className: 'clientEnterpriseName' },
-									'Plataforma Zas S.A.C.'
-								)
-							),
-							_react2.default.createElement(
-								'div',
 								{ id: 'testimonial2', className: 'gridTestimonial' },
 								_react2.default.createElement(
 									'figure',
@@ -28849,6 +28833,38 @@ var Landing = function (_Component) {
 									'p',
 									{ className: 'clientEnterpriseName' },
 									'Roll Star Sushi Bar E.I.R.L.'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ id: 'testimonial1', className: 'gridTestimonial' },
+								_react2.default.createElement(
+									'figure',
+									null,
+									_react2.default.createElement('img', { src: 'css/img/sean-rico.jpg' })
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridScore' },
+									_react2.default.createElement('span', { className: 'icon-star' }),
+									_react2.default.createElement('span', { className: 'icon-star' }),
+									_react2.default.createElement('span', { className: 'icon-star' }),
+									_react2.default.createElement('span', { className: 'icon-star' })
+								),
+								_react2.default.createElement(
+									'p',
+									{ className: 'testimonial' },
+									'Perfecto, r\xE1pido y muy eficientes.'
+								),
+								_react2.default.createElement(
+									'p',
+									{ className: 'clientName' },
+									'Sean Rico'
+								),
+								_react2.default.createElement(
+									'p',
+									{ className: 'clientEnterpriseName' },
+									'Plataforma Zas S.A.C.'
 								)
 							)
 						)
@@ -28919,6 +28935,15 @@ var Landing = function (_Component) {
 
 	return Landing;
 }(_react.Component);
+
+//<a href="#">¿Cómo funciona?</a>
+
+/*
+<span className="gridActive">·</span>
+<span>·</span>
+
+*/
+
 
 exports.default = Landing;
 
