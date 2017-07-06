@@ -28641,7 +28641,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'h2',
 								null,
-								'Accesible'
+								'Incluye'
 							),
 							_react2.default.createElement(
 								'h3',
@@ -28746,13 +28746,13 @@ var Landing = function (_Component) {
 						_react2.default.createElement(
 							'h1',
 							null,
-							'\xBFPor qu\xE9 debo registrar y proteger mi marca?'
+							'\xBFQu\xE9 otros tr\xE1mites me puede facilitar Legaly?'
 						),
 						_react2.default.createElement('div', { className: 'underlineBlue' }),
 						_react2.default.createElement(
 							'h2',
 							null,
-							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+							'Tambi\xE9n ofrecemos servicios de registro de marca, cambio de denominaci\xF3n, transferencia de participaciones, nombramiento de caargo, renuncia y nombramiento de cargo, transferencia de acciones, transformaci\xF3n de tipo societario y modificaci\xF3n de objeto social. Puedes realizar las consultas al 961 845 410 / 945 164 303'
 						),
 						_react2.default.createElement(
 							'div',

@@ -59,7 +59,7 @@ export default class Landing extends Component{
 								<figure>
 									<img src="css/img/accesible.svg"/>
 								</figure>
-								<h2>Accesible</h2>
+								<h2>Incluye</h2>
 								<h3>Reserva del nombre<br/>Elaboración o revisión de minuta<br/>Escritura pública<br/>Inscripción en Sunarp<br/>Inscripción de R.U.C. (consultar condiciones).</h3>
 							</div>
 							
@@ -96,9 +96,9 @@ export default class Landing extends Component{
 							<img src="css/img/registromarca-photo.jpg"/>
 						</figure>
 						<div className="gridFaq">
-							<h1>¿Por qué debo registrar y proteger mi marca?</h1>
+							<h1>¿Qué otros trámites me puede facilitar Legaly?</h1>
 							<div className="underlineBlue"></div>
-							<h2>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h2>
+							<h2>También ofrecemos servicios de registro de marca, cambio de denominación, transferencia de participaciones, nombramiento de caargo, renuncia y nombramiento de cargo, transferencia de acciones, transformación de tipo societario y modificación de objeto social. Puedes realizar las consultas al 961 845 410 / 945 164 303</h2>
 							<div className="btnFaq">Quiero saber más</div>
 						</div>
 					</div>
