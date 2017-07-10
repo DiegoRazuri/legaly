@@ -90,7 +90,7 @@ export default class PaymentMethodForm extends Component{
 								<p className="detailName mediumContent">Precio</p>
 								<p className="price mediumContent">S/. {this.props.enterpriseInProcessData.price}</p>
 								<p className="detailName mediumContent">Delivery</p>
-								<p className="mediumContent detail">7 días posterior a la toma de firma</p>
+								<p className="mediumContent detail">7 días hábiles posterior a la toma de firma</p>
 								<div className="btnPrint mediumContent">Imprimir Recibo</div>
 								<div className="underlineGrey"></div>
 								<h3 className="bigTitlesSS subtitle">Delivery</h3>
@@ -125,7 +125,7 @@ export default class PaymentMethodForm extends Component{
 							<h1>¿Por qué es importante constituir mi empresa?</h1>
 							<div className="underlineBlue"></div>
 							<h2>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h2>
-							<div className="btnFaq">Quiero saber más</div>
+							
 						</div>
 					</div>
 
@@ -174,3 +174,5 @@ export default class PaymentMethodForm extends Component{
 
 	}
 }
+
+//<div className="btnFaq">Quiero saber más</div>

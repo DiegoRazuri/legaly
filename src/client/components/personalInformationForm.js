@@ -649,7 +649,7 @@ export default class PersonalInformationForm extends Component{
 
 				inputPosition = <input type="text" value={dataReaderPartner.user.profession != undefined ? dataReaderPartner.user.profession : ""} onChange={this.props.inputTextHandler.bind()} name="profession" data-pos={this.state.partnerSelected} ref="user_position"/>
 
-				inputPhoneNumber = <input type="text" value={dataReaderPartner.user.phoneNumber != undefined ? dataReaderPartner.user.phoneNumber : ""} onChange={this.props.inputTextHandler.bind()} name="phoneNumber" data-pos={this.state.partnerSelected} ref="user_phone"/>
+				inputPhoneNumber = <input type="number" value={dataReaderPartner.user.phoneNumber != undefined ? dataReaderPartner.user.phoneNumber : ""} onChange={this.props.inputTextHandler.bind()} name="phoneNumber" data-pos={this.state.partnerSelected} ref="user_phone"/>
 			}
 
 
@@ -874,7 +874,7 @@ export default class PersonalInformationForm extends Component{
 								<h1>¿Por qué es importante constituir mi empresa?</h1>
 								<div className="underlineBlue"></div>
 								<h2>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h2>
-								<div className="btnFaq">Quiero saber más</div>
+								
 							</div>
 						</div>
 
@@ -918,6 +918,8 @@ export default class PersonalInformationForm extends Component{
 		}
 	}
 }
+//<div className="btnFaq">Quiero saber más</div>
+
 /*
 //agregando selectores de socios
 		

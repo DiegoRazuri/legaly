@@ -26958,16 +26958,16 @@ var DateForm = function (_Component) {
 					if (_dayNum >= 31) {
 						_dayNum = _dayNum - 30;
 
-						var _newMonth = parseInt(_dayArry[1]);
-						_newMonth += 1;
+						var _newMonth2 = parseInt(_dayArry[1]);
+						_newMonth2 += 1;
 
-						if (_newMonth <= 9) {
+						if (_newMonth2 <= 9) {
 
-							var _val2 = "0" + _newMonth.toString();
+							var _val2 = "0" + _newMonth2.toString();
 
 							_dayArry[1] = _val2;
 						} else {
-							_dayArry[1] = _newMonth;
+							_dayArry[1] = _newMonth2;
 						}
 					}
 
@@ -26976,6 +26976,13 @@ var DateForm = function (_Component) {
 						_dayArry[0] = _val3;
 					} else {
 						_dayArry[0] = _dayNum;
+					}
+
+					var _newMonth = parseInt(_dayArry[1]);
+
+					if (_newMonth <= 9) {
+						var _val4 = "0" + _newMonth;
+						_dayArry[1] = _val4;
 					}
 
 					/*
@@ -26987,6 +26994,8 @@ var DateForm = function (_Component) {
 					dateComplete = _dayArry[2] + "-" + _dayArry[1] + "-" + _dayArry[0];
 					dateComplete.toString();
 				}
+
+				console.log(dateComplete);
 
 				var dataReaderEnterprise = this.props.enterpriseInProcessData;
 
@@ -27222,11 +27231,6 @@ var DateForm = function (_Component) {
 								'h2',
 								null,
 								'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'btnFaq' },
-								'Quiero saber m\xE1s'
 							)
 						)
 					),
@@ -27336,6 +27340,7 @@ var DateForm = function (_Component) {
 
 	return DateForm;
 }(_react.Component);
+//<div className="btnFaq">Quiero saber más</div>
 
 //<Link to="/informacion-perosnal"><div className="btnTransparentBackground">Anterior</div></Link>
 
@@ -27722,7 +27727,7 @@ var EnterpriseInformationForm = function (_Component) {
 										_react2.default.createElement(
 											'label',
 											{ className: 'smallContent' },
-											'Ingresa de 3 a 5 posibles nombres en orden de prioridad'
+											'Ingresa de 3 a 5 posibles nombres en orden de prioridad y separados por comas'
 										),
 										_react2.default.createElement(
 											'div',
@@ -27780,7 +27785,7 @@ var EnterpriseInformationForm = function (_Component) {
 										_react2.default.createElement(
 											'label',
 											{ className: 'smallContent' },
-											'\xBFA qu\xE9 se dedicar\xE1 tu empresa?'
+											'\xBFA qu\xE9 se dedicar\xE1 tu empresa? (puedes manejar varios rubros).'
 										),
 										_react2.default.createElement(
 											'div',
@@ -27889,11 +27894,6 @@ var EnterpriseInformationForm = function (_Component) {
 								'h2',
 								null,
 								'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'btnFaq' },
-								'Quiero saber m\xE1s'
 							)
 						)
 					),
@@ -28003,6 +28003,8 @@ var EnterpriseInformationForm = function (_Component) {
 
 	return EnterpriseInformationForm;
 }(_react.Component);
+
+//<div className="btnFaq">Quiero saber más</div>
 
 /*
 <div className="inputSelect">					
@@ -28538,7 +28540,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'h1',
 								null,
-								'Constituye tu empresa desde S/ 850.00 toma de firmas y entrega de documentos a domicilio'
+								'Constituye tu empresa desde S/ 850.00 Toma de firmas y entrega de documentos a domicilio'
 							),
 							_react2.default.createElement(
 								'p',
@@ -28724,11 +28726,6 @@ var Landing = function (_Component) {
 							'h2',
 							null,
 							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'btnFaq' },
-							'Quiero saber m\xE1s'
 						)
 					)
 				),
@@ -28752,12 +28749,7 @@ var Landing = function (_Component) {
 						_react2.default.createElement(
 							'h2',
 							null,
-							'Tambi\xE9n ofrecemos servicios de registro de marca, cambio de denominaci\xF3n, transferencia de participaciones, nombramiento de caargo, renuncia y nombramiento de cargo, transferencia de acciones, transformaci\xF3n de tipo societario y modificaci\xF3n de objeto social. Puedes realizar las consultas al 961 845 410 / 945 164 303'
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'btnFaq' },
-							'Quiero saber m\xE1s'
+							'Tambi\xE9n ofrecemos servicios de registro de marca, cambio de denominaci\xF3n, transferencia de participaciones, nombramiento de cargo, renuncia y nombramiento de cargo, transferencia de acciones, transformaci\xF3n de tipo societario y modificaci\xF3n de objeto social. Puedes realizar las consultas al 961 845 410 / 945 164 303'
 						)
 					)
 				),
@@ -28949,6 +28941,8 @@ var Landing = function (_Component) {
 <span>·</span>
 
 */
+
+//<div className="btnFaq">Quiero saber más</div>
 
 
 exports.default = Landing;
@@ -29725,11 +29719,6 @@ var PartnersAddingForm = function (_Component) {
 								'h2',
 								null,
 								'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'btnFaq' },
-								'Quiero saber m\xE1s'
 							)
 						)
 					),
@@ -29839,6 +29828,8 @@ var PartnersAddingForm = function (_Component) {
 
 	return PartnersAddingForm;
 }(_react.Component);
+
+//<div className="btnFaq">Quiero saber más</div>
 
 //<Link to="/informacion-empresa"><div className="btnTransparentBackground">Anterior</div></Link>
 
@@ -30046,7 +30037,7 @@ var PaymentMethodForm = function (_Component) {
 							_react2.default.createElement(
 								'p',
 								{ className: 'mediumContent detail' },
-								'7 d\xEDas posterior a la toma de firma'
+								'7 d\xEDas h\xE1biles posterior a la toma de firma'
 							),
 							_react2.default.createElement(
 								'div',
@@ -30131,11 +30122,6 @@ var PaymentMethodForm = function (_Component) {
 							'h2',
 							null,
 							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'btnFaq' },
-							'Quiero saber m\xE1s'
 						)
 					)
 				),
@@ -30244,6 +30230,9 @@ var PaymentMethodForm = function (_Component) {
 
 	return PaymentMethodForm;
 }(_react.Component);
+
+//<div className="btnFaq">Quiero saber más</div>
+
 
 exports.default = PaymentMethodForm;
 
@@ -31253,7 +31242,7 @@ var PersonalInformationForm = function (_Component) {
 
 					inputPosition = _react2.default.createElement('input', { type: 'text', value: dataReaderPartner.user.profession != undefined ? dataReaderPartner.user.profession : "", onChange: this.props.inputTextHandler.bind(), name: 'profession', 'data-pos': this.state.partnerSelected, ref: 'user_position' });
 
-					inputPhoneNumber = _react2.default.createElement('input', { type: 'text', value: dataReaderPartner.user.phoneNumber != undefined ? dataReaderPartner.user.phoneNumber : "", onChange: this.props.inputTextHandler.bind(), name: 'phoneNumber', 'data-pos': this.state.partnerSelected, ref: 'user_phone' });
+					inputPhoneNumber = _react2.default.createElement('input', { type: 'number', value: dataReaderPartner.user.phoneNumber != undefined ? dataReaderPartner.user.phoneNumber : "", onChange: this.props.inputTextHandler.bind(), name: 'phoneNumber', 'data-pos': this.state.partnerSelected, ref: 'user_phone' });
 				}
 
 				//agregando input de inversion en Dinero
@@ -31585,11 +31574,6 @@ var PersonalInformationForm = function (_Component) {
 								'h2',
 								null,
 								'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'btnFaq' },
-								'Quiero saber m\xE1s'
 							)
 						)
 					),
@@ -31699,6 +31683,8 @@ var PersonalInformationForm = function (_Component) {
 
 	return PersonalInformationForm;
 }(_react.Component);
+//<div className="btnFaq">Quiero saber más</div>
+
 /*
 //agregando selectores de socios
 		

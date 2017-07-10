@@ -326,7 +326,7 @@ export default class PartnersAddingForm extends Component{
 								<h1>¿Por qué es importante constituir mi empresa?</h1>
 								<div className="underlineBlue"></div>
 								<h2>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h2>
-								<div className="btnFaq">Quiero saber más</div>
+								
 							</div>
 						</div>
 
@@ -369,5 +369,7 @@ export default class PartnersAddingForm extends Component{
 		}
 	}
 }
+
+//<div className="btnFaq">Quiero saber más</div>
 
 //<Link to="/informacion-empresa"><div className="btnTransparentBackground">Anterior</div></Link>

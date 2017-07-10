@@ -23,7 +23,7 @@ export default class Landing extends Component{
 								<figure className="bannerIco">
 									<img src="css/img/Constitucion-icon.svg"/>
 								</figure>
-								<h1>Constituye tu empresa desde S/ 850.00 toma de firmas y entrega de documentos a domicilio</h1>
+								<h1>Constituye tu empresa desde S/ 850.00 Toma de firmas y entrega de documentos a domicilio</h1>
 								<p>¿Consultas? Te contestamos al instante</p>
 								<p><span className="icon-whatsapp"></span> 942 914 542</p>
 								<p><span className="icon-mail_outline"></span> info@legaly.pe</p>
@@ -88,7 +88,7 @@ export default class Landing extends Component{
 							<h1>¿Por qué es importante constituir mi empresa?</h1>
 							<div className="underlineBlue"></div>
 							<h2>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h2>
-							<div className="btnFaq">Quiero saber más</div>
+							
 						</div>
 					</div>
 					<div id="faq2" className="wrapperFaq">
@@ -98,8 +98,8 @@ export default class Landing extends Component{
 						<div className="gridFaq">
 							<h1>¿Qué otros trámites me puede facilitar Legaly?</h1>
 							<div className="underlineBlue"></div>
-							<h2>También ofrecemos servicios de registro de marca, cambio de denominación, transferencia de participaciones, nombramiento de caargo, renuncia y nombramiento de cargo, transferencia de acciones, transformación de tipo societario y modificación de objeto social. Puedes realizar las consultas al 961 845 410 / 945 164 303</h2>
-							<div className="btnFaq">Quiero saber más</div>
+							<h2>También ofrecemos servicios de registro de marca, cambio de denominación, transferencia de participaciones, nombramiento de cargo, renuncia y nombramiento de cargo, transferencia de acciones, transformación de tipo societario y modificación de objeto social. Puedes realizar las consultas al 961 845 410 / 945 164 303</h2>
+							
 						</div>
 					</div>
 
@@ -191,3 +191,5 @@ export default class Landing extends Component{
 <span>·</span>
 
 */
+
+//<div className="btnFaq">Quiero saber más</div>

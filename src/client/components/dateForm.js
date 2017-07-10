@@ -177,6 +177,12 @@ export default class DateForm extends Component{
 					dayArry[0] = dayNum;
 				}
 
+				let newMonth = parseInt(dayArry[1])
+
+				if(newMonth <= 9){
+					let val = "0" + newMonth;
+					dayArry[1] = val;
+				}
 				
 /*
 				if(dayArry[1].length == 1){
@@ -187,6 +193,8 @@ export default class DateForm extends Component{
 				dateComplete = dayArry[2] + "-" + dayArry[1] + "-" + dayArry[0]
 				dateComplete.toString();
 			}
+
+			console.log(dateComplete);
 
 
 
@@ -286,7 +294,7 @@ export default class DateForm extends Component{
 								<h1>¿Por qué es importante constituir mi empresa?</h1>
 								<div className="underlineBlue"></div>
 								<h2>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h2>
-								<div className="btnFaq">Quiero saber más</div>
+								
 							</div>
 						</div>
 
@@ -329,5 +337,6 @@ export default class DateForm extends Component{
 		}
 	}
 }
+//<div className="btnFaq">Quiero saber más</div>
 
 //<Link to="/informacion-perosnal"><div className="btnTransparentBackground">Anterior</div></Link>

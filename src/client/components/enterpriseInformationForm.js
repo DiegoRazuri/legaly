@@ -324,7 +324,7 @@ export default class EnterpriseInformationForm extends Component{
 									<div className="underlineBlue"></div>
 									<form>
 										<div className="gridFormLarge">
-											<label className="smallContent">Ingresa de 3 a 5 posibles nombres en orden de prioridad</label>
+											<label className="smallContent">Ingresa de 3 a 5 posibles nombres en orden de prioridad y separados por comas</label>
 											<div className="inputMultipleValues">
 												<div id="wrapperInputValues" className="wrapperInputValues">
 													<input autoFocus type="text" id="inputMultipleValuesNames" ref="companyNames_i" onBlur={this.catchNames.bind(this, 0)}/>
@@ -349,7 +349,7 @@ export default class EnterpriseInformationForm extends Component{
 
 										</div>
 										<div className="gridFormLarge">
-											<label className="smallContent">¿A qué se dedicará tu empresa?</label>
+											<label className="smallContent">¿A qué se dedicará tu empresa? (puedes manejar varios rubros).</label>
 											<div className="inputTxtarea">
 												
 												
@@ -401,7 +401,7 @@ export default class EnterpriseInformationForm extends Component{
 								<h1>¿Por qué es importante constituir mi empresa?</h1>
 								<div className="underlineBlue"></div>
 								<h2>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h2>
-								<div className="btnFaq">Quiero saber más</div>
+								
 							</div>
 						</div>
 
@@ -449,6 +449,7 @@ export default class EnterpriseInformationForm extends Component{
 	}
 }
 
+//<div className="btnFaq">Quiero saber más</div>
 
 /*
 <div className="inputSelect">					
