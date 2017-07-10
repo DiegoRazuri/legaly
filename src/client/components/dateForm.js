@@ -194,7 +194,7 @@ export default class DateForm extends Component{
 				dateComplete.toString();
 			}
 
-			console.log(dateComplete);
+			
 
 
 

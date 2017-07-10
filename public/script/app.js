@@ -26995,8 +26995,6 @@ var DateForm = function (_Component) {
 					dateComplete.toString();
 				}
 
-				console.log(dateComplete);
-
 				var dataReaderEnterprise = this.props.enterpriseInProcessData;
 
 				var inputDate = void 0,
