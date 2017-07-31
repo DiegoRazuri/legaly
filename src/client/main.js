@@ -6,6 +6,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import createHistory from 'history/createBrowserHistory'
 
+
 import {
   BrowserRouter as Router,
   Route, IndexRoute
@@ -27,8 +28,8 @@ function logPageView(){
 }
 
 const history = createHistory()
-history.listen((location, action)=>{
-	ReactGA.set({page : location.pathname });
+history.listen((location)=>{
+	  ReactGA.set({page : location.pathname });
     ReactGA.pageview(location.pathname);
 })
 

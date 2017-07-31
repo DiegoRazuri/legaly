@@ -33612,7 +33612,7 @@ function logPageView() {
 }
 
 var history = (0, _createBrowserHistory2.default)();
-history.listen(function (location, action) {
+history.listen(function (location) {
    _reactGa2.default.set({ page: location.pathname });
    _reactGa2.default.pageview(location.pathname);
 });
