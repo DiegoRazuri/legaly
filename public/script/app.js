@@ -26224,7 +26224,7 @@ var App = function (_Component) {
 								_react2.default.createElement(
 									'p',
 									null,
-									'01 468 1546'
+									'942 914 542'
 								)
 							),
 							_react2.default.createElement(
@@ -26342,17 +26342,12 @@ var App = function (_Component) {
 								_react2.default.createElement(
 									'li',
 									null,
-									'Jr. Tom\xE1s Guido 160, Lince - CC. Risso'
-								),
-								_react2.default.createElement(
-									'li',
-									null,
 									'info@legaly.pe'
 								),
 								_react2.default.createElement(
 									'li',
 									null,
-									'01 468 1546'
+									'942 914 542'
 								)
 							)
 						),
@@ -28538,7 +28533,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'h1',
 								null,
-								'Constituye tu empresa desde S/ 850.00 Toma de firmas y entrega de documentos a domicilio'
+								'Constituye tu empresa desde S/ 650.00 todo incluido y asesor\xEDa totalmente gratuita'
 							),
 							_react2.default.createElement(
 								'p',
@@ -28627,7 +28622,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'h3',
 								null,
-								'Inicia el proceso online, llena los formularios, indica la fecha de toma de firmas y env\xEDanos el dep\xF3sito.'
+								'Inicia el proceso online sin colas ni esperas, llena los formularios, indicanos el distrito para la toma de firmas y env\xEDanos el dep\xF3sito.'
 							)
 						),
 						_react2.default.createElement(
@@ -28668,12 +28663,12 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'h2',
 								null,
-								'Delivery'
+								'Asesor\xEDa'
 							),
 							_react2.default.createElement(
 								'h3',
 								null,
-								'Nos encargamos de hacer la toma de firmas y huella en tu oficina u hogar para que no pierdas tiempo haciendo colas, adem\xE1s del delivery de documentos.'
+								'Si tienes dudas, nosotros las resolvemos. Nuestro equipo de abogados te ayudar\xE1n a constituir una mype capaz de convertirse en una transnacional.'
 							)
 						),
 						_react2.default.createElement(
@@ -28723,7 +28718,7 @@ var Landing = function (_Component) {
 						_react2.default.createElement(
 							'h2',
 							null,
-							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+							'Porque ganar\xE1s m\xE1s dinero. Si tu objetivo es crear riqueza mediante tu empresa, entonces tienes que generar seguridad en tus potenciales clientes y red de contactos. Ser confiable es ser una empresa formal. Te ver\xE1n con otros ojos, proyectar\xE1s una imagen m\xE1s s\xF3lida, podr\xE1s licitar con el estado y te recomendar\xE1n con absoluta confianza.'
 						)
 					)
 				),
@@ -28747,7 +28742,7 @@ var Landing = function (_Component) {
 						_react2.default.createElement(
 							'h2',
 							null,
-							'Tambi\xE9n ofrecemos servicios de registro de marca, cambio de denominaci\xF3n, transferencia de participaciones, nombramiento de cargo, renuncia y nombramiento de cargo, transferencia de acciones, transformaci\xF3n de tipo societario y modificaci\xF3n de objeto social. Puedes realizar las consultas al 961 845 410 / 945 164 303'
+							'Tambi\xE9n ofrecemos servicios de registro de marca, cambio de denominaci\xF3n, transferencia de participaciones, nombramiento de cargo, renuncia y nombramiento de cargo, transferencia de acciones, transformaci\xF3n de tipo societario y modificaci\xF3n de objeto social. Puedes realizar las consultas al 942 914 542'
 						)
 					)
 				),
@@ -28885,7 +28880,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'p',
 								{ className: 'number' },
-								'423'
+								'1073'
 							),
 							_react2.default.createElement(
 								'p',
@@ -28900,7 +28895,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'p',
 								{ className: 'number' },
-								'112'
+								'131'
 							),
 							_react2.default.createElement(
 								'p',
@@ -28915,7 +28910,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'p',
 								{ className: 'number' },
-								'106'
+								'102'
 							),
 							_react2.default.createElement(
 								'p',
@@ -29952,6 +29947,11 @@ var PaymentMethodForm = function (_Component) {
 										'p',
 										{ className: 'legalyContactInfo' },
 										'pagos@legaly.pe'
+									),
+									_react2.default.createElement(
+										'p',
+										{ className: 'legalyContactInfo' },
+										'Cel. 996 005 400'
 									),
 									_react2.default.createElement(
 										'p',

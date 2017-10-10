@@ -551,7 +551,7 @@ export default class App extends Component{
 							<div className="gridGeneralContactInfo">
 								<div className="subGrid">
 									<span className="icon-office"></span>
-									<p>01 468 1546</p>
+									<p>942 914 542</p>
 								</div>
 								<div className="subGrid">
 									<span className="icon-mail_outline"></span>
@@ -611,9 +611,8 @@ export default class App extends Component{
 								<div className="underlineWhite"></div>
 								<ul>
 									<li>Lun-Vie : 9am - 6pm / Sab : 9am - 1pm</li>
-									<li>Jr. Tomás Guido 160, Lince - CC. Risso</li>
 									<li>info@legaly.pe</li>
-									<li>01 468 1546</li>
+									<li>942 914 542</li>
 								</ul>
 							</div>
 							<div id="footerGrid2" className="gridFooterInfo gridFooterA">

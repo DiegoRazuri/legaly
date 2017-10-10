@@ -23,7 +23,7 @@ export default class Landing extends Component{
 								<figure className="bannerIco">
 									<img src="css/img/Constitucion-icon.svg"/>
 								</figure>
-								<h1>Constituye tu empresa desde S/ 750.00 Toma de firmas y entrega de documentos a domicilio</h1>
+								<h1>Constituye tu empresa desde S/ 650.00 todo incluido y asesoría totalmente gratuita</h1>
 								<p>¿Consultas? Te contestamos al instante</p>
 								<p><span className="icon-whatsapp"></span> 942 914 542</p>
 								<p><span className="icon-mail_outline"></span> info@legaly.pe</p>
@@ -53,7 +53,7 @@ export default class Landing extends Component{
 									<img src="css/img/rapidez.svg"/>
 								</figure>
 								<h2>Rapidez</h2>
-								<h3>Inicia el proceso online, llena los formularios, indica la fecha de toma de firmas y envíanos el depósito.</h3>
+								<h3>Inicia el proceso online sin colas ni esperas, llena los formularios, indicanos el distrito para la toma de firmas y envíanos el depósito.</h3>
 							</div>
 							<div className="gridBenefit">
 								<figure>
@@ -67,8 +67,8 @@ export default class Landing extends Component{
 								<figure>
 									<img src="css/img/delivery.svg"/>
 								</figure>
-								<h2>Delivery</h2>
-								<h3>Nos encargamos de hacer la toma de firmas y huella en tu oficina u hogar para que no pierdas tiempo haciendo colas, además del delivery de documentos.</h3>
+								<h2>Asesoría</h2>
+								<h3>Si tienes dudas, nosotros las resolvemos. Nuestro equipo de abogados te ayudarán a constituir una mype capaz de convertirse en una transnacional.</h3>
 							</div>
 							<div className="gridBenefit">
 								<figure>
@@ -87,7 +87,7 @@ export default class Landing extends Component{
 						<div className="gridFaq">
 							<h1>¿Por qué es importante constituir mi empresa?</h1>
 							<div className="underlineBlue"></div>
-							<h2>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h2>
+							<h2>Porque ganarás más dinero. Si tu objetivo es crear riqueza mediante tu empresa, entonces tienes que generar seguridad en tus potenciales clientes y red de contactos. Ser confiable es ser una empresa formal. Te verán con otros ojos, proyectarás una imagen más sólida, podrás licitar con el estado y te recomendarán con absoluta confianza.</h2>
 							
 						</div>
 					</div>
@@ -98,8 +98,7 @@ export default class Landing extends Component{
 						<div className="gridFaq">
 							<h1>¿Qué otros trámites me puede facilitar Legaly?</h1>
 							<div className="underlineBlue"></div>
-							<h2>También ofrecemos servicios de registro de marca, cambio de denominación, transferencia de participaciones, nombramiento de cargo, renuncia y nombramiento de cargo, transferencia de acciones, transformación de tipo societario y modificación de objeto social. Puedes realizar las consultas al 961 845 410 / 945 164 303</h2>
-							
+							<h2>También ofrecemos servicios de registro de marca, cambio de denominación, transferencia de participaciones, nombramiento de cargo, renuncia y nombramiento de cargo, transferencia de acciones, transformación de tipo societario y modificación de objeto social. Puedes realizar las consultas al 942 914 542</h2>
 						</div>
 					</div>
 
@@ -164,17 +163,17 @@ export default class Landing extends Component{
 						<div className="wrapperInfoCounters">
 							<div className="gridCounter">
 								<span className="icon-paper"></span>
-								<p className="number">423</p>
+								<p className="number">1073</p>
 								<p className="counterName">Empresas constituidas</p>
 							</div>
 							<div className="gridCounter">
 								<span className="icon-circle-check"></span>
-								<p className="number">112</p>
+								<p className="number">131</p>
 								<p className="counterName">Marcas registradas</p>
 							</div>
 							<div className="gridCounter">
 								<span className="icon-briefcase"></span>
-								<p className="number">106</p>
+								<p className="number">102</p>
 								<p className="counterName">Empresas asesoradas</p>
 							</div>
 						</div>
