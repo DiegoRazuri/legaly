@@ -174,7 +174,7 @@ router.post('/signing_date_information', jsonParser, function (req, res){
 					enterprise.signAppointmentTime = data.signAppointmentTime;
 					enterprise.signAppointmentLocation = data.signAppointmentLocation;
 
-					let base = 750;
+					let base = 690;
 
 					let num_positions = 0
 
@@ -192,7 +192,7 @@ router.post('/signing_date_information', jsonParser, function (req, res){
 
 						let num = num_positions - 1;
 
-						vPartners = num * 45;	
+						vPartners = num * 35;	
 
 					}else{
 

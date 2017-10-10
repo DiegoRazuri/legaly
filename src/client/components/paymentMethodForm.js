@@ -66,10 +66,10 @@ export default class PaymentMethodForm extends Component{
 											</figure>
 											
 										</div>
-										<p className="deliveryInstructions">Establece la hora, fecha y dirección de tu preferencia para que uno de nuestros colaboradores vaya con los papeles necesarios para la firma y huella digital de todos los socios. Por lo tanto, todos los fundadores deben de estar para dicha reunión.</p>
-										<p className="legalyContactInfo">pagos@legaly.pe</p>
+										<p className="deliveryInstructions">Una vez que hayas realizado el depósito, el proceso de tu constitución iniciará con la reserva de nombre, la cual tarda cerca de 24 horas en tener respuesta. Luego, te enviaremos por correo la minuta para que nos des tu aprobación. Finalmente, con el visto bueno se emitirá el testimonio y te especificaremos lugar, hora y fecha de la toma de firma de los socios. No olvides contactarnos en cuanto hayas realizado el pago.</p>
+										<p className="legalyContactInfo">info@legaly.pe</p>
 										<p className="legalyContactInfo">Cel. 996 005 400</p>
-										<p className="legalyContactInfo">BBVA Continental cta 0011 - 0153 - 0200633- 000 - 41</p>
+										<p className="legalyContactInfo">BBVA Continental cta 0011 - 0383 - 0200182247</p>
 										<Link to="/"><div className="btnPrint mediumContent">Confirmar</div></Link>
 									</div>
 									
@@ -90,11 +90,11 @@ export default class PaymentMethodForm extends Component{
 								<p className="mediumContent detail">{this.props.enterpriseInProcessData.totalCapital} capital</p>
 								<p className="detailName mediumContent">Precio</p>
 								<p className="price mediumContent">S/. {this.props.enterpriseInProcessData.price}</p>
-								<p className="detailName mediumContent">Delivery</p>
+								<p className="detailName mediumContent">Fin de proceso</p>
 								<p className="mediumContent detail">7 días hábiles posterior a la toma de firma</p>
 								<div className="btnPrint mediumContent">Imprimir Recibo</div>
 								<div className="underlineGrey"></div>
-								<h3 className="bigTitlesSS subtitle">Delivery</h3>
+								<h3 className="bigTitlesSS subtitle">Toma de firma</h3>
 								<div className="underlineBlue"></div>
 								<p className="deliveryLocation mediumContent">{this.props.enterpriseInProcessData.signAppointmentLocation}</p>
 								<p className="deliveryDate mediumContent">{day} de {month} del {year} a las {this.props.enterpriseInProcessData.signAppointmentTime}</p>
@@ -110,7 +110,7 @@ export default class PaymentMethodForm extends Component{
 								</a>
 								<div className="gridUserSupport">
 									<span className="icon-mail_outline"></span>
-									<p className="smallContent">ayuda@legaly.pe</p>
+									<p className="smallContent">info@legaly.pe</p>
 								</div>
 							</div>
 						</div>

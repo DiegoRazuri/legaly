@@ -29941,12 +29941,12 @@ var PaymentMethodForm = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'deliveryInstructions' },
-										'Establece la hora, fecha y direcci\xF3n de tu preferencia para que uno de nuestros colaboradores vaya con los papeles necesarios para la firma y huella digital de todos los socios. Por lo tanto, todos los fundadores deben de estar para dicha reuni\xF3n.'
+										'Una vez que hayas realizado el dep\xF3sito, el proceso de tu constituci\xF3n iniciar\xE1 con la reserva de nombre, la cual tarda cerca de 24 horas en tener respuesta. Luego, te enviaremos por correo la minuta para que nos des tu aprobaci\xF3n. Finalmente, con el visto bueno se emitir\xE1 el testimonio y te especificaremos lugar, hora y fecha de la toma de firma de los socios. No olvides contactarnos en cuanto hayas realizado el pago.'
 									),
 									_react2.default.createElement(
 										'p',
 										{ className: 'legalyContactInfo' },
-										'pagos@legaly.pe'
+										'info@legaly.pe'
 									),
 									_react2.default.createElement(
 										'p',
@@ -29956,7 +29956,7 @@ var PaymentMethodForm = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'legalyContactInfo' },
-										'BBVA Continental cta 0011 - 0153 - 0200633- 000 - 41'
+										'BBVA Continental cta 0011 - 0383 - 0200182247'
 									),
 									_react2.default.createElement(
 										_reactRouterDom.Link,
@@ -30030,7 +30030,7 @@ var PaymentMethodForm = function (_Component) {
 							_react2.default.createElement(
 								'p',
 								{ className: 'detailName mediumContent' },
-								'Delivery'
+								'Fin de proceso'
 							),
 							_react2.default.createElement(
 								'p',
@@ -30046,7 +30046,7 @@ var PaymentMethodForm = function (_Component) {
 							_react2.default.createElement(
 								'h3',
 								{ className: 'bigTitlesSS subtitle' },
-								'Delivery'
+								'Toma de firma'
 							),
 							_react2.default.createElement('div', { className: 'underlineBlue' }),
 							_react2.default.createElement(
@@ -30093,7 +30093,7 @@ var PaymentMethodForm = function (_Component) {
 								_react2.default.createElement(
 									'p',
 									{ className: 'smallContent' },
-									'ayuda@legaly.pe'
+									'info@legaly.pe'
 								)
 							)
 						)
