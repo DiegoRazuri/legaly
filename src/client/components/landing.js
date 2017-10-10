@@ -23,7 +23,7 @@ export default class Landing extends Component{
 								<figure className="bannerIco">
 									<img src="css/img/Constitucion-icon.svg"/>
 								</figure>
-								<h1>Constituye tu empresa desde S/ 650.00 todo incluido y asesoría totalmente gratuita</h1>
+								<h1>Constituye tu empresa desde S/ 690.00 todo incluido y asesoría totalmente gratuita</h1>
 								<p>¿Consultas? Te contestamos al instante</p>
 								<p><span className="icon-whatsapp"></span> 942 914 542</p>
 								<p><span className="icon-mail_outline"></span> info@legaly.pe</p>
