@@ -26096,7 +26096,7 @@ var App = function (_Component) {
 							_react2.default.createElement(
 								'figure',
 								{ className: 'movilMenuMainLogo' },
-								_react2.default.createElement('img', { src: 'css/img/LogotipoLegaly.svg' })
+								_react2.default.createElement('img', { src: 'css/img/LogotipoLegaly.svg', alt: 'constituci\xF3n de empresas online legaly' })
 							),
 							_react2.default.createElement('span', null)
 						),
@@ -26259,7 +26259,7 @@ var App = function (_Component) {
 							_react2.default.createElement(
 								_reactRouterDom.Link,
 								{ to: '/', onClick: this.switchBtnNavSelected.bind(this, 4) },
-								_react2.default.createElement('img', { src: 'css/img/LogotipoLegaly.svg' })
+								_react2.default.createElement('img', { src: 'css/img/LogotipoLegaly.svg', alt: 'asesor\xEDa legal para mypes' })
 							)
 						),
 						_react2.default.createElement(
@@ -28528,12 +28528,12 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'figure',
 								{ className: 'bannerIco' },
-								_react2.default.createElement('img', { src: 'css/img/Constitucion-icon.svg' })
+								_react2.default.createElement('img', { src: 'css/img/Constitucion-icon.svg', alt: 'constituci\xF3n de empresas - legaly' })
 							),
 							_react2.default.createElement(
 								'h1',
 								null,
-								'Constituye tu empresa desde S/ 650.00 todo incluido y asesor\xEDa totalmente gratuita'
+								'Constituye tu empresa desde S/ 690.00 todo incluido y asesor\xEDa totalmente gratuita'
 							),
 							_react2.default.createElement(
 								'p',
@@ -28568,7 +28568,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'figure',
 								{ className: 'bannerIco' },
-								_react2.default.createElement('img', { src: 'css/img/Registromarca-icon.svg' })
+								_react2.default.createElement('img', { src: 'css/img/Registromarca-icon.svg', alt: 'registro de marca - legaly' })
 							),
 							_react2.default.createElement(
 								'h1',
@@ -28612,7 +28612,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'figure',
 								null,
-								_react2.default.createElement('img', { src: 'css/img/rapidez.svg' })
+								_react2.default.createElement('img', { src: 'css/img/rapidez.svg', alt: 'servicio r\xE1pido de constituci\xF3n - legaly' })
 							),
 							_react2.default.createElement(
 								'h2',
@@ -28622,7 +28622,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'h3',
 								null,
-								'Inicia el proceso online sin colas ni esperas, llena los formularios, indicanos el distrito para la toma de firmas y env\xEDanos el dep\xF3sito.'
+								'Inicia tu constituci\xF3n en linea sin colas ni esperas, llena los formularios, indicanos el distrito para la toma de firmas y env\xEDanos el dep\xF3sito.'
 							)
 						),
 						_react2.default.createElement(
@@ -28631,7 +28631,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'figure',
 								null,
-								_react2.default.createElement('img', { src: 'css/img/accesible.svg' })
+								_react2.default.createElement('img', { src: 'css/img/accesible.svg', alt: '' })
 							),
 							_react2.default.createElement(
 								'h2',
@@ -28643,13 +28643,13 @@ var Landing = function (_Component) {
 								null,
 								'Reserva del nombre',
 								_react2.default.createElement('br', null),
-								'Elaboraci\xF3n o revisi\xF3n de minuta',
+								'Elaboraci\xF3n de minuta',
 								_react2.default.createElement('br', null),
 								'Escritura p\xFAblica',
 								_react2.default.createElement('br', null),
 								'Inscripci\xF3n en Sunarp',
 								_react2.default.createElement('br', null),
-								'Inscripci\xF3n de R.U.C. (consultar condiciones).'
+								'Inscripci\xF3n de R.U.C.'
 							)
 						),
 						_react2.default.createElement(
