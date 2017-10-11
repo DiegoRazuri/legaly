@@ -21,7 +21,7 @@ export default class Landing extends Component{
 						<div className="bannerScene">
 							<div className="gridConstitucionEmpresas">
 								<figure className="bannerIco">
-									<img src="css/img/Constitucion-icon.svg"/>
+									<img src="css/img/Constitucion-icon.svg" alt="constitución de empresas - legaly"/>
 								</figure>
 								<h1>Constituye tu empresa desde S/ 690.00 todo incluido y asesoría totalmente gratuita</h1>
 								<p>¿Consultas? Te contestamos al instante</p>
@@ -32,7 +32,7 @@ export default class Landing extends Component{
 							</div>
 							<div className="gridRegistraMarca">
 								<figure className="bannerIco">
-									<img src="css/img/Registromarca-icon.svg"/>
+									<img src="css/img/Registromarca-icon.svg" alt="registro de marca - legaly"/>
 								</figure>
 								<h1>Registra tu marca, te asistimos en cada paso del proceso.</h1>
 								<p>Todos los trámites garantizados desde la comodidad de tu oficina u hogar</p>
@@ -50,17 +50,17 @@ export default class Landing extends Component{
 						<div className="wrapperInfoBenefits">
 							<div className="gridBenefit">
 								<figure>
-									<img src="css/img/rapidez.svg"/>
+									<img src="css/img/rapidez.svg" alt="servicio rápido de constitución - legaly"/>
 								</figure>
 								<h2>Rapidez</h2>
-								<h3>Inicia el proceso online sin colas ni esperas, llena los formularios, indicanos el distrito para la toma de firmas y envíanos el depósito.</h3>
+								<h3>Inicia tu constitución en linea sin colas ni esperas, llena los formularios, indicanos el distrito para la toma de firmas y envíanos el depósito.</h3>
 							</div>
 							<div className="gridBenefit">
 								<figure>
-									<img src="css/img/accesible.svg"/>
+									<img src="css/img/accesible.svg" alt=""/>
 								</figure>
 								<h2>Incluye</h2>
-								<h3>Reserva del nombre<br/>Elaboración o revisión de minuta<br/>Escritura pública<br/>Inscripción en Sunarp<br/>Inscripción de R.U.C. (consultar condiciones).</h3>
+								<h3>Reserva del nombre<br/>Elaboración de minuta<br/>Escritura pública<br/>Inscripción en Sunarp<br/>Inscripción de R.U.C.</h3>
 							</div>
 							
 							<div className="gridBenefit">

@@ -492,7 +492,7 @@ export default class App extends Component{
 							<div className="wrapperHeaderMovilMenu">
 								<span id="btnCloseMovilMenu" className="icon-cross"></span>
 								<figure className="movilMenuMainLogo">
-									<img src="css/img/LogotipoLegaly.svg"/>
+									<img src="css/img/LogotipoLegaly.svg" alt="constitución de empresas online legaly"/>
 								</figure>
 								<span></span>	
 							</div>
@@ -567,7 +567,7 @@ export default class App extends Component{
 							<span id="btnMovilMenu" className="icon-align-justify btnMovilMenu"></span>
 							<figure className="mainLogo">
 								<Link to="/" onClick={this.switchBtnNavSelected.bind(this, 4)}>
-									<img src="css/img/LogotipoLegaly.svg"/>
+									<img src="css/img/LogotipoLegaly.svg" alt="asesoría legal para mypes"/>
 								</Link>
 							</figure>
 							<div className="gridNav">
