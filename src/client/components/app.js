@@ -54,6 +54,8 @@ export default class App extends Component{
 		this.updatePartnerInvitation = this.updatePartnerInvitation.bind(this);
 		this.switchBtnNavSelected = this.switchBtnNavSelected.bind(this);
 		this.resetEnterpriseRegistrationData = this.resetEnterpriseRegistrationData.bind(this);
+		this.insertDataRootLevel = this.insertDataRootLevel.bind(this);
+	
 	
 	}
 
@@ -80,6 +82,17 @@ export default class App extends Component{
 			})
 		}
 		
+	}
+
+	insertDataRootLevel(data){
+
+		console.log(data)
+		let newData = this.state.enterpriseInProcessData;
+
+		newData[data.field] = data.value;
+
+		this.setState({enterpriseInProcessData : newData});
+
 	}
 
 	// FORMSTAGE
@@ -592,7 +605,7 @@ export default class App extends Component{
 						<Route path="/informacion-empresa" render={(props) => ( this.state.user == false ? (<Redirect to="/login"/>) : (<EnterpriseInformationForm user={this.state.user} sendEnterpriseInformation={this.sendEnterpriseInformation} enterpriseInProcessData={this.state.enterpriseInProcessData} enterpriseInProcess={this.state.enterpriseInProcess} enterpriseSaved={this.state.enterpriseSaved} updateEnterpriseInformation={this.updateEnterpriseInformation}/>)   )}/>
 						<Route path="/invitar-socios" render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<PartnersAddingForm user={this.state.user} sendPartnerInvitation={this.sendPartnerInvitation} enterpriseInProcessData={this.state.enterpriseInProcessData} rowPartnerInputHandler={this.rowPartnerInputHandler} deletingPartnerRow={this.deletingPartnerRow} rowAccountManagerInputHandler={this.rowAccountManagerInputHandler} partnersInvitationSaved={this.state.partnersInvitationSaved} updatePartnerInvitation={this.updatePartnerInvitation}/> )   )}/>
 						<Route path="/informacion-personal" render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<PersonalInformationForm user={this.state.user} enterpriseInProcessData={this.state.enterpriseInProcessData} inputTextHandler={this.inputTextHandler} selectHandler={this.selectHandler} rowInputsHandler={this.rowInputsHandler} deleteRowInputHandle={this.deleteRowInputHandle} sendPartnersInformation={this.sendPartnersInformation} enterpriseSaved={this.state.enterpriseSaved}/> )    )}/>
-						<Route path="/fecha-firma" render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<DateForm inputTextHandlerRootLevel={this.inputTextHandlerRootLevel} enterpriseInProcessData={this.state.enterpriseInProcessData} sendSingingDateInformation={this.sendSingingDateInformation} enterpriseSaved={this.state.enterpriseSaved}/>)    )}/>
+						<Route path="/fecha-firma" render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<DateForm inputTextHandlerRootLevel={this.inputTextHandlerRootLevel} enterpriseInProcessData={this.state.enterpriseInProcessData} insertDataRootLevel={this.insertDataRootLevel} sendSingingDateInformation={this.sendSingingDateInformation} enterpriseSaved={this.state.enterpriseSaved}/>)    )}/>
 						<Route path="/metodo-pago" onUpdate={this.logPageView} render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<PaymentMethodForm enterpriseInProcessData={this.state.enterpriseInProcessData} enterpriseSaved={this.state.enterpriseSaved}/>)    )}/>
 						<Route path="/perfil" onUpdate={this.logPageView} render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<Userprofile user={this.state.user} isItLogin={this.isItLogin}/>) )}/>
 						<Route path="/panel-listado-empresas" onUpdate={this.logPageView} render={(props)=>( <TrackingPanel user={this.state.user} isItLogin={this.isItLogin}/> )}/>

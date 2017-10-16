@@ -260,6 +260,9 @@
 						.btnRed
 							margin 0px
 							
+						a
+							width 90%
+							
 					#lblValidationMsgAddPartner
 						color red
 							
@@ -444,6 +447,30 @@
 					span
 						text-align center
 						
+		.dateForm
+			.gridForm
+				form
+					.gridFormLarge
+						.inputRadio
+							display flex
+							flex-direction column
+							
+							label
+								margin 10px 0px
+								color #000
+								font-size 0.8em
+								font-weight lighter
+								display flex
+								align-items center
+
+								input
+									font-size 0.8em
+									color #000
+									margin auto 6px auto 0px
+					.gridFormShort
+						.inputSingleValue
+							label
+								margin auto
 		.serviceTicket
 			margin 20px auto
 			
@@ -983,11 +1010,16 @@ select
 						margin-top 10px
 						margin-right 10%
 						
-					form .partnerRow
-						.gridEmail
-							width 37.5%
-						.gridPosition
-							width 34.5%
+					form 
+						.partnerRow
+							.gridEmail
+								width 37.5%
+							.gridPosition
+								width 34.5%
+							
+						.wrapperBtnNext
+							a
+								width 90%
 							
 			.dateForm
 				width 580px

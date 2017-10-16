@@ -50,6 +50,21 @@ export default class PaymentMethodForm extends Component{
 			}
 		}
 
+		let notaryLocation;
+
+		let signAppointmentLocation = this.props.enterpriseInProcessData.signAppointmentLocation;
+
+		switch(signAppointmentLocation){
+			case "San Isidro" : notaryLocation = "Notaria Tinageros| Av. Canaval y Moreyra Nº 425 Ofs: 21 - 22 y 23; 2do piso, San Isidro."
+				break;
+			case "Magdalena": notaryLocation = "Notaria Acevedo Mendoza| Av. Javier Prado oeste Nº 850, Magdalena del Mar."
+				break;
+			case "San Miguel": notaryLocation = "Notaria Landázuri| Av. Brigida Silva Ochoa Nº 398 Of: 204 - 2do piso, San Miguel (Esq. cdra. 22 av. La Marina)."
+				break;
+			case "Cercado de Lima": notaryLocation = "Notaria Donato Carpio Vélez| Av. República de Chile Nº 295 Of. 205; 2do piso, Sta. Beatriz (Lima)."
+				break;
+		}
+
 
 		return <div className="sectionEnterpriseIncorporation">
 					<div className="wrapperIncorporationForm">
@@ -96,8 +111,8 @@ export default class PaymentMethodForm extends Component{
 								<div className="underlineGrey"></div>
 								<h3 className="bigTitlesSS subtitle">Toma de firma</h3>
 								<div className="underlineBlue"></div>
-								<p className="deliveryLocation mediumContent">{this.props.enterpriseInProcessData.signAppointmentLocation}</p>
-								<p className="deliveryDate mediumContent">{day} de {month} del {year} a las {this.props.enterpriseInProcessData.signAppointmentTime}</p>
+								<p className="deliveryLocation mediumContent">{notaryLocation}</p>
+								<p className="deliveryDate mediumContent">{day} de {month} del {year}</p>
 							</div>
 
 							<div className="gridUserHelp">

@@ -11,53 +11,60 @@ export default class DateForm extends Component{
 		super(props);
 		this.state={
 
-			redirect : false
+			redirect : false,
+			district: ""
 		}
 		
 	}
 
+	handleRadioOption(ev){
+		this.setState({
+			district : ev.target.value
+		})
+
+		this.props.inputTextHandlerRootLevel(ev);
+	}
+
+	
 
 
 	handleDateFormSubmit(){
 
 		let i_date, i_time, i_location;
 
-		i_date = ReactDom.findDOMNode(this.refs.signAppointmentDate);
-		i_time = ReactDom.findDOMNode(this.refs.signAppointmentTime);
-		i_location = ReactDom.findDOMNode(this.refs.signAppointmentLocation);
+		let msg = document.getElementById("msgNotarySelection");
 
-		i_date.parentNode.classList.remove("inputError");
-		i_time.parentNode.classList.remove("inputError");
-		i_location.parentNode.classList.remove("inputError");
+		//i_time = ReactDom.findDOMNode(this.refs.signAppointmentTime);
+		i_location = this.state.district;
+
+		//i_date.parentNode.classList.remove("inputError");
+		//i_time.parentNode.classList.remove("inputError");
+		//i_location.parentNode.classList.remove("inputError");
 
 		let errors = 0;
 
-		if(this.props.enterpriseInProcessData.signAppointmentDate == "" || this.props.enterpriseInProcessData.signAppointmentDate == undefined){
+		if(this.state.district == ""){
 
-			i_date.parentNode.classList.add("inputError");
 
-			errors += 1;
+			msg.style.color = "red";
+			msg.innerText = "Debes elegir una notaría donde firmar.";
 
-		}
-
-		if(this.props.enterpriseInProcessData.signAppointmentTime == "" || this.props.enterpriseInProcessData.signAppointmentTime == undefined){
-
-			i_time.parentNode.classList.add("inputError");
+			
 
 			errors += 1;
 
 		}
 
-		if(this.props.enterpriseInProcessData.signAppointmentLocation == "" || this.props.enterpriseInProcessData.signAppointmentLocation == undefined){
-
-			i_location.parentNode.classList.add("inputError");
-
-			errors += 1;
-
-		}
+		
 
 		if(errors == 0){
-					
+
+			
+			let json = {
+				"field" : "signAppointmentDate",
+				"value" : this.state.dateServerFormat
+			} 
+			this.props.insertDataRootLevel(json)
 
 			this.props.sendSingingDateInformation.call(null)
 
@@ -71,13 +78,241 @@ export default class DateForm extends Component{
 		
 
 	}
+	componentWillMount(){
+		let date = new Date();
+
+			let numOfDays = 4;
+
+			let options = {
+				weekday : 'long'
+			};
+
+			let dayName = date.toLocaleDateString('es-MX', options)
+
+			let optionsRestric ={
+				year: 'numeric',
+				month : 'numeric',
+				day : 'numeric'
+			}
+
+			let day = date.toLocaleDateString('es-MX', optionsRestric)
+
+			let dateComplete;
+
+			if(dayName == "miércoles" || dayName == "jueves" || dayName == "viernes" || dayName == "sábado"){
+				numOfDays = 5;
+				let dayArry = day.split("/")
+				let dayNum = parseInt(dayArry[0])
+				dayNum += numOfDays;
+				
+
+				if(dayNum >= 31){
+					dayNum = dayNum - 30
+
+					let newMonth = parseInt(dayArry[1])
+					newMonth += 1;
+
+					if(newMonth <= 9 ){
+
+						let val = "0" + newMonth.toString();
+
+						dayArry[1] = val;
+					}else{
+						dayArry[1] = newMonth;
+					}
+					
+					
+				}
+
+				if(dayNum <= 9){
+					let val = "0" + dayNum;
+					dayArry[0] = val;
+				}else{
+					dayArry[0] = dayNum;
+				}
+
+
+
+				dateComplete = dayArry[0] + "-" + dayArry[1] + "-" + dayArry[2]
+				let dateServerFormat = dayArry[2] + "-" + dayArry[1] + "-" + dayArry[0]
+				dateComplete.toString();
+				this.setState({
+					date: dateComplete,
+					dateServerFormat : dateServerFormat
+				});
+				
+
+			}else{
+				let dayArry = day.split("/")
+				let dayNum = parseInt(dayArry[0])
+				dayNum += numOfDays;
+
+				if(dayNum >= 31){
+					dayNum = dayNum - 30
+
+					let newMonth = parseInt(dayArry[1])
+					newMonth += 1;
+
+					if(newMonth <= 9 ){
+
+						let val = "0" + newMonth.toString();
+
+						dayArry[1] = val;
+					}else{
+						dayArry[1] = newMonth;
+					}
+
+					
+				}
+
+				if(dayNum <= 9){
+					let val = "0" + dayNum;
+					dayArry[0] = val;
+				}else{
+					dayArry[0] = dayNum;
+				}
+
+				let newMonth = parseInt(dayArry[1])
+
+				if(newMonth <= 9){
+					let val = "0" + newMonth;
+					dayArry[1] = val;
+				}
+				
+
+				dateComplete = dayArry[0] + "-" + dayArry[1] + "-" + dayArry[2]
+				let dateServerFormat = dayArry[2] + "-" + dayArry[1] + "-" + dayArry[0]
+				dateComplete.toString();
+				this.setState({
+					date: dateComplete,
+					dateServerFormat : dateServerFormat
+				});
+				
+			}
+	}
 
 	componentDidMount(){
 		window.scrollTo(0, 0)
+
 	}
 	
 	
 	
+	render(){
+
+		if(this.state.redirect){
+			return <Redirect to="/metodo-pago"/>
+		}
+		else{
+
+			return <div className="sectionEnterpriseIncorporation">
+						<div className="wrapperIncorporationForm">
+
+							<div className="dateForm">
+								<div className="gridForm">
+									<h3 className="bigTitlesSS">Firma de Minuta</h3>
+									<div className="underlineBlue"></div>
+									<p className="instructions smallContent">En los próximos días te contactaremos para establecer una cita en la notaría para la toma de firmas de todos los socios. Elige la notaría donde firmarás la minuta.</p>
+									<form>
+										<div className="gridFormShort">
+											<label className="smallContent">Fecha estimada de toma de firma</label>
+											<div className="inputSingleValue">
+												
+												<label id="txtSignDate" className="smallContent">{this.state.date}</label>
+											</div>
+										</div>
+										
+
+										<div className="gridFormLarge gridFormMutable">
+											<label id="msgNotarySelection" className="smallContent">Notarías:</label>
+											<div className="inputRadio">
+												<label>
+													<input type="radio" name="signAppointmentLocation" className="radioBtn" value="Cercado de Lima" checked={this.state.district=== "Cercado de Lima"} onChange={this.handleRadioOption.bind(this)}/>Donato Carpio Vélez | Cercado de Lima (Santa Beatriz)
+												</label>
+												<label>
+													<input type="radio" name="signAppointmentLocation" className="radioBtn" value="San Isidro" checked={this.state.district=== "San Isidro"} onChange={this.handleRadioOption.bind(this)}/>Tinageros | San Isidro
+												</label>
+												<label>
+													<input type="radio" name="signAppointmentLocation" className="radioBtn" value="San Miguel" checked={this.state.district=== "San Miguel"} onChange={this.handleRadioOption.bind(this)}/>Landázuri | San Miguel
+												</label>
+												<label>
+													<input type="radio" name="signAppointmentLocation" className="radioBtn" value="Magdalena" checked={this.state.district=== "Magdalena"} onChange={this.handleRadioOption.bind(this)}/>Acevedo Mendoza | Magdalena
+												</label>
+
+
+											</div>
+										</div>
+										
+										<div className="gridFormLarge gridFormMutable wrapperBtnNext">
+											<a><div className="btnNext" onClick={this.handleDateFormSubmit.bind(this)}>Siguiente</div></a>
+										</div>
+										<div className="gridFormLarge gridFormMutable wrapperBtnTransparent">
+											
+										</div>
+									</form>
+								</div>
+							</div>
+
+
+
+						</div>
+						
+
+						<div id="faq1" className="wrapperFaq">
+							<figure>
+								<img src="./css/img/constitucion-photo.jpg"/>
+							</figure>
+							<div className="gridFaq">
+								<h1>¿Por qué es importante constituir mi empresa?</h1>
+								<div className="underlineBlue"></div>
+								<h2>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h2>
+								
+							</div>
+						</div>
+
+
+
+						<div className="wrapperComercialFAQ">
+							<div className="gridComercialFAQ">
+								<figure>
+									<img src="css/img/accesible.svg"/>
+								</figure>
+								<h2 className="landingTitles">¿Cúal es el precio?</h2>
+								<h3>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h3>
+							</div>
+							<div className="gridComercialFAQ">
+								<figure>
+									<img src="css/img/rapidez.svg"/>
+								</figure>
+								<h2 className="landingTitles">¿Cúanto debo esperar?</h2>
+								<h3>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h3>
+							</div>
+							<div className="gridComercialFAQ">
+								<figure>
+									<img src="css/img/delivery.svg"/>
+								</figure>
+								<h2 className="landingTitles">Brindamos lo siguiente</h2>
+								<h3>
+									<ul>
+										<li>Búsqueda y reserva de nombre</li>
+										<li>Estatutos de la empresa</li>
+										<li>Escritura pública ante notario</li>
+										<li>Inscripción registral en Sunarp</li>
+										<li>Ficha RUC</li>
+										<li>Copia literal</li>
+										<li>Compra de dominio web</li>
+									</ul>
+								</h3>
+							</div>
+						</div>
+					</div>
+		}
+	}
+}
+/*
+Fragmento de codigo de formulario antiguo con validaciones de fechas
+
+
 	render(){
 
 		if(this.state.redirect){
@@ -137,12 +372,7 @@ export default class DateForm extends Component{
 					dayArry[0] = dayNum;
 				}
 
-/*
-				if(dayArry[1].length == 1){
-					let val = dayArry[1].toString(); 
-					dayArry[1] = "0" + val;
-				}
-*/
+
 
 				dateComplete = dayArry[2] + "-" + dayArry[1] + "-" + dayArry[0]
 				dateComplete.toString();
@@ -184,12 +414,7 @@ export default class DateForm extends Component{
 					dayArry[1] = val;
 				}
 				
-/*
-				if(dayArry[1].length == 1){
-					let val = dayArry[1].toString(); 
-					dayArry[1] = "0" + val;
-				}
-*/
+
 				dateComplete = dayArry[2] + "-" + dayArry[1] + "-" + dayArry[0]
 				dateComplete.toString();
 			}
@@ -336,7 +561,11 @@ export default class DateForm extends Component{
 					</div>
 		}
 	}
-}
+
+
+*/
+
+
 //<div className="btnFaq">Quiero saber más</div>
 
 //<Link to="/informacion-perosnal"><div className="btnTransparentBackground">Anterior</div></Link>

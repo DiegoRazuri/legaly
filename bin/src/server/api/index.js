@@ -185,7 +185,7 @@ router.post('/signing_date_information', jsonParser, function (req, res) {
 		}
 
 		enterprise.signAppointmentDate = data.signAppointmentDate;
-		enterprise.signAppointmentTime = data.signAppointmentTime;
+		//enterprise.signAppointmentTime = data.signAppointmentTime;
 		enterprise.signAppointmentLocation = data.signAppointmentLocation;
 
 		var base = 690;
@@ -564,7 +564,6 @@ router.post('/partners_invitation_update', jsonParser, function (req, res) {
 router.post('/delete_partner_invitation', jsonParser, function (req, res) {
 	if (!req.body) return res.sendStatus(400);
 	var data = req.body;
-	console.log(data);
 
 	_partners2.default.remove({ _id: data.partner_id }, function (err) {
 		if (err) {

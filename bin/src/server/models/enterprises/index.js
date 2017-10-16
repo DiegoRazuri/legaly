@@ -26,7 +26,7 @@ var EnterpriseSchema = new _mongoose2.default.Schema({
 	totalCapital: { type: Number },
 	accountManager: [{ type: _mongoose2.default.Schema.Types.ObjectId, ref: 'Userprofiles' }],
 	signAppointmentDate: { type: Date },
-	signAppointmentTime: { type: String },
+	notary: { type: String },
 	signAppointmentLocation: { type: String },
 	price: { type: Number },
 	inProcess: { type: Boolean, default: false },

@@ -25633,6 +25633,7 @@ var App = function (_Component) {
 		_this.updatePartnerInvitation = _this.updatePartnerInvitation.bind(_this);
 		_this.switchBtnNavSelected = _this.switchBtnNavSelected.bind(_this);
 		_this.resetEnterpriseRegistrationData = _this.resetEnterpriseRegistrationData.bind(_this);
+		_this.insertDataRootLevel = _this.insertDataRootLevel.bind(_this);
 
 		return _this;
 	}
@@ -25658,6 +25659,17 @@ var App = function (_Component) {
 			} else {
 				this.setState(_defineProperty({}, key, 0));
 			}
+		}
+	}, {
+		key: 'insertDataRootLevel',
+		value: function insertDataRootLevel(data) {
+
+			console.log(data);
+			var newData = this.state.enterpriseInProcessData;
+
+			newData[data.field] = data.value;
+
+			this.setState({ enterpriseInProcessData: newData });
 		}
 
 		// FORMSTAGE
@@ -26300,7 +26312,7 @@ var App = function (_Component) {
 							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_personalInformationForm2.default, { user: _this9.state.user, enterpriseInProcessData: _this9.state.enterpriseInProcessData, inputTextHandler: _this9.inputTextHandler, selectHandler: _this9.selectHandler, rowInputsHandler: _this9.rowInputsHandler, deleteRowInputHandle: _this9.deleteRowInputHandle, sendPartnersInformation: _this9.sendPartnersInformation, enterpriseSaved: _this9.state.enterpriseSaved });
 						} }),
 					_react2.default.createElement(_reactRouterDom.Route, { path: '/fecha-firma', render: function render(props) {
-							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_dateForm2.default, { inputTextHandlerRootLevel: _this9.inputTextHandlerRootLevel, enterpriseInProcessData: _this9.state.enterpriseInProcessData, sendSingingDateInformation: _this9.sendSingingDateInformation, enterpriseSaved: _this9.state.enterpriseSaved });
+							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_dateForm2.default, { inputTextHandlerRootLevel: _this9.inputTextHandlerRootLevel, enterpriseInProcessData: _this9.state.enterpriseInProcessData, insertDataRootLevel: _this9.insertDataRootLevel, sendSingingDateInformation: _this9.sendSingingDateInformation, enterpriseSaved: _this9.state.enterpriseSaved });
 						} }),
 					_react2.default.createElement(_reactRouterDom.Route, { path: '/metodo-pago', onUpdate: this.logPageView, render: function render(props) {
 							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_paymentMethodForm2.default, { enterpriseInProcessData: _this9.state.enterpriseInProcessData, enterpriseSaved: _this9.state.enterpriseSaved });
@@ -26820,13 +26832,23 @@ var DateForm = function (_Component) {
 
 		_this.state = {
 
-			redirect: false
+			redirect: false,
+			district: ""
 		};
 
 		return _this;
 	}
 
 	_createClass(DateForm, [{
+		key: 'handleRadioOption',
+		value: function handleRadioOption(ev) {
+			this.setState({
+				district: ev.target.value
+			});
+
+			this.props.inputTextHandlerRootLevel(ev);
+		}
+	}, {
 		key: 'handleDateFormSubmit',
 		value: function handleDateFormSubmit() {
 
@@ -26834,38 +26856,32 @@ var DateForm = function (_Component) {
 			    i_time = void 0,
 			    i_location = void 0;
 
-			i_date = _reactDom2.default.findDOMNode(this.refs.signAppointmentDate);
-			i_time = _reactDom2.default.findDOMNode(this.refs.signAppointmentTime);
-			i_location = _reactDom2.default.findDOMNode(this.refs.signAppointmentLocation);
+			var msg = document.getElementById("msgNotarySelection");
 
-			i_date.parentNode.classList.remove("inputError");
-			i_time.parentNode.classList.remove("inputError");
-			i_location.parentNode.classList.remove("inputError");
+			//i_time = ReactDom.findDOMNode(this.refs.signAppointmentTime);
+			i_location = this.state.district;
+
+			//i_date.parentNode.classList.remove("inputError");
+			//i_time.parentNode.classList.remove("inputError");
+			//i_location.parentNode.classList.remove("inputError");
 
 			var errors = 0;
 
-			if (this.props.enterpriseInProcessData.signAppointmentDate == "" || this.props.enterpriseInProcessData.signAppointmentDate == undefined) {
+			if (this.state.district == "") {
 
-				i_date.parentNode.classList.add("inputError");
-
-				errors += 1;
-			}
-
-			if (this.props.enterpriseInProcessData.signAppointmentTime == "" || this.props.enterpriseInProcessData.signAppointmentTime == undefined) {
-
-				i_time.parentNode.classList.add("inputError");
-
-				errors += 1;
-			}
-
-			if (this.props.enterpriseInProcessData.signAppointmentLocation == "" || this.props.enterpriseInProcessData.signAppointmentLocation == undefined) {
-
-				i_location.parentNode.classList.add("inputError");
+				msg.style.color = "red";
+				msg.innerText = "Debes elegir una notaría donde firmar.";
 
 				errors += 1;
 			}
 
 			if (errors == 0) {
+
+				var json = {
+					"field": "signAppointmentDate",
+					"value": this.state.dateServerFormat
+				};
+				this.props.insertDataRootLevel(json);
 
 				this.props.sendSingingDateInformation.call(null);
 
@@ -26873,6 +26889,109 @@ var DateForm = function (_Component) {
 					redirect: true
 				});
 			} else {}
+		}
+	}, {
+		key: 'componentWillMount',
+		value: function componentWillMount() {
+			var date = new Date();
+
+			var numOfDays = 4;
+
+			var options = {
+				weekday: 'long'
+			};
+
+			var dayName = date.toLocaleDateString('es-MX', options);
+
+			var optionsRestric = {
+				year: 'numeric',
+				month: 'numeric',
+				day: 'numeric'
+			};
+
+			var day = date.toLocaleDateString('es-MX', optionsRestric);
+
+			var dateComplete = void 0;
+
+			if (dayName == "miércoles" || dayName == "jueves" || dayName == "viernes" || dayName == "sábado") {
+				numOfDays = 5;
+				var dayArry = day.split("/");
+				var dayNum = parseInt(dayArry[0]);
+				dayNum += numOfDays;
+
+				if (dayNum >= 31) {
+					dayNum = dayNum - 30;
+
+					var newMonth = parseInt(dayArry[1]);
+					newMonth += 1;
+
+					if (newMonth <= 9) {
+
+						var val = "0" + newMonth.toString();
+
+						dayArry[1] = val;
+					} else {
+						dayArry[1] = newMonth;
+					}
+				}
+
+				if (dayNum <= 9) {
+					var _val = "0" + dayNum;
+					dayArry[0] = _val;
+				} else {
+					dayArry[0] = dayNum;
+				}
+
+				dateComplete = dayArry[0] + "-" + dayArry[1] + "-" + dayArry[2];
+				var dateServerFormat = dayArry[2] + "-" + dayArry[1] + "-" + dayArry[0];
+				dateComplete.toString();
+				this.setState({
+					date: dateComplete,
+					dateServerFormat: dateServerFormat
+				});
+			} else {
+				var _dayArry = day.split("/");
+				var _dayNum = parseInt(_dayArry[0]);
+				_dayNum += numOfDays;
+
+				if (_dayNum >= 31) {
+					_dayNum = _dayNum - 30;
+
+					var _newMonth2 = parseInt(_dayArry[1]);
+					_newMonth2 += 1;
+
+					if (_newMonth2 <= 9) {
+
+						var _val2 = "0" + _newMonth2.toString();
+
+						_dayArry[1] = _val2;
+					} else {
+						_dayArry[1] = _newMonth2;
+					}
+				}
+
+				if (_dayNum <= 9) {
+					var _val3 = "0" + _dayNum;
+					_dayArry[0] = _val3;
+				} else {
+					_dayArry[0] = _dayNum;
+				}
+
+				var _newMonth = parseInt(_dayArry[1]);
+
+				if (_newMonth <= 9) {
+					var _val4 = "0" + _newMonth;
+					_dayArry[1] = _val4;
+				}
+
+				dateComplete = _dayArry[0] + "-" + _dayArry[1] + "-" + _dayArry[2];
+				var _dateServerFormat = _dayArry[2] + "-" + _dayArry[1] + "-" + _dayArry[0];
+				dateComplete.toString();
+				this.setState({
+					date: dateComplete,
+					dateServerFormat: _dateServerFormat
+				});
+			}
 		}
 	}, {
 		key: 'componentDidMount',
@@ -26886,233 +27005,6 @@ var DateForm = function (_Component) {
 			if (this.state.redirect) {
 				return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/metodo-pago' });
 			} else {
-
-				var date = new Date();
-
-				var numOfDays = 4;
-
-				var options = {
-					weekday: 'long'
-				};
-
-				var dayName = date.toLocaleDateString('es-MX', options);
-
-				var optionsRestric = {
-					year: 'numeric',
-					month: 'numeric',
-					day: 'numeric'
-				};
-
-				var day = date.toLocaleDateString('es-MX', optionsRestric);
-
-				var dateComplete = void 0;
-
-				if (dayName == "miércoles" || dayName == "jueves" || dayName == "viernes" || dayName == "sábado") {
-					numOfDays = 5;
-					var dayArry = day.split("/");
-					var dayNum = parseInt(dayArry[0]);
-					dayNum += numOfDays;
-
-					if (dayNum >= 31) {
-						dayNum = dayNum - 30;
-
-						var newMonth = parseInt(dayArry[1]);
-						newMonth += 1;
-
-						if (newMonth <= 9) {
-
-							var val = "0" + newMonth.toString();
-
-							dayArry[1] = val;
-						} else {
-							dayArry[1] = newMonth;
-						}
-					}
-
-					if (dayNum <= 9) {
-						var _val = "0" + dayNum;
-						dayArry[0] = _val;
-					} else {
-						dayArry[0] = dayNum;
-					}
-
-					/*
-     				if(dayArry[1].length == 1){
-     					let val = dayArry[1].toString(); 
-     					dayArry[1] = "0" + val;
-     				}
-     */
-
-					dateComplete = dayArry[2] + "-" + dayArry[1] + "-" + dayArry[0];
-					dateComplete.toString();
-				} else {
-					var _dayArry = day.split("/");
-					var _dayNum = parseInt(_dayArry[0]);
-					_dayNum += numOfDays;
-
-					if (_dayNum >= 31) {
-						_dayNum = _dayNum - 30;
-
-						var _newMonth2 = parseInt(_dayArry[1]);
-						_newMonth2 += 1;
-
-						if (_newMonth2 <= 9) {
-
-							var _val2 = "0" + _newMonth2.toString();
-
-							_dayArry[1] = _val2;
-						} else {
-							_dayArry[1] = _newMonth2;
-						}
-					}
-
-					if (_dayNum <= 9) {
-						var _val3 = "0" + _dayNum;
-						_dayArry[0] = _val3;
-					} else {
-						_dayArry[0] = _dayNum;
-					}
-
-					var _newMonth = parseInt(_dayArry[1]);
-
-					if (_newMonth <= 9) {
-						var _val4 = "0" + _newMonth;
-						_dayArry[1] = _val4;
-					}
-
-					/*
-     				if(dayArry[1].length == 1){
-     					let val = dayArry[1].toString(); 
-     					dayArry[1] = "0" + val;
-     				}
-     */
-					dateComplete = _dayArry[2] + "-" + _dayArry[1] + "-" + _dayArry[0];
-					dateComplete.toString();
-				}
-
-				var dataReaderEnterprise = this.props.enterpriseInProcessData;
-
-				var inputDate = void 0,
-				    selectTime = void 0,
-				    inputLocation = void 0;
-
-				if (dataReaderEnterprise) {
-
-					inputDate = _react2.default.createElement('input', { type: 'date', id: 'inputDate', value: dataReaderEnterprise.signAppointmentDate != undefined ? dataReaderEnterprise.signAppointmentDate : "", onChange: this.props.inputTextHandlerRootLevel.bind(), name: 'signAppointmentDate', min: dateComplete, ref: 'signAppointmentDate' });
-
-					selectTime = _react2.default.createElement(
-						'select',
-						{ value: dataReaderEnterprise.signAppointmentTime != undefined ? dataReaderEnterprise.signAppointmentTime : "", onChange: this.props.inputTextHandlerRootLevel.bind(), name: 'signAppointmentTime', ref: 'signAppointmentTime' },
-						_react2.default.createElement('option', { disabled: true }),
-						_react2.default.createElement(
-							'option',
-							null,
-							'8:00 am'
-						),
-						_react2.default.createElement(
-							'option',
-							null,
-							'8:30 am'
-						),
-						_react2.default.createElement(
-							'option',
-							null,
-							'9:00 am'
-						),
-						_react2.default.createElement(
-							'option',
-							null,
-							'9:30 am'
-						),
-						_react2.default.createElement(
-							'option',
-							null,
-							'10:00 am'
-						),
-						_react2.default.createElement(
-							'option',
-							null,
-							'10:30 am'
-						),
-						_react2.default.createElement(
-							'option',
-							null,
-							'11:00 am'
-						),
-						_react2.default.createElement(
-							'option',
-							null,
-							'11:30 am'
-						),
-						_react2.default.createElement(
-							'option',
-							null,
-							'12:00 pm'
-						),
-						_react2.default.createElement(
-							'option',
-							null,
-							'12:30 pm'
-						),
-						_react2.default.createElement(
-							'option',
-							null,
-							'1:00 pm'
-						),
-						_react2.default.createElement(
-							'option',
-							null,
-							'1:30 pm'
-						),
-						_react2.default.createElement(
-							'option',
-							null,
-							'2:00 pm'
-						),
-						_react2.default.createElement(
-							'option',
-							null,
-							'2:30 pm'
-						),
-						_react2.default.createElement(
-							'option',
-							null,
-							'3:00 pm'
-						),
-						_react2.default.createElement(
-							'option',
-							null,
-							'3:30 pm'
-						),
-						_react2.default.createElement(
-							'option',
-							null,
-							'4:00 pm'
-						),
-						_react2.default.createElement(
-							'option',
-							null,
-							'4:30 pm'
-						),
-						_react2.default.createElement(
-							'option',
-							null,
-							'5:00 pm'
-						),
-						_react2.default.createElement(
-							'option',
-							null,
-							'5:30 pm'
-						),
-						_react2.default.createElement(
-							'option',
-							null,
-							'6:00 pm'
-						)
-					);
-
-					inputLocation = _react2.default.createElement('input', { type: 'text', value: dataReaderEnterprise.signAppointmentLocation != undefined ? dataReaderEnterprise.signAppointmentLocation : "", onChange: this.props.inputTextHandlerRootLevel.bind(), name: 'signAppointmentLocation', ref: 'signAppointmentLocation' });
-				}
 
 				return _react2.default.createElement(
 					'div',
@@ -27129,13 +27021,13 @@ var DateForm = function (_Component) {
 								_react2.default.createElement(
 									'h3',
 									{ className: 'bigTitlesSS' },
-									'Delivery - Firma de Constituci\xF3n'
+									'Firma de Minuta'
 								),
 								_react2.default.createElement('div', { className: 'underlineBlue' }),
 								_react2.default.createElement(
 									'p',
 									{ className: 'instructions smallContent' },
-									'Establece la hora, fecha y direcci\xF3n de tu preferencia para que uno de nuestros colaboradores vaya con los papeles necesarios para la firma y huella digital de todos los socios. Por lo tanto, todos los fundadores deben de estar para dicha reuni\xF3n. '
+									'En los pr\xF3ximos d\xEDas te contactaremos para establecer una cita en la notar\xEDa para la toma de firmas de todos los socios. Elige la notar\xEDa donde firmar\xE1s la minuta.'
 								),
 								_react2.default.createElement(
 									'form',
@@ -27146,43 +27038,53 @@ var DateForm = function (_Component) {
 										_react2.default.createElement(
 											'label',
 											{ className: 'smallContent' },
-											'Fecha'
-										),
-										_react2.default.createElement(
-											'div',
-											{ className: 'inputDate' },
-											inputDate,
-											_react2.default.createElement('span', { className: 'icon-layout icoInputDate' })
-										)
-									),
-									_react2.default.createElement(
-										'div',
-										{ className: 'gridFormShort' },
-										_react2.default.createElement(
-											'label',
-											{ className: 'smallContent' },
-											'Hora'
-										),
-										_react2.default.createElement(
-											'div',
-											{ className: 'inputSelect' },
-											selectTime,
-											_react2.default.createElement('span', { className: 'icon-clock icoInputSelect' })
-										)
-									),
-									_react2.default.createElement(
-										'div',
-										{ className: 'gridFormLarge' },
-										_react2.default.createElement(
-											'label',
-											{ className: 'smallContent' },
-											'Direcci\xF3n'
+											'Fecha estimada de toma de firma'
 										),
 										_react2.default.createElement(
 											'div',
 											{ className: 'inputSingleValue' },
-											inputLocation,
-											_react2.default.createElement('span', { className: 'icon-room' })
+											_react2.default.createElement(
+												'label',
+												{ id: 'txtSignDate', className: 'smallContent' },
+												this.state.date
+											)
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'gridFormLarge gridFormMutable' },
+										_react2.default.createElement(
+											'label',
+											{ id: 'msgNotarySelection', className: 'smallContent' },
+											'Notar\xEDas:'
+										),
+										_react2.default.createElement(
+											'div',
+											{ className: 'inputRadio' },
+											_react2.default.createElement(
+												'label',
+												null,
+												_react2.default.createElement('input', { type: 'radio', name: 'signAppointmentLocation', className: 'radioBtn', value: 'Cercado de Lima', checked: this.state.district === "Cercado de Lima", onChange: this.handleRadioOption.bind(this) }),
+												'Donato Carpio V\xE9lez | Cercado de Lima (Santa Beatriz)'
+											),
+											_react2.default.createElement(
+												'label',
+												null,
+												_react2.default.createElement('input', { type: 'radio', name: 'signAppointmentLocation', className: 'radioBtn', value: 'San Isidro', checked: this.state.district === "San Isidro", onChange: this.handleRadioOption.bind(this) }),
+												'Tinageros | San Isidro'
+											),
+											_react2.default.createElement(
+												'label',
+												null,
+												_react2.default.createElement('input', { type: 'radio', name: 'signAppointmentLocation', className: 'radioBtn', value: 'San Miguel', checked: this.state.district === "San Miguel", onChange: this.handleRadioOption.bind(this) }),
+												'Land\xE1zuri | San Miguel'
+											),
+											_react2.default.createElement(
+												'label',
+												null,
+												_react2.default.createElement('input', { type: 'radio', name: 'signAppointmentLocation', className: 'radioBtn', value: 'Magdalena', checked: this.state.district === "Magdalena", onChange: this.handleRadioOption.bind(this) }),
+												'Acevedo Mendoza | Magdalena'
+											)
 										)
 									),
 									_react2.default.createElement(
@@ -27333,6 +27235,262 @@ var DateForm = function (_Component) {
 
 	return DateForm;
 }(_react.Component);
+/*
+Fragmento de codigo de formulario antiguo con validaciones de fechas
+
+
+	render(){
+
+		if(this.state.redirect){
+			return <Redirect to="/metodo-pago"/>
+		}
+		else{
+
+			let date = new Date();
+
+			let numOfDays = 4;
+
+			let options = {
+				weekday : 'long'
+			};
+
+			let dayName = date.toLocaleDateString('es-MX', options)
+
+			let optionsRestric ={
+				year: 'numeric',
+				month : 'numeric',
+				day : 'numeric'
+			}
+
+			let day = date.toLocaleDateString('es-MX', optionsRestric)
+
+			let dateComplete;
+
+			if(dayName == "miércoles" || dayName == "jueves" || dayName == "viernes" || dayName == "sábado"){
+				numOfDays = 5;
+				let dayArry = day.split("/")
+				let dayNum = parseInt(dayArry[0])
+				dayNum += numOfDays;
+				
+
+				if(dayNum >= 31){
+					dayNum = dayNum - 30
+
+					let newMonth = parseInt(dayArry[1])
+					newMonth += 1;
+
+					if(newMonth <= 9 ){
+
+						let val = "0" + newMonth.toString();
+
+						dayArry[1] = val;
+					}else{
+						dayArry[1] = newMonth;
+					}
+					
+					
+				}
+
+				if(dayNum <= 9){
+					let val = "0" + dayNum;
+					dayArry[0] = val;
+				}else{
+					dayArry[0] = dayNum;
+				}
+
+
+
+				dateComplete = dayArry[2] + "-" + dayArry[1] + "-" + dayArry[0]
+				dateComplete.toString();
+
+			}else{
+				let dayArry = day.split("/")
+				let dayNum = parseInt(dayArry[0])
+				dayNum += numOfDays;
+
+				if(dayNum >= 31){
+					dayNum = dayNum - 30
+
+					let newMonth = parseInt(dayArry[1])
+					newMonth += 1;
+
+					if(newMonth <= 9 ){
+
+						let val = "0" + newMonth.toString();
+
+						dayArry[1] = val;
+					}else{
+						dayArry[1] = newMonth;
+					}
+
+					
+				}
+
+				if(dayNum <= 9){
+					let val = "0" + dayNum;
+					dayArry[0] = val;
+				}else{
+					dayArry[0] = dayNum;
+				}
+
+				let newMonth = parseInt(dayArry[1])
+
+				if(newMonth <= 9){
+					let val = "0" + newMonth;
+					dayArry[1] = val;
+				}
+				
+
+				dateComplete = dayArry[2] + "-" + dayArry[1] + "-" + dayArry[0]
+				dateComplete.toString();
+			}
+
+			
+
+
+
+			let dataReaderEnterprise = this.props.enterpriseInProcessData;
+
+			let inputDate, selectTime, inputLocation;
+
+			if(dataReaderEnterprise){
+
+				inputDate = <input type="date" id="inputDate" value={dataReaderEnterprise.signAppointmentDate != undefined ? dataReaderEnterprise.signAppointmentDate : ""} onChange={this.props.inputTextHandlerRootLevel.bind()} name="signAppointmentDate" min={dateComplete} ref="signAppointmentDate"/>;
+
+				selectTime = <select value={dataReaderEnterprise.signAppointmentTime != undefined ? dataReaderEnterprise.signAppointmentTime : ""} onChange={this.props.inputTextHandlerRootLevel.bind()} name="signAppointmentTime" ref="signAppointmentTime">
+								<option disabled></option>
+								<option>8:00 am</option>
+								<option>8:30 am</option>
+								<option>9:00 am</option>
+								<option>9:30 am</option>
+								<option>10:00 am</option>
+								<option>10:30 am</option>
+								<option>11:00 am</option>
+								<option>11:30 am</option>
+								<option>12:00 pm</option>
+								<option>12:30 pm</option>
+								<option>1:00 pm</option>
+								<option>1:30 pm</option>
+								<option>2:00 pm</option>
+								<option>2:30 pm</option>
+								<option>3:00 pm</option>
+								<option>3:30 pm</option>
+								<option>4:00 pm</option>
+								<option>4:30 pm</option>
+								<option>5:00 pm</option>
+								<option>5:30 pm</option>
+								<option>6:00 pm</option>
+
+							</select>
+
+				inputLocation = <input type="text" value={dataReaderEnterprise.signAppointmentLocation != undefined ? dataReaderEnterprise.signAppointmentLocation : ""} onChange={this.props.inputTextHandlerRootLevel.bind()} name="signAppointmentLocation" ref="signAppointmentLocation"/>
+
+			}
+
+
+			return <div className="sectionEnterpriseIncorporation">
+						<div className="wrapperIncorporationForm">
+
+							<div className="dateForm">
+								<div className="gridForm">
+									<h3 className="bigTitlesSS">Delivery - Firma de Constitución</h3>
+									<div className="underlineBlue"></div>
+									<p className="instructions smallContent">Establece la hora, fecha y dirección de tu preferencia para que uno de nuestros colaboradores vaya con los papeles necesarios para la firma y huella digital de todos los socios. Por lo tanto, todos los fundadores deben de estar para dicha reunión. </p>
+									<form>
+										<div className="gridFormShort">
+											<label className="smallContent">Fecha</label>
+											<div className="inputDate">
+												{inputDate}
+												<span className="icon-layout icoInputDate"></span>
+											</div>
+										</div>
+										<div className="gridFormShort">
+											<label className="smallContent">Hora</label>
+											<div className="inputSelect">
+												
+												{selectTime}
+
+												<span className="icon-clock icoInputSelect"></span>
+											</div>
+										</div>
+										<div className="gridFormLarge">
+											<label className="smallContent">Dirección</label>
+											<div className="inputSingleValue">
+												
+												{inputLocation}
+
+												<span className="icon-room"></span>
+											</div>
+										</div>
+										<div className="gridFormLarge gridFormMutable wrapperBtnNext">
+											<a><div className="btnNext" onClick={this.handleDateFormSubmit.bind(this)}>Siguiente</div></a>
+										</div>
+										<div className="gridFormLarge gridFormMutable wrapperBtnTransparent">
+											
+										</div>
+									</form>
+								</div>
+							</div>
+
+
+
+						</div>
+						
+
+						<div id="faq1" className="wrapperFaq">
+							<figure>
+								<img src="./css/img/constitucion-photo.jpg"/>
+							</figure>
+							<div className="gridFaq">
+								<h1>¿Por qué es importante constituir mi empresa?</h1>
+								<div className="underlineBlue"></div>
+								<h2>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h2>
+								
+							</div>
+						</div>
+
+
+
+						<div className="wrapperComercialFAQ">
+							<div className="gridComercialFAQ">
+								<figure>
+									<img src="css/img/accesible.svg"/>
+								</figure>
+								<h2 className="landingTitles">¿Cúal es el precio?</h2>
+								<h3>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h3>
+							</div>
+							<div className="gridComercialFAQ">
+								<figure>
+									<img src="css/img/rapidez.svg"/>
+								</figure>
+								<h2 className="landingTitles">¿Cúanto debo esperar?</h2>
+								<h3>Porque así podrá crecer tu negocio de una manera legal, segura y eficaz, generando más confianza a tus clientes, teniendo la facilidad de obtener un préstamo al banco y participar en licitaciones con el estado.</h3>
+							</div>
+							<div className="gridComercialFAQ">
+								<figure>
+									<img src="css/img/delivery.svg"/>
+								</figure>
+								<h2 className="landingTitles">Brindamos lo siguiente</h2>
+								<h3>
+									<ul>
+										<li>Búsqueda y reserva de nombre</li>
+										<li>Estatutos de la empresa</li>
+										<li>Escritura pública ante notario</li>
+										<li>Inscripción registral en Sunarp</li>
+										<li>Ficha RUC</li>
+										<li>Copia literal</li>
+										<li>Compra de dominio web</li>
+									</ul>
+								</h3>
+							</div>
+						</div>
+					</div>
+		}
+	}
+
+
+*/
+
 //<div className="btnFaq">Quiero saber más</div>
 
 //<Link to="/informacion-perosnal"><div className="btnTransparentBackground">Anterior</div></Link>
@@ -29905,6 +30063,25 @@ var PaymentMethodForm = function (_Component) {
 				}
 			}
 
+			var notaryLocation = void 0;
+
+			var signAppointmentLocation = this.props.enterpriseInProcessData.signAppointmentLocation;
+
+			switch (signAppointmentLocation) {
+				case "San Isidro":
+					notaryLocation = "Notaria Tinageros| Av. Canaval y Moreyra Nº 425 Ofs: 21 - 22 y 23; 2do piso, San Isidro.";
+					break;
+				case "Magdalena":
+					notaryLocation = "Notaria Acevedo Mendoza| Av. Javier Prado oeste Nº 850, Magdalena del Mar.";
+					break;
+				case "San Miguel":
+					notaryLocation = "Notaria Landázuri| Av. Brigida Silva Ochoa Nº 398 Of: 204 - 2do piso, San Miguel (Esq. cdra. 22 av. La Marina).";
+					break;
+				case "Cercado de Lima":
+					notaryLocation = "Notaria Donato Carpio Vélez| Av. República de Chile Nº 295 Of. 205; 2do piso, Sta. Beatriz (Lima).";
+					break;
+			}
+
 			return _react2.default.createElement(
 				'div',
 				{ className: 'sectionEnterpriseIncorporation' },
@@ -30052,7 +30229,7 @@ var PaymentMethodForm = function (_Component) {
 							_react2.default.createElement(
 								'p',
 								{ className: 'deliveryLocation mediumContent' },
-								this.props.enterpriseInProcessData.signAppointmentLocation
+								notaryLocation
 							),
 							_react2.default.createElement(
 								'p',
@@ -30061,9 +30238,7 @@ var PaymentMethodForm = function (_Component) {
 								' de ',
 								month,
 								' del ',
-								year,
-								' a las ',
-								this.props.enterpriseInProcessData.signAppointmentTime
+								year
 							)
 						),
 						_react2.default.createElement(

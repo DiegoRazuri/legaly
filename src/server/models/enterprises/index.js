@@ -17,7 +17,7 @@ let EnterpriseSchema = new mongoose.Schema({
 	totalCapital: {type: Number},
 	accountManager: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Userprofiles' }],
 	signAppointmentDate: {type:Date},
-	signAppointmentTime: {type: String},
+	notary: {type: String},
 	signAppointmentLocation : {type: String},
 	price : {type:Number},
 	inProcess : {type: Boolean, default : false},
