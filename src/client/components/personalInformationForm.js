@@ -734,7 +734,7 @@ export default class PersonalInformationForm extends Component{
 									</a>
 									<div className="gridUserSupport">
 										<span className="icon-mail_outline"></span>
-										<p className="smallContent">ayuda@legaly.pe</p>
+										<p className="smallContent">info@legaly.pe</p>
 									</div>
 								</div>
 								<div className="gridForm">

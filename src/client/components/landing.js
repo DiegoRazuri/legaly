@@ -53,14 +53,14 @@ export default class Landing extends Component{
 									<img src="css/img/rapidez.svg" alt="servicio rápido de constitución - legaly"/>
 								</figure>
 								<h2>Rapidez</h2>
-								<h3>Inicia tu constitución en linea sin colas ni esperas, llena los formularios, indicanos el distrito para la toma de firmas y envíanos el depósito.</h3>
+								<h3>Inicia tu constitución en linea sin colas ni esperas, llena los formularios, elige la notaría de tu preferencia para la toma de firmas y envíanos el depósito (los gastos notariales ya están incluidos en el precio).</h3>
 							</div>
 							<div className="gridBenefit">
 								<figure>
 									<img src="css/img/accesible.svg" alt=""/>
 								</figure>
 								<h2>Incluye</h2>
-								<h3>Reserva del nombre<br/>Elaboración de minuta<br/>Escritura pública<br/>Inscripción en Sunarp<br/>Inscripción de R.U.C.</h3>
+								<h3>Reserva del nombre<br/>Elaboración de minuta<br/>Escritura pública<br/>Inscripción en Sunarp<br/>Copia Literal</h3>
 							</div>
 							
 							<div className="gridBenefit">
@@ -75,7 +75,7 @@ export default class Landing extends Component{
 									<img src="css/img/seguridad.svg"/>
 								</figure>
 								<h2>Seguridad</h2>
-								<h3>Contamos con el respaldo de la <a href="http://www.notariaparraga.com/">Notaria Párraga</a> y colaboradores certificados por el colegio de notarios.</h3>
+								<h3>Contamos con el respaldo de la <a href="http://www.notariatinageros.com/">Notaría Tinageros</a>, <a href="http://http://notariaacevedomendoza.com/">Notaría Acevedo Mendoza</a>, <a href="https://www.notariacarpiovelez.com/">Notaría Carpio Vélez</a> y <a href="http://www.notarialandazuri.com/">Notaría Landázuri</a>. Además, de colaboradores certificados por el colegio de notarios.</h3>
 							</div>
 						</div>
 						

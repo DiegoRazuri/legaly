@@ -572,7 +572,7 @@ export default class App extends Component{
 								</div>
 								<div className="subGrid">
 									<span className="icon-clock"></span>
-									<p>Lun-Vie: 9am - 6pm / Sab: 9am - 1pm</p>
+									<p>Asesorías de Lun-Vie: 9am - 6pm / Sab: 9am - 1pm</p>
 								</div>
 							</div>
 						</div>	
@@ -623,7 +623,7 @@ export default class App extends Component{
 								<h5>ATENCIÓN AL CLIENTE</h5>
 								<div className="underlineWhite"></div>
 								<ul>
-									<li>Lun-Vie : 9am - 6pm / Sab : 9am - 1pm</li>
+									<li>Asesoría de: Lun-Vie : 9am - 6pm / Sab : 9am - 1pm</li>
 									<li>info@legaly.pe</li>
 									<li>942 914 542</li>
 								</ul>

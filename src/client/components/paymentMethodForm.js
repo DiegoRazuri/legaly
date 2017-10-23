@@ -85,6 +85,8 @@ export default class PaymentMethodForm extends Component{
 										<p className="legalyContactInfo">info@legaly.pe</p>
 										<p className="legalyContactInfo">Cel. 996 005 400</p>
 										<p className="legalyContactInfo">BBVA Continental cta 0011 - 0383 - 0200182247</p>
+										<p className="legalyContactInfo">BCP cta 192 - 36010048 - 0 - 85</p>
+										<p className="legalyContactInfo">Interbank cta 155 - 3061230642</p>
 										<Link to="/"><div className="btnPrint mediumContent">Confirmar</div></Link>
 									</div>
 									

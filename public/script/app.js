@@ -26256,7 +26256,7 @@ var App = function (_Component) {
 								_react2.default.createElement(
 									'p',
 									null,
-									'Lun-Vie: 9am - 6pm / Sab: 9am - 1pm'
+									'Asesor\xEDas de Lun-Vie: 9am - 6pm / Sab: 9am - 1pm'
 								)
 							)
 						)
@@ -26349,7 +26349,7 @@ var App = function (_Component) {
 								_react2.default.createElement(
 									'li',
 									null,
-									'Lun-Vie : 9am - 6pm / Sab : 9am - 1pm'
+									'Asesor\xEDa de: Lun-Vie : 9am - 6pm / Sab : 9am - 1pm'
 								),
 								_react2.default.createElement(
 									'li',
@@ -27856,7 +27856,7 @@ var EnterpriseInformationForm = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'smallContent' },
-										'ayuda@legaly.pe'
+										'info@legaly.pe'
 									)
 								)
 							),
@@ -28780,7 +28780,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'h3',
 								null,
-								'Inicia tu constituci\xF3n en linea sin colas ni esperas, llena los formularios, indicanos el distrito para la toma de firmas y env\xEDanos el dep\xF3sito.'
+								'Inicia tu constituci\xF3n en linea sin colas ni esperas, llena los formularios, elige la notar\xEDa de tu preferencia para la toma de firmas y env\xEDanos el dep\xF3sito (los gastos notariales ya est\xE1n incluidos en el precio).'
 							)
 						),
 						_react2.default.createElement(
@@ -28807,7 +28807,7 @@ var Landing = function (_Component) {
 								_react2.default.createElement('br', null),
 								'Inscripci\xF3n en Sunarp',
 								_react2.default.createElement('br', null),
-								'Inscripci\xF3n de R.U.C.'
+								'Copia Literal'
 							)
 						),
 						_react2.default.createElement(
@@ -28848,10 +28848,28 @@ var Landing = function (_Component) {
 								'Contamos con el respaldo de la ',
 								_react2.default.createElement(
 									'a',
-									{ href: 'http://www.notariaparraga.com/' },
-									'Notaria P\xE1rraga'
+									{ href: 'http://www.notariatinageros.com/' },
+									'Notar\xEDa Tinageros'
 								),
-								' y colaboradores certificados por el colegio de notarios.'
+								', ',
+								_react2.default.createElement(
+									'a',
+									{ href: 'http://http://notariaacevedomendoza.com/' },
+									'Notar\xEDa Acevedo Mendoza'
+								),
+								', ',
+								_react2.default.createElement(
+									'a',
+									{ href: 'https://www.notariacarpiovelez.com/' },
+									'Notar\xEDa Carpio V\xE9lez'
+								),
+								' y ',
+								_react2.default.createElement(
+									'a',
+									{ href: 'http://www.notarialandazuri.com/' },
+									'Notar\xEDa Land\xE1zuri'
+								),
+								'. Adem\xE1s, de colaboradores certificados por el colegio de notarios.'
 							)
 						)
 					)
@@ -29658,7 +29676,7 @@ var PartnersAddingForm = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'smallContent' },
-										'ayuda@legaly.pe'
+										'info@legaly.pe'
 									)
 								)
 							),
@@ -30134,6 +30152,16 @@ var PaymentMethodForm = function (_Component) {
 										'p',
 										{ className: 'legalyContactInfo' },
 										'BBVA Continental cta 0011 - 0383 - 0200182247'
+									),
+									_react2.default.createElement(
+										'p',
+										{ className: 'legalyContactInfo' },
+										'BCP cta 192 - 36010048 - 0 - 85'
+									),
+									_react2.default.createElement(
+										'p',
+										{ className: 'legalyContactInfo' },
+										'Interbank cta 155 - 3061230642'
 									),
 									_react2.default.createElement(
 										_reactRouterDom.Link,
@@ -31536,7 +31564,7 @@ var PersonalInformationForm = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'smallContent' },
-										'ayuda@legaly.pe'
+										'info@legaly.pe'
 									)
 								)
 							),
