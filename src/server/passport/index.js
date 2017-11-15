@@ -31,7 +31,13 @@ module.exports = function (passport){
 				return done(err);
 			}
 			if(user){
-				return done(null, user)
+				user.photo = profile.photos[0].value;
+				user.save(function(err){
+					if(err)
+						throw err;
+	      			return done(null, user);
+				})
+				//return done(null, user)
 			}else{
 				let user = new Userprofiles()
 				
