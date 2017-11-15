@@ -26303,7 +26303,7 @@ var App = function (_Component) {
 							return _react2.default.createElement(_landing2.default, { resetEnterpriseRegistrationData: _this9.resetEnterpriseRegistrationData });
 						} }),
 					_react2.default.createElement(_reactRouterDom.Route, { path: '/informacion-empresa', render: function render(props) {
-							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_enterpriseInformationForm2.default, { user: _this9.state.user, sendEnterpriseInformation: _this9.sendEnterpriseInformation, enterpriseInProcessData: _this9.state.enterpriseInProcessData, enterpriseInProcess: _this9.state.enterpriseInProcess, enterpriseSaved: _this9.state.enterpriseSaved, updateEnterpriseInformation: _this9.updateEnterpriseInformation });
+							return _react2.default.createElement(_enterpriseInformationForm2.default, { user: _this9.state.user, sendEnterpriseInformation: _this9.sendEnterpriseInformation, enterpriseInProcessData: _this9.state.enterpriseInProcessData, enterpriseInProcess: _this9.state.enterpriseInProcess, enterpriseSaved: _this9.state.enterpriseSaved, updateEnterpriseInformation: _this9.updateEnterpriseInformation });
 						} }),
 					_react2.default.createElement(_reactRouterDom.Route, { path: '/invitar-socios', render: function render(props) {
 							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_partnersAddingForm2.default, { user: _this9.state.user, sendPartnerInvitation: _this9.sendPartnerInvitation, enterpriseInProcessData: _this9.state.enterpriseInProcessData, rowPartnerInputHandler: _this9.rowPartnerInputHandler, deletingPartnerRow: _this9.deletingPartnerRow, rowAccountManagerInputHandler: _this9.rowAccountManagerInputHandler, partnersInvitationSaved: _this9.state.partnersInvitationSaved, updatePartnerInvitation: _this9.updatePartnerInvitation });
@@ -28715,7 +28715,7 @@ var Landing = function (_Component) {
 								null,
 								_react2.default.createElement(
 									_reactRouterDom.Link,
-									{ to: '/informacion-empresa' },
+									{ to: '/login' },
 									'Iniciar proceso'
 								)
 							)

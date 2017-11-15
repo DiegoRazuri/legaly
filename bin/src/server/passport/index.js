@@ -34,12 +34,12 @@ module.exports = function (passport) {
 
 		// QUERY APLICANDO POPULATE
 
+
 		_userprofiles2.default.findOne({ username: profile.id }, function (err, user) {
 			if (err) {
 				return done(err);
 			}
 			if (user) {
-
 				return done(null, user);
 			} else {
 				var _user = new _userprofiles2.default();

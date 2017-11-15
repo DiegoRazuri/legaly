@@ -23,12 +23,14 @@ module.exports = function (passport){
 
 		// QUERY APLICANDO POPULATE
 
+	
+
+
 		Userprofiles.findOne({ username: profile.id }, function (err, user) {
 			if(err){
 				return done(err);
 			}
 			if(user){
-				
 				return done(null, user)
 			}else{
 				let user = new Userprofiles()

@@ -27,7 +27,7 @@ export default class Landing extends Component{
 								<p>¿Consultas?</p>
 								<p><span className="icon-whatsapp"></span> 942 914 542</p>
 								<p><span className="icon-mail_outline"></span> info@legaly.pe</p>
-								<div><Link to="/informacion-empresa">Iniciar proceso</Link></div>
+								<div><Link to="/login">Iniciar proceso</Link></div>
 								
 							</div>
 							<div className="gridRegistraMarca">

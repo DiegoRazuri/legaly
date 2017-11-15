@@ -72,7 +72,7 @@ var sessionKey = process.env.SESSION_KEY;
 
 app.use((0, _expressSession2.default)({
 	// el campo de store debe ser comentado cuando se trabaja en local
-	store: new RedisStore({ host: 'localhost', port: 6379, client: redis }),
+	//store : new RedisStore({ host: 'localhost', port: 6379, client: redis}),
 	secret: sessionKey,
 	resave: false,
 	saveUninitialized: false
@@ -91,22 +91,14 @@ app.use('/api', _api2.default);
 
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['public_profile', 'user_location'] }));
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-	//	successRedirect : '/',
+	successRedirect: '/informacion-empresa',
 	failureRedirect: '/'
-}), function (req, res) {
-	if (req.user.isNew) {
-		console.log("es nuevo");
-		return res.redirect('/otro');
-	} else {
-
-		res.redirect('/');
-	}
-});
+}));
 
 app.get('/auth/linkedin', passport.authenticate('linkedin', { scope: ['r_basicprofile', 'r_emailaddress'] }));
 app.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
 	//	successRedirect : '/welcome',
-	successRedirect: '/',
+	successRedirect: '/informacion-empresa',
 	failureRedirect: '/'
 }));
 
