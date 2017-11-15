@@ -28691,12 +28691,12 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'h1',
 								null,
-								'Constituye tu empresa desde S/ 690.00 todo incluido y asesor\xEDa totalmente gratuita'
+								'Constituye tu empresa desde S/ 650.00 todo incluido y asesor\xEDa totalmente gratuita'
 							),
 							_react2.default.createElement(
 								'p',
 								null,
-								'\xBFConsultas? Te contestamos al instante'
+								'\xBFConsultas?'
 							),
 							_react2.default.createElement(
 								'p',
