@@ -580,8 +580,7 @@ export default class App extends Component{
 							</figure>
 							<div className="gridNav">
 								<Link to="/informacion-empresa" className="btnMainNav" className={this.state.btnNavCons} onClick={this.switchBtnNavSelected.bind(this, 0)}>Constituye tu Empresa</Link>
-								<a href="#" className="btnMainNav" className={this.state.btnNavUs} onClick={this.switchBtnNavSelected.bind(this, 1)}>Quienes somos</a>
-								<a href="#" className="btnMainNav" className={this.state.btnNavInfo} onClick={this.switchBtnNavSelected.bind(this, 2)}>Información</a>
+								
 							</div>
 							
 
@@ -704,7 +703,7 @@ userLogin = <div className="btnRegistration">
 */
 
 /*
-//botones de nav ocultos
+//botones de nav ocultos MOVILMENU
 <li>
 	<a href="#" className="mediumContent">Quienes somos</a>
 </li>
@@ -712,4 +711,10 @@ userLogin = <div className="btnRegistration">
 	<a href="#" className="mediumContent">Información</a>
 </li>
 
+*/
+
+/*
+//botones de nav ocultos DESKTOP MENU
+<a href="#" className="btnMainNav" className={this.state.btnNavUs} onClick={this.switchBtnNavSelected.bind(this, 1)}>Quienes somos</a>
+<a href="#" className="btnMainNav" className={this.state.btnNavInfo} onClick={this.switchBtnNavSelected.bind(this, 2)}>Información</a>
 */

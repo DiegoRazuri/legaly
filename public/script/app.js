@@ -26049,8 +26049,6 @@ var App = function (_Component) {
 		key: 'render',
 		value: function render() {
 			var _React$createElement,
-			    _React$createElement2,
-			    _React$createElement3,
 			    _this9 = this;
 
 			var userLogin = void 0,
@@ -26263,16 +26261,6 @@ var App = function (_Component) {
 								_reactRouterDom.Link,
 								(_React$createElement = { to: '/informacion-empresa', className: 'btnMainNav' }, _defineProperty(_React$createElement, 'className', this.state.btnNavCons), _defineProperty(_React$createElement, 'onClick', this.switchBtnNavSelected.bind(this, 0)), _React$createElement),
 								'Constituye tu Empresa'
-							),
-							_react2.default.createElement(
-								'a',
-								(_React$createElement2 = { href: '#', className: 'btnMainNav' }, _defineProperty(_React$createElement2, 'className', this.state.btnNavUs), _defineProperty(_React$createElement2, 'onClick', this.switchBtnNavSelected.bind(this, 1)), _React$createElement2),
-								'Quienes somos'
-							),
-							_react2.default.createElement(
-								'a',
-								(_React$createElement3 = { href: '#', className: 'btnMainNav' }, _defineProperty(_React$createElement3, 'className', this.state.btnNavInfo), _defineProperty(_React$createElement3, 'onClick', this.switchBtnNavSelected.bind(this, 2)), _React$createElement3),
-								'Informaci\xF3n'
 							)
 						),
 						userLogin
@@ -26568,7 +26556,7 @@ userLogin = <div className="btnRegistration">
 */
 
 /*
-//botones de nav ocultos
+//botones de nav ocultos MOVILMENU
 <li>
 	<a href="#" className="mediumContent">Quienes somos</a>
 </li>
@@ -26576,6 +26564,12 @@ userLogin = <div className="btnRegistration">
 	<a href="#" className="mediumContent">Información</a>
 </li>
 
+*/
+
+/*
+//botones de nav ocultos DESKTOP MENU
+<a href="#" className="btnMainNav" className={this.state.btnNavUs} onClick={this.switchBtnNavSelected.bind(this, 1)}>Quienes somos</a>
+<a href="#" className="btnMainNav" className={this.state.btnNavInfo} onClick={this.switchBtnNavSelected.bind(this, 2)}>Información</a>
 */
 
 
