@@ -188,7 +188,7 @@ router.post('/signing_date_information', jsonParser, function (req, res) {
 		//enterprise.signAppointmentTime = data.signAppointmentTime;
 		enterprise.signAppointmentLocation = data.signAppointmentLocation;
 
-		var base = 690;
+		var base = 650;
 
 		var num_positions = 0;
 
@@ -216,12 +216,13 @@ router.post('/signing_date_information', jsonParser, function (req, res) {
 
 		if (enterprise.totalCapital > 5000) {
 
-			vBCapital = enterprise.totalCapital / 5000;
+			var prevBCapital = enterprise.totalCapital / 1000;
+			vBCapital = prevBCapital - 5;
 		} else {
 			vBCapital = 0;
 		}
 
-		var vCapital = vBCapital * 30;
+		var vCapital = vBCapital * 5;
 
 		var price = vPartners + vCapital + base;
 

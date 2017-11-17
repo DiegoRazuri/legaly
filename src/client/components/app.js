@@ -516,14 +516,9 @@ export default class App extends Component{
 								<div className="underlineWhite"></div>
 								<ul>
 									<li>
-										<Link to="/informacion-empresa" className="mediumContent">Constituye tu Empresa</Link>
+										<Link to="/login" className="mediumContent">Constituye tu Empresa</Link>
 									</li>
-									<li>
-										<a href="#" className="mediumContent">Quienes somos</a>
-									</li>
-									<li>
-										<a href="#" className="mediumContent">Información</a>
-									</li>
+									
 								</ul>
 								<div className="underlineWhite"></div>
 								<ul>
@@ -705,5 +700,16 @@ userLogin = <div className="btnRegistration">
 					<p>Registrate</p>
 				</Link>
 			</div>
+
+*/
+
+/*
+//botones de nav ocultos
+<li>
+	<a href="#" className="mediumContent">Quienes somos</a>
+</li>
+<li>
+	<a href="#" className="mediumContent">Información</a>
+</li>
 
 */

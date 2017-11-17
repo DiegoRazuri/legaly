@@ -26125,26 +26125,8 @@ var App = function (_Component) {
 									null,
 									_react2.default.createElement(
 										_reactRouterDom.Link,
-										{ to: '/informacion-empresa', className: 'mediumContent' },
+										{ to: '/login', className: 'mediumContent' },
 										'Constituye tu Empresa'
-									)
-								),
-								_react2.default.createElement(
-									'li',
-									null,
-									_react2.default.createElement(
-										'a',
-										{ href: '#', className: 'mediumContent' },
-										'Quienes somos'
-									)
-								),
-								_react2.default.createElement(
-									'li',
-									null,
-									_react2.default.createElement(
-										'a',
-										{ href: '#', className: 'mediumContent' },
-										'Informaci\xF3n'
 									)
 								)
 							),
@@ -26582,6 +26564,17 @@ userLogin = <div className="btnRegistration">
 					<p>Registrate</p>
 				</Link>
 			</div>
+
+*/
+
+/*
+//botones de nav ocultos
+<li>
+	<a href="#" className="mediumContent">Quienes somos</a>
+</li>
+<li>
+	<a href="#" className="mediumContent">Información</a>
+</li>
 
 */
 

@@ -72,7 +72,7 @@ var sessionKey = process.env.SESSION_KEY;
 
 app.use((0, _expressSession2.default)({
 	// el campo de store debe ser comentado cuando se trabaja en local
-	//store : new RedisStore({ host: 'localhost', port: 6379, client: redis}),
+	store: new RedisStore({ host: 'localhost', port: 6379, client: redis }),
 	secret: sessionKey,
 	resave: false,
 	saveUninitialized: false
