@@ -28642,13 +28642,83 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Landing = function (_Component) {
 	_inherits(Landing, _Component);
 
-	function Landing() {
+	function Landing(props) {
 		_classCallCheck(this, Landing);
 
-		return _possibleConstructorReturn(this, (Landing.__proto__ || Object.getPrototypeOf(Landing)).apply(this, arguments));
+		var _this = _possibleConstructorReturn(this, (Landing.__proto__ || Object.getPrototypeOf(Landing)).call(this, props));
+
+		_this.state = {};
+
+		_this.scrollinContact = _this.scrollinContact.bind(_this);
+		_this.scrollinProduct = _this.scrollinProduct.bind(_this);
+		_this.scrollinPricing = _this.scrollinPricing.bind(_this);
+		_this.scrollinNotaries = _this.scrollinNotaries.bind(_this);
+
+		return _this;
 	}
 
 	_createClass(Landing, [{
+		key: 'scrollinContact',
+		value: function scrollinContact() {
+
+			var p = document.querySelector('#contact').offsetTop;
+			var pos = p - 70;
+
+			window.scroll({
+				top: pos,
+				left: 0,
+				behavior: 'smooth'
+			});
+		}
+	}, {
+		key: 'scrollinProduct',
+		value: function scrollinProduct() {
+
+			var ventana_ancho = $(window).width();
+			var val = void 0;
+
+			if (ventana_ancho > 700) {
+				val = 190;
+			} else {
+				val = 120;
+			}
+
+			var p = document.querySelector('#product').offsetTop;
+			var pos = p - val;
+
+			window.scroll({
+				top: pos,
+				left: 0,
+				behavior: 'smooth'
+			});
+		}
+	}, {
+		key: 'scrollinPricing',
+		value: function scrollinPricing() {
+
+			var p = document.querySelector('#pricing').offsetTop;
+			var pos = p - 70;
+
+			window.scroll({
+				top: pos,
+				left: 0,
+				behavior: 'smooth'
+			});
+		}
+	}, {
+		key: 'scrollinNotaries',
+		value: function scrollinNotaries() {
+
+			var p = document.querySelector('#notaries').offsetTop;
+			var pos = p - 70;
+
+			window.scroll({
+				top: pos,
+				left: 0,
+				behavior: 'smooth'
+			});
+		}
+	}, {
 		key: 'componentDidMount',
 		value: function componentDidMount() {
 			window.scrollTo(0, 0);
@@ -28666,246 +28736,556 @@ var Landing = function (_Component) {
 					{ className: 'wrapperBanner' },
 					_react2.default.createElement(
 						'div',
-						{ className: 'bannerScene' },
+						{ className: 'wrapperTxt' },
+						_react2.default.createElement(
+							'h1',
+							{ className: 'landingTitles' },
+							'Inicia tu constituci\xF3n en 20 minutos'
+						),
+						_react2.default.createElement(
+							'h2',
+							{ className: 'bigContent' },
+							'Olv\xEDdate de tr\xE1mites y largas colas'
+						),
 						_react2.default.createElement(
 							'div',
-							{ className: 'gridConstitucionEmpresas' },
+							{ className: 'ctaA' },
 							_react2.default.createElement(
-								'figure',
-								{ className: 'bannerIco' },
-								_react2.default.createElement('img', { src: 'css/img/Constitucion-icon.svg', alt: 'constituci\xF3n de empresas - legaly' })
-							),
-							_react2.default.createElement(
-								'h1',
-								null,
-								'Constituye tu empresa desde S/ 650.00 todo incluido y asesor\xEDa totalmente gratuita'
-							),
+								_reactRouterDom.Link,
+								{ to: '/login' },
+								'Crear mi empresa'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ onClick: this.scrollinContact.bind(this), id: 'btnContact', className: 'ctaB', 'data-direct': '#contact' },
 							_react2.default.createElement(
 								'p',
 								null,
 								'\xBFConsultas?'
-							),
-							_react2.default.createElement(
-								'p',
-								null,
-								_react2.default.createElement('span', { className: 'icon-whatsapp' }),
-								' 942 914 542'
-							),
-							_react2.default.createElement(
-								'p',
-								null,
-								_react2.default.createElement('span', { className: 'icon-mail_outline' }),
-								' info@legaly.pe'
-							),
+							)
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'wrapperProductInfo' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'infoNav' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'gridTitle' },
 							_react2.default.createElement(
 								'div',
-								null,
+								{ className: 'wrapperTxt' },
 								_react2.default.createElement(
-									_reactRouterDom.Link,
-									{ to: '/login' },
-									'Iniciar proceso'
+									'p',
+									{ className: 'navTitle' },
+									'Los beneficios'
+								),
+								_react2.default.createElement(
+									'p',
+									{ className: 'navSubtitle' },
+									'usando nuestra plataforma'
 								)
 							)
 						),
 						_react2.default.createElement(
 							'div',
-							{ className: 'gridRegistraMarca' },
+							{ className: 'infoNavBtn', id: 'btnProduct', 'data-direct': '#product', onClick: this.scrollinProduct.bind(this) },
 							_react2.default.createElement(
-								'figure',
-								{ className: 'bannerIco' },
-								_react2.default.createElement('img', { src: 'css/img/Registromarca-icon.svg', alt: 'registro de marca - legaly' })
-							),
+								'div',
+								{ className: 'gridInfoNav' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'wrapperIcos' },
+									_react2.default.createElement(
+										'figure',
+										{ className: 'ico' },
+										_react2.default.createElement('img', { src: 'css/img/ComoFuncionaIcono.svg' })
+									),
+									_react2.default.createElement(
+										'figure',
+										{ className: 'icoSelected' },
+										_react2.default.createElement('img', { src: 'css/img/ComoFuncionaIconoAzul.svg' })
+									)
+								),
+								_react2.default.createElement(
+									'p',
+									{ className: 'btnTitle smallContent' },
+									'\xBFComo funciona?'
+								)
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'infoNavBtn', id: 'btnPricing', 'data-direct': '#pricing', onClick: this.scrollinPricing.bind(this) },
 							_react2.default.createElement(
-								'h1',
-								null,
-								'Registra tu marca, te asistimos en cada paso del proceso.'
-							),
+								'div',
+								{ className: 'gridInfoNav' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'wrapperIcos' },
+									_react2.default.createElement(
+										'figure',
+										{ className: 'ico' },
+										_react2.default.createElement('img', { src: 'css/img/ChanchoAhorroIcono.svg' })
+									),
+									_react2.default.createElement(
+										'figure',
+										{ className: 'icoSelected' },
+										_react2.default.createElement('img', { src: 'css/img/ChanchoAhorroIconoAzul.svg' })
+									)
+								),
+								_react2.default.createElement(
+									'p',
+									{ className: 'btnTitle smallContent' },
+									'Precio'
+								)
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'infoNavBtn', id: 'btnNotaries', 'data-direct': '#notaries', onClick: this.scrollinNotaries.bind(this) },
 							_react2.default.createElement(
-								'p',
-								null,
-								'Todos los tr\xE1mites garantizados desde la comodidad de tu oficina u hogar'
+								'div',
+								{ className: 'gridInfoNav' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'wrapperIcos' },
+									_react2.default.createElement(
+										'figure',
+										{ className: 'ico' },
+										_react2.default.createElement('img', { src: 'css/img/NotariasAlianzasIcono.svg' })
+									),
+									_react2.default.createElement(
+										'figure',
+										{ className: 'icoSelected' },
+										_react2.default.createElement('img', { src: 'css/img/NotariasAlianzasIconoAzul.svg' })
+									)
+								),
+								_react2.default.createElement(
+									'p',
+									{ className: 'btnTitle smallContent' },
+									'Notarias aliadas'
+								)
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'wrapperInfoA', id: 'product' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'wrapperA' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'gridA' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'wrapperTxt' },
+									_react2.default.createElement(
+										'h5',
+										{ className: 'landingTitles' },
+										'\xBFC\xF3mo funciona?'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'wrapperContent' },
+										_react2.default.createElement(
+											'p',
+											{ className: 'instructionTitle smallContent' },
+											'Llena un simple formulario'
+										),
+										_react2.default.createElement(
+											'p',
+											{ className: 'instructionDescrip smallContent' },
+											'Dale click a \u201Ccrear mi empresa\u201D, y registrate con la red social de tu preferencia. Luego, llena un formulario con la informaci\xF3n de tu negocio y la de tus socios. Si tienes dudas solicita una asistencia telef\xF3nica para asesorarte paso a paso. Las consultas no tienen costo!'
+										)
+									)
+								)
 							),
 							_react2.default.createElement(
 								'div',
-								null,
-								'Registra ahora'
+								{ className: 'gridB' },
+								_react2.default.createElement(
+									'figure',
+									null,
+									_react2.default.createElement('img', { src: 'css/img/ComoFunciona1.png' })
+								)
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'wrapperB' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'gridA' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'wrapperTxt' },
+									_react2.default.createElement(
+										'h5',
+										{ className: 'landingTitles' },
+										'Haz un s\xF3lo pago'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'wrapperContent' },
+										_react2.default.createElement(
+											'p',
+											{ className: 'instructionTitle smallContent' },
+											'Todos los costos est\xE1n incluidos'
+										),
+										_react2.default.createElement(
+											'p',
+											{ className: 'instructionDescrip smallContent' },
+											'Cuando termines de llenar el formulario, la plataforma calcular\xE1 el precio del servicio. El pago lo puedes hacer mediante dep\xF3sito bancario en cualquiera de las cuentas que te indicaremos.'
+										)
+									)
+								)
 							),
 							_react2.default.createElement(
-								'a',
-								{ href: '#' },
-								'\xBFC\xF3mo funciona?'
+								'div',
+								{ className: 'gridB' },
+								_react2.default.createElement(
+									'figure',
+									null,
+									_react2.default.createElement('img', { src: 'css/img/ComoFunciona2.png' })
+								)
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'wrapperC' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'gridA' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'wrapperTxt' },
+									_react2.default.createElement(
+										'h5',
+										{ className: 'landingTitles' },
+										'Ahorra tiempo'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'wrapperContent' },
+										_react2.default.createElement(
+											'p',
+											{ className: 'instructionTitle smallContent' },
+											'Toma de firmas'
+										),
+										_react2.default.createElement(
+											'p',
+											{ className: 'instructionDescrip smallContent' },
+											'Enf\xF3cate en construir tu negocio que nosotros nos ocuparemos de los tr\xE1mites. Sin que tengas que dar tantas vueltas te citaremos en la notar\xEDa de tu preferencia para la toma de firmas. Eso es todo!'
+										)
+									)
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'gridB' },
+								_react2.default.createElement(
+									'figure',
+									null,
+									_react2.default.createElement('img', { src: 'css/img/ComoFunciona3.png' })
+								)
 							)
 						)
 					),
-					_react2.default.createElement('div', { className: 'gridPagination' })
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'wrapperBenefits' },
-					_react2.default.createElement(
-						'h4',
-						{ className: 'landingTitles' },
-						'\xBFPor qu\xE9 constituir con nosotros?'
-					),
-					_react2.default.createElement('div', { className: 'underlineBlue' }),
 					_react2.default.createElement(
 						'div',
-						{ className: 'wrapperInfoBenefits' },
+						{ className: 'wrapperInfoB', id: 'pricing' },
 						_react2.default.createElement(
-							'div',
-							{ className: 'gridBenefit' },
-							_react2.default.createElement(
-								'figure',
-								null,
-								_react2.default.createElement('img', { src: 'css/img/rapidez.svg', alt: 'servicio r\xE1pido de constituci\xF3n - legaly' })
-							),
-							_react2.default.createElement(
-								'h2',
-								null,
-								'Rapidez'
-							),
-							_react2.default.createElement(
-								'h3',
-								null,
-								'Inicia tu constituci\xF3n en linea sin colas ni esperas, llena los formularios, elige la notar\xEDa de tu preferencia para la toma de firmas y env\xEDanos el dep\xF3sito (los gastos notariales ya est\xE1n incluidos en el precio).'
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridBenefit' },
-							_react2.default.createElement(
-								'figure',
-								null,
-								_react2.default.createElement('img', { src: 'css/img/accesible.svg', alt: '' })
-							),
-							_react2.default.createElement(
-								'h2',
-								null,
-								'Incluye'
-							),
-							_react2.default.createElement(
-								'h3',
-								null,
-								'Reserva del nombre',
-								_react2.default.createElement('br', null),
-								'Elaboraci\xF3n de minuta',
-								_react2.default.createElement('br', null),
-								'Escritura p\xFAblica',
-								_react2.default.createElement('br', null),
-								'Inscripci\xF3n en Sunarp',
-								_react2.default.createElement('br', null),
-								'Copia Literal'
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridBenefit' },
-							_react2.default.createElement(
-								'figure',
-								null,
-								_react2.default.createElement('img', { src: 'css/img/delivery.svg' })
-							),
-							_react2.default.createElement(
-								'h2',
-								null,
-								'Asesor\xEDa'
-							),
-							_react2.default.createElement(
-								'h3',
-								null,
-								'Si tienes dudas, nosotros las resolvemos. Nuestro equipo de abogados te ayudar\xE1n a constituir una mype capaz de convertirse en una transnacional.'
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gridBenefit' },
-							_react2.default.createElement(
-								'figure',
-								null,
-								_react2.default.createElement('img', { src: 'css/img/seguridad.svg' })
-							),
-							_react2.default.createElement(
-								'h2',
-								null,
-								'Seguridad'
-							),
-							_react2.default.createElement(
-								'h3',
-								null,
-								'Contamos con el respaldo de la ',
-								_react2.default.createElement(
-									'a',
-									{ href: 'http://www.notariatinageros.com/' },
-									'Notar\xEDa Tinageros'
-								),
-								', ',
-								_react2.default.createElement(
-									'a',
-									{ href: 'http://http://notariaacevedomendoza.com/' },
-									'Notar\xEDa Acevedo Mendoza'
-								),
-								', ',
-								_react2.default.createElement(
-									'a',
-									{ href: 'https://www.notariacarpiovelez.com/' },
-									'Notar\xEDa Carpio V\xE9lez'
-								),
-								' y ',
-								_react2.default.createElement(
-									'a',
-									{ href: 'http://www.notarialandazuri.com/' },
-									'Notar\xEDa Land\xE1zuri'
-								),
-								'. Adem\xE1s, de colaboradores certificados por el colegio de notarios.'
-							)
-						)
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ id: 'faq1', className: 'wrapperFaq' },
-					_react2.default.createElement(
-						'figure',
-						null,
-						_react2.default.createElement('img', { src: 'css/img/constitucion-photo.jpg' })
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'gridFaq' },
-						_react2.default.createElement(
-							'h1',
-							null,
-							'\xBFPor qu\xE9 es importante constituir mi empresa?'
+							'h4',
+							{ className: 'landingTitles' },
+							'Constituci\xF3n de empresa'
 						),
 						_react2.default.createElement('div', { className: 'underlineBlue' }),
 						_react2.default.createElement(
-							'h2',
-							null,
-							'Porque ganar\xE1s m\xE1s dinero. Si tu objetivo es crear riqueza mediante tu empresa, entonces tienes que generar seguridad en tus potenciales clientes y red de contactos. Ser confiable es ser una empresa formal. Te ver\xE1n con otros ojos, proyectar\xE1s una imagen m\xE1s s\xF3lida, podr\xE1s licitar con el estado y te recomendar\xE1n con absoluta confianza.'
+							'div',
+							{ className: 'wrapperPacks' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'gridPacks' },
+								_react2.default.createElement(
+									'figure',
+									null,
+									_react2.default.createElement('img', { src: 'css/img/Positivo1.png' })
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'pack' },
+									_react2.default.createElement(
+										'div',
+										{ className: 'gridInfo' },
+										_react2.default.createElement(
+											'h5',
+											{ className: 'bigTitlesSS' },
+											'Paquete Emprende'
+										),
+										_react2.default.createElement(
+											'h5',
+											null,
+											_react2.default.createElement(
+												'p',
+												{ className: 'symbol' },
+												'S/.'
+											),
+											_react2.default.createElement(
+												'p',
+												{ className: 'price' },
+												'650'
+											)
+										),
+										_react2.default.createElement(
+											'ul',
+											null,
+											_react2.default.createElement(
+												'li',
+												null,
+												'Asesor\xEDa legal'
+											),
+											_react2.default.createElement(
+												'li',
+												null,
+												'Reserva de nombre en SUNARP'
+											),
+											_react2.default.createElement(
+												'li',
+												null,
+												'Elaboraci\xF3n de minuta'
+											),
+											_react2.default.createElement(
+												'li',
+												null,
+												'Escritura p\xFAblica ante Notario'
+											),
+											_react2.default.createElement(
+												'li',
+												null,
+												'Inscripci\xF3n en Registros p\xFAblicos'
+											),
+											_react2.default.createElement(
+												'li',
+												null,
+												'R.U.C.'
+											)
+										),
+										_react2.default.createElement(
+											'div',
+											{ className: 'btn' },
+											_react2.default.createElement(
+												'a',
+												{ href: '#' },
+												'Iniciar inscripci\xF3n'
+											)
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'gridTerms' },
+										_react2.default.createElement(
+											'h5',
+											null,
+											'CONDICIONES'
+										),
+										_react2.default.createElement(
+											'ul',
+											null,
+											_react2.default.createElement(
+												'li',
+												null,
+												'M\xE1ximo S/ 5 000 en valor como capital social'
+											),
+											_react2.default.createElement(
+												'li',
+												null,
+												'Un s\xF3lo cargo (Gerente general)'
+											),
+											_react2.default.createElement(
+												'li',
+												null,
+												'Tr\xE1mite online en www.legaly.pe'
+											),
+											_react2.default.createElement(
+												'li',
+												null,
+												'Firma de documentos en la notar\xEDa de su elecci\xF3n'
+											),
+											_react2.default.createElement(
+												'li',
+												null,
+												'Poderes especiales s\xF3lo para Gerente general'
+											)
+										)
+									)
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'gridAditionalCosts' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'infoTitle' },
+									_react2.default.createElement(
+										'h6',
+										null,
+										'COSTOS ADICIONALES'
+									),
+									_react2.default.createElement(
+										'p',
+										null,
+										'En caso excedas las condiciones estipuladas en el paquete en cargos o capital social, considera los siguientes recargos.'
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'infoDetail' },
+									_react2.default.createElement(
+										'div',
+										{ className: 'gridA' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'wrapperConditPrice' },
+											_react2.default.createElement(
+												'p',
+												{ className: 'symbol' },
+												'S/.'
+											),
+											_react2.default.createElement(
+												'p',
+												{ className: 'price' },
+												'35'
+											)
+										),
+										_react2.default.createElement(
+											'p',
+											{ className: 'termsDescription' },
+											'Por cada cargo adicional como Gerentes, Directorio y otros.'
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'gridB' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'wrapperConditPrice' },
+											_react2.default.createElement(
+												'p',
+												{ className: 'symbol' },
+												'S/.'
+											),
+											_react2.default.createElement(
+												'p',
+												{ className: 'price' },
+												'5'
+											)
+										),
+										_react2.default.createElement(
+											'p',
+											{ className: 'termsDescription' },
+											'Por cada S/ 1 000 adicionales en el valor del capital social.'
+										)
+									)
+								)
+							)
 						)
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ id: 'faq2', className: 'wrapperFaq' },
-					_react2.default.createElement(
-						'figure',
-						null,
-						_react2.default.createElement('img', { src: 'css/img/registromarca-photo.jpg' })
 					),
 					_react2.default.createElement(
 						'div',
-						{ className: 'gridFaq' },
+						{ className: 'wrapperInfoC', id: 'notaries' },
 						_react2.default.createElement(
-							'h1',
-							null,
-							'\xBFQu\xE9 otros tr\xE1mites me puede facilitar Legaly?'
+							'h4',
+							{ className: 'landingTitles' },
+							'Notar\xEDas Aliadas'
 						),
 						_react2.default.createElement('div', { className: 'underlineBlue' }),
 						_react2.default.createElement(
-							'h2',
-							null,
-							'Tambi\xE9n ofrecemos servicios de registro de marca, cambio de denominaci\xF3n, transferencia de participaciones, nombramiento de cargo, renuncia y nombramiento de cargo, transferencia de acciones, transformaci\xF3n de tipo societario y modificaci\xF3n de objeto social. Puedes realizar las consultas al 942 914 542'
+							'div',
+							{ className: 'wrapperList' },
+							_react2.default.createElement(
+								'ul',
+								{ className: 'gridA' },
+								_react2.default.createElement(
+									'li',
+									null,
+									_react2.default.createElement(
+										'p',
+										{ className: 'notaryName' },
+										'NOTAR\xCDA TINAGEROS'
+									),
+									_react2.default.createElement(
+										'p',
+										{ className: 'notaryLocation' },
+										'San Isidro'
+									)
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									_react2.default.createElement(
+										'p',
+										{ className: 'notaryName' },
+										'NOTAR\xCDA LAND\xC1ZURI'
+									),
+									_react2.default.createElement(
+										'p',
+										{ className: 'notaryLocation' },
+										'Av. Brigida Silva de Ochoa 3398 int 201, San Miguel.'
+									)
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									_react2.default.createElement(
+										'p',
+										{ className: 'notaryName' },
+										'NOTAR\xCDA ACEVEDO MENDOZA'
+									),
+									_react2.default.createElement(
+										'p',
+										{ className: 'notaryLocation' },
+										'Av. Javier Prado Oeste 850, Magdalena del Mar.'
+									)
+								)
+							),
+							_react2.default.createElement(
+								'ul',
+								{ className: 'gridB' },
+								_react2.default.createElement(
+									'li',
+									null,
+									_react2.default.createElement(
+										'p',
+										{ className: 'notaryName' },
+										'NOTAR\xCDA DONATO CARPIO'
+									),
+									_react2.default.createElement(
+										'p',
+										{ className: 'notaryLocation' },
+										'Av. Rep\xFAblica de Chile 295 Of. 205, Santa Beatriz.'
+									)
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									_react2.default.createElement(
+										'p',
+										{ className: 'notaryName' },
+										'NOTAR\xCDA G\xC1LVEZ'
+									),
+									_react2.default.createElement(
+										'p',
+										{ className: 'notaryLocation' },
+										'Av. Oscar R. Benavides (ex av. Colonial) N\xBA 5177 Parque Industrial, Callao.'
+									)
+								)
+							)
 						)
 					)
 				),
@@ -29080,6 +29460,63 @@ var Landing = function (_Component) {
 								{ className: 'counterName' },
 								'Empresas asesoradas'
 							)
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'wrapperContact', id: 'contact' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridData' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'wrapperTxt' },
+							_react2.default.createElement(
+								'h5',
+								{ className: 'landingTitles' },
+								'\xBFTienes alguna duda?'
+							),
+							_react2.default.createElement('div', { className: 'underlineBlue' }),
+							_react2.default.createElement(
+								'p',
+								{ className: 'field smallContent' },
+								'Este texto hay que formularlo y tiene que invitar al cliente ha que se comunique con nosotros dejandole claro que no existe un costo por la consulta y que puede hacer las preguntas que quiera tmb se le puede invitar a seguirnos en las redes sociales? Elaborar'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'field smallContent' },
+								'Estamos en'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'smallContent data' },
+								'Calle Porta 165, Miraflores'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'field smallContent' },
+								'Cont\xE1ctanos a'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'smallContent data' },
+								'info@legaly.pe'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'smallContent data' },
+								'01 420 6162'
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridMap' },
+						_react2.default.createElement(
+							'figure',
+							null,
+							_react2.default.createElement('img', { src: 'css/img/map.png' })
 						)
 					)
 				)
