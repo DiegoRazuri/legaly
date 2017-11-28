@@ -376,11 +376,13 @@ export default class Landing extends Component{
 								<h5 className="landingTitles">¿Tienes alguna duda?</h5>
 								<div className="underlineBlue"></div>
 								<p className="field smallContent">Este texto hay que formularlo y tiene que invitar al cliente ha que se comunique con nosotros dejandole claro que no existe un costo por la consulta y que puede hacer las preguntas que quiera tmb se le puede invitar a seguirnos en las redes sociales? Elaborar</p>
-								<p className="field smallContent">Estamos en</p>
-								<p className="smallContent data">Calle Porta 165, Miraflores</p>
 								<p className="field smallContent">Contáctanos a</p>
 								<p className="smallContent data">info@legaly.pe</p>
 								<p className="smallContent data">01 420 6162</p>
+								<p className="smallContent data">942 914 542</p>
+								<p className="field smallContent">Estamos en</p>
+								<p className="smallContent data">Calle Porta 165, Miraflores</p>
+
 								
 
 							</div>

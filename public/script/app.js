@@ -28901,7 +28901,7 @@ var Landing = function (_Component) {
 										_react2.default.createElement(
 											'p',
 											{ className: 'instructionDescrip smallContent' },
-											'Dale click a \u201Ccrear mi empresa\u201D, y registrate con la red social de tu preferencia. Luego, llena un formulario con la informaci\xF3n de tu negocio y la de tus socios. Si tienes dudas solicita una asistencia telef\xF3nica para asesorarte paso a paso. Las consultas no tienen costo!'
+											'Dale click a \u201Ccrear mi empresa\u201D y registrate con la red social de tu preferencia. Luego, llena un formulario con la informaci\xF3n de tu negocio y la de tus socios. Si tienes dudas solicita una asistencia telef\xF3nica para asesorarte paso a paso. Las consultas no tienen costo!'
 										)
 									)
 								)
@@ -29486,16 +29486,6 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'p',
 								{ className: 'field smallContent' },
-								'Estamos en'
-							),
-							_react2.default.createElement(
-								'p',
-								{ className: 'smallContent data' },
-								'Calle Porta 165, Miraflores'
-							),
-							_react2.default.createElement(
-								'p',
-								{ className: 'field smallContent' },
 								'Cont\xE1ctanos a'
 							),
 							_react2.default.createElement(
@@ -29507,6 +29497,21 @@ var Landing = function (_Component) {
 								'p',
 								{ className: 'smallContent data' },
 								'01 420 6162'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'smallContent data' },
+								'942 914 542'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'field smallContent' },
+								'Estamos en'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'smallContent data' },
+								'Calle Porta 165, Miraflores'
 							)
 						)
 					),
