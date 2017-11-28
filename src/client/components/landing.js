@@ -375,7 +375,7 @@ export default class Landing extends Component{
 							<div className="wrapperTxt">
 								<h5 className="landingTitles">¿Tienes alguna duda?</h5>
 								<div className="underlineBlue"></div>
-								<p className="field smallContent">Este texto hay que formularlo y tiene que invitar al cliente ha que se comunique con nosotros dejandole claro que no existe un costo por la consulta y que puede hacer las preguntas que quiera tmb se le puede invitar a seguirnos en las redes sociales? Elaborar</p>
+								<p className="field smallContent">Puedes solicitar una asesoría gratuita para la constitución de tu empresa en el momento que lo desees, incluso por whatsapp. Te invitamos a seguirnos en nuestras redes sociales donde compartiremos conocimiento y contactos para la comunidad Legaly!</p>
 								<p className="field smallContent">Contáctanos a</p>
 								<p className="smallContent data">info@legaly.pe</p>
 								<p className="smallContent data">01 420 6162</p>
