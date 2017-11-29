@@ -21,7 +21,7 @@ export default class LoginForm extends Component{
 					<figure>
 						<img src="css/img/LogotipoLegaly.svg"/>
 					</figure>
-					<h5>Crea tu empresa, sin moverte a ningún lugar.</h5>
+					<h5>Registrate facilmente con una red social, luego llena el formulario.</h5>
 					<div className="underlineBlue"></div>
 
 					

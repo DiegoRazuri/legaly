@@ -101,6 +101,8 @@ export default class Landing extends Component{
 							<div onClick={this.scrollinContact.bind(this)} id="btnContact" className="ctaB" data-direct="#contact">
 								<p>¿Consultas?</p>
 							</div>
+							<h2 className="mediumContent contactNum"><span className="icon-whatsapp"></span>942 914 542</h2>
+							<h2 className="mediumContent contactNum"><span className="icon-office"></span>01 420 6162</h2>
 						</div>
 					</div>
 					<div className="wrapperProductInfo">

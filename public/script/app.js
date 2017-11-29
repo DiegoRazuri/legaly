@@ -28764,6 +28764,18 @@ var Landing = function (_Component) {
 								null,
 								'\xBFConsultas?'
 							)
+						),
+						_react2.default.createElement(
+							'h2',
+							{ className: 'mediumContent contactNum' },
+							_react2.default.createElement('span', { className: 'icon-whatsapp' }),
+							'942 914 542'
+						),
+						_react2.default.createElement(
+							'h2',
+							{ className: 'mediumContent contactNum' },
+							_react2.default.createElement('span', { className: 'icon-office' }),
+							'01 420 6162'
 						)
 					)
 				),
@@ -29481,7 +29493,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'p',
 								{ className: 'field smallContent' },
-								'Este texto hay que formularlo y tiene que invitar al cliente ha que se comunique con nosotros dejandole claro que no existe un costo por la consulta y que puede hacer las preguntas que quiera tmb se le puede invitar a seguirnos en las redes sociales? Elaborar'
+								'Puedes solicitar una asesor\xEDa gratuita para la constituci\xF3n de tu empresa en el momento que lo desees, incluso por whatsapp. Te invitamos a seguirnos en nuestras redes sociales donde compartiremos conocimiento y contactos para la comunidad Legaly!'
 							),
 							_react2.default.createElement(
 								'p',
@@ -29611,7 +29623,7 @@ var LoginForm = function (_Component) {
 					_react2.default.createElement(
 						'h5',
 						null,
-						'Crea tu empresa, sin moverte a ning\xFAn lugar.'
+						'Registrate facilmente con una red social, luego llena el formulario.'
 					),
 					_react2.default.createElement('div', { className: 'underlineBlue' }),
 					_react2.default.createElement(
