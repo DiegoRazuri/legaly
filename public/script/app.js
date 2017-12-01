@@ -29051,7 +29051,7 @@ var Landing = function (_Component) {
 											_react2.default.createElement(
 												'p',
 												{ className: 'price' },
-												'650'
+												'580'
 											)
 										),
 										_react2.default.createElement(
@@ -29227,12 +29227,22 @@ var Landing = function (_Component) {
 										_react2.default.createElement(
 											'li',
 											null,
-											'DNI y direcci\xF3n de socios (DNI de conyugues, si aplica)'
+											'Informaci\xF3n de socios: DNI, nombre completo, domicilio, DNI de conyugues'
 										),
 										_react2.default.createElement(
 											'li',
 											null,
 											'3 opciones de nombre'
+										),
+										_react2.default.createElement(
+											'li',
+											null,
+											'Inversi\xF3n por socio'
+										),
+										_react2.default.createElement(
+											'li',
+											null,
+											'Descripci\xF3n de bienes: modelo, marca y n\xBA de serie (si aporta bien como capital)'
 										)
 									)
 								)

@@ -217,7 +217,7 @@ export default class Landing extends Component{
 									<div className="pack">
 										<div className="gridInfo">
 											<h5 className="bigTitlesSS">Paquete Emprende</h5>
-											<h5><p className="symbol">S/.</p><p className="price">650</p></h5>
+											<h5><p className="symbol">S/.</p><p className="price">580</p></h5>
 											<ul>
 												<li>Asesoría legal</li>
 												<li>Reserva de nombre en SUNARP</li>
@@ -266,8 +266,10 @@ export default class Landing extends Component{
 									</div>
 									<div className="infoDetail">
 										<ul>
-											<li>DNI y dirección de socios (DNI de conyugues, si aplica)</li>
+											<li>Información de socios: DNI, nombre completo, domicilio, DNI de conyugues</li>
 											<li>3 opciones de nombre</li>
+											<li>Inversión por socio</li>
+											<li>Descripción de bienes: modelo, marca y nº de serie (si aporta bien como capital)</li>
 										</ul>
 									</div>
 								</div>
