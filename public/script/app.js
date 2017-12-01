@@ -29227,17 +29227,17 @@ var Landing = function (_Component) {
 										_react2.default.createElement(
 											'li',
 											null,
-											'Informaci\xF3n de socios: DNI, nombre completo, domicilio, DNI de conyugues'
-										),
-										_react2.default.createElement(
-											'li',
-											null,
 											'3 opciones de nombre'
 										),
 										_react2.default.createElement(
 											'li',
 											null,
-											'Inversi\xF3n por socio'
+											'Informaci\xF3n de socios: DNI, nombre completo, domicilio, DNI de conyugues'
+										),
+										_react2.default.createElement(
+											'li',
+											null,
+											'Monto de inversi\xF3n por socio'
 										),
 										_react2.default.createElement(
 											'li',

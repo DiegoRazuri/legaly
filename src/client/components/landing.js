@@ -266,9 +266,9 @@ export default class Landing extends Component{
 									</div>
 									<div className="infoDetail">
 										<ul>
-											<li>Información de socios: DNI, nombre completo, domicilio, DNI de conyugues</li>
 											<li>3 opciones de nombre</li>
-											<li>Inversión por socio</li>
+											<li>Información de socios: DNI, nombre completo, domicilio, DNI de conyugues</li>
+											<li>Monto de inversión por socio</li>
 											<li>Descripción de bienes: modelo, marca y nº de serie (si aporta bien como capital)</li>
 										</ul>
 									</div>
