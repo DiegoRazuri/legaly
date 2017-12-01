@@ -29205,6 +29205,37 @@ var Landing = function (_Component) {
 										)
 									)
 								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'gridRequirements' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'infoTitle' },
+									_react2.default.createElement(
+										'h6',
+										null,
+										'REQUISITOS'
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'infoDetail' },
+									_react2.default.createElement(
+										'ul',
+										null,
+										_react2.default.createElement(
+											'li',
+											null,
+											'DNI y direcci\xF3n de socios (DNI de conyugues, si aplica)'
+										),
+										_react2.default.createElement(
+											'li',
+											null,
+											'3 opciones de nombre'
+										)
+									)
+								)
 							)
 						)
 					),

@@ -991,6 +991,53 @@ body
 												width 90%
 												margin 0px auto 30px auto
 													
+								.gridRequirements
+									width 85%
+									margin 20px auto
+									
+									.infoTitle
+										background-color white
+										padding 20px 0px
+										border solid 1px #A2bc31
+										
+										h6
+											color #A2bc31
+											font-family "Open Sans"
+											text-align center
+											font-size 0.9em
+											font-weight bold
+											letter-spacing 3px
+											margin 0px auto
+											
+									.infoDetail
+										background-color #A2bc31
+										display flex
+										justify-content space-between
+										padding 20px 0px
+										
+										ul
+											padding 0px
+											margin 0px auto
+											display block
+											width 70%
+											list-style none
+
+											li
+												color white
+												font-family "Open Sans"
+												font-weight lighter
+												font-size 0.9em
+												margin 3px auto
+												text-align left
+												
+											li::before
+												content "+"
+												color white
+												font-size 0.9em
+												margin 0px 4px 0px 0px
+										
+										
+										
 						.wrapperInfoC
 							padding-top 20px
 							
@@ -1619,12 +1666,27 @@ body
 					padding-top 10px
 					flex-direction row
 					justify-content center
+					flex-wrap wrap
+					height 660px
 					
 					.gridPacks
 						width 50%
 					.gridAditionalCosts
 						width 40%
 						margin 40px 0px 0px 0px
+						
+				
+					
+					.gridRequirements
+						width 40%
+						position relative
+						top -370px
+						left 192px
+						
+						.infoDetail
+							ul
+								width 72%
+						
 						
 			.wrapperInfoC
 				margin-bottom 50px
@@ -1819,8 +1881,21 @@ body
 							
 			.wrapperInfoB
 				.wrapperPacks
+					flex-wrap wrap
+					height 670px
+					
 					.gridPacks
 						width 400px
+						
+					.gridRequirements
+						width 40%
+						position relative
+						top -378px
+						left 200px
+						
+						.infoDetail
+							ul
+								width 72%
 						
 			.wrapperInfoC
 				.wrapperList

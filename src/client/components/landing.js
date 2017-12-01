@@ -260,6 +260,17 @@ export default class Landing extends Component{
 										</div>
 									</div>
 								</div>
+								<div className="gridRequirements">
+									<div className="infoTitle">
+										<h6>REQUISITOS</h6>
+									</div>
+									<div className="infoDetail">
+										<ul>
+											<li>DNI y dirección de socios (DNI de conyugues, si aplica)</li>
+											<li>3 opciones de nombre</li>
+										</ul>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div className="wrapperInfoC" id="notaries">
