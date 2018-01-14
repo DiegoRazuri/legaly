@@ -370,9 +370,9 @@
 					.btnRed
 						order 8
 						
-		.paymentMethodForm
+		.paymentMethodForm, .selectPaymentMethodForm
 			.gridForm
-				.wrapperBtnPayments
+				.wrapperBtnPayments, .wrapperPaymentInformation
 					display flex
 					flex-direction column
 					align-items center
@@ -447,6 +447,126 @@
 					span
 						text-align center
 						
+		.selectPaymentMethodForm
+			
+			
+			#paymentConfirmation
+				display none
+				
+			.gridForm 
+				.wrapperBtnPayments
+					display flex
+					flex-wrap wrap
+					flex-direction row
+					margin 20px auto 30px auto
+					justify-content space-around
+					
+					.gridBtnPaymentMethod
+						width 45%
+						
+						figure
+							border solid 1px #ccc
+							width 120px
+							padding 20px
+							display flex
+							height 120px
+							justify-content center
+							margin 15px auto
+							
+							
+							img
+								width 100%
+								display block
+								margin auto
+								
+						figure:hover
+							border solid 1px #007eff
+								
+						.icoCards
+							cursor pointer
+								
+						.icoVoucher
+							
+							img
+								width 86%
+
+						p
+							text-align center
+				
+				.wrapperPaymentInformation
+					flex-direction column
+					
+			.gridLoader
+				width 300px
+				height 300px
+				display none
+				justify-content center
+				align-content center
+				margin 40px auto 0px auto
+				overflow hidden
+				align-items center
+				
+				.loader {
+					font-size: 10px;
+					margin: 0px auto 0px auto;
+					text-indent: -9999em;
+					width: 11em;
+					height: 11em;
+					border-radius: 50%;
+					background: #007eff;
+					background: -moz-linear-gradient(left, #007eff 10%, rgba(255, 255, 255, 0) 42%);
+					background: -webkit-linear-gradient(left, #007eff 10%, rgba(255, 255, 255, 0) 42%);
+					background: -o-linear-gradient(left, #007eff 10%, rgba(255, 255, 255, 0) 42%);
+					background: -ms-linear-gradient(left, #007eff 10%, rgba(255, 255, 255, 0) 42%);
+					background: linear-gradient(to right, #007eff 10%, rgba(255, 255, 255, 0) 42%);
+					position: relative;
+					-webkit-animation: load3 1.4s infinite linear;
+					animation: load3 1.4s infinite linear;
+				}
+				.loader:before {
+					width: 50%;
+					height: 50%;
+					background: #007eff;
+					border-radius: 100% 0 0 0;
+					position: absolute;
+					top: 0;
+					left: 0;
+					content: '';
+				}
+				.loader:after {
+					background: white;
+					width: 75%;
+					height: 75%;
+					border-radius: 50%;
+					content: '';
+					margin: auto;
+					position: absolute;
+					top: 0;
+					left: 0;
+					bottom: 0;
+					right: 0;
+				}
+				@-webkit-keyframes load3 {
+					0% {
+					-webkit-transform: rotate(0deg);
+					transform: rotate(0deg);
+					}
+					100% {
+					-webkit-transform: rotate(360deg);
+					transform: rotate(360deg);
+					}
+				}
+				@keyframes load3 {
+					0% {
+					-webkit-transform: rotate(0deg);
+					transform: rotate(0deg);
+					}
+					100% {
+					-webkit-transform: rotate(360deg);
+					transform: rotate(360deg);
+					}
+				}
+
 		.dateForm
 			.gridForm
 				form
@@ -789,6 +909,10 @@ select
 				.icoInputDate
 					display flex
 					margin-left 10px
+					
+	.sectionEnterpriseIncorporation .wrapperIncorporationForm .selectPaymentMethodForm .gridForm .wrapperBtnPayments
+		padding-bottom 30px
+		width 70%
 		
 @media screen and (min-width: 1180px)
 	
@@ -1109,7 +1233,7 @@ select
 					.subtitle
 						margin-top 25px
 					
-				.paymentMethodForm
+				.paymentMethodForm, .selectPaymentMethodForm
 					order 2
 					width 550px
 					
@@ -1132,8 +1256,12 @@ select
 						.btnServiceTicket
 							display none
 						
+						.wrapperPaymentInformation
+							.btnPaymentMethod
+								width 110px
+						
 
-				.serviceTicket, .paymentMethodForm, .gridUserHelp
+				.serviceTicket, .paymentMethodForm, .gridUserHelp, .selectPaymentMethodForm
 					margin 80px 7px
 					box-shadow 1px 1px 20px rgba(0,0,0,0.2)
 					

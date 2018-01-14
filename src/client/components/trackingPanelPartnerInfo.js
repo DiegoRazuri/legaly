@@ -106,7 +106,7 @@ export default class TrackingPanelPartnerInfo extends Component{
 
 					<div className="rowPartnerInfo">
 						<p className="fieldName">celular/telefono</p>
-						<p className="fieldValue">{this.props.user.phone_number}</p>
+						<p className="fieldValue">{this.props.user.phoneNumber}</p>
 					</div>
 					
 				</div>

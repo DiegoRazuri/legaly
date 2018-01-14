@@ -20,6 +20,8 @@ let EnterpriseSchema = new mongoose.Schema({
 	notary: {type: String},
 	signAppointmentLocation : {type: String},
 	price : {type:Number},
+	tokenId : {type:String},
+	paymentMethod : {type:String},
 	inProcess : {type: Boolean, default : false},
 	serviceState : {type: Number, default : 0},
 	createdAt: {type: Date, default: Date.now}

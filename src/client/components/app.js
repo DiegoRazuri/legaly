@@ -14,12 +14,15 @@ import EnterpriseInformationForm from './enterpriseInformationForm';
 import PartnersAddingForm from './partnersAddingForm';
 import PersonalInformationForm from './personalInformationForm';
 import DateForm from './dateForm';
+import SelectPaymentMethodForm from './selectPaymentMethodForm';
 import PaymentMethodForm from './paymentMethodForm';
 import Userprofile from './userprofile';
 import UserAvatar from './userAvatar';
 import TrackingPanel from './trackingPanel';
 import TrackingEnterpriseInfo from './trackingEnterpriseInfo';
 import TheCreatorPanel from './theCreatorPanel';
+
+
 
 export default class App extends Component{
 
@@ -55,9 +58,15 @@ export default class App extends Component{
 		this.switchBtnNavSelected = this.switchBtnNavSelected.bind(this);
 		this.resetEnterpriseRegistrationData = this.resetEnterpriseRegistrationData.bind(this);
 		this.insertDataRootLevel = this.insertDataRootLevel.bind(this);
+		
+	
 	
 	
 	}
+
+	
+
+	
 
 	resetEnterpriseRegistrationData(){
 		this.setState({
@@ -558,7 +567,7 @@ export default class App extends Component{
 							</div>
 							<div className="gridGeneralContactInfo">
 								<div className="subGrid">
-									<span className="icon-office"></span>
+									<span className="icon-whatsapp"></span>
 									<p>942 914 542</p>
 								</div>
 								<div className="subGrid">
@@ -579,7 +588,7 @@ export default class App extends Component{
 								</Link>
 							</figure>
 							<div className="gridNav">
-								<Link to="/informacion-empresa" className="btnMainNav" className={this.state.btnNavCons} onClick={this.switchBtnNavSelected.bind(this, 0)}>Constituye tu Empresa</Link>
+								<Link to="/login" className="btnMainNav" className={this.state.btnNavCons} onClick={this.switchBtnNavSelected.bind(this, 0)}>Constituye tu Empresa</Link>
 								
 							</div>
 							
@@ -600,7 +609,8 @@ export default class App extends Component{
 						<Route path="/invitar-socios" render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<PartnersAddingForm user={this.state.user} sendPartnerInvitation={this.sendPartnerInvitation} enterpriseInProcessData={this.state.enterpriseInProcessData} rowPartnerInputHandler={this.rowPartnerInputHandler} deletingPartnerRow={this.deletingPartnerRow} rowAccountManagerInputHandler={this.rowAccountManagerInputHandler} partnersInvitationSaved={this.state.partnersInvitationSaved} updatePartnerInvitation={this.updatePartnerInvitation}/> )   )}/>
 						<Route path="/informacion-personal" render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<PersonalInformationForm user={this.state.user} enterpriseInProcessData={this.state.enterpriseInProcessData} inputTextHandler={this.inputTextHandler} selectHandler={this.selectHandler} rowInputsHandler={this.rowInputsHandler} deleteRowInputHandle={this.deleteRowInputHandle} sendPartnersInformation={this.sendPartnersInformation} enterpriseSaved={this.state.enterpriseSaved}/> )    )}/>
 						<Route path="/fecha-firma" render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<DateForm inputTextHandlerRootLevel={this.inputTextHandlerRootLevel} enterpriseInProcessData={this.state.enterpriseInProcessData} insertDataRootLevel={this.insertDataRootLevel} sendSingingDateInformation={this.sendSingingDateInformation} enterpriseSaved={this.state.enterpriseSaved}/>)    )}/>
-						<Route path="/metodo-pago" onUpdate={this.logPageView} render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<PaymentMethodForm enterpriseInProcessData={this.state.enterpriseInProcessData} enterpriseSaved={this.state.enterpriseSaved}/>)    )}/>
+						<Route path="/seleccion-metodo-pago" onUpdate={this.logPageView} render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<SelectPaymentMethodForm enterpriseInProcessData={this.state.enterpriseInProcessData} enterpriseSaved={this.state.enterpriseSaved}/>)    )}/>
+						<Route path="/metodo-pago-voucher" onUpdate={this.logPageView} render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<PaymentMethodForm enterpriseInProcessData={this.state.enterpriseInProcessData} enterpriseSaved={this.state.enterpriseSaved}/>)    )}/>
 						<Route path="/perfil" onUpdate={this.logPageView} render={(props)=>( this.state.user == false ? (<Redirect to="/login"/>) : (<Userprofile user={this.state.user} isItLogin={this.isItLogin}/>) )}/>
 						<Route path="/panel-listado-empresas" onUpdate={this.logPageView} render={(props)=>( <TrackingPanel user={this.state.user} isItLogin={this.isItLogin}/> )}/>
 						<Route path="/panel-detalle-empresas/:enterprise_id" onUpdate={this.logPageView}  component={TrackingEnterpriseInfo}/>

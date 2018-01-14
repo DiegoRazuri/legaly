@@ -34,6 +34,9 @@ var _appadmin2 = _interopRequireDefault(_appadmin);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//modulo para consumir api externa
+var request = require('request-promise-native');
+
 //configuracion para el router
 var router = _express2.default.Router();
 //configuracion para el bodyparser
@@ -49,14 +52,9 @@ var months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "A
 
 router.get('/usersession', function (req, res) {
 
-	//console.log(req.session.passport.user)
-
-
 	if (!req.user) {
 		res.json({ user: false });
 	} else {
-
-		console.log("se ejecuta query");
 
 		_userprofiles2.default.findById(req.user._id).populate({
 			path: 'enterprise'
@@ -83,7 +81,6 @@ router.get('/usersession', function (req, res) {
 						throw err;
 					} else {
 
-						//console.log(result)
 						res.json(result);
 					}
 				});
@@ -97,8 +94,6 @@ router.post('/enterprise_information_update', jsonParser, function (req, res) {
 	if (!req.body) return res.sendStatus(400);
 
 	var data = req.body;
-	console.log("enterprise_information_update");
-	console.log(data);
 
 	_enterprises2.default.findById(data._id).populate({
 		path: 'partners'
@@ -115,9 +110,6 @@ router.post('/enterprise_information_update', jsonParser, function (req, res) {
 
 		_userprofiles2.default.populate(enterprise, options, function (err, enterprise_info) {
 			if (err) throw err;
-			console.log("ultimo populate");
-			console.log(data.industry);
-			console.log(enterprise_info);
 
 			enterprise_info.industry = data.industry;
 			enterprise_info.isItGoodsCapital = data.isItGoodsCapital;
@@ -188,7 +180,7 @@ router.post('/signing_date_information', jsonParser, function (req, res) {
 		//enterprise.signAppointmentTime = data.signAppointmentTime;
 		enterprise.signAppointmentLocation = data.signAppointmentLocation;
 
-		var base = 650;
+		var base = 580;
 
 		var num_positions = 0;
 
@@ -579,7 +571,6 @@ router.post('/delete_partner_invitation', jsonParser, function (req, res) {
 						path: "partners"
 					}).exec(function (err, enterprise) {
 
-						console.log(enterprise);
 						if (err) {
 							res.sendStatus(500).json(err);
 						} else {
@@ -589,15 +580,11 @@ router.post('/delete_partner_invitation', jsonParser, function (req, res) {
 									enterprise.partners.splice(index, 1);
 								}
 							});
-							console.log("previo al save de enterprise");
-							console.log(enterprise);
 
 							enterprise.save(function (err) {
 								if (err) {
 									res.sendStatus(500).json(err);
 								} else {
-
-									console.log(enterprise);
 
 									var json = { state: 1 };
 									res.json(json);
@@ -618,7 +605,7 @@ router.get('/all_enterprises', function (req, res) {
 
 	_enterprises2.default.find({ inProcess: false }).populate({
 		path: 'partners'
-	}).exec(function (err, enterprise) {
+	}).sort('-date').exec(function (err, enterprise) {
 		if (err) {
 			res.sendStatus(500).json(err);
 		} else {
@@ -671,7 +658,6 @@ router.get('/all_users_admin', function (req, res) {
 router.post('/enterprise_detail', function (req, res) {
 	if (!req.body) return res.sendStatus(400);
 	var data = req.body;
-	console.log(data);
 
 	_enterprises2.default.findById(data.enterprise_id).populate({
 		path: "partners"
@@ -748,13 +734,11 @@ router.post('/add_user_admin', jsonParser, function (req, res) {
 router.post('/delete_userAdmin', jsonParser, function (req, res) {
 	if (!req.body) return res.sendStatus(400);
 	var data = req.body;
-	console.log(data);
 
 	_appadmin2.default.find().populate({
 		path: 'users'
 	}).exec(function (err, adminData) {
 
-		console.log(adminData);
 		if (err) {
 			res.sendStatus(500).json(err);
 		} else {
@@ -786,7 +770,6 @@ router.post('/delete_userAdmin', jsonParser, function (req, res) {
 router.post('/create_super_user', jsonParser, function (req, res) {
 	if (!req.body) return res.sendStatus(400);
 	var data = req.body;
-	console.log(data);
 
 	var appAdmin = new _appadmin2.default();
 
@@ -837,9 +820,6 @@ router.get('/is_it_the_creator', function (req, res) {
 router.post('/is_it_admin', function (req, res) {
 	if (!req.body) return res.sendStatus(400);
 
-	console.log("is_it_admin");
-	console.log(req.user._id);
-
 	if (req.user) {
 		_appadmin2.default.find().populate({
 			path: "users"
@@ -851,8 +831,7 @@ router.post('/is_it_admin', function (req, res) {
 				var json = void 0;
 
 				for (var i = 0; i < appadmin[0].users.length; i++) {
-					console.log("usuario");
-					console.log(appadmin[0].users[i]);
+
 					if (req.user._id == appadmin[0].users[i]._id) {
 						json = { state: 1 };
 
@@ -873,13 +852,9 @@ router.post('/update_service_state', jsonParser, function (req, res) {
 	if (!req.body) return res.sendStatus(400);
 	var data = req.body;
 
-	console.log(data);
-
 	_enterprises2.default.findById(data.enterpriseId).exec(function (err, enterprise) {
 
 		enterprise.serviceState = data.serviceState;
-
-		console.log(enterprise.serviceState);
 
 		enterprise.save(function (err) {
 			if (err) {
@@ -911,13 +886,72 @@ router.post('/update_service_state', jsonParser, function (req, res) {
 									res.sendStatus(500).json(err);
 								} else {
 
-									console.log(e_data);
 									res.json(e_data);
 								}
 							});
 						});
 					}
 				});
+			}
+		});
+	});
+});
+
+// ENDPOINT registrar token id culqi
+
+router.post('/register_tokenid', jsonParser, function (req, res) {
+	if (!req.body) return res.sendStatus(400);
+	var data = req.body;
+
+	_enterprises2.default.findById(data.enterprise_id).exec(function (err, enterprise) {
+		if (err) {
+			return res.sendStatus(500).json(err);
+		}
+
+		enterprise.tokenId = data.token_id;
+		enterprise.paymentMethod = data.payment_method;
+
+		enterprise.save(function (err) {
+			if (err) {
+				res.sendStatus(500).json(err);
+			} else {
+
+				//envio de datos a culqi
+
+				var amount = enterprise.price + "00";
+
+				var chargeJson = {
+					"amount": amount,
+					"currency_code": "PEN",
+					"email": data.customerEmail,
+					"source_id": data.token_id
+				};
+
+				var p_k = 'Bearer ' + process.env.CULQI_PRIVATE_KEY;
+
+				var optionsReqCulqi = {
+					method: 'POST',
+					uri: 'https://api.culqi.com/v2/charges',
+					body: chargeJson,
+					json: true,
+					headers: {
+						'Authorization': p_k,
+						'Accept': 'application/json',
+						'Content-Type': 'application/json'
+					}
+				};
+
+				request(optionsReqCulqi).then(function (response) {
+
+					var resp = {
+						state: 1
+					};
+					res.json(resp);
+				}).catch(function (err) {
+					console.log(err);
+				});
+
+				//res.json(resp)
 			}
 		});
 	});

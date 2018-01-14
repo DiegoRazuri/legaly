@@ -7,6 +7,9 @@ import Enterprise from 'src/server/models/enterprises'
 import Partners from 'src/server/models/partners'
 import AppAdmin from 'src/server/models/appadmin'
 
+//modulo para consumir api externa
+const request = require('request-promise-native')
+
 //configuracion para el router
 const router = express.Router();
 //configuracion para el bodyparser
@@ -22,14 +25,14 @@ let months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "A
 
 router.get('/usersession', function ( req, res ){
 
-	//console.log(req.session.passport.user)
+
 
 
 	if(!req.user){
 		res.json({user:false})
 	}else{
 
-		console.log("se ejecuta query")
+		
 	
 		Userprofiles.findById(req.user._id).
 			populate({
@@ -58,7 +61,7 @@ router.get('/usersession', function ( req, res ){
 							throw err;
 						}else{
 
-							//console.log(result)
+							
 							res.json(result);
 						}
 							
@@ -77,8 +80,8 @@ router.post('/enterprise_information_update', jsonParser, function (req, res){
 	if (!req.body) return res.sendStatus(400)
 
 		let data = req.body;
-		console.log("enterprise_information_update")
-		console.log(data)
+		
+		
 
 		Enterprise.findById(data._id).
 			populate({
@@ -95,9 +98,7 @@ router.post('/enterprise_information_update', jsonParser, function (req, res){
 
 				Userprofiles.populate(enterprise, options, function(err, enterprise_info){
 					if (err) throw err;
-					console.log("ultimo populate")
-					console.log(data.industry)
-					console.log(enterprise_info)
+					
 
 
 					enterprise_info.industry = data.industry;
@@ -632,7 +633,7 @@ router.post('/delete_partner_invitation', jsonParser, function (req, res){
 							}).
 							exec(function(err, enterprise){
 
-								console.log(enterprise)
+								
 								if(err){
 									res.sendStatus(500).json(err)
 								}else{
@@ -642,15 +643,14 @@ router.post('/delete_partner_invitation', jsonParser, function (req, res){
 											enterprise.partners.splice(index, 1)
 										}
 									});
-									console.log("previo al save de enterprise")
-									console.log(enterprise)
+									
 
 									enterprise.save(function(err){
 										if(err){
 											res.sendStatus(500).json(err)
 										}else{
 
-											console.log(enterprise)
+											
 
 											let json = { state : 1}
 											res.json(json);
@@ -679,6 +679,7 @@ router.get('/all_enterprises', function(req, res){
 		populate({
 			path : 'partners'
 		}).
+		sort('-date').
 		exec(function(err, enterprise){
 			if(err){
 				res.sendStatus(500).json(err)
@@ -741,7 +742,7 @@ router.get('/all_users_admin', function(req, res){
 router.post('/enterprise_detail', function(req, res){
 	if (!req.body) return res.sendStatus(400)
 		let data = req.body;
-		console.log(data)
+		
 
 	Enterprise.findById(data.enterprise_id).
 		populate({
@@ -839,7 +840,7 @@ router.post('/add_user_admin', jsonParser, function (req, res){
 router.post('/delete_userAdmin', jsonParser, function (req, res){
 	if (!req.body) return res.sendStatus(400)
 		let data = req.body;
-		console.log(data)
+		
 
 
 		AppAdmin.find().
@@ -848,7 +849,7 @@ router.post('/delete_userAdmin', jsonParser, function (req, res){
 			}).
 			exec(function(err, adminData){
 
-				console.log(adminData)
+		
 				if(err){
 					res.sendStatus(500).json(err)
 				}else{
@@ -884,7 +885,7 @@ router.post('/delete_userAdmin', jsonParser, function (req, res){
 router.post('/create_super_user', jsonParser, function (req, res){
 	if (!req.body) return res.sendStatus(400)
 		let data = req.body;
-		console.log(data)
+		
 
 		let appAdmin = new AppAdmin()
 
@@ -945,8 +946,6 @@ router.get('/is_it_the_creator', function(req, res){
 router.post('/is_it_admin', function(req, res){
 	if (!req.body) return res.sendStatus(400)
 		
-	console.log("is_it_admin")
-	console.log(req.user._id)
 
 	if(req.user){
 		AppAdmin.find().
@@ -961,8 +960,7 @@ router.post('/is_it_admin', function(req, res){
 					let json;
 
 					for(let i=0; i < appadmin[0].users.length; i++){
-						console.log("usuario")
-						console.log(appadmin[0].users[i])
+
 						if(req.user._id == appadmin[0].users[i]._id){
 							json = { state : 1}
 							
@@ -988,14 +986,14 @@ router.post('/update_service_state', jsonParser, function (req, res){
 	if (!req.body) return res.sendStatus(400)
 		let data = req.body;
 
-		console.log(data)
+		
 
 		Enterprise.findById(data.enterpriseId).
 			exec(function(err, enterprise){
 
 				enterprise.serviceState = data.serviceState;
 
-				console.log(enterprise.serviceState)
+				
 
 				enterprise.save(function(err){
 					if(err){
@@ -1029,7 +1027,7 @@ router.post('/update_service_state', jsonParser, function (req, res){
 												res.sendStatus(500).json(err)
 											}else{
 
-												console.log(e_data)
+												
 												res.json(e_data)
 											}
 										});
@@ -1042,6 +1040,74 @@ router.post('/update_service_state', jsonParser, function (req, res){
 					}
 				});
 			});
+});
+
+// ENDPOINT registrar token id culqi
+
+router.post('/register_tokenid', jsonParser, function (req, res){
+	if (!req.body) return res.sendStatus(400)
+		let data = req.body;
+		
+
+		Enterprise.findById(data.enterprise_id).
+			
+			exec(function(err, enterprise){
+				if(err) {
+					return res.sendStatus(500).json(err)
+				}
+
+				enterprise.tokenId = data.token_id;
+				enterprise.paymentMethod = data.payment_method;
+
+				enterprise.save(function(err){
+					if(err){
+						res.sendStatus(500).json(err)
+					}else{
+
+						//envio de datos a culqi
+
+						let amount = enterprise.price + "00";
+
+						let chargeJson = {
+							"amount": amount,
+							"currency_code": "PEN",
+							"email": data.customerEmail,
+							"source_id": data.token_id
+						}
+
+						let p_k = 'Bearer ' + process.env.CULQI_PRIVATE_KEY
+
+						let optionsReqCulqi = {
+							method: 'POST',
+							uri: 'https://api.culqi.com/v2/charges',
+							body: chargeJson,
+							json: true,
+							headers: {
+								'Authorization': p_k,
+								'Accept': 'application/json',
+								'Content-Type': 'application/json'
+							}
+						}
+
+						request(optionsReqCulqi).then(function(response){
+							
+							let resp = {
+								state : 1
+							}
+							res.json(resp);
+						}).catch(function(err){
+							console.log(err);
+						})
+
+						//res.json(resp)
+
+					}
+				});
+				
+			})
+
+
+	
 });
 
 

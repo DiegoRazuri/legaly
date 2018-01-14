@@ -13,6 +13,15 @@
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Playfair+Display:700" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="icon" type="image/png" href="https://s3-sa-east-1.amazonaws.com/legaly/landing/Favicon.png" />
+	<!-- Incluyendo .js de Culqi Checkout-->
+
+	<script src="https://checkout.culqi.com/v2"></script>
+	<!-- Configurando el checkout-->
+	<script>
+		Culqi.publicKey = 'pk_test_jo1NjonsUOSOCyQj';
+	</script>
+
+
 </head>
 <body>
 	<div id="container" class="container">
@@ -1109,6 +1118,59 @@
 		-->
 	</div>
 	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	
 	<script type="text/javascript" src="script/app.js"></script>
+
+	<script type="text/javascript">
+		function culqi() {
+
+			if(Culqi.token) { // ¡Token creado exitosamente!
+				
+				// Get the token ID:
+
+				console.log("click en pagar")
+				let form = document.getElementById("paymentMethodForm");
+				
+				form.style.display = 'none';
+
+				let loader = document.getElementById('loader');
+				
+				loader.style.display = 'flex'
+
+				let json = {
+					enterprise_id : Culqi.enterprise_id,
+					token_id : Culqi.token.id,
+					payment_method : "tarjeta",
+					customerEmail : Culqi.token.email
+				} 
+
+				$.post('api/register_tokenid', json, (res)=>{
+					if(res.state == 1){
+
+						let loader = document.getElementById('loader');
+						loader.style.display = 'none'
+						
+
+						let formActive = document.getElementById("paymentConfirmation");
+						formActive.style.display = 'block';
+
+
+					}
+				});
+
+			}else{ // ¡Hubo algún problema!
+				console.log("no hay token")
+				// Mostramos JSON de objeto error en consola
+				console.log(Culqi.error.mensaje)
+				console.log(Culqi.error);
+			}
+		}; 
+	</script>
+
+
+	
+	
+
+	
 </body>
 </html>

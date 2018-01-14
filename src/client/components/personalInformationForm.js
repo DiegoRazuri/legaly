@@ -728,6 +728,10 @@ export default class PersonalInformationForm extends Component{
 									<p className="mediumContent instructions">Debes ingresar la información de cada socio.</p>
 									<h4 className="bigTitlesOS helpTitle">¿Necesitas ayuda?</h4>
 									<span className="icon-angle-down"></span>
+									<div className="gridUserSupport">
+										<span className="icon-whatsapp"></span>
+										<p className="smallContent">942 914 542</p>
+									</div>
 									<a href="http://www.facebook.com/legaly.pe" target="_blank" className="gridUserSupport">
 										<span className="icon-facebook"></span>
 										<p className="smallContent">www.facebook.com/legaly.pe</p>

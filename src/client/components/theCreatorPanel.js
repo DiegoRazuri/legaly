@@ -86,7 +86,7 @@ export default class TheCreatorPanel extends Component{
 	}
 
 	componentWillMount(){
-		
+		// se debe comentar toodo este request cuando se setea el super usuario por primera vez.
 
 		$.get('/api/is_it_the_creator', (res)=>{
 			

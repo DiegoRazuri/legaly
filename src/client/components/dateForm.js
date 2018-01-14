@@ -81,7 +81,7 @@ export default class DateForm extends Component{
 	componentWillMount(){
 		let date = new Date();
 
-			let numOfDays = 4;
+			let numOfDays = 3;
 
 			let options = {
 				weekday : 'long'
@@ -99,8 +99,8 @@ export default class DateForm extends Component{
 
 			let dateComplete;
 
-			if(dayName == "miércoles" || dayName == "jueves" || dayName == "viernes" || dayName == "sábado"){
-				numOfDays = 5;
+			if(dayName == "jueves" || dayName == "viernes" || dayName == "sábado"){
+				numOfDays = 4;
 				let dayArry = day.split("/")
 				let dayNum = parseInt(dayArry[0])
 				dayNum += numOfDays;
@@ -201,7 +201,7 @@ export default class DateForm extends Component{
 	render(){
 
 		if(this.state.redirect){
-			return <Redirect to="/metodo-pago"/>
+			return <Redirect to="/seleccion-metodo-pago"/>
 		}
 		else{
 

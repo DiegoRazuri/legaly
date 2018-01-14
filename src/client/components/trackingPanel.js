@@ -134,11 +134,18 @@ export default class TrackingPanel extends Component{
 
 					let dateArry = date.split("-")
 
+					console.log(dateArry)
+
 					let day = dateArry[2].substr(0, 2)
 
-					let pos = parseInt(dateArry[1])
+					let num_month = dateArry[1]
 
-					let month = months[parseInt(pos)];
+					let num_parse = parseInt(num_month)
+					let pos = num_parse - 1
+
+					
+
+					let month = months[pos];
 
 					let year = dateArry[0]
 
@@ -159,7 +166,7 @@ export default class TrackingPanel extends Component{
 									</div>
 									<div className="trackingListGrid">
 
-										<p className="fieldValue"> -- </p>
+										<p className="fieldValue"> {enterprise.accountManager[0].phoneNumber ? enterprise.accountManager[0].phoneNumber : "--"} </p>
 									</div>
 									<div className="trackingListGrid">
 										

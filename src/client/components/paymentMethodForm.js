@@ -16,15 +16,26 @@ export default class PaymentMethodForm extends Component{
 		
 	}
 
+	
+
+
+	
+
 	componentDidMount(){
 		window.scrollTo(0, 0)
-	}	
 
+
+	}
 
 	
 	
 	render(){
 
+
+
+	
+
+		//parseInt(this.props.enterpriseInProcessData.price)
 		let months = ["Enero", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"]
 
 		let date = this.props.enterpriseInProcessData.signAppointmentDate
@@ -83,11 +94,13 @@ export default class PaymentMethodForm extends Component{
 										</div>
 										<p className="deliveryInstructions">Una vez que hayas realizado el depósito, el proceso de tu constitución iniciará con la reserva de nombre, la cual tarda cerca de 24 horas en tener respuesta. Luego, te enviaremos por correo la minuta para que nos des tu aprobación. Finalmente, con el visto bueno se emitirá el testimonio y te especificaremos lugar, hora y fecha de la toma de firma de los socios. No olvides contactarnos en cuanto hayas realizado el pago.</p>
 										<p className="legalyContactInfo">info@legaly.pe</p>
+										<p className="legalyContactInfo">Cel. 942 914 542</p>
 										<p className="legalyContactInfo">Cel. 996 005 400</p>
 										<p className="legalyContactInfo">BBVA Continental cta 0011 - 0383 - 0200182247</p>
 										<p className="legalyContactInfo">BCP cta 192 - 36010048 - 0 - 85</p>
-										<p className="legalyContactInfo">Interbank cta 155 - 3061230642</p>
-										<Link to="/"><div className="btnPrint mediumContent">Confirmar</div></Link>
+										<p className="legalyContactInfo">Interbank cta 200-3108756220</p>
+										<Link to="/"><div className="btnPrint mediumContent">Cerrar</div></Link>
+										
 									</div>
 									
 									<div className="btnServiceTicket">
@@ -95,6 +108,7 @@ export default class PaymentMethodForm extends Component{
 										<span className="icon-angle-down"></span>
 									</div>
 								</div>
+								
 							</div>
 				
 							<div className="serviceTicket">

@@ -83,7 +83,15 @@ export default class TrackingEnterpriseInfo extends Component{
 
 			signDay = signDateArry[2].substr(0, 2)
 
-			signPos = parseInt(signDateArry[1])
+/*******/
+
+			let signNum_month = signDateArry[1]
+
+			let signNum_parse = parseInt(signNum_month)
+			signPos = signNum_parse - 1
+
+/*******/
+
 
 			signMonth = this.state.months[signPos];
 
@@ -97,7 +105,16 @@ export default class TrackingEnterpriseInfo extends Component{
 
 			createdDay = createdDateArry[2].substr(0, 2)
 
-			createdPos = parseInt(createdDateArry[1])
+
+/*******/
+
+			let createdNum_month = createdDateArry[1]
+
+			let createdNum_parse = parseInt(createdNum_month)
+			createdPos = createdNum_parse - 1
+
+/*******/
+
 
 			createdMonth = this.state.months[createdPos];
 
@@ -236,6 +253,14 @@ export default class TrackingEnterpriseInfo extends Component{
 							<div className="rowEnterpriseInfo">
 								<p className="fieldName">Fecha de registro</p>
 								<p className="fieldValue">{createdDay} de {createdMonth} del {createdYear}</p>
+							</div>
+							<div className="rowEnterpriseInfo">
+								<p className="fieldName">Medio de pago</p>
+								<p className="fieldValue">{this.state.enterprise.paymentMethod ? this.state.enterprise.paymentMethod : "no registra"}</p>
+							</div>
+							<div className="rowEnterpriseInfo">
+								<p className="fieldName">Token ID</p>
+								<p className="fieldValue">{this.state.enterprise.tokenId ? this.state.enterprise.tokenId : " -- "}</p>
 							</div>
 
 							<div className="wrapperPartnerInfoList">

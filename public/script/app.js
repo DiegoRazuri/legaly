@@ -25559,6 +25559,10 @@ var _dateForm = require('./dateForm');
 
 var _dateForm2 = _interopRequireDefault(_dateForm);
 
+var _selectPaymentMethodForm = require('./selectPaymentMethodForm');
+
+var _selectPaymentMethodForm2 = _interopRequireDefault(_selectPaymentMethodForm);
+
 var _paymentMethodForm = require('./paymentMethodForm');
 
 var _paymentMethodForm2 = _interopRequireDefault(_paymentMethodForm);
@@ -26212,7 +26216,7 @@ var App = function (_Component) {
 							_react2.default.createElement(
 								'div',
 								{ className: 'subGrid' },
-								_react2.default.createElement('span', { className: 'icon-office' }),
+								_react2.default.createElement('span', { className: 'icon-whatsapp' }),
 								_react2.default.createElement(
 									'p',
 									null,
@@ -26259,7 +26263,7 @@ var App = function (_Component) {
 							{ className: 'gridNav' },
 							_react2.default.createElement(
 								_reactRouterDom.Link,
-								(_React$createElement = { to: '/informacion-empresa', className: 'btnMainNav' }, _defineProperty(_React$createElement, 'className', this.state.btnNavCons), _defineProperty(_React$createElement, 'onClick', this.switchBtnNavSelected.bind(this, 0)), _React$createElement),
+								(_React$createElement = { to: '/login', className: 'btnMainNav' }, _defineProperty(_React$createElement, 'className', this.state.btnNavCons), _defineProperty(_React$createElement, 'onClick', this.switchBtnNavSelected.bind(this, 0)), _React$createElement),
 								'Constituye tu Empresa'
 							)
 						),
@@ -26284,7 +26288,10 @@ var App = function (_Component) {
 					_react2.default.createElement(_reactRouterDom.Route, { path: '/fecha-firma', render: function render(props) {
 							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_dateForm2.default, { inputTextHandlerRootLevel: _this9.inputTextHandlerRootLevel, enterpriseInProcessData: _this9.state.enterpriseInProcessData, insertDataRootLevel: _this9.insertDataRootLevel, sendSingingDateInformation: _this9.sendSingingDateInformation, enterpriseSaved: _this9.state.enterpriseSaved });
 						} }),
-					_react2.default.createElement(_reactRouterDom.Route, { path: '/metodo-pago', onUpdate: this.logPageView, render: function render(props) {
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/seleccion-metodo-pago', onUpdate: this.logPageView, render: function render(props) {
+							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_selectPaymentMethodForm2.default, { enterpriseInProcessData: _this9.state.enterpriseInProcessData, enterpriseSaved: _this9.state.enterpriseSaved });
+						} }),
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/metodo-pago-voucher', onUpdate: this.logPageView, render: function render(props) {
 							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_paymentMethodForm2.default, { enterpriseInProcessData: _this9.state.enterpriseInProcessData, enterpriseSaved: _this9.state.enterpriseSaved });
 						} }),
 					_react2.default.createElement(_reactRouterDom.Route, { path: '/perfil', onUpdate: this.logPageView, render: function render(props) {
@@ -26575,7 +26582,7 @@ userLogin = <div className="btnRegistration">
 
 exports.default = App;
 
-},{"./dateForm":238,"./enterpriseInformationForm":239,"./incorporate":241,"./landing":242,"./loginForm":243,"./partnersAddingForm":245,"./paymentMethodForm":246,"./personalInformationForm":247,"./theCreatorPanel":249,"./trackingEnterpriseInfo":250,"./trackingPanel":251,"./userAvatar":253,"./userprofile":254,"react":229,"react-dom":43,"react-router-dom":189}],235:[function(require,module,exports){
+},{"./dateForm":238,"./enterpriseInformationForm":239,"./incorporate":241,"./landing":242,"./loginForm":243,"./partnersAddingForm":245,"./paymentMethodForm":246,"./personalInformationForm":247,"./selectPaymentMethodForm":248,"./theCreatorPanel":250,"./trackingEnterpriseInfo":251,"./trackingPanel":252,"./userAvatar":254,"./userprofile":255,"react":229,"react-dom":43,"react-router-dom":189}],235:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26882,7 +26889,7 @@ var DateForm = function (_Component) {
 		value: function componentWillMount() {
 			var date = new Date();
 
-			var numOfDays = 4;
+			var numOfDays = 3;
 
 			var options = {
 				weekday: 'long'
@@ -26900,8 +26907,8 @@ var DateForm = function (_Component) {
 
 			var dateComplete = void 0;
 
-			if (dayName == "miércoles" || dayName == "jueves" || dayName == "viernes" || dayName == "sábado") {
-				numOfDays = 5;
+			if (dayName == "jueves" || dayName == "viernes" || dayName == "sábado") {
+				numOfDays = 4;
 				var dayArry = day.split("/");
 				var dayNum = parseInt(dayArry[0]);
 				dayNum += numOfDays;
@@ -26990,7 +26997,7 @@ var DateForm = function (_Component) {
 		value: function render() {
 
 			if (this.state.redirect) {
-				return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/metodo-pago' });
+				return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/seleccion-metodo-pago' });
 			} else {
 
 				return _react2.default.createElement(
@@ -27826,6 +27833,16 @@ var EnterpriseInformationForm = function (_Component) {
 									'\xBFNecesitas ayuda?'
 								),
 								_react2.default.createElement('span', { className: 'icon-angle-down' }),
+								_react2.default.createElement(
+									'div',
+									{ className: 'gridUserSupport' },
+									_react2.default.createElement('span', { className: 'icon-whatsapp' }),
+									_react2.default.createElement(
+										'p',
+										{ className: 'smallContent' },
+										'942 914 542'
+									)
+								),
 								_react2.default.createElement(
 									'a',
 									{ href: 'http://www.facebook.com/legaly.pe', target: '_blank', className: 'gridUserSupport' },
@@ -30142,6 +30159,16 @@ var PartnersAddingForm = function (_Component) {
 								),
 								_react2.default.createElement('span', { className: 'icon-angle-down' }),
 								_react2.default.createElement(
+									'div',
+									{ className: 'gridUserSupport' },
+									_react2.default.createElement('span', { className: 'icon-whatsapp' }),
+									_react2.default.createElement(
+										'p',
+										{ className: 'smallContent' },
+										'942 914 542'
+									)
+								),
+								_react2.default.createElement(
 									'a',
 									{ href: 'http://www.facebook.com/legaly.pe', target: '_blank', className: 'gridUserSupport' },
 									_react2.default.createElement('span', { className: 'icon-facebook' }),
@@ -30539,6 +30566,7 @@ var PaymentMethodForm = function (_Component) {
 		key: 'render',
 		value: function render() {
 
+			//parseInt(this.props.enterpriseInProcessData.price)
 			var months = ["Enero", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"];
 
 			var date = this.props.enterpriseInProcessData.signAppointmentDate;
@@ -30628,6 +30656,11 @@ var PaymentMethodForm = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'legalyContactInfo' },
+										'Cel. 942 914 542'
+									),
+									_react2.default.createElement(
+										'p',
+										{ className: 'legalyContactInfo' },
 										'Cel. 996 005 400'
 									),
 									_react2.default.createElement(
@@ -30643,7 +30676,7 @@ var PaymentMethodForm = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'legalyContactInfo' },
-										'Interbank cta 155 - 3061230642'
+										'Interbank cta 200-3108756220'
 									),
 									_react2.default.createElement(
 										_reactRouterDom.Link,
@@ -30651,7 +30684,7 @@ var PaymentMethodForm = function (_Component) {
 										_react2.default.createElement(
 											'div',
 											{ className: 'btnPrint mediumContent' },
-											'Confirmar'
+											'Cerrar'
 										)
 									)
 								),
@@ -32030,6 +32063,16 @@ var PersonalInformationForm = function (_Component) {
 								),
 								_react2.default.createElement('span', { className: 'icon-angle-down' }),
 								_react2.default.createElement(
+									'div',
+									{ className: 'gridUserSupport' },
+									_react2.default.createElement('span', { className: 'icon-whatsapp' }),
+									_react2.default.createElement(
+										'p',
+										{ className: 'smallContent' },
+										'942 914 542'
+									)
+								),
+								_react2.default.createElement(
 									'a',
 									{ href: 'http://www.facebook.com/legaly.pe', target: '_blank', className: 'gridUserSupport' },
 									_react2.default.createElement('span', { className: 'icon-facebook' }),
@@ -32465,6 +32508,506 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
 
+var SelectPaymentMethodForm = function (_Component) {
+	_inherits(SelectPaymentMethodForm, _Component);
+
+	function SelectPaymentMethodForm(props) {
+		_classCallCheck(this, SelectPaymentMethodForm);
+
+		var _this = _possibleConstructorReturn(this, (SelectPaymentMethodForm.__proto__ || Object.getPrototypeOf(SelectPaymentMethodForm)).call(this, props));
+
+		_this.state = {};
+
+		return _this;
+	}
+
+	_createClass(SelectPaymentMethodForm, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			window.scrollTo(0, 0);
+
+			$('#btnPay').on('click', function (e) {
+				// Abre el formulario con las opciones de Culqi.settings
+				Culqi.open();
+				e.preventDefault();
+			});
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+
+			var prePrice = this.props.enterpriseInProcessData.price + "00";
+			var price = parseInt(prePrice);
+
+			Culqi.settings({
+				title: 'Legaly',
+				currency: 'PEN',
+				description: 'Servicio de constitución',
+				amount: price
+			});
+
+			//console.log(this.props.enterpriseInProcessData._id)
+			Culqi.enterprise_id = this.props.enterpriseInProcessData._id;
+
+			//parseInt(this.props.enterpriseInProcessData.price)
+			var months = ["Enero", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"];
+
+			var date = this.props.enterpriseInProcessData.signAppointmentDate;
+
+			var dateArry = date.split("-");
+
+			var day = dateArry[2];
+
+			var num_month = dateArry[1];
+
+			var num_parse = parseInt(num_month);
+			var pos = num_parse - 1;
+
+			var month = months[pos];
+
+			var year = dateArry[0];
+
+			var num_position = 0;
+
+			for (var i = 0; i < this.props.enterpriseInProcessData.partners.length; i++) {
+
+				if (this.props.enterpriseInProcessData.partners[i].position != '' && this.props.enterpriseInProcessData.partners[i].position != "Ninguno") {
+
+					num_position = num_position + 1;
+				}
+			}
+
+			var notaryLocation = void 0;
+
+			var signAppointmentLocation = this.props.enterpriseInProcessData.signAppointmentLocation;
+
+			switch (signAppointmentLocation) {
+				case "San Isidro":
+					notaryLocation = "Notaria Tinageros| Av. Canaval y Moreyra Nº 425 Ofs: 21 - 22 y 23; 2do piso, San Isidro.";
+					break;
+				case "Magdalena":
+					notaryLocation = "Notaria Acevedo Mendoza| Av. Javier Prado oeste Nº 850, Magdalena del Mar.";
+					break;
+				case "San Miguel":
+					notaryLocation = "Notaria Landázuri| Av. Brigida Silva Ochoa Nº 398 Of: 204 - 2do piso, San Miguel (Esq. cdra. 22 av. La Marina).";
+					break;
+				case "Cercado de Lima":
+					notaryLocation = "Notaria Donato Carpio Vélez| Av. República de Chile Nº 295 Of. 205; 2do piso, Sta. Beatriz (Lima).";
+					break;
+			}
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'sectionEnterpriseIncorporation' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'wrapperIncorporationForm' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'wrapperPaymentMethodForm' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'selectPaymentMethodForm' },
+							_react2.default.createElement(
+								'div',
+								{ id: 'paymentMethodForm', className: 'gridForm' },
+								_react2.default.createElement(
+									'h3',
+									{ className: 'bigTitlesSS' },
+									'Selecciona un m\xE9todo de pago'
+								),
+								_react2.default.createElement('div', { className: 'underlineBlue' }),
+								_react2.default.createElement(
+									'div',
+									{ className: 'wrapperBtnPayments' },
+									_react2.default.createElement(
+										'div',
+										{ className: 'gridBtnPaymentMethod' },
+										_react2.default.createElement(
+											'figure',
+											{ id: 'btnPay', className: 'btnIcoPaymentMethod icoCards' },
+											_react2.default.createElement('img', { src: 'css/img/TarjetasPago.svg' })
+										),
+										_react2.default.createElement(
+											'p',
+											{ className: 'mediumContent' },
+											'Tarjetas de cr\xE9dito o d\xE9bito'
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'gridBtnPaymentMethod' },
+										_react2.default.createElement(
+											_reactRouterDom.Link,
+											{ to: '/metodo-pago-voucher' },
+											_react2.default.createElement(
+												'figure',
+												{ className: 'btnIcoPaymentMethod icoVoucher' },
+												_react2.default.createElement('img', { src: 'css/img/VoucherPago.svg' })
+											)
+										),
+										_react2.default.createElement(
+											'p',
+											{ className: 'mediumContent' },
+											'Env\xEDo de voucher de pago'
+										)
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'btnServiceTicket' },
+									_react2.default.createElement(
+										'p',
+										{ className: 'mediumContent' },
+										'Orden de servicio'
+									),
+									_react2.default.createElement('span', { className: 'icon-angle-down' })
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'gridLoader', id: 'loader' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'loader' },
+									'loading...'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ id: 'paymentConfirmation', className: 'gridForm' },
+								_react2.default.createElement(
+									'h3',
+									{ className: 'bigTitlesSS' },
+									'Pago exitoso'
+								),
+								_react2.default.createElement('div', { className: 'underlineBlue' }),
+								_react2.default.createElement(
+									'div',
+									{ className: 'wrapperPaymentInformation' },
+									_react2.default.createElement(
+										'div',
+										{ className: 'btnPaymentMethod' },
+										_react2.default.createElement(
+											'figure',
+											null,
+											_react2.default.createElement('img', { src: 'css/img/VoucherPago.svg' })
+										)
+									),
+									_react2.default.createElement(
+										'p',
+										{ className: 'deliveryInstructions' },
+										'Tu constituci\xF3n ya est\xE1 en proceso. En las pr\xF3ximas 24 horas estar\xE1 lista la reserva de nombre de tu empresa y te cont\xE1ctaremos por correo para fijar la fecha y hora para la toma de firmas. Si tienes alguna consulta, puedes contactarnos por los siguientes medios:'
+									),
+									_react2.default.createElement(
+										'p',
+										{ className: 'legalyContactInfo' },
+										'info@legaly.pe'
+									),
+									_react2.default.createElement(
+										'p',
+										{ className: 'legalyContactInfo' },
+										'Cel. 942 914 542'
+									),
+									_react2.default.createElement(
+										'p',
+										{ className: 'legalyContactInfo' },
+										'Cel. 996 005 400'
+									),
+									_react2.default.createElement(
+										_reactRouterDom.Link,
+										{ to: '/' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'btnPrint mediumContent' },
+											'Cerrar'
+										)
+									)
+								)
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'serviceTicket' },
+							_react2.default.createElement(
+								'h3',
+								{ className: 'bigTitlesSS' },
+								'Orden de servicio'
+							),
+							_react2.default.createElement('div', { className: 'underlineBlue' }),
+							_react2.default.createElement(
+								'p',
+								{ className: 'detailName mediumContent' },
+								'Servicio'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'mediumContent detail' },
+								'Constituci\xF3n'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'detailName mediumContent' },
+								'Detalles'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'mediumContent detail' },
+								num_position,
+								' Gerentes'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'mediumContent detail' },
+								this.props.enterpriseInProcessData.totalCapital,
+								' capital'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'detailName mediumContent' },
+								'Precio'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'price mediumContent' },
+								'S/. ',
+								this.props.enterpriseInProcessData.price
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'detailName mediumContent' },
+								'Fin de proceso'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'mediumContent detail' },
+								'7 d\xEDas h\xE1biles posterior a la toma de firma'
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'btnPrint mediumContent' },
+								'Imprimir Recibo'
+							),
+							_react2.default.createElement('div', { className: 'underlineGrey' }),
+							_react2.default.createElement(
+								'h3',
+								{ className: 'bigTitlesSS subtitle' },
+								'Toma de firma'
+							),
+							_react2.default.createElement('div', { className: 'underlineBlue' }),
+							_react2.default.createElement(
+								'p',
+								{ className: 'deliveryLocation mediumContent' },
+								notaryLocation
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'deliveryDate mediumContent' },
+								day,
+								' de ',
+								month,
+								' del ',
+								year
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'gridUserHelp' },
+							_react2.default.createElement(
+								'h4',
+								{ className: 'bigTitlesOS helpTitle' },
+								'\xBFNecesitas ayuda?'
+							),
+							_react2.default.createElement('div', { className: 'underlineWhite' }),
+							_react2.default.createElement('span', { className: 'icon-angle-down' }),
+							_react2.default.createElement(
+								'a',
+								{ href: 'http://www.facebook.com/legaly.pe', target: '_blank', className: 'gridUserSupport' },
+								_react2.default.createElement('span', { className: 'icon-whatsapp' }),
+								_react2.default.createElement(
+									'p',
+									{ className: 'smallContent' },
+									'www.facebook.com/legaly.pe'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'gridUserSupport' },
+								_react2.default.createElement('span', { className: 'icon-mail_outline' }),
+								_react2.default.createElement(
+									'p',
+									{ className: 'smallContent' },
+									'info@legaly.pe'
+								)
+							)
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ id: 'faq1', className: 'wrapperFaq' },
+					_react2.default.createElement(
+						'figure',
+						null,
+						_react2.default.createElement('img', { src: './css/img/constitucion-photo.jpg' })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridFaq' },
+						_react2.default.createElement(
+							'h1',
+							null,
+							'\xBFPor qu\xE9 es importante constituir mi empresa?'
+						),
+						_react2.default.createElement('div', { className: 'underlineBlue' }),
+						_react2.default.createElement(
+							'h2',
+							null,
+							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'wrapperComercialFAQ' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridComercialFAQ' },
+						_react2.default.createElement(
+							'figure',
+							null,
+							_react2.default.createElement('img', { src: 'css/img/accesible.svg' })
+						),
+						_react2.default.createElement(
+							'h2',
+							{ className: 'landingTitles' },
+							'\xBFC\xFAal es el precio?'
+						),
+						_react2.default.createElement(
+							'h3',
+							null,
+							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridComercialFAQ' },
+						_react2.default.createElement(
+							'figure',
+							null,
+							_react2.default.createElement('img', { src: 'css/img/rapidez.svg' })
+						),
+						_react2.default.createElement(
+							'h2',
+							{ className: 'landingTitles' },
+							'\xBFC\xFAanto debo esperar?'
+						),
+						_react2.default.createElement(
+							'h3',
+							null,
+							'Porque as\xED podr\xE1 crecer tu negocio de una manera legal, segura y eficaz, generando m\xE1s confianza a tus clientes, teniendo la facilidad de obtener un pr\xE9stamo al banco y participar en licitaciones con el estado.'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'gridComercialFAQ' },
+						_react2.default.createElement(
+							'figure',
+							null,
+							_react2.default.createElement('img', { src: 'css/img/delivery.svg' })
+						),
+						_react2.default.createElement(
+							'h2',
+							{ className: 'landingTitles' },
+							'Brindamos lo siguiente'
+						),
+						_react2.default.createElement(
+							'h3',
+							null,
+							_react2.default.createElement(
+								'ul',
+								null,
+								_react2.default.createElement(
+									'li',
+									null,
+									'B\xFAsqueda y reserva de nombre'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Estatutos de la empresa'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Escritura p\xFAblica ante notario'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Inscripci\xF3n registral en Sunarp'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Ficha RUC'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Copia literal'
+								),
+								_react2.default.createElement(
+									'li',
+									null,
+									'Compra de dominio web'
+								)
+							)
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return SelectPaymentMethodForm;
+}(_react.Component);
+
+//<div className="btnFaq">Quiero saber más</div>
+
+
+exports.default = SelectPaymentMethodForm;
+
+},{"react":229,"react-dom":43,"react-router-dom":189}],249:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _reactRouterDom = require('react-router-dom');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *	module dependencies
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
+
 var ServiceState = function (_Component) {
 	_inherits(ServiceState, _Component);
 
@@ -32519,7 +33062,7 @@ var ServiceState = function (_Component) {
 
 exports.default = ServiceState;
 
-},{"react":229,"react-dom":43,"react-router-dom":189}],249:[function(require,module,exports){
+},{"react":229,"react-dom":43,"react-router-dom":189}],250:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -32627,6 +33170,8 @@ var TheCreatorPanel = function (_Component) {
 		key: 'componentWillMount',
 		value: function componentWillMount() {
 			var _this5 = this;
+
+			// se debe comentar toodo este request cuando se setea el super usuario por primera vez.
 
 			$.get('/api/is_it_the_creator', function (res) {
 
@@ -32755,7 +33300,7 @@ var TheCreatorPanel = function (_Component) {
 
 exports.default = TheCreatorPanel;
 
-},{"react":229,"react-dom":43,"uid":231}],250:[function(require,module,exports){
+},{"react":229,"react-dom":43,"uid":231}],251:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -32897,7 +33442,14 @@ var TrackingEnterpriseInfo = function (_Component) {
 
 				signDay = signDateArry[2].substr(0, 2);
 
-				signPos = parseInt(signDateArry[1]);
+				/*******/
+
+				var signNum_month = signDateArry[1];
+
+				var signNum_parse = parseInt(signNum_month);
+				signPos = signNum_parse - 1;
+
+				/*******/
 
 				signMonth = this.state.months[signPos];
 
@@ -32911,7 +33463,14 @@ var TrackingEnterpriseInfo = function (_Component) {
 
 				createdDay = createdDateArry[2].substr(0, 2);
 
-				createdPos = parseInt(createdDateArry[1]);
+				/*******/
+
+				var createdNum_month = createdDateArry[1];
+
+				var createdNum_parse = parseInt(createdNum_month);
+				createdPos = createdNum_parse - 1;
+
+				/*******/
 
 				createdMonth = this.state.months[createdPos];
 
@@ -33183,6 +33742,34 @@ var TrackingEnterpriseInfo = function (_Component) {
 						),
 						_react2.default.createElement(
 							'div',
+							{ className: 'rowEnterpriseInfo' },
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldName' },
+								'Medio de pago'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldValue' },
+								this.state.enterprise.paymentMethod ? this.state.enterprise.paymentMethod : "no registra"
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'rowEnterpriseInfo' },
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldName' },
+								'Token ID'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'fieldValue' },
+								this.state.enterprise.tokenId ? this.state.enterprise.tokenId : " -- "
+							)
+						),
+						_react2.default.createElement(
+							'div',
 							{ className: 'wrapperPartnerInfoList' },
 							_react2.default.createElement(
 								'h2',
@@ -33203,7 +33790,7 @@ var TrackingEnterpriseInfo = function (_Component) {
 
 exports.default = TrackingEnterpriseInfo;
 
-},{"./trackingPanelPartnerInfo":252,"react":229,"react-dom":43,"uid":231}],251:[function(require,module,exports){
+},{"./trackingPanelPartnerInfo":253,"react":229,"react-dom":43,"uid":231}],252:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -33355,11 +33942,16 @@ var TrackingPanel = function (_Component) {
 
 						var dateArry = date.split("-");
 
+						console.log(dateArry);
+
 						var day = dateArry[2].substr(0, 2);
 
-						var pos = parseInt(dateArry[1]);
+						var num_month = dateArry[1];
 
-						var month = months[parseInt(pos)];
+						var num_parse = parseInt(num_month);
+						var pos = num_parse - 1;
+
+						var month = months[pos];
 
 						var year = dateArry[0];
 
@@ -33394,7 +33986,9 @@ var TrackingPanel = function (_Component) {
 								_react2.default.createElement(
 									'p',
 									{ className: 'fieldValue' },
-									' -- '
+									' ',
+									enterprise.accountManager[0].phoneNumber ? enterprise.accountManager[0].phoneNumber : "--",
+									' '
 								)
 							),
 							_react2.default.createElement(
@@ -33580,7 +34174,7 @@ var TrackingPanel = function (_Component) {
 
 exports.default = TrackingPanel;
 
-},{"react":229,"react-dom":43,"react-router-dom":189,"uid":231}],252:[function(require,module,exports){
+},{"react":229,"react-dom":43,"react-router-dom":189,"uid":231}],253:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -33874,7 +34468,7 @@ var TrackingPanelPartnerInfo = function (_Component) {
 					_react2.default.createElement(
 						'p',
 						{ className: 'fieldValue' },
-						this.props.user.phone_number
+						this.props.user.phoneNumber
 					)
 				)
 			);
@@ -33886,7 +34480,7 @@ var TrackingPanelPartnerInfo = function (_Component) {
 
 exports.default = TrackingPanelPartnerInfo;
 
-},{"react":229,"react-dom":43,"uid":231}],253:[function(require,module,exports){
+},{"react":229,"react-dom":43,"uid":231}],254:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -33951,7 +34545,7 @@ var UserAvatar = function (_Component) {
 
 exports.default = UserAvatar;
 
-},{"react":229,"react-dom":43,"react-router-dom":189}],254:[function(require,module,exports){
+},{"react":229,"react-dom":43,"react-router-dom":189}],255:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -34259,7 +34853,7 @@ var Userprofile = function (_Component) {
 
 exports.default = Userprofile;
 
-},{"./contactRow":237,"./serviceState":248,"react":229,"react-dom":43,"react-router-dom":189,"uid":231}],255:[function(require,module,exports){
+},{"./contactRow":237,"./serviceState":249,"react":229,"react-dom":43,"react-router-dom":189,"uid":231}],256:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -34310,4 +34904,4 @@ var routes = _react2.default.createElement(
 
 _reactDom2.default.render(routes, document.getElementById('container'));
 
-},{"./components/app":234,"history/createBrowserHistory":29,"react":229,"react-dom":43,"react-ga":170,"react-router-dom":189}]},{},[255]);
+},{"./components/app":234,"history/createBrowserHistory":29,"react":229,"react-dom":43,"react-ga":170,"react-router-dom":189}]},{},[256]);
