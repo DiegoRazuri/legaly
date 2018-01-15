@@ -42,7 +42,7 @@
   },
   "devDependencies": {},
   "engines": {
-    "node": "0.10.x"
+    "node": "4.4.x"
   },
   "scripts": {
     "public": "mkdir -p public && mkdir -p public/css && mkdir -p public/script",
