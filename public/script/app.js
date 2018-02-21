@@ -29572,16 +29572,6 @@ var Landing = function (_Component) {
 								'p',
 								{ className: 'smallContent data' },
 								'942 914 542'
-							),
-							_react2.default.createElement(
-								'p',
-								{ className: 'field smallContent' },
-								'Estamos en'
-							),
-							_react2.default.createElement(
-								'p',
-								{ className: 'smallContent data' },
-								'Calle Porta 165, Miraflores'
 							)
 						)
 					),

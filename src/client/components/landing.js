@@ -395,8 +395,6 @@ export default class Landing extends Component{
 								<p className="smallContent data">info@legaly.pe</p>
 								<p className="smallContent data">01 420 6162</p>
 								<p className="smallContent data">942 914 542</p>
-								<p className="field smallContent">Estamos en</p>
-								<p className="smallContent data">Calle Porta 165, Miraflores</p>
 
 								
 
