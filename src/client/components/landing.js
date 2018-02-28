@@ -217,7 +217,7 @@ export default class Landing extends Component{
 									<div className="pack">
 										<div className="gridInfo">
 											<h5 className="bigTitlesSS">Paquete Emprende</h5>
-											<h5><p className="symbol">S/.</p><p className="price">580</p></h5>
+											<h5><p className="symbol">S/.</p><p className="price">600</p></h5>
 											<ul>
 												<li>Asesoría legal</li>
 												<li>Reserva de nombre en SUNARP</li>

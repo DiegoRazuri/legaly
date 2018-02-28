@@ -29068,7 +29068,7 @@ var Landing = function (_Component) {
 											_react2.default.createElement(
 												'p',
 												{ className: 'price' },
-												'580'
+												'600'
 											)
 										),
 										_react2.default.createElement(
