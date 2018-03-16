@@ -180,7 +180,7 @@ router.post('/signing_date_information', jsonParser, function (req, res) {
 		//enterprise.signAppointmentTime = data.signAppointmentTime;
 		enterprise.signAppointmentLocation = data.signAppointmentLocation;
 
-		var base = 600;
+		var base = 650;
 
 		var num_positions = 0;
 
