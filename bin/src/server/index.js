@@ -4,6 +4,10 @@ var _http = require('http');
 
 var _http2 = _interopRequireDefault(_http);
 
+var _https = require('https');
+
+var _https2 = _interopRequireDefault(_https);
+
 var _mongoose = require('mongoose');
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
@@ -36,6 +40,10 @@ var _connectHistoryApiFallback = require('connect-history-api-fallback');
 
 var _connectHistoryApiFallback2 = _interopRequireDefault(_connectHistoryApiFallback);
 
+var _herokuSslRedirect = require('heroku-ssl-redirect');
+
+var _herokuSslRedirect2 = _interopRequireDefault(_herokuSslRedirect);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //configuracion de session con Redis
@@ -50,6 +58,9 @@ require('src/server/passport')(passport);
 //configuracion de server
 
 var app = (0, _express2.default)();
+
+app.use((0, _herokuSslRedirect2.default)());
+
 var server = _http2.default.createServer(app);
 
 //conexion a base de datos

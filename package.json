@@ -16,6 +16,7 @@
     "create-react-class": "*",
     "express": "*",
     "express-session": "*",
+    "heroku-ssl-redirect": "0.0.4",
     "history": "^4.6.3",
     "jquery": "*",
     "mongoose": "*",

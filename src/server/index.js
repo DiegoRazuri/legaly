@@ -1,4 +1,5 @@
 import http from 'http'
+import https from 'https'
 import mongoose from 'mongoose'
 import express from 'express'
 import expressSession from 'express-session'
@@ -7,6 +8,7 @@ import cookieParser from 'cookie-parser'
 import path from 'path'
 import api from 'src/server/api'
 import history from 'connect-history-api-fallback'
+import sslRedirect from 'heroku-ssl-redirect'
 
 //configuracion de session con Redis
 const RedisStore = require('connect-redis')(expressSession);
@@ -21,7 +23,11 @@ const passport = require('passport');
 //configuracion de server
 
 const app = express()
+
+app.use(sslRedirect());
+
 const server = http.createServer(app)
+
 
 //conexion a base de datos
 
