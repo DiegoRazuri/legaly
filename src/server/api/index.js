@@ -357,7 +357,7 @@ router.post('/enterprise_information', jsonParser, function (req, res){
 
 		console.log(req.user)
 		
-		console.log("dot1")
+		
 
 		let enterprise = new Enterprise()
 
@@ -376,25 +376,28 @@ router.post('/enterprise_information', jsonParser, function (req, res){
 
 		partner.save()
 
-		console.log("dot2")
+		
 
 		enterprise.partners.push(partner);
 
-		console.log("dotA")
+		console.log(enterprise)
 
 		enterprise.save(function(err){
 			if(err){
 				res.sendStatus(500).json(err)
 			}else{
 
-				console.log("dotB")
+				
 
 				Userprofiles.
 					findById(req.user._id).
 					exec(function(err, user){
 						if (err) throw err;
 
-						console.log("dotC")
+						console.log("usuario")
+						console.log(user)
+						console.log("empresa")
+						console.log(enterprise)
 
 						user.enterprise.push(enterprise._id);
 
