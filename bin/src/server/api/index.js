@@ -345,6 +345,8 @@ router.post('/enterprise_information', jsonParser, function (req, res) {
 
 	console.log(req.user);
 
+	console.log("dot1");
+
 	var enterprise = new _enterprises2.default();
 
 	//creacion de empresa
@@ -362,6 +364,8 @@ router.post('/enterprise_information', jsonParser, function (req, res) {
 
 	partner.save();
 
+	console.log("dot2");
+
 	enterprise.partners.push(partner);
 
 	enterprise.save(function (err) {
@@ -378,6 +382,8 @@ router.post('/enterprise_information', jsonParser, function (req, res) {
 					if (err) {
 						res.sendStatus(500).json(err);
 					} else {
+
+						console.log("dot3");
 
 						_enterprises2.default.findById(enterprise._id).populate({
 							path: "partners"
@@ -399,6 +405,8 @@ router.post('/enterprise_information', jsonParser, function (req, res) {
 									enterprise: enterprise_info,
 									user: user
 								};
+
+								console.log("dot4");
 
 								res.json(json);
 							});

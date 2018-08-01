@@ -357,7 +357,7 @@ router.post('/enterprise_information', jsonParser, function (req, res){
 
 		console.log(req.user)
 		
-
+		console.log("dot1")
 
 		let enterprise = new Enterprise()
 
@@ -375,6 +375,8 @@ router.post('/enterprise_information', jsonParser, function (req, res){
 		partner.user = req.user._id;
 
 		partner.save()
+
+		console.log("dot2")
 
 		enterprise.partners.push(partner);
 
@@ -395,7 +397,7 @@ router.post('/enterprise_information', jsonParser, function (req, res){
 								res.sendStatus(500).json(err)
 							}else{
 
-							
+								console.log("dot3")
 
 								Enterprise.findById(enterprise._id).
 								populate({
@@ -417,6 +419,8 @@ router.post('/enterprise_information', jsonParser, function (req, res){
 											enterprise : enterprise_info,
 											user : user
 										}
+
+										console.log("dot4")
 									
 										res.json(json)
 									});
