@@ -18,7 +18,7 @@ module.exports = function (passport){
 		clientID: process.env.FACEBOOK_APP_ID,
 		clientSecret: process.env.FACEBOOK_APP_SECRET,
 		callbackURL: process.env.FACEBOOK_CALLBACK_URI || 'http://localhost:3000/auth/facebook/callback',
-		profileFields: ['id', 'first_name', 'email', 'last_name', 'locale', 'picture.type(large)']
+		profileFields: ['id', 'first_name', 'email', 'last_name', 'picture.type(large)']
 	}, (token, refreshToken, profile, done)=> {
 
 		// QUERY APLICANDO POPULATE
