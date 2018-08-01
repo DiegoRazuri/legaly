@@ -399,7 +399,12 @@ router.post('/enterprise_information', jsonParser, function (req, res){
 						console.log("empresa")
 						console.log(enterprise)
 
+						console.log("id de empresa")
+						console.log(enterprise._id)
+
 						user.enterprise.push(enterprise._id);
+						console.log("empresas de user")
+						console.log(user.enterprise)
 
 						user.save(function(err){
 
