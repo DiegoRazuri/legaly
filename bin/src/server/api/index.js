@@ -368,17 +368,25 @@ router.post('/enterprise_information', jsonParser, function (req, res) {
 
 	enterprise.partners.push(partner);
 
+	console.log("dotA");
+
 	enterprise.save(function (err) {
 		if (err) {
 			res.sendStatus(500).json(err);
 		} else {
 
+			console.log("dotB");
+
 			_userprofiles2.default.findById(req.user._id).exec(function (err, user) {
 				if (err) throw err;
+
+				console.log("dotC");
 
 				user.enterprise.push(enterprise._id);
 
 				user.save(function (err) {
+
+					console.log("dotD");
 					if (err) {
 						res.sendStatus(500).json(err);
 					} else {
