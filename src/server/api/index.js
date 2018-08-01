@@ -353,7 +353,11 @@ router.post('/partners_information', jsonParser, function (req, res){
 router.post('/enterprise_information', jsonParser, function (req, res){
 	if (!req.body) return res.sendStatus(400)
 
-		let data = req.body;		
+		let data = req.body;	
+
+		console.log(req.user)
+		
+
 
 		let enterprise = new Enterprise()
 

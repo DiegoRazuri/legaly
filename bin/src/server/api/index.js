@@ -343,6 +343,8 @@ router.post('/enterprise_information', jsonParser, function (req, res) {
 
 	var data = req.body;
 
+	console.log(req.user);
+
 	var enterprise = new _enterprises2.default();
 
 	//creacion de empresa
