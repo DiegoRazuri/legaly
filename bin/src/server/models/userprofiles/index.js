@@ -40,6 +40,8 @@ var UserprofileSchema = new _mongoose2.default.Schema({
 	userState: { type: Number, default: 0 },
 	createdAt: { type: Date, default: Date.now }
 
+}, {
+	usePushEach: true
 });
 
 UserprofileSchema.index({
