@@ -387,31 +387,30 @@ router.post('/enterprise_information', jsonParser, function (req, res){
 				res.sendStatus(500).json(err)
 			}else{
 
-				
 
 				Userprofiles.
 					findById(req.user._id).
 					exec(function(err, user){
 						if (err) throw err;
 
-						console.log("usuario")
-						console.log(user)
-						console.log("empresa")
-						console.log(enterprise)
+//						console.log("usuario")
+//						console.log(user)
+//						console.log("empresa")
+//						console.log(enterprise)
 
-						console.log("id de empresa")
-						console.log(enterprise._id)
+//						console.log("id de empresa")
+//						console.log(enterprise._id)
 
 						user.enterprise.push(enterprise._id);
-						console.log("empresas de user")
-						console.log(user.enterprise)
+
+
+//						console.log("empresas de user")
+//						console.log(user.enterprise)
 
 						user.save(function(err){
 
 							console.log("dotD")
-							if(err){
-								res.sendStatus(500).json(err)
-							}else{
+							if (err) throw err;
 
 								console.log("dot3")
 
@@ -442,12 +441,10 @@ router.post('/enterprise_information', jsonParser, function (req, res){
 									});
 
 								})
-
-								
-
-							}
-						})
+							
+						});
 					});
+
 			}
 		})
 

@@ -374,54 +374,52 @@ router.post('/enterprise_information', jsonParser, function (req, res) {
 			_userprofiles2.default.findById(req.user._id).exec(function (err, user) {
 				if (err) throw err;
 
-				console.log("usuario");
-				console.log(user);
-				console.log("empresa");
-				console.log(enterprise);
+				//						console.log("usuario")
+				//						console.log(user)
+				//						console.log("empresa")
+				//						console.log(enterprise)
 
-				console.log("id de empresa");
-				console.log(enterprise._id);
+				//						console.log("id de empresa")
+				//						console.log(enterprise._id)
 
 				user.enterprise.push(enterprise._id);
-				console.log("empresas de user");
-				console.log(user.enterprise);
+
+				//						console.log("empresas de user")
+				//						console.log(user.enterprise)
 
 				user.save(function (err) {
 
 					console.log("dotD");
-					if (err) {
-						res.sendStatus(500).json(err);
-					} else {
+					if (err) throw err;
 
-						console.log("dot3");
+					console.log("dot3");
 
-						_enterprises2.default.findById(enterprise._id).populate({
-							path: "partners"
-						}).exec(function (err, enterprise_info) {
+					_enterprises2.default.findById(enterprise._id).populate({
+						path: "partners"
+					}).exec(function (err, enterprise_info) {
 
-							if (err) {
-								return res.sendStatus(500).json(err);
-							}
+						if (err) {
+							return res.sendStatus(500).json(err);
+						}
 
-							var options = {
-								path: 'partners.user',
-								model: 'Userprofiles'
+						var options = {
+							path: 'partners.user',
+							model: 'Userprofiles'
+						};
+
+						_enterprises2.default.populate(enterprise_info, options, function (err, e_data) {
+							if (err) throw err;
+
+							var json = {
+								enterprise: enterprise_info,
+								user: user
 							};
 
-							_enterprises2.default.populate(enterprise_info, options, function (err, e_data) {
-								if (err) throw err;
+							console.log("dot4");
 
-								var json = {
-									enterprise: enterprise_info,
-									user: user
-								};
-
-								console.log("dot4");
-
-								res.json(json);
-							});
+							res.json(json);
 						});
-					}
+					});
 				});
 			});
 		}
