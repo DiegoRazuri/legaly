@@ -35,6 +35,8 @@ var EnterpriseSchema = new _mongoose2.default.Schema({
 	serviceState: { type: Number, default: 0 },
 	createdAt: { type: Date, default: Date.now }
 
+}, {
+	usePushEach: true
 });
 
 exports.default = _mongoose2.default.model('Enterprises', EnterpriseSchema);

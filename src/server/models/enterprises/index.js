@@ -26,6 +26,8 @@ let EnterpriseSchema = new mongoose.Schema({
 	serviceState : {type: Number, default : 0},
 	createdAt: {type: Date, default: Date.now}
 	
+},{
+	usePushEach: true 	
 })
 
 
