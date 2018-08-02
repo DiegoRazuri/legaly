@@ -355,10 +355,6 @@ router.post('/enterprise_information', jsonParser, function (req, res){
 
 		let data = req.body;	
 
-		console.log(req.user)
-		
-		
-
 		let enterprise = new Enterprise()
 
 		//creacion de empresa
@@ -376,11 +372,8 @@ router.post('/enterprise_information', jsonParser, function (req, res){
 
 		partner.save()
 
-		
-
 		enterprise.partners.push(partner);
 
-		console.log(enterprise)
 
 		enterprise.save(function(err){
 			if(err){
@@ -393,28 +386,16 @@ router.post('/enterprise_information', jsonParser, function (req, res){
 					exec(function(err, user){
 						if (err) throw err;
 
-//						console.log("usuario")
-//						console.log(user)
-//						console.log("empresa")
-//						console.log(enterprise)
-
-//						console.log("id de empresa")
-//						console.log(enterprise._id)
 
 						user.enterprise.push(enterprise._id);
 
 
-//						console.log("empresas de user")
-//						console.log(user.enterprise)
-
 						user.save(function(err){
 
-							console.log("dotD")
 							if(err){
 								res.sendStatus(500).json(err)
 							}else{
 
-								console.log("dot3")
 
 								Enterprise.findById(enterprise._id).
 								populate({
@@ -436,8 +417,6 @@ router.post('/enterprise_information', jsonParser, function (req, res){
 											enterprise : enterprise_info,
 											user : user
 										}
-
-										console.log("dot4")
 									
 										res.json(json)
 									});
