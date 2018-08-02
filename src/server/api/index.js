@@ -410,7 +410,9 @@ router.post('/enterprise_information', jsonParser, function (req, res){
 						user.save(function(err){
 
 							console.log("dotD")
-							if (err) throw err;
+							if(err){
+								res.sendStatus(500).json(err)
+							}else{
 
 								console.log("dot3")
 
@@ -441,7 +443,7 @@ router.post('/enterprise_information', jsonParser, function (req, res){
 									});
 
 								})
-							
+							}
 						});
 					});
 

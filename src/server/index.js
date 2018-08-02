@@ -24,7 +24,7 @@ const passport = require('passport');
 
 const app = express()
 
-//app.use(sslRedirect());
+app.use(sslRedirect());
 
 const server = http.createServer(app)
 

@@ -59,7 +59,7 @@ require('src/server/passport')(passport);
 
 var app = (0, _express2.default)();
 
-//app.use(sslRedirect());
+app.use((0, _herokuSslRedirect2.default)());
 
 var server = _http2.default.createServer(app);
 

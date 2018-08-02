@@ -390,36 +390,39 @@ router.post('/enterprise_information', jsonParser, function (req, res) {
 				user.save(function (err) {
 
 					console.log("dotD");
-					if (err) throw err;
+					if (err) {
+						res.sendStatus(500).json(err);
+					} else {
 
-					console.log("dot3");
+						console.log("dot3");
 
-					_enterprises2.default.findById(enterprise._id).populate({
-						path: "partners"
-					}).exec(function (err, enterprise_info) {
+						_enterprises2.default.findById(enterprise._id).populate({
+							path: "partners"
+						}).exec(function (err, enterprise_info) {
 
-						if (err) {
-							return res.sendStatus(500).json(err);
-						}
+							if (err) {
+								return res.sendStatus(500).json(err);
+							}
 
-						var options = {
-							path: 'partners.user',
-							model: 'Userprofiles'
-						};
-
-						_enterprises2.default.populate(enterprise_info, options, function (err, e_data) {
-							if (err) throw err;
-
-							var json = {
-								enterprise: enterprise_info,
-								user: user
+							var options = {
+								path: 'partners.user',
+								model: 'Userprofiles'
 							};
 
-							console.log("dot4");
+							_enterprises2.default.populate(enterprise_info, options, function (err, e_data) {
+								if (err) throw err;
 
-							res.json(json);
+								var json = {
+									enterprise: enterprise_info,
+									user: user
+								};
+
+								console.log("dot4");
+
+								res.json(json);
+							});
 						});
-					});
+					}
 				});
 			});
 		}
