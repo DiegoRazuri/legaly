@@ -8,6 +8,8 @@ let AppadminSchema = new mongoose.Schema({
 	users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Userprofiles' }],
 	createdAt: {type: Date, default: Date.now}
 
+},{
+	usePushEach: true 	
 })
 
 

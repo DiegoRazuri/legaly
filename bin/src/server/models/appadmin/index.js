@@ -20,6 +20,8 @@ var AppadminSchema = new _mongoose2.default.Schema({
 	users: [{ type: _mongoose2.default.Schema.Types.ObjectId, ref: 'Userprofiles' }],
 	createdAt: { type: Date, default: Date.now }
 
+}, {
+	usePushEach: true
 });
 
 exports.default = _mongoose2.default.model('Appadmin', AppadminSchema);
