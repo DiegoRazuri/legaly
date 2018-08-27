@@ -144,7 +144,7 @@ export default class SelectPaymentMethodForm extends Component{
 										</div>
 										<p className="deliveryInstructions">Tu constitución ya está en proceso. En las próximas 24 horas estará lista la reserva de nombre de tu empresa y te contáctaremos por correo para fijar la fecha y hora para la toma de firmas. Si tienes alguna consulta, puedes contactarnos por los siguientes medios:</p>
 										<p className="legalyContactInfo">info@legaly.pe</p>
-										<p className="legalyContactInfo">Cel. 942 914 542</p>
+										<p className="legalyContactInfo">Cel. 912 289 540</p>
 										<p className="legalyContactInfo">Cel. 996 005 400</p>
 										<Link to="/"><div className="btnPrint mediumContent">Cerrar</div></Link>
 										

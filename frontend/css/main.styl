@@ -468,6 +468,9 @@ body
 				.wrapperMovilMenuBtn
 					width 65%
 					margin 0px auto
+					
+					.userPhoto
+						margin 20px 0px
 						
 					.wrapperBtnRegistration, .rowMenuMovil
 						display flex
@@ -486,6 +489,7 @@ body
 						a
 							margin-left 10px
 							font-weight bold
+							text-decoration none
 							
 					ul
 						list-style none
@@ -558,7 +562,7 @@ body
 					justify-content space-between
 					height 100%
 					
-					.btnMovilMenu, .btnRegistration
+					.btnMovilMenu
 						width 70px
 						
 					.btnMovilMenu
@@ -566,9 +570,11 @@ body
 						margin-left 10px
 
 					.mainLogo
-						border solid 1px red
-						height 40px
-						width 130px
+						width 90px
+						margin 0px auto
+						
+						a
+							text-decoration none
 					
 					.gridNav
 						display none
@@ -577,138 +583,493 @@ body
 						margin 0px 10px 0px 0px
 						padding 0px 3px
 						height 23px
-						display flex
-						justify-content center
-						align-items center
-						background-color #007FFF
 						border-radius 2	px
 						cursor pointer
+						width 90px
+						border solid 1px #505050
+						
+						a
+							width 100%
+							height 100%
+							text-decoration none
+							display flex
+							justify-content center
+							align-items center
 
-						p, span
-							color white
-							font-family "Open Sans"
-							font-size 0.6em
-							font-weight lighter
-							
-						span
-							margin 0px 3px 0px 0px
+							p, span
+								color #505050
+								font-family "Open Sans"
+								font-size 0.6em
+								font-weight lighter
+								
+							span
+								margin 0px 3px 0px 0px
 
 			
 			.wrapperViews
+				width 100%
 				margin 50px 0px 0px 0px
 				
 				.wrapperLanding
-					
+					width 100%
 					.wrapperBanner
-						height 450px
+						width 100%
+						height 430px
 						display flex
 						flex-wrap nowrap
 						flex-direction column
 						justify-content center
 						align-items center
-						background-image url("img/Home-banner1.png")
+						background-image url("img/Homepage.jpg")
 						background-repeat no-repeat
 						background-size cover
-						background-position 34% 0px
+						background-position 3% 0px
 						
-						.bannerScene
-							width 100%
-							height 300px
-							display flex
-							justify-content center
-							align-items center
+						.wrapperTxt
+							width 80%
+							margin auto
 							
-							.gridConstitucionEmpresas, .gridRegistraMarca
-								background-color white
-								width 94%
-								margin auto
-								padding 25px 0px
-								display flex
-								flex-direction column
-								flex-wrap wrap
-								align-items center
-								position absolute
-								box-shadow 0px 2px 16px rgba(0,0,0,0.6)
+							h1, h2
+								color white
+								margin 5px auto
 								
-
-								figure
-									width 65px
-									display block
-									margin 0px auto 16px auto
-									
-									img
-										width 100%
-									
-								h1
-									font-family "Source Serif Pro"
-									font-size 1.3em
-									font-weight 500
-									text-align center
-									color #000000
-									margin 0px
-									padding 0px
-									display block
-									width 290px
-									
+							.ctaA
+								background-color white
+								
+								a
+									color #007FFF 
+							.ctaB
+								background-color #A2bc31
+								
 								p
-									font-family "Open Sans"
-									font-size 0.9em
-									font-weight 400
-									text-align center
-									color #007FFF
-									margin 3px 0px 10px 0px
-									padding 0px
-									display block
-									width 280px
-									
-								div
-									font-family "Open Sans"
-									font-size 0.8em
-									font-weight regular
-									text-align center
-									background-color #007FFF
 									color white
-									margin 10px 0px
-									padding 0px 23px
-									display block
-									width auto
-									height 28px
-									line-height 28px
-									border-radius 2px
-									cursor pointer
-									
+								
+							.ctaA, .ctaB
+								border-radius 18px
+								width 190px
+								height 40px
+								line-height 40px
+								margin 14px auto
+								box-shadow 1px 1px 4px #04294e
+								text-align center
+								font-family "Open Sans"
+								font-weight normal
+								font-size 1em
+								cursor pointer
+								
 								a
 									text-decoration none
-									font-family "Open Sans"
-									font-size 0.7em
-									font-weight regular
-									text-align center
+									display block
+									width 100%
+									height 100%
+								
+							.ctaA
+								margin-top 25px
+								
+							.ctaB
+								margin-bottom 18px
+							
+							.contactNum
+								span
+									margin-right 8px
+									
+								
+							
+							
+					.wrapperProductInfo
+						width 100%
+						
+						.infoNav
+							display flex
+							flex-wrap wrap
+							
+						.gridTitle, .infoNavBtn
+							border none
+							
+						.gridTitle
+							display none
+						.infoNavBtn
+							width 33.3%
+							border-bottom solid 5px #AAD4FF
+							
+
+							
+							.gridInfoNav
+								width 80%
+								margin auto
+								height 60px
+								display flex
+								align-items center
+								justify-content center
+								
+								.wrapperIcos
+									position relative
+								
+									figure
+										display block
+										width 20px
+										height 20px
+										margin 0px
+										
+										img
+											width 100%
+											
+									.icoSelected
+										position absolute
+										top 0px
+										opacity 0
+									
+								.btnTitle
 									color #000000
+									margin 0px 0px 0px 10px	
+									text-align left
+									
+								.btnTitleSelected
+									color #007FFF
+
+						.infoNavBtn:hover
+							border-bottom solid 5px #007fff
+							.gridInfoNav
+								p
+									color #007fff
+									
+							.wrapperIcos
+								.ico
+									opacity 0
+								.icoSelected
+									opacity 1
+
+						.infoNavBtnSelected
+							border-bottom solid 5px #007FFF
+						
+						.wrapperInfoA
+							.wrapperA, .wrapperB, .wrapperC
+								margin 10px 0px 0px 0px
+								display flex
+								flex-direction column
+							
+									
+								.gridA
+									.wrapperTxt
+										
+										h5
+											margin 30px auto 5px auto
+											
+											
+										.wrapperContent
+											width 80%
+											margin 20px auto
+											
+											
+											.instructionTitle::before
+												content "1."
+												color #000000
+												font-size 1.2em
+												margin 0px 5px 0px 0px
+												padding 0px
+												
+											
+											.instructionTitle, .instructionDescrip
+												text-align justify
+												
+											.instructionTitle
+												margin 0px 0px 7px 0px
+												font-size 0.9em
+												
+											.instructionDescrip
+												padding-left 20px
+												margin 0px 0px 5px 0px
+								.gridB
+									figure
+										display block
+										margin 13px auto 0px auto
+										padding 0px
+										width 280px
+										
+										img
+											width 100%		
+										
+							.wrapperB .gridA .wrapperTxt .wrapperContent .instructionTitle::before
+								content "2."
+								color #000000
+								font-size 1.2em
+								margin 0px 5px 0px 0px
+								
+							.wrapperC .gridA .wrapperTxt .wrapperContent .instructionTitle::before
+								content "3."
+								color #000000
+								font-size 1.2em
+								margin 0px 5px 0px 0px
+									
+						.wrapperInfoB
+							h4
+								margin-top 30px
+							.wrapperPacks
+								display flex
+								flex-direction column
+								margin-bottom 30px
+
+								.gridPacks
+									position relative
+									margin-top 20px
+									
+									figure
+										height 100px
+										width 100px
+										display block
+										position absolute
+										top -25px
+										left -60px
+										-ms-transform: rotate(30deg);
+										-webkit-transform: rotate(30deg);
+										transform: rotate(30deg);
+										
+										img
+											width 100%
+									.pack
+										width 85%
+										margin 0px auto
+										box-shadow 5px 1px 9px #ccc
+										border-top-left-radius 10px
+										border-top-right-radius 10px
+										overflow hidden
+										margin-top 20px
+										
+										.gridInfo
+											background-color #007EFF
+											display flex
+											flex-direction column
+											align-items center
+											justify-content center
+											padding-top 10px
+											
+											
+											h5
+												color white
+												width 100px
+												margin 20px auto 0px auto
+												
+											.symbol
+												font-size 25px
+											.price
+												font-size 40px
+												
+											.symbol, .price
+												margin 0px
+												padding 0px
+												display inline-block
+												font-weight normal
+												
+											ul
+												list-style none
+												padding 0px
+												margin 10px auto
+												
+												li
+													color white
+													font-family "Open Sans"
+													font-size 0.8em
+													font-weight lighter
+													margin 10px 0px
+													
+												li::before
+													content: "+"
+													color white
+													font-size 0.9em
+													margin-right 5px
+													
+											.btn
+												background-color white
+												box-shadow 1px 1px 4px #04294e
+												height 50px
+												font-family "Open Sans"
+												border-radius 30px
+												text-align center
+												line-height 50px
+												padding 0px 30px
+												cursor pointer
+												margin 15px auto 30px auto
+												
+												a
+													text-decoration none
+													color #000000
+													width 100%
+													height 100%
+												
+											
+										.gridTerms
+											background-color white
+											
+											h5
+												letter-spacing 3px
+												margin 30px auto 10px auto
+												text-align center
+												
+											ul
+												padding 0px
+												margin 15px auto 0px auto
+												width 90%
+												list-style none
+												padding-bottom 20px
+
+												li
+													font-family "Open Sans"
+													font-size 0.7em
+													font-weight lighter
+													color #000000
+													margin 3px auto
+													
+												li::before
+													content: "+"
+													color #F65813
+													margin 0px 5px 10px 0px
+											
+								.gridAditionalCosts
+									width 85%
+									margin 40px auto 20px auto
+									
+									.infoTitle
+										background-color white
+										padding 20px 0px
+										border solid 1px #F65813
+										
+										h6, p
+											color #F65813
+											font-family "Open Sans"
+											text-align center
+											
+										h6
+											font-size 0.9em
+											font-weight bold
+											letter-spacing 3px
+											margin 0px auto
+											
+											
+										p
+											font-size 0.7em
+											font-weight lighter
+											margin 10px auto
+											width 90%
+											
+
+											
+									.infoDetail
+										background-color #F65813
+										display flex
+										justify-content space-between
+										
+										.gridA, .gridB
+											width 50%
+											display flex
+											flex-direction column
+											
+											
+											.wrapperConditPrice
+												width 60px
+												margin 20px auto 0px auto
+												text-align center
+
+												p
+													color white
+													font-family "Open Sans"
+													display inline-block
+													text-align center
+													margin 0px auto 0px auto
+												
+												.symbol
+													font-size 1em
+													
+												.price
+													font-size 2em
+													font-weight bold
+													
+											.termsDescription
+												color white
+												font-family "Open Sans"
+												font-size 0.6em
+												text-align center
+												width 90%
+												margin 0px auto 30px auto
+													
+								.gridRequirements
+									width 85%
+									margin 20px auto
+									
+									.infoTitle
+										background-color white
+										padding 20px 0px
+										border solid 1px #A2bc31
+										
+										h6
+											color #A2bc31
+											font-family "Open Sans"
+											text-align center
+											font-size 0.9em
+											font-weight bold
+											letter-spacing 3px
+											margin 0px auto
+											
+									.infoDetail
+										background-color #A2bc31
+										display flex
+										justify-content space-between
+										padding 20px 0px
+										
+										ul
+											padding 0px
+											margin 0px auto
+											display block
+											width 70%
+											list-style-type circle
+
+											li
+												color white
+												font-family "Open Sans"
+												font-weight lighter
+												font-size 0.9em
+												margin 3px auto
+												text-align left
+											
+										
+										
+										
+						.wrapperInfoC
+							padding-top 20px
+							
+							.wrapperList
+								margin-top 25px
+								display flex
+								flex-direction column
+								
+								ul
 									margin 0px
 									padding 0px
-									display block
-									width auto
-								
-							.gridRegistraMarca
-								h1
-									width 310px
-						
-						.gridPagination
-							width 100px
-							margin 10px auto 
-							display flex
-							justify-content center
-							span
-								color #000000
-								margin 0px 2px
-								font-size 3.1em
-								color #95989A
-							
-							.gridActive
-								color #007FFF
+									width 100%
+									display flex
+									flex-direction column
+									list-style none
+									
+									li
+										margin 8px 25px
+										padding 0px
+										
+										p
+											margin 3px
+											padding 0px
+										.notaryName
+											font-family "Playfair Display"
+											font-size 1.2em
+											color black
+											text-transform capitalize
+											font-weight bold
+										
+										.notaryLocation
+											font-family "Open Sans"
+											font-size 0.9em
+											font-weight lighter
+											color #007EFC
 					
-					.wrapperBenefits, .wrapperTestimonials, .wrapperCounters
-						
+					
 							
 					.wrapperBenefits
 						display flex
@@ -725,6 +1086,7 @@ body
 							display flex
 							justify-content space-around
 							flex-wrap wrap
+							align-items flex-start
 
 							.gridBenefit
 								margin 40px auto 0px auto
@@ -753,7 +1115,7 @@ body
 									
 								h3
 									font-family "Open Sans"
-									font-size 0.75em
+									font-size 0.7em
 									font-weight 600
 									text-align center
 									color #272727
@@ -761,9 +1123,16 @@ body
 									padding 0px
 									display block
 									text-align center
-									width 120px
+									width 140px
+									
+									a
+										text-decoration none
+										font-weight bold
+										color #F3575D
+										cursor pointer
 						
 					.wrapperTestimonials
+						display none
 						padding-top 20px
 						background-color #F8f8f8
 						
@@ -773,7 +1142,7 @@ body
 						.wrapperWidgetTestimonials
 							display flex
 							justify-content center
-							height 300px
+							height auto
 							margin-top 30px
 							
 							.btnWidgetTestimonials
@@ -783,21 +1152,22 @@ body
 								color #ccc
 							
 							.wrapperInfoTestimonials
-								width 250px
-								height 300px
-								position relative
+								width 90%
+								height auto
+								display flex
+								justify-content space-around
+								flex-direction column							
 								
 								.gridTestimonial
-									position absolute
 									display flex
 									flex-direction column
 									align-items center
+									margin-bottom 30px
 
 									figure
 										width 100px
 										border-radius 50%
 										overflow hidden
-										height 100px
 										margin 16px auto 8px auto
 										
 										img
@@ -814,7 +1184,6 @@ body
 										font-size 0.8em
 										text-align center
 										color #95989A
-										margin 20px auto 20px auto
 										padding 0px
 										display block
 										text-align center
@@ -893,6 +1262,44 @@ body
 									color #454545
 									font-size 1em
 									margin 0px auto
+
+					.wrapperContact 
+						
+						.gridData .wrapperTxt
+						
+							width 80%
+							margin 0px auto
+							padding-bottom 30px
+							
+							h5
+								margin-bottom 15px
+							
+							.smallContent
+								text-align left
+								
+							.field
+								margin-top 20px
+								
+							.data
+								color #007EFC
+								
+						.gridMap
+							width 100%
+							overflow hidden
+							
+							figure
+								display block
+								width 100%
+								height 100%
+								margin 0px auto
+								
+								img
+									width 100%
+							
+							
+
+							
+
 
 			footer
 				display block
@@ -1015,6 +1422,7 @@ body
 					#footerGrid6
 						order 6
 						
+
 			.login
 				background-color white
 				width 100%
@@ -1022,26 +1430,36 @@ body
 				top 0px
 				height 100vh
 				z-index 9999
-				display none
-				align-items center
+				display flex
+				align-content center
 				
 				.wrapperLogin
+					width 100%
 					display flex
 					flex-direction column
 					align-items center
-					justify-content center
+					align-content center
+					justify-content flex-start
 					
-					.icon-cross
+					.wrapperBtnClose
+						margin-top 10px
 						color black
 						width 100%
-						font-size 1em
-						text-align right
-						margin 0px 0px 30px 0px 
-						cursor pointer
+						display flex
+						justify-content flex-end
+						
+						a
+							text-decoration none
+							margin-top 10px
+							margin-right 10px
+							
+							span
+								font-size 1em
+								text-align right
+								margin 0px 0px 30px 0px 
 					
 					figure
-						margin 0px auto 10px auto
-						border solid 1px red	
+						margin 20px auto 10px auto
 						width 100px
 						
 						img
@@ -1056,6 +1474,9 @@ body
 						padding 0px
 						display block
 						text-align center
+						
+					.underlineBlue
+						margin-bottom 20px
 						
 						
 					.formLogin
@@ -1098,54 +1519,78 @@ body
 						border-radius 3px
 						background-color #007EFF
 						
-					.fbLogin
-						background-color #4464A2
-					.linkedinLogin
-						background-color #0282BD
-						
-					.underlineGrey
-						margin 10px auto
-									
-					.btnLoginForm
-						cursor pointer
-						height 40px
-						width 90%
+					.wrapperBtnLogin
+						margin-top 15%
+						width 100%
 						display flex
-						justify-content center
+						flex-direction column
 						align-items center
-						margin 10px 0px
-						
-						
-						span
-							width 30px
-							color white
-							font-size 1.2em
-							text-align center
-							margin 0px auto
-							padding 0px
+						.fbLogin
+							background-color #4464A2
+						.linkedinLogin
+							background-color #0282BD
 							
-						p
-							font-family "Open Sans"
-							font-weight lighter
-							font-size 0.9em
-							color white
-							text-align center
-							width auto
-							margin 0px
-							padding 0px
+						.googleLogin
+							background-color #f3575d
+							
+						.underlineGrey
+							margin 10px auto
+										
+						.btnLoginForm
+							cursor pointer
+							height 40px
+							width 90%
+							margin 10px 0px
+							
+							a
+								width 100%
+								height 100%
+								text-decoration none
+								display flex
+								justify-content center
+								align-items center
+							
+								span
+									width 30px
+									color white
+									font-size 1.2em
+									text-align center
+									margin 0px auto
+									padding 0px
+									
+								p
+									font-family "Open Sans"
+									font-weight lighter
+									font-size 0.9em
+									color white
+									text-align center
+									width auto
+									margin 0px
+									padding 0px		
 
-						
-					
-				
-				
 					
 
 	.userPhoto
-		display none
-	.sectionBrandRegistration
-		display none
+		display block
+		height 30px
+		width 30px
+		line-height 30px
+		margin 0px 25px 0px 0px
+		padding 0px
+		border-radius 50%
+		overflow hidden
 		
-	.login
+		a
+			text-decoration none
+			width 100%
+			height 100%
+			margin 0px
+			padding 0px
+			
+			img
+				width 100%
+			
+	.sectionBrandRegistration
 		display none
 		
 		
@@ -1160,70 +1605,104 @@ body
 		.wrapperBenefits .wrapperInfoBenefits .gridBenefit
 			width 25%
 			
-		#faq2
-			figure
-				order 2
-			.gridFaq
-				order 1
-			
-		.wrapperFaq
-			margin 0px
-			padding 0px
-			display flex
-			align-items center
-			
-			figure, .gridFaq
-				width 50%
-				
-			figure
-				margin 0px
-				padding 0px
-				
-				img
-					width 100%
-			.gridFaq
-				display flex
-				flex-direction column
-				align-items center
-				background-color white
-				
-				h1
-					font-family "Source Serif Pro"
-					font-size 1.4em
-					font-weight 600
-					color #007EFF
-					margin 0px auto 20px auto
-					padding 0px
-					display block
-					text-align center
-					width 300px
+		
+		.wrapperProductInfo	
+			.infoNav
+				height 85px	
+				.gridTitle, .infoNavBtn
+					display flex
 					
-				h2	
-					font-family "Open Sans"
-					font-size 0.9em
-					font-weight lighter
-					color #95989A
-					margin 10px auto 15px auto
-					padding 0px
-					display block
-					text-align center
-					width 300px
+				.gridTitle
+					border-bottom solid 5px #95989A
+					background-color #F8F8F8
 					
-				.btnFaq
-					background-color #F34A51
-					height 26px
-					line-height 26px
-					width 120px
-					margin 20px auto 0px auto
-					padding 0px
-					font-family "Open Sans"
-					font-size 0.7em
-					font-weight lighter
-					color white
-					text-align center
-					
+					.wrapperTxt 
+						margin auto auto
+						border-left solid 3px #007FFF
 
+						width 80%
+						
+						p
+							font-family "Open Sans"
+							text-align left
+							margin 0px 0px 0px 12px
+							padding 0px
+							
+						.navTitle
+							font-size 1.1em
+							font-weight bold
+							
+						.navSubtitle
+							font-size 0.6em
+							color #007FFF
+				.infoNavBtn, .gridTitle
+					width 24.9%
 				
+			.wrapperInfoA
+				.wrapperA, .wrapperB, .wrapperC
+					flex-direction row
+					width 85%
+					margin 20px auto 0px auto
+					
+					.gridA, .gridB
+						width 50%
+						
+					.gridA .wrapperTxt h5
+						margin 40px 0px 5px 33px
+						text-align left
+				
+				.wrapperB
+					.gridA
+						order 2
+					.gridB
+						order 1
+						
+			.wrapperInfoB
+				padding-top 30px
+				
+				.wrapperPacks
+					padding-top 10px
+					flex-direction row
+					justify-content center
+					flex-wrap wrap
+					height 660px
+					
+					.gridPacks
+						width 50%
+					.gridAditionalCosts
+						width 40%
+						margin 40px 0px 0px 0px
+						
+				
+					
+					.gridRequirements
+						width 40%
+						position relative
+						top -370px
+						left 192px
+						
+						.infoDetail
+							ul
+								width 72%
+						
+						
+			.wrapperInfoC
+				margin-bottom 50px
+				
+				.wrapperList
+					flex-direction row
+
+					.gridA, .gridB
+						margin 0px auto
+						width 50%
+
+		.wrapperContact
+			display flex
+			flex-direction row
+			
+			.gridData, .gridMap
+				width 50%
+
 
 		.wrapperCounters
 			padding 40px 0px 0px 0px 
@@ -1233,6 +1712,7 @@ body
 				flex-direction row
 				margin 40px auto 20px 0px
 				
+
 	body .container .appContainer .login .wrapperLogin
 		width 60%
 		margin 0px auto
@@ -1308,9 +1788,13 @@ body
 					font-size 0.67em
 					font-weight lighter
 					color #505050
-					padding 0px
+					padding 0px 0px 5px 0px
 					margin auto 16px
-					cursor pointer			
+					cursor pointer
+					
+				.btnNavSelected
+					color #007EFF
+					border-bottom solid 2px #007EFF
 				
 			.btnRegistration
 				margin-right 25px
@@ -1325,22 +1809,34 @@ body
 
 	body .container .appContainer .wrapperViews .wrapperLanding
 		.wrapperBanner
-			height 600px
+			height 100vh - 21px
 			background-position 34% -43px
-			
+			.wrapperTxt
+				h1
+					font-size 2em
+				h1, h2
+					text-align left
+				.ctaA, .ctaB
+					margin 14px 0px 14px 2px
+					
+				.contactNum
+					margin-left 48px
+				
+					
 		.wrapperBanner .bannerScene .gridConstitucionEmpresas, .wrapperBanner .bannerScene .gridRegistraMarca
-			width 470px
+			width 500px
 			padding 40px 0px
 			
 			figure
 				width 80px
 			h1 
 				font-size 1.6em
-				width 355px
+				width 353px
 				
 			p
 				font-size 1em
-				margin 7px 0px 20px 0px
+				margin 0px 0px 10px 0px
+				width 284px
 
 	
 		.wrapperBanner .gridPagination
@@ -1349,61 +1845,85 @@ body
 			span
 				font-size 4em
 				
-
-		.wrapperBenefits
-			padding-bottom 120px
-			
-			.wrapperInfoBenefits
-				margin 20px auto 0px auto
-				width 1100px
-				
-				.gridBenefit
-					figure
-						width 75px
-						
-					h2
-						font-size 1.7em
-					
-					h3
-						font-size 0.9em
-						width 128px
-						
-		.wrapperFaq
-			.gridFaq
-				h1
-					font-size 2.4em
-					width 420px
-					margin 0px auto 25px auto
-					
-					
-				h2
-					font-size 1.1em
-					width 400px
-					margin 18px auto 15px auto
-					
-				.btnFaq
-					font-size 0.8em
-					height 33px
-					line-height 33px
-					width 135px
-					margin 40px auto 0px auto
+		.wrapperProductInfo
+			padding-top 0px
+			.infoNav
+				.gridTitle
+					.wrapperTxt
+						.navTitle
+							font-size 1.4em
+						.navSubtitle
+							font-size 0.7em
+				.infoNavBtn
 					cursor pointer
-		
+					.gridInfoNav
+						p
+							font-size 1em
+							
+						figure
+							height 24px
+							width 24px
+					
+			.wrapperInfoA
+				.wrapperA, .wrapperB, .wrapperC
+					justify-content center
+					align-items center
+					
+					.gridA
+						.wrapperTxt
+							width 440px
+							
+					.gridB
+						figure
+							width 450px
+							
+			.wrapperInfoB
+				.wrapperPacks
+					flex-wrap wrap
+					height 670px
+					
+					.gridPacks
+						width 400px
+						
+					.gridRequirements
+						width 40%
+						position relative
+						top -378px
+						left 200px
+						
+						.infoDetail
+							ul
+								width 72%
+						
+			.wrapperInfoC
+				.wrapperList
+					width 900px
+					margin 50px auto
+					
+					ul
+						align-items center
+						
+						li
+							width 362px
+							margin-bottom 20px
+
 		.wrapperTestimonials
+			display none
 			padding-top 45px
-			
+			padding-bottom 40px
 			.wrapperWidgetTestimonials 
-				height 400px
+				height 320px
 				.wrapperInfoTestimonials 
-					width 280px
+					flex-direction row
+					padding-bottom 30px
 	
 					.gridTestimonial
+						margin-bottom auto
 						figure
 							margin 16px auto 16px auto
 						.testimonial
 							font-size 1em
 							width 280px
-							margin 37px auto
 							
 						.clientName
 							font-size 1em
@@ -1412,7 +1932,7 @@ body
 							font-size 1.1em
 
 		.wrapperCounters
-			padding 60px 0px 0px 0px
+			padding 30px 0px 0px 0px
 			
 			.wrapperInfoCounters
 				margin 60px auto 20px auto
@@ -1427,7 +1947,9 @@ body
 						font-size 1.5em
 					.counterName
 						font-size 0.9em
-						
+		
+		.wrapperContact .gridMap
+			padding 30px 0px		
 
 
 	body .container .appContainer
@@ -1467,27 +1989,18 @@ body
 					
 					.gridFooterInfoSocialNetwork
 						justify-content center
-						
+		
 		.login
-			display none
 			background-color #F2F2F2
 			.wrapperLogin
 				background-color white
 				box-shadow 0px 1px 20px rgba(0,0,0,0.2)
-				width 29%
-				padding 45px 50px
-				
+				width 30%
+				padding 45px 50px					
 
-		
+
 @import "userprofile.styl"
 @import "enterpriseIncorporation.styl"
-@import "trackingPanel.styl"
-						
-.wrapperLanding
-	display none
-.sectionUserprofile
-	display none
-.sectionEnterpriseIncorporation
-	display none
+@import "trackingPanel.styl"					
 
 

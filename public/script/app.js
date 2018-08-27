@@ -27840,7 +27840,7 @@ var EnterpriseInformationForm = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'smallContent' },
-										'942 914 542'
+										'912 289 540'
 									)
 								),
 								_react2.default.createElement(
@@ -28786,7 +28786,7 @@ var Landing = function (_Component) {
 							'h2',
 							{ className: 'mediumContent contactNum' },
 							_react2.default.createElement('span', { className: 'icon-whatsapp' }),
-							'942 914 542'
+							'912 289 540'
 						),
 						_react2.default.createElement(
 							'h2',
@@ -29566,12 +29566,7 @@ var Landing = function (_Component) {
 							_react2.default.createElement(
 								'p',
 								{ className: 'smallContent data' },
-								'01 420 6162'
-							),
-							_react2.default.createElement(
-								'p',
-								{ className: 'smallContent data' },
-								'942 914 542'
+								'912 289 540'
 							)
 						)
 					),
@@ -30155,7 +30150,7 @@ var PartnersAddingForm = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'smallContent' },
-										'942 914 542'
+										'912 289 540'
 									)
 								),
 								_react2.default.createElement(
@@ -30646,7 +30641,7 @@ var PaymentMethodForm = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'legalyContactInfo' },
-										'Cel. 942 914 542'
+										'Cel. 912 289 540'
 									),
 									_react2.default.createElement(
 										'p',
@@ -32059,7 +32054,7 @@ var PersonalInformationForm = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'smallContent' },
-										'942 914 542'
+										'912 289 540'
 									)
 								),
 								_react2.default.createElement(
@@ -32697,7 +32692,7 @@ var SelectPaymentMethodForm = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'legalyContactInfo' },
-										'Cel. 942 914 542'
+										'Cel. 912 289 540'
 									),
 									_react2.default.createElement(
 										'p',

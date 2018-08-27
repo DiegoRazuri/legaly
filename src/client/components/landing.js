@@ -101,7 +101,7 @@ export default class Landing extends Component{
 							<div onClick={this.scrollinContact.bind(this)} id="btnContact" className="ctaB" data-direct="#contact">
 								<p>¿Consultas?</p>
 							</div>
-							<h2 className="mediumContent contactNum"><span className="icon-whatsapp"></span>942 914 542</h2>
+							<h2 className="mediumContent contactNum"><span className="icon-whatsapp"></span>912 289 540</h2>
 							<h2 className="mediumContent contactNum"><span className="icon-office"></span>01 420 6162</h2>
 						</div>
 					</div>
@@ -393,8 +393,7 @@ export default class Landing extends Component{
 								<p className="field smallContent">Puedes solicitar una asesoría gratuita para la constitución de tu empresa en el momento que lo desees, incluso por whatsapp. Te invitamos a seguirnos en nuestras redes sociales donde compartiremos conocimiento y contactos para la comunidad Legaly!</p>
 								<p className="field smallContent">Contáctanos a</p>
 								<p className="smallContent data">info@legaly.pe</p>
-								<p className="smallContent data">01 420 6162</p>
-								<p className="smallContent data">942 914 542</p>
+								<p className="smallContent data">912 289 540</p>
 
 								
 

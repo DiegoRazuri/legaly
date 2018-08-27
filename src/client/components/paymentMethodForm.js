@@ -94,7 +94,7 @@ export default class PaymentMethodForm extends Component{
 										</div>
 										<p className="deliveryInstructions">Una vez que hayas realizado el depósito, el proceso de tu constitución iniciará con la reserva de nombre, la cual tarda cerca de 24 horas en tener respuesta. Luego, te enviaremos por correo la minuta para que nos des tu aprobación. Finalmente, con el visto bueno se emitirá el testimonio y te especificaremos lugar, hora y fecha de la toma de firma de los socios. No olvides contactarnos en cuanto hayas realizado el pago.</p>
 										<p className="legalyContactInfo">info@legaly.pe</p>
-										<p className="legalyContactInfo">Cel. 942 914 542</p>
+										<p className="legalyContactInfo">Cel. 912 289 540</p>
 										<p className="legalyContactInfo">Cel. 996 005 400</p>
 										<p className="legalyContactInfo">BBVA Continental cta 0011 - 0383 - 0200182247</p>
 										<p className="legalyContactInfo">BCP cta 192 - 36010048 - 0 - 85</p>

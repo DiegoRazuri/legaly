@@ -312,7 +312,7 @@ export default class EnterpriseInformationForm extends Component{
 									<span className="icon-angle-down"></span>
 									<div className="gridUserSupport">
 										<span className="icon-whatsapp"></span>
-										<p className="smallContent">942 914 542</p>
+										<p className="smallContent">912 289 540</p>
 									</div>
 									<a href="http://www.facebook.com/legaly.pe" target="_blank" className="gridUserSupport">
 										<span className="icon-facebook"></span>
