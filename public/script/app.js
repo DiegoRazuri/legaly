@@ -26143,7 +26143,7 @@ var App = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'smallContent' },
-										'942 914 542'
+										'912 289 540'
 									)
 								),
 								_react2.default.createElement(
@@ -26220,7 +26220,7 @@ var App = function (_Component) {
 								_react2.default.createElement(
 									'p',
 									null,
-									'942 914 542'
+									'912 289 540'
 								)
 							),
 							_react2.default.createElement(
@@ -26336,7 +26336,7 @@ var App = function (_Component) {
 								_react2.default.createElement(
 									'li',
 									null,
-									'942 914 542'
+									'912 289 540'
 								)
 							)
 						),

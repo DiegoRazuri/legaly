@@ -533,7 +533,7 @@ export default class App extends Component{
 								<ul>
 									<li className="rowMenuMovil">
 										<span className="icon-whatsapp"></span>
-										<p className="smallContent">942 914 542</p>
+										<p className="smallContent">912 289 540</p>
 									</li>
 									<li className="rowMenuMovil">
 										<span className="icon-mail_outline"></span>
@@ -568,7 +568,7 @@ export default class App extends Component{
 							<div className="gridGeneralContactInfo">
 								<div className="subGrid">
 									<span className="icon-whatsapp"></span>
-									<p>942 914 542</p>
+									<p>912 289 540</p>
 								</div>
 								<div className="subGrid">
 									<span className="icon-mail_outline"></span>
@@ -629,7 +629,7 @@ export default class App extends Component{
 								<ul>
 									<li>Asesoría de: Lun-Vie : 9am - 6pm / Sab : 9am - 1pm</li>
 									<li>info@legaly.pe</li>
-									<li>942 914 542</li>
+									<li>912 289 540</li>
 								</ul>
 							</div>
 							<div id="footerGrid2" className="gridFooterInfo gridFooterA">
