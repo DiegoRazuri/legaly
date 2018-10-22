@@ -71,7 +71,7 @@ module.exports = function (passport) {
 		consumerKey: process.env.LINKEDIN_API_KEY,
 		consumerSecret: process.env.LINKEDIN_SECRET_KEY,
 		//callbackURL: 'http://localhost:3000/auth/linkedin/callback',
-		callbackURL: process.env.LINKEDIN_CALLBACK_URI || 'http://localhost:3000/auth/linkedin/callback',
+		callbackURL: process.env.LINKEDIN_CALLBACK_URI || 'https://legaly.pe/auth/linkedin/callback',
 		profileFields: ['id', 'first-name', 'last-name', 'email-address', 'headline', 'picture-url']
 	}, function (token, tokenSecret, profile, done) {
 		//logica si el usuario es nuevo o no, si se le va a registrar, etc.
@@ -103,7 +103,7 @@ module.exports = function (passport) {
 	passport.use(new GoogleStrategy({
 		clientID: process.env.GOOGLE_CLIENT_ID,
 		clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-		callbackURL: process.env.GOOGLE_CALLBACK_URI || "http://localhost:3000/auth/google/callback"
+		callbackURL: process.env.GOOGLE_CALLBACK_URI || "https://legaly.pe/auth/google/callback"
 
 	}, function (accessToken, refreshToken, profile, done) {
 
