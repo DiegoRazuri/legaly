@@ -115,6 +115,7 @@ app.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
 
 app.get('/auth/google', passport.authenticate('google', { scope: ['email profile'] }));
 app.get('/auth/google/callback', passport.authenticate('google', {
+	successRedirect: '/informacion-empresa',
 	failureRedirect: '/'
 
 }), function (req, res) {
