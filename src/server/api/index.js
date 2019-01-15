@@ -677,6 +677,7 @@ router.post('/delete_partner_invitation', jsonParser, function (req, res){
 router.get('/all_enterprises', function(req, res){
 	// este debe cambiar a 1 despues de programar el endpoint de actualizacion para recibir solo las activas
 
+	console.log("listando empresas");
 	Enterprise.find({inProcess : false}).
 		populate({
 			path : 'partners'
