@@ -33899,6 +33899,8 @@ var TrackingPanel = function (_Component) {
 		value: function componentWillMount() {
 			var _this4 = this;
 
+			console.log("componenewillmount");
+
 			$.post('/api/is_it_admin', function (res) {
 
 				if (res.state == 1) {
