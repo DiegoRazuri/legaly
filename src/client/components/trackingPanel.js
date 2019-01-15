@@ -105,6 +105,7 @@ export default class TrackingPanel extends Component{
 					this.setState({user_identified: res.state});
 
 					this.getEnterprises();
+					console.log("cambio")
 					
 				}
 			});
