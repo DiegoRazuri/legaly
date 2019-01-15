@@ -704,6 +704,7 @@ router.get('/all_enterprises', function(req, res){
 						if(err){
 							res.sendStatus(500).json(err)
 						}else{
+							console.log(e_data)
 							res.json(e_data)
 						}
 					});

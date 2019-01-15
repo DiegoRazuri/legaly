@@ -30,7 +30,7 @@ export default class TrackingPanel extends Component{
 		$.get('/api/all_enterprises', (res)=>{
 			
 			
-			
+			console.log(res)
 		
 			this.setState({enterprises : res})
 

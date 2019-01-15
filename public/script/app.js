@@ -33838,6 +33838,8 @@ var TrackingPanel = function (_Component) {
 
 			$.get('/api/all_enterprises', function (res) {
 
+				console.log(res);
+
 				_this2.setState({ enterprises: res });
 			});
 		}
