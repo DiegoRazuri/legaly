@@ -33838,8 +33838,6 @@ var TrackingPanel = function (_Component) {
 
 			$.get('/api/all_enterprises', function (res) {
 
-				console.log(res);
-
 				_this2.setState({ enterprises: res });
 			});
 		}
@@ -33899,8 +33897,6 @@ var TrackingPanel = function (_Component) {
 		value: function componentWillMount() {
 			var _this4 = this;
 
-			console.log("componenewillmount");
-
 			$.post('/api/is_it_admin', function (res) {
 
 				if (res.state == 1) {
@@ -33908,7 +33904,6 @@ var TrackingPanel = function (_Component) {
 					_this4.setState({ user_identified: res.state });
 
 					_this4.getEnterprises();
-					console.log("cambio");
 				}
 			});
 		}

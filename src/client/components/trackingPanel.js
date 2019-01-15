@@ -29,9 +29,6 @@ export default class TrackingPanel extends Component{
 	getEnterprises(){
 		$.get('/api/all_enterprises', (res)=>{
 			
-			
-			console.log(res)
-		
 			this.setState({enterprises : res})
 
 		});
@@ -96,7 +93,6 @@ export default class TrackingPanel extends Component{
 	}
 
 	componentWillMount(){
-			console.log("componenewillmount")
 			
 			$.post('/api/is_it_admin', (res)=>{
 				
@@ -105,7 +101,6 @@ export default class TrackingPanel extends Component{
 					this.setState({user_identified: res.state});
 
 					this.getEnterprises();
-					console.log("cambio")
 					
 				}
 			});
