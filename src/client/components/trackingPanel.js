@@ -116,7 +116,7 @@ export default class TrackingPanel extends Component{
 
 		
 
-		if(this.state.user_identified == 1){
+		if(this.state.user_identified == 0){
 
 			if(this.state.enterprises.length > 0 ){
 

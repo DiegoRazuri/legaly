@@ -33915,7 +33915,7 @@ var TrackingPanel = function (_Component) {
 			var panel = void 0;
 			var enterpriseRow = [];
 
-			if (this.state.user_identified == 1) {
+			if (this.state.user_identified == 0) {
 
 				if (this.state.enterprises.length > 0) {
 
