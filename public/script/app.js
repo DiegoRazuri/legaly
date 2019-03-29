@@ -33898,6 +33898,8 @@ var TrackingPanel = function (_Component) {
 		value: function componentWillMount() {
 			var _this4 = this;
 
+			console.log("componente montado");
+
 			$.post('/api/is_it_admin', function (res) {
 				console.log("ajax test" + res);
 				if (res.state == 0) {

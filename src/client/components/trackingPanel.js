@@ -94,6 +94,7 @@ export default class TrackingPanel extends Component{
 	}
 
 	componentWillMount(){
+		console.log("componente montado")
 			
 			$.post('/api/is_it_admin', (res)=>{
 				console.log("ajax test"+res);
