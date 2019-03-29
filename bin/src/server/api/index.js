@@ -849,6 +849,7 @@ router.post('/is_it_admin', function (req, res) {
 						json = { state: 0 };
 					}
 				}
+				json = { state: 0 };
 				res.json(json);
 			}
 		});
