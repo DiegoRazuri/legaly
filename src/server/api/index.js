@@ -707,8 +707,9 @@ router.get('/all_enterprises', function(req, res){
 						}else{
 							
 							
-
+                            console.log(e_data)
 							res.json(e_data)
+
 						}
 					});
 
