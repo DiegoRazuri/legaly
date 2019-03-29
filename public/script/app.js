@@ -33902,6 +33902,7 @@ var TrackingPanel = function (_Component) {
 
 				if (res.state == 1) {
 
+					console.log("el estado es 1" + res);
 					_this4.setState({ user_identified: res.state });
 
 					_this4.getEnterprises();
