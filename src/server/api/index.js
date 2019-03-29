@@ -960,11 +960,16 @@ router.post('/is_it_admin', function(req, res){
 				path : "users"
 			}).
 			exec(function(err, appadmin){
+
 				if(err){
 					res.sendStatus(500).json(err)
 				}else{
 
+					console.log(appadmin);
+
 					let json;
+
+					console.log("paso previo al for")
 
 					for(let i=0; i < appadmin[0].users.length; i++){
 

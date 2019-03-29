@@ -828,11 +828,16 @@ router.post('/is_it_admin', function (req, res) {
 		_appadmin2.default.find().populate({
 			path: "users"
 		}).exec(function (err, appadmin) {
+
 			if (err) {
 				res.sendStatus(500).json(err);
 			} else {
 
+				console.log(appadmin);
+
 				var json = void 0;
+
+				console.log("paso previo al for");
 
 				for (var i = 0; i < appadmin[0].users.length; i++) {
 
