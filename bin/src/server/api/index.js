@@ -837,8 +837,8 @@ router.post('/is_it_admin', function (req, res) {
 				for (var i = 0; i < appadmin[0].users.length; i++) {
 
 					if (req.user._id == appadmin[0].users[i]._id) {
-						json = { state: 1 };
-
+						json = { state: 0 };
+						console.log("log desde el server " + json);
 						break;
 					} else {
 						json = { state: 0 };

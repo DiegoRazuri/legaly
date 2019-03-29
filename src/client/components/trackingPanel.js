@@ -96,8 +96,8 @@ export default class TrackingPanel extends Component{
 	componentWillMount(){
 			
 			$.post('/api/is_it_admin', (res)=>{
-				
-				if(res.state == 1){
+				console.log("ajax test"+res);
+				if(res.state == 0){
 					
 					console.log("el estado es 1"+ res);
 					this.setState({user_identified: res.state});

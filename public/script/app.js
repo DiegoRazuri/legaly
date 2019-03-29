@@ -33899,8 +33899,8 @@ var TrackingPanel = function (_Component) {
 			var _this4 = this;
 
 			$.post('/api/is_it_admin', function (res) {
-
-				if (res.state == 1) {
+				console.log("ajax test" + res);
+				if (res.state == 0) {
 
 					console.log("el estado es 1" + res);
 					_this4.setState({ user_identified: res.state });
