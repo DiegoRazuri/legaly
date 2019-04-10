@@ -33902,7 +33902,7 @@ var TrackingPanel = function (_Component) {
 
 			$.post('/api/is_it_admin', function (res) {
 				console.log("ajax test" + res);
-				if (res.state == 0) {
+				if (res.state == 1) {
 
 					console.log("el estado es 1" + res);
 					_this4.setState({ user_identified: res.state });
@@ -33919,7 +33919,7 @@ var TrackingPanel = function (_Component) {
 			var panel = void 0;
 			var enterpriseRow = [];
 
-			if (this.state.user_identified == 0) {
+			if (this.state.user_identified == 1) {
 
 				if (this.state.enterprises.length > 0) {
 

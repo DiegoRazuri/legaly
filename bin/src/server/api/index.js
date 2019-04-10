@@ -837,19 +837,17 @@ router.post('/is_it_admin', function (req, res) {
 
 				var json = void 0;
 
-				console.log("paso previo al for");
-
 				for (var i = 0; i < appadmin[0].users.length; i++) {
 
 					if (req.user._id == appadmin[0].users[i]._id) {
-						json = { state: 0 };
-						console.log("log desde el server " + json);
+						json = { state: 1 };
+
 						break;
 					} else {
 						json = { state: 0 };
 					}
 				}
-				json = { state: 0 };
+
 				res.json(json);
 			}
 		});

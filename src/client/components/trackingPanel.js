@@ -98,7 +98,7 @@ export default class TrackingPanel extends Component{
 			
 			$.post('/api/is_it_admin', (res)=>{
 				console.log("ajax test"+res);
-				if(res.state == 0){
+				if(res.state == 1){
 					
 					console.log("el estado es 1"+ res);
 					this.setState({user_identified: res.state});
@@ -119,7 +119,7 @@ export default class TrackingPanel extends Component{
 
 		
 
-		if(this.state.user_identified == 0){
+		if(this.state.user_identified == 1){
 
 			if(this.state.enterprises.length > 0 ){
 
