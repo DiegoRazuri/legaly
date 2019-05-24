@@ -6,6 +6,7 @@ import Userprofiles from 'src/server/models/userprofiles'
 import Enterprise from 'src/server/models/enterprises'
 import Partners from 'src/server/models/partners'
 import AppAdmin from 'src/server/models/appadmin'
+import Leads from 'src/server/models/leads'
 
 //modulo para consumir api externa
 const request = require('request-promise-native')
@@ -901,6 +902,42 @@ router.post('/create_super_user', jsonParser, function (req, res){
 
 
 		appAdmin.save(function(err){
+			if(err){
+				res.sendStatus(500).json(err)
+			}else{
+
+				let data = {
+					state : 1
+				}
+
+				res.json(data)
+
+			}
+		});
+
+
+
+	
+});
+
+// ENDPOINT registrar lead
+
+router.post('/lead_register', jsonParser, function (req, res){
+	if (!req.body) return res.sendStatus(400)
+		let data = req.body;
+		
+
+		let lead = new Leads()
+
+		lead.name = data.name;
+		lead.enterprise = data.enterprise;
+		lead.email = data.email;
+		lead.cel = data.cel;
+		lead.product = data.product;
+		lead.message = data.message;
+
+
+		lead.save(function(err){
 			if(err){
 				res.sendStatus(500).json(err)
 			}else{

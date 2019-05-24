@@ -32,6 +32,10 @@ var _appadmin = require('src/server/models/appadmin');
 
 var _appadmin2 = _interopRequireDefault(_appadmin);
 
+var _leads = require('src/server/models/leads');
+
+var _leads2 = _interopRequireDefault(_leads);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //modulo para consumir api externa
@@ -790,6 +794,35 @@ router.post('/create_super_user', jsonParser, function (req, res) {
 			};
 
 			res.json(_data);
+		}
+	});
+});
+
+// ENDPOINT registrar lead
+
+router.post('/lead_register', jsonParser, function (req, res) {
+	if (!req.body) return res.sendStatus(400);
+	var data = req.body;
+
+	var lead = new _leads2.default();
+
+	lead.name = data.name;
+	lead.enterprise = data.enterprise;
+	lead.email = data.email;
+	lead.cel = data.cel;
+	lead.product = data.product;
+	lead.message = data.message;
+
+	lead.save(function (err) {
+		if (err) {
+			res.sendStatus(500).json(err);
+		} else {
+
+			var _data2 = {
+				state: 1
+			};
+
+			res.json(_data2);
 		}
 	});
 });
