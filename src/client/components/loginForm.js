@@ -6,7 +6,36 @@ import ReactDom from 'react-dom';
 import {Link} from 'react-router-dom'
 
 export default class LoginForm extends Component{
+	constructor (props){
+		super(props);
+		this.state={
+			name: '',
+			email: '',
+			password: ''
+		}
 
+		this.handleChange = this.handleChange.bind(this);
+		this.login = this.login.bind(this);
+		
+	}
+
+	handleChange (ev) {
+		this.setState({ [ev.target.name]: ev.target.value })
+	}
+
+	login () {
+		fetch('/login', {
+			method: 'POST',
+			headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+      },
+      body: JSON.stringify(this.state)
+		})
+			.then(res => {
+				location.replace(res.url)
+			})
+			.catch(error => console.error(error))
+	}
 
 	render(){
 
@@ -21,11 +50,25 @@ export default class LoginForm extends Component{
 					<figure>
 						<img src="css/img/LogotipoLegaly.svg"/>
 					</figure>
-					<h5>Registrate facilmente con una red social, luego llena el formulario.</h5>
+					<h5>Registrate facilmente, luego llena el formulario.</h5>
 					<div className="underlineBlue"></div>
 
-					
-					<div className="wrapperBtnLogin">
+					<div className='form-container'>
+						<div className='form-input'>
+							<img src='css/img/Icon.svg' />
+							<input type='text' placeholder='Nombre' name='name' value={this.state.name} onChange={this.handleChange} />
+						</div>
+						<div className='form-input'>
+							<img src='css/img/Mail.svg' />
+							<input type='email' placeholder='Correo' name='email' value={this.state.email} onChange={this.handleChange} />
+						</div>
+						<div className='form-input'>
+							<img src='css/img/Lock.svg' />
+							<input type='password' placeholder='Contraseña' name='password' value={this.state.password} onChange={this.handleChange} />
+						</div>
+						<button onClick={this.login}>Ingresar</button>
+					</div>
+					{/* <div className="wrapperBtnLogin">
 						<div className="btnLoginForm fbLogin">
 							<a href="/auth/facebook">
 								<span className="icon-facebook"></span>
@@ -48,7 +91,7 @@ export default class LoginForm extends Component{
 								<span></span>
 							</a>
 						</div>
-					</div>
+					</div> */}
 
 				</div>
 			</div>

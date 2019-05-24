@@ -29619,6 +29619,8 @@ var _reactRouterDom = require('react-router-dom');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -29631,13 +29633,44 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var LoginForm = function (_Component) {
 	_inherits(LoginForm, _Component);
 
-	function LoginForm() {
+	function LoginForm(props) {
 		_classCallCheck(this, LoginForm);
 
-		return _possibleConstructorReturn(this, (LoginForm.__proto__ || Object.getPrototypeOf(LoginForm)).apply(this, arguments));
+		var _this = _possibleConstructorReturn(this, (LoginForm.__proto__ || Object.getPrototypeOf(LoginForm)).call(this, props));
+
+		_this.state = {
+			name: '',
+			email: '',
+			password: ''
+		};
+
+		_this.handleChange = _this.handleChange.bind(_this);
+		_this.login = _this.login.bind(_this);
+
+		return _this;
 	}
 
 	_createClass(LoginForm, [{
+		key: 'handleChange',
+		value: function handleChange(ev) {
+			this.setState(_defineProperty({}, ev.target.name, ev.target.value));
+		}
+	}, {
+		key: 'login',
+		value: function login() {
+			fetch('/login', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json; charset=utf-8'
+				},
+				body: JSON.stringify(this.state)
+			}).then(function (res) {
+				location.replace(res.url);
+			}).catch(function (error) {
+				return console.error(error);
+			});
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 
@@ -29664,56 +29697,34 @@ var LoginForm = function (_Component) {
 					_react2.default.createElement(
 						'h5',
 						null,
-						'Registrate facilmente con una red social, luego llena el formulario.'
+						'Registrate facilmente, luego llena el formulario.'
 					),
 					_react2.default.createElement('div', { className: 'underlineBlue' }),
 					_react2.default.createElement(
 						'div',
-						{ className: 'wrapperBtnLogin' },
+						{ className: 'form-container' },
 						_react2.default.createElement(
 							'div',
-							{ className: 'btnLoginForm fbLogin' },
-							_react2.default.createElement(
-								'a',
-								{ href: '/auth/facebook' },
-								_react2.default.createElement('span', { className: 'icon-facebook' }),
-								_react2.default.createElement(
-									'p',
-									null,
-									'Registrarme con facebook'
-								),
-								_react2.default.createElement('span', null)
-							)
+							{ className: 'form-input' },
+							_react2.default.createElement('img', { src: 'css/img/Icon.svg' }),
+							_react2.default.createElement('input', { type: 'text', placeholder: 'Nombre', name: 'name', value: this.state.name, onChange: this.handleChange })
 						),
 						_react2.default.createElement(
 							'div',
-							{ className: 'btnLoginForm linkedinLogin' },
-							_react2.default.createElement(
-								'a',
-								{ href: '/auth/linkedin' },
-								_react2.default.createElement('span', { className: 'icon-linkedin' }),
-								_react2.default.createElement(
-									'p',
-									null,
-									'Registrarme con linkedin'
-								),
-								_react2.default.createElement('span', null)
-							)
+							{ className: 'form-input' },
+							_react2.default.createElement('img', { src: 'css/img/Mail.svg' }),
+							_react2.default.createElement('input', { type: 'email', placeholder: 'Correo', name: 'email', value: this.state.email, onChange: this.handleChange })
 						),
 						_react2.default.createElement(
 							'div',
-							{ className: 'btnLoginForm googleLogin' },
-							_react2.default.createElement(
-								'a',
-								{ href: '/auth/google' },
-								_react2.default.createElement('span', { className: 'icon-google' }),
-								_react2.default.createElement(
-									'p',
-									null,
-									'Registrarme con google'
-								),
-								_react2.default.createElement('span', null)
-							)
+							{ className: 'form-input' },
+							_react2.default.createElement('img', { src: 'css/img/Lock.svg' }),
+							_react2.default.createElement('input', { type: 'password', placeholder: 'Contrase\xF1a', name: 'password', value: this.state.password, onChange: this.handleChange })
+						),
+						_react2.default.createElement(
+							'button',
+							{ onClick: this.login },
+							'Ingresar'
 						)
 					)
 				)

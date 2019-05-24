@@ -95,9 +95,12 @@ app.get('/auth/google/callback', passport.authenticate('google', {
 	res.redirect('/');
 });
 
-app.get('/login',
-	passport.authenticate('local', { failureRedirect: '/' }),
-	function(req,res){
+app.post('/login',
+	passport.authenticate('local', {
+		successRedirect : '/informacion-empresa',
+		failureRedirect: '/'
+	}),
+	function(req, res){
 		res.redirect('/');
 	});
 

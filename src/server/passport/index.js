@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import Userprofiles from 'src/server/models/userprofiles'
+import passwordHash from 'password-hash'
 const FacebookStrategy = require('passport-facebook').Strategy;
 const LinkedInStrategy = require('passport-linkedin').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
@@ -139,30 +140,26 @@ module.exports = function (passport){
 	}))
 
 	passport.use(new LocalStrategy(
-		{usernameField : 'email', passReqToCallback : true},
-		function(req, email, password, done){
-			Userprofiles.findOne({ email : username}, function(err, user){
-				if(err) {return done(err);}
-				if(!user) {return done(null, false);}
-				if(user.password != password){return done(null, false);}
-				
-				return done(null, user);
-
-				if(err){
-					return done(err);
-				}else if(user.password != password){
-					return done(null, false);
-				}else if(user){
-					return done(null, user)
-				}else{
-
-					console.log(req.user)
-					
-					user.provider = "local"
-					user.lastname = req.user.lastname;
-					user.name = req.user.name + " " + req.user.lastname;
-					user.email = email;
-					user.password = req.user.email
+		{
+			usernameField : 'email',
+			passReqToCallback: true
+		},
+		function(req, username, password, done){
+			Userprofiles.findOne({ email : username }, function(err, user) {
+				if(err) { return done(err); }
+				if(user) {
+					if(passwordHash.verify(password, user.password)) { return done(null, user); }
+					else { return done(null, false); }
+				} else{
+					let user = new Userprofiles()
+					user.provider = 'local'
+					user.name = req.body.name
+					user.email = username
+					user.password = passwordHash.generate(password)
+					user.save(function(err){
+						if(err) { throw err; }
+						return done(null, user);
+					})
 				}
 			})
 		}
