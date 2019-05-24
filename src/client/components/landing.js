@@ -102,7 +102,7 @@ export default class Landing extends Component{
 								<p>¿Consultas?</p>
 							</div>
 							<h2 className="mediumContent contactNum"><span className="icon-whatsapp"></span>912 289 540</h2>
-							<h2 className="mediumContent contactNum"><span className="icon-office"></span>01 420 6162</h2>
+							
 						</div>
 					</div>
 					<div className="wrapperProductInfo">

@@ -28791,12 +28791,6 @@ var Landing = function (_Component) {
 							{ className: 'mediumContent contactNum' },
 							_react2.default.createElement('span', { className: 'icon-whatsapp' }),
 							'912 289 540'
-						),
-						_react2.default.createElement(
-							'h2',
-							{ className: 'mediumContent contactNum' },
-							_react2.default.createElement('span', { className: 'icon-office' }),
-							'01 420 6162'
 						)
 					)
 				),
