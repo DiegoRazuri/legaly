@@ -96,7 +96,7 @@ export default class Landing extends Component{
 							<h1 className="landingTitles">Inicia tu constitución en 20 minutos</h1>
 							<h2 className="bigContent">Olvídate de trámites y largas colas</h2>
 							<div className="ctaA">
-								<Link to="/login">Crear mi empresa</Link>
+								<Link to="/informacion-empresa">Crear mi empresa</Link>
 							</div>
 							<div onClick={this.scrollinContact.bind(this)} id="btnContact" className="ctaB" data-direct="#contact">
 								<p>¿Consultas?</p>

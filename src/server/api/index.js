@@ -951,8 +951,9 @@ router.get('/is_it_the_creator', function(req, res){
 // ENDPOINT confirmacion si es admin
 
 router.post('/is_it_admin', function(req, res){
+
 	if (!req.body) return res.sendStatus(400)
-		
+	
 
 	if(req.user){
 		AppAdmin.find().

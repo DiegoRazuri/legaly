@@ -26280,20 +26280,24 @@ var App = function (_Component) {
 							return _react2.default.createElement(_enterpriseInformationForm2.default, { user: _this9.state.user, sendEnterpriseInformation: _this9.sendEnterpriseInformation, enterpriseInProcessData: _this9.state.enterpriseInProcessData, enterpriseInProcess: _this9.state.enterpriseInProcess, enterpriseSaved: _this9.state.enterpriseSaved, updateEnterpriseInformation: _this9.updateEnterpriseInformation });
 						} }),
 					_react2.default.createElement(_reactRouterDom.Route, { path: '/invitar-socios', render: function render(props) {
-							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_partnersAddingForm2.default, { user: _this9.state.user, sendPartnerInvitation: _this9.sendPartnerInvitation, enterpriseInProcessData: _this9.state.enterpriseInProcessData, rowPartnerInputHandler: _this9.rowPartnerInputHandler, deletingPartnerRow: _this9.deletingPartnerRow, rowAccountManagerInputHandler: _this9.rowAccountManagerInputHandler, partnersInvitationSaved: _this9.state.partnersInvitationSaved, updatePartnerInvitation: _this9.updatePartnerInvitation });
+							return _react2.default.createElement(_partnersAddingForm2.default, { user: _this9.state.user, sendPartnerInvitation: _this9.sendPartnerInvitation, enterpriseInProcessData: _this9.state.enterpriseInProcessData, rowPartnerInputHandler: _this9.rowPartnerInputHandler, deletingPartnerRow: _this9.deletingPartnerRow, rowAccountManagerInputHandler: _this9.rowAccountManagerInputHandler, partnersInvitationSaved: _this9.state.partnersInvitationSaved, updatePartnerInvitation: _this9.updatePartnerInvitation });
 						} }),
 					_react2.default.createElement(_reactRouterDom.Route, { path: '/informacion-personal', render: function render(props) {
-							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_personalInformationForm2.default, { user: _this9.state.user, enterpriseInProcessData: _this9.state.enterpriseInProcessData, inputTextHandler: _this9.inputTextHandler, selectHandler: _this9.selectHandler, rowInputsHandler: _this9.rowInputsHandler, deleteRowInputHandle: _this9.deleteRowInputHandle, sendPartnersInformation: _this9.sendPartnersInformation, enterpriseSaved: _this9.state.enterpriseSaved });
+							return _react2.default.createElement(_personalInformationForm2.default, { user: _this9.state.user, enterpriseInProcessData: _this9.state.enterpriseInProcessData, inputTextHandler: _this9.inputTextHandler, selectHandler: _this9.selectHandler, rowInputsHandler: _this9.rowInputsHandler, deleteRowInputHandle: _this9.deleteRowInputHandle, sendPartnersInformation: _this9.sendPartnersInformation, enterpriseSaved: _this9.state.enterpriseSaved });
 						} }),
 					_react2.default.createElement(_reactRouterDom.Route, { path: '/fecha-firma', render: function render(props) {
-							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_dateForm2.default, { inputTextHandlerRootLevel: _this9.inputTextHandlerRootLevel, enterpriseInProcessData: _this9.state.enterpriseInProcessData, insertDataRootLevel: _this9.insertDataRootLevel, sendSingingDateInformation: _this9.sendSingingDateInformation, enterpriseSaved: _this9.state.enterpriseSaved });
+							return _react2.default.createElement(_dateForm2.default, { inputTextHandlerRootLevel: _this9.inputTextHandlerRootLevel, enterpriseInProcessData: _this9.state.enterpriseInProcessData, insertDataRootLevel: _this9.insertDataRootLevel, sendSingingDateInformation: _this9.sendSingingDateInformation, enterpriseSaved: _this9.state.enterpriseSaved });
 						} }),
 					_react2.default.createElement(_reactRouterDom.Route, { path: '/seleccion-metodo-pago', onUpdate: this.logPageView, render: function render(props) {
-							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_selectPaymentMethodForm2.default, { enterpriseInProcessData: _this9.state.enterpriseInProcessData, enterpriseSaved: _this9.state.enterpriseSaved });
+							return _react2.default.createElement(_selectPaymentMethodForm2.default, { enterpriseInProcessData: _this9.state.enterpriseInProcessData, enterpriseSaved: _this9.state.enterpriseSaved });
 						} }),
 					_react2.default.createElement(_reactRouterDom.Route, { path: '/metodo-pago-voucher', onUpdate: this.logPageView, render: function render(props) {
-							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_paymentMethodForm2.default, { enterpriseInProcessData: _this9.state.enterpriseInProcessData, enterpriseSaved: _this9.state.enterpriseSaved });
+							return _react2.default.createElement(_paymentMethodForm2.default, { enterpriseInProcessData: _this9.state.enterpriseInProcessData, enterpriseSaved: _this9.state.enterpriseSaved });
 						} }),
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/perfil', onUpdate: this.logPageView, render: function render(props) {
+							return _react2.default.createElement(_userprofile2.default, { user: _this9.state.user, isItLogin: _this9.isItLogin });
+						} }),
+					'//',
 					_react2.default.createElement(_reactRouterDom.Route, { path: '/perfil', onUpdate: this.logPageView, render: function render(props) {
 							return _this9.state.user == false ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' }) : _react2.default.createElement(_userprofile2.default, { user: _this9.state.user, isItLogin: _this9.isItLogin });
 						} }),
@@ -28769,7 +28773,7 @@ var Landing = function (_Component) {
 							{ className: 'ctaA' },
 							_react2.default.createElement(
 								_reactRouterDom.Link,
-								{ to: '/login' },
+								{ to: '/informacion-empresa' },
 								'Crear mi empresa'
 							)
 						),
@@ -33898,13 +33902,10 @@ var TrackingPanel = function (_Component) {
 		value: function componentWillMount() {
 			var _this4 = this;
 
-			console.log("componente montado");
-
 			$.post('/api/is_it_admin', function (res) {
-				console.log("ajax test" + res);
+
 				if (res.state == 1) {
 
-					console.log("el estado es 1" + res);
 					_this4.setState({ user_identified: res.state });
 
 					_this4.getEnterprises();
