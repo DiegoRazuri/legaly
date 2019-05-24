@@ -537,7 +537,7 @@ export default class App extends Component{
 									</li>
 									<li className="rowMenuMovil">
 										<span className="icon-mail_outline"></span>
-										<p className="smallContent">info@legitify.com</p>
+										<p className="smallContent">info@legaly.pe</p>
 									</li>
 									<li className="rowMenuMovil">
 										<span className="icon-clock"></span>

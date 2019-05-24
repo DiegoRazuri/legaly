@@ -26153,7 +26153,7 @@ var App = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'smallContent' },
-										'info@legitify.com'
+										'info@legaly.pe'
 									)
 								),
 								_react2.default.createElement(
