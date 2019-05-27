@@ -61,6 +61,14 @@ var app = (0, _express2.default)();
 
 app.use((0, _herokuSslRedirect2.default)());
 
+// Esto permite las peticiones desde otro origen
+
+app.use(function (req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
+});
+
 var server = _http2.default.createServer(app);
 
 //conexion a base de datos
